@@ -36,6 +36,17 @@ public class FrontController extends HttpServlet {
             case "/trade/chat":
                 action = new ChatListAction();
                 break;
+            //로그인
+            case "/login.com" :
+              action = new loginAction();
+              break;
+            case "/loginProess.com" :
+              action = new loginProessAction();
+              break;
+              //로그아웃
+            case "/logout.com" :
+              action = new logoutAction();
+              break;
         } //switch (command)
 
         forward = action.execute(request, response);
