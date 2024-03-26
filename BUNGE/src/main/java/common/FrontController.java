@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import trade.chat.ChatListAction;
 
 @WebServlet("/")
 public class FrontController extends HttpServlet {
@@ -32,17 +33,20 @@ public class FrontController extends HttpServlet {
         Action action = null;
 
         switch (command) {
-        //로그인
-        case "/login.com" :
-        	action = new loginAction();
-        	break;
-        case "/loginProess.com" :
-        	action = new loginProessAction();
-        	break;
-        	//로그아웃
-        case "/logout.com" :
-        	action = new logoutAction();
-        	break;
+            case "/trade/chat":
+                action = new ChatListAction();
+                break;
+            //로그인
+            case "/login.com" :
+              action = new loginAction();
+              break;
+            case "/loginProess.com" :
+              action = new loginProessAction();
+              break;
+              //로그아웃
+            case "/logout.com" :
+              action = new logoutAction();
+              break;
         } //switch (command)
 
         forward = action.execute(request, response);
