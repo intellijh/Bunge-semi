@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/*")
+@WebServlet("*.com")
 public class FrontController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -32,7 +32,17 @@ public class FrontController extends HttpServlet {
         Action action = null;
 
         switch (command) {
-
+        //로그인
+        case "/login.com" :
+        	action = new loginAction();
+        	break;
+        case "/loginProess.com" :
+        	action = new loginProessAction();
+        	break;
+        	//로그아웃
+        case "/logout.com" :
+        	action = new logoutAction();
+        	break;
         } //switch (command)
 
         forward = action.execute(request, response);
