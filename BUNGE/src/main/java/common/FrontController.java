@@ -10,8 +10,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import trade.chat.ChatListAction;
 
-//@WebServlet("/*")
+@WebServlet("/")
 public class FrontController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -32,7 +33,9 @@ public class FrontController extends HttpServlet {
         Action action = null;
 
         switch (command) {
-
+            case "/trade/chat":
+                action = new ChatListAction();
+                break;
         } //switch (command)
 
         forward = action.execute(request, response);
