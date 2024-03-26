@@ -3,6 +3,8 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+src/main/webapp/WEB-INF/lib/
+libs/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
