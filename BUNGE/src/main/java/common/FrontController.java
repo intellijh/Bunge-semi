@@ -34,23 +34,39 @@ public class FrontController extends HttpServlet {
         Action action = null;
 
         switch (command) {
+            //로그인
+            case "/login.com" :
+                action = new loginAction();
+                break;
+            case "/loginProess.com" :
+                action = new loginProessAction();
+                break;
+            //로그아웃
+            case "/logout.com" :
+                action = new logoutAction();
+                break;
+            //게시판에 글 추가
+            case "/InfoAdd.com" :
+                action = new InfoAddAction();
+                break;
+            //글쓰기
+            case "/Write.com" :
+                action = new InfoWriteAction();
+                break;
+            case "/BoardList.com" :
+                action = new BoardListAction();
+                break;
+            case "/BoardDetail.com" :
+                action = new BoardDetailAction();
+                break;
+            //채팅 페이지 이동
             case "/chat.com":
                 action = new ChatListAction();
                 break;
+            //채팅 리스트 불러오기
             case "/chatLoad.com":
                 action = new ChatListLoadAction();
                 break;
-            //로그인
-            case "/login.com" :
-              action = new loginAction();
-              break;
-            case "/loginProess.com" :
-              action = new loginProessAction();
-              break;
-              //로그아웃
-            case "/logout.com" :
-              action = new logoutAction();
-              break;
         } //switch (command)
 
         forward = action.execute(request, response);
