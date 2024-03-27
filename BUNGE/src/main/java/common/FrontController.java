@@ -2,6 +2,7 @@ package common;
 
 import java.io.IOException;
 
+import chat.ChatListLoadAction;
 import common.action.Action;
 import common.action.ActionForward;
 import jakarta.servlet.RequestDispatcher;
@@ -10,7 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import trade.chat.ChatListAction;
+import chat.ChatListAction;
 
 @WebServlet("*.com")
 public class FrontController extends HttpServlet {
@@ -33,8 +34,11 @@ public class FrontController extends HttpServlet {
         Action action = null;
 
         switch (command) {
-            case "/trade/chat":
+            case "/chat.com":
                 action = new ChatListAction();
+                break;
+            case "/chatLoad.com":
+                action = new ChatListLoadAction();
                 break;
             //로그인
             case "/login.com" :
