@@ -31,19 +31,28 @@ public class FrontController extends HttpServlet {
         ActionForward forward = null;
         Action action = null;
 
-        switch (command) {
-        //로그인
-        case "/login.com" :
-        	action = new loginAction();
-        	break;
-        case "/loginProess.com" :
-        	action = new loginProessAction();
-        	break;
-        	//로그아웃
-        case "/logout.com" :
-        	action = new logoutAction();
-        	break;
-        } //switch (command)
+	        switch (command) {
+	        //로그인
+	        case "/login.com" :
+	        	action = new loginAction();
+	        	break;
+	        case "/loginProess.com" :
+	        	action = new loginProessAction();
+	        	break;
+	        	//로그아웃
+	        case "/logout.com" :
+	        	action = new logoutAction();
+	        	break;
+	        case "/join.com" :
+	        	action = new joinAction();
+	        	break;
+	       case "/joinProcess.com" :
+	    	   action = new joinProessAction();
+	    	   break;
+	       case "/idcheck.com" :
+	    	   action = new idcheckAction();
+	    	   break;
+	        } //switch (command)
 
         forward = action.execute(request, response);
 

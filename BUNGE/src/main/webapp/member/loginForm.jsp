@@ -29,11 +29,11 @@ $(function() {
   <b>Password</b>
   <input type="password" name="m_pwd" placeholder="Enter passwrod" required>
   <input type="checkbox" id="remember" name="remember" value="store">
-  <span>remember</span>
+  <span>아이디저장</span>
   
   <div class="clearfix">
     <button type="submit" class="submitbtn">로그인</button>
-    <button type="button" class="join">취소</button>
+    <a href=""><button type="button" class="join">취소</button></a>
   </div>
 </form>
 </body>
