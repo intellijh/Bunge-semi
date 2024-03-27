@@ -7,6 +7,7 @@ src/main/webapp/WEB-INF/lib/
 libs/
 
 ### IntelliJ IDEA ###
+.idea
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
