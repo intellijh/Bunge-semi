@@ -26,7 +26,7 @@ dependencies {
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-  implementation fileTree(dir: 'src/main/webapp/WEB-INF/lib', includes: ['*.jar'])
+  implementation fileTree(dir: 'libs', includes: ['*.jar'])
 }
 
 test {

@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import trade.chat.ChatListAction;
 
 @WebServlet("*.com")
 public class FrontController extends HttpServlet {
@@ -32,6 +33,7 @@ public class FrontController extends HttpServlet {
         Action action = null;
 
         switch (command) {
+<<<<<<< HEAD
         //로그인
         case "/login.com" :
         	action = new loginAction();
@@ -51,6 +53,22 @@ public class FrontController extends HttpServlet {
         case "/Write.com" :
         	action = new InfoWriteAction();
         	break;
+=======
+            case "/trade/chat":
+                action = new ChatListAction();
+                break;
+            //로그인
+            case "/login.com" :
+              action = new loginAction();
+              break;
+            case "/loginProess.com" :
+              action = new loginProessAction();
+              break;
+              //로그아웃
+            case "/logout.com" :
+              action = new logoutAction();
+              break;
+>>>>>>> branch 'main' of https://github.com/kjh936/Bunge.git
         } //switch (command)
 
         forward = action.execute(request, response);
