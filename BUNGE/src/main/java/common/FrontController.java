@@ -47,13 +47,19 @@ public class FrontController extends HttpServlet {
         case "/logout.com" :
         	action = new logoutAction();
         	break;
-        	//글쓰기 버튼
-        case "/BoardAdd.com" :
-        	action = new InfoAddActionAction();
+        	//게시판에 글 추가
+        case "/InfoAdd.com" :
+        	action = new InfoAddAction();
         	break;
         	//글쓰기
         case "/Write.com" :
         	action = new InfoWriteAction();
+        	break;
+        case "/BoardList.com" :
+        	action = new BoardListAction();
+        	break;
+        case "/BoardDetail.com" :
+        	action = new BoardDetailAction();
         	break;
         } //switch (command)
 

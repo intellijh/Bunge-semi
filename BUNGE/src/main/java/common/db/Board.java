@@ -1,7 +1,5 @@
 package common.db;
 
-import java.sql.Date;
-
 public class Board {
 	private int inf_num;
 	private String m_id;
@@ -14,7 +12,7 @@ public class Board {
 	private int inf_readcount;
 	private String inf_loc;
 	private String inf_reg;
-	private String inf_file;
+	private int cnt;
 	
 	public int getInf_num() {
 		return inf_num;
@@ -82,12 +80,11 @@ public class Board {
 	public void setInf_reg(String inf_reg) {
 		this.inf_reg = inf_reg;
 	}
-	public String getInf_file() {
-		return inf_file;
+	public int getCnt() {
+		return cnt;
 	}
-	public void setInf_file(String inf_file) {
-		this.inf_file = inf_file;
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
-	
 }
 
