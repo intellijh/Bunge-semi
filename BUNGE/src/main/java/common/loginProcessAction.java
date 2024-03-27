@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class loginProessAction implements Action {
+public class loginProcessAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
@@ -28,7 +28,7 @@ public class loginProessAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("m_id",m_id);
 			forward.setRedirect(true);
-			forward.setPath("index.jsp");
+			forward.setPath("BoardList.com");
 			return forward;
 		
 		} else {

@@ -3,13 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <html>
 <head>
-<title>MVC 게시판 - view</title>
-<jsp:include page="header.jsp"	/>
+<title>상세페이지</title>
+<script src = "http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/view.js"></script>
 <link rel="stylesheet" href="css/view.css" type="text/css">
 </head>
  <body>
- 	<input type="hidden" id="loginid" value="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
+ 	<input type="hidden" id="loginid" value="${m_id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
  	<div class="container">
  		<table class="table">
  			<tr>
@@ -17,41 +17,41 @@
  			</tr>
  			<tr>
  				<td><div>글쓴이</div></td>
- 				<td><div>${boarddata.board_name}</div></td>
+ 				<td><div>${boarddata.m_id}</div></td>
  			</tr>
  			<tr>
  				<td><div>제목</div></td>
- 				<td><c:out value="${boarddata.board_subject}" /></td>
+ 				<td><c:out value="${boarddata.inf_subject}" /></td>
  			</tr>
  			<tr>
  				<td><div>내용</div></td>
  				<td style="padding-right:0px">
- 					<textarea class="form-control" rows="5" readOnly>${boarddata.board_content}
+ 					<textarea class="form-control" rows="5" readOnly>${boarddata.inf_content}
  					</textarea></td>
  			</tr>
  			
- 			 <c:if test="${boarddata.board_re_lev==0}">
+ 			 <c:if test="${boarddata.inf_lev==0}">
           <%-- 원문글인 경우에만 첨부파일을 추가할 수 있다. --%>
           <tr>
             <td><div>첨부파일</div></td>
             
             <%-- 파일을 첨부한 경우 --%>
-            <c:if test="${!empty boarddata.board_file}">
+   <%--         <c:if test="${!empty boarddata.inf_file}">
               <td><img src="image/down.png" width="10px">
                 <a href="BoardFileDown.bo?filename=${boarddata.board_file}">${boarddata.board_file}</a></td>
-            </c:if>
+            </c:if>--%>
             
             <%-- 파일을 첨부하지 않은 경우 --%>
-            <c:if test="${empty boarddata.board_file}">
+   <%--        <c:if test="${empty boarddata.board_file}">
               <td></td>
             </c:if>
-          </tr>
-        </c:if>
+          </tr>	--%>
+        </c:if>		
         
         <tr>
           <td colspan="2" class="center">
-            <c:if test="${boarddata.board_name == id || id == 'admin' }">
-              <a href="BoardModify.bo?num=${boarddata.board_num}">
+            <c:if test="${boarddata.m_id == m_id || m_id == 'admin' }">
+              <a href="BoardModify.com?num=${boarddata.inf_num}">
                 <button class="btn btn-info">수정</button>
               </a>
               <%-- href의 주소를 #으로 설정한다. --%>
@@ -60,10 +60,10 @@
                 	    data-target="#myModal">삭제</button>
               </a>
             </c:if>
-            <a href="BoardList.bo">
+             <a href="BoardList.com">
               <button class="btn btn-warning">목록</button>
             </a>
-            <a href="BoardReply.bo?num=${boarddata.board_num}">
+            <a href="BoardReply.com?num=${boarddata.inf_num}">
               <button class="btn btn-success">답변</button>
             </a>
           </td>
@@ -84,11 +84,6 @@
     					또는 ${boarddata.board_num}--%>
     			<input type="hidden" name="num" value="${param.num }"
     					id="comment_board_num">
-    			<div class="form-group">
-    				<label for="pwd">비밀번호</label>
-    				<input type="password" class="form-control" 
-    					   placeholder="Enter password" name="board_pass" id="board_pass">
-    			</div>
 				<button type="submit" class="btn btn-primary">전송</button>   				
 				<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>   				
     			</form>
@@ -110,8 +105,8 @@
 			</ul>
 			<div class="comment-write">
 				<div class="comment-write-area">
-					<b class="comment-write-area-name" >${id}</b> <span
-						class="comment-write-area-count">0/200</span>
+					<b class="comment-write-area-name" >${m_id}</b> 
+					<span class="comment-write-area-count">0/200</span>
 					<textarea placeholder="댓글을 남겨보세요" rows="1"
 						class="comment-write-area-text" maxLength="200"></textarea>
 					

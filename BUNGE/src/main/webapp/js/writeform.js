@@ -5,13 +5,9 @@ $(function() {
 		$('#filevalue').text(inputfile[inputfile.length -1]);
 	});
 	
-$("button:eq(1)").click(function(){
-	history.back();
-})	
-	/*
-$("button:eq(0)").click(function(){
+$("input[type=button]:eq(1)").click(function(){
 	if($.trim($("#inf_subject").val()) == "") {
-		alert("다시제목을 입력하세요.");
+		alert("제목을 입력하세요.");
 		$("inf_subject").focus();
 		return false;
 	}
@@ -22,8 +18,11 @@ $("button:eq(0)").click(function(){
 		return false;
 	}
  });
-  */
-
+  
+$("input[type=button]:eq(2)").click(function(){
+	console.log('abcd');
+	location.href="BoardList.com";
+})
 	
 $("#postcode").click(function () {
 //		window.open("post.html", "post", "width=400,height=500,scrollbars=yes");

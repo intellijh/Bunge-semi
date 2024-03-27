@@ -16,7 +16,7 @@ public class InfoWriteAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("write.jsp");
+		forward.setPath("infoboard/write.jsp");
 		return forward;
 	}
 }

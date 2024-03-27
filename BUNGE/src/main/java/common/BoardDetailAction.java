@@ -18,7 +18,7 @@ public class BoardDetailAction implements Action {
 		BoardDAO boarddao = new BoardDAO();
 
 		// 글 번호 파라미터 값을 num변수에 저장합니다.
-		int num = Integer.parseInt(request.getParameter("inf_num"));
+		int num = Integer.parseInt(request.getParameter("num"));
 		
 		//특정 주소로부터의 이동을 확인하는데 사용할 수 있는 정보는 요청 헤더인 "Referer"에 있습니다.
 		String referer = request.getHeader("Referer");
@@ -46,7 +46,7 @@ public class BoardDetailAction implements Action {
 		//boarddata 객체를 request 객체에 저장합니다.
 		request.setAttribute("boarddata", boarddata);
 		forward.setRedirect(false);
-		forward.setPath("board/boardView.jsp"); //글 내용을 보기 페이지로 이동하기 위해 경로를 설정합니다.
+		forward.setPath("infoboard/viewdetail.jsp"); //글 내용을 보기 페이지로 이동하기 위해 경로를 설정합니다.
 		return forward;
 	}
 }

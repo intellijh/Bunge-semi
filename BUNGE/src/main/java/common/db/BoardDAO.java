@@ -189,9 +189,8 @@ public class BoardDAO {
 
 	public Board getDetail(int num) {
 		Board board = null;
-		Boardfile boardfile = null;
+		
 		String sql = "select * from infoboard where inf_NUM = ?";
-		String sql2 = "select infa_filename from infoattach where inf_NUM = ?";
 				    
 		try (Connection con = ds.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -200,7 +199,6 @@ public class BoardDAO {
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
 					board = new Board();
-					boardfile = new Boardfile();
 					
 					board.setInf_num(rs.getInt("INF_NUM"));
 					board.setM_id(rs.getString("M_ID"));
@@ -210,32 +208,18 @@ public class BoardDAO {
 					board.setInf_ref(rs.getInt("INF_REF"));
 					board.setInf_lev(rs.getInt("INF_LEV"));
 					board.setInf_seq(rs.getInt("INF_SEQ"));
+					board.setInf_readcount(rs.getInt("INF_READCOUNT"));
 					board.setInf_loc(rs.getString("INF_LOC"));
 					board.setInf_reg(rs.getString("INF_REG"));
-					board.setCnt(rs.getInt("cnt"));
-					
-//					boardfile.setBoard_file(rs.getString("BOARD_FILE"));
-//					board.setBoard_readcount(rs.getInt("BOARD_READCOUNT"));
-				}
-			
-			try (PreparedStatement pstmt2 = con.prepareStatement(sql2);) {
-				pstmt2.setInt(1, num);
-				try (ResultSet rs2 = pstmt2.executeQuery()) {
-					while (rs2.next()) {
-				boardfile.setInfa_filename(rs2.getString(1));
-					}
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} 
-			
+		
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			System.out.println("getListCount() 에러 : " + ex);
 		}
 		return board;
-	}catch (SQLException e) {
-		e.printStackTrace();
-	}
   }
 }//class end

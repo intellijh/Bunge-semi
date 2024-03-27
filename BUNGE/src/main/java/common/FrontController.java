@@ -40,8 +40,8 @@ public class FrontController extends HttpServlet {
         case "/login.com" :
         	action = new loginAction();
         	break;
-        case "/loginProess.com" :
-        	action = new loginProessAction();
+        case "/loginProcess.com" :
+        	action = new loginProcessAction();
         	break;
         	//로그아웃
         case "/logout.com" :
@@ -55,9 +55,11 @@ public class FrontController extends HttpServlet {
         case "/Write.com" :
         	action = new InfoWriteAction();
         	break;
+        	//게시판 페이지
         case "/BoardList.com" :
         	action = new BoardListAction();
         	break;
+        	//글 상세페이지
         case "/BoardDetail.com" :
         	action = new BoardDetailAction();
         	break;
