@@ -2,6 +2,7 @@ package common;
 
 import java.io.IOException;
 
+import chat.ChatListLoadAction;
 import common.action.Action;
 import common.action.ActionForward;
 import jakarta.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import chat.ChatListAction;
 
 @WebServlet("*.com")
 public class FrontController extends HttpServlet {
@@ -31,19 +33,19 @@ public class FrontController extends HttpServlet {
         ActionForward forward = null;
         Action action = null;
 
-	        switch (command) {
-	        //로그인
-	        case "/login.com" :
-	        	action = new loginAction();
-	        	break;
-	        case "/loginProess.com" :
-	        	action = new loginProessAction();
-	        	break;
-	        	//로그아웃
-	        case "/logout.com" :
-	        	action = new logoutAction();
-	        	break;
-	        case "/join.com" :
+        switch (command) {
+            //로그인
+            case "/login.com" :
+                action = new loginAction();
+                break;
+            case "/loginProess.com" :
+                action = new loginProessAction();
+                break;
+            //로그아웃
+            case "/logout.com" :
+                action = new logoutAction();
+                break;
+            case "/join.com" :
 	        	action = new joinAction();
 	        	break;
 	       case "/joinProcess.com" :
@@ -64,8 +66,29 @@ public class FrontController extends HttpServlet {
 	       case"/findidProcess.com" :
 	    	   action = new findidProcessAction();
 	    	   break;
-	    	  
-	        } //switch (command)
+            //게시판에 글 추가
+            case "/InfoAdd.com" :
+                action = new InfoAddAction();
+                break;
+            //글쓰기
+            case "/Write.com" :
+                action = new InfoWriteAction();
+                break;
+            case "/BoardList.com" :
+                action = new BoardListAction();
+                break;
+            case "/BoardDetail.com" :
+                action = new BoardDetailAction();
+                break;
+            //채팅 페이지 이동
+            case "/chat.com":
+                action = new ChatListAction();
+                break;
+            //채팅 리스트 불러오기
+            case "/chatLoad.com":
+                action = new ChatListLoadAction();
+                break;
+        } //switch (command)
 
         forward = action.execute(request, response);
 

@@ -8,16 +8,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class loginAction implements Action {
+public class InfoWriteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("member/loginForm.jsp");		
 		forward.setRedirect(false);
+		forward.setPath("infoboard/write.jsp");
 		return forward;
 	}
-
 }
