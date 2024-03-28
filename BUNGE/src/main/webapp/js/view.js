@@ -4,7 +4,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    option=state;
 	    $.ajax({
 			type:"post",
-			url : "CommentList.bo",
+			url : "CommentList.com",
 			data: {"comment_board_num" : $("#comment_board_num").val(), state:state},
 			dataType : "json",
 			success : function(rdata){
@@ -137,7 +137,7 @@ function del(num){//num : 댓글 번호
 		   return;
 	   }
 	   	$.ajax({
-			url : 'CommentDelete.bo', //원문 등록
+			url : 'CommentDelete.com', //원문 등록
 			data : {num : num},
 			success : function(rdata) {
 				if(rdata == 1) {
@@ -185,14 +185,6 @@ $(function() {
 	
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	
-	$('form[name="deleteForm"]').submit(function() {
-		if($("#board_pass").val() == '') {
-			alert(" 비밀번호를 입력하세요");
-			$("#board_pass").focus();
-			return false;
-		}
-	})//form
-	
 	$('.comment-area').on('keyup','.comment-write-area-text', function() {
 		const length = $(this).val().length;
 		$(this).prev().text(length+'/200');
@@ -208,7 +200,7 @@ $(function() {
 		}
 		
 		$.ajax({
-			url : 'CommentAdd.bo', //원문 등록
+			url : 'CommentAdd.com', //원문 등록
 			data : {
 				id : $("#loginid").val(),
 				content : content,

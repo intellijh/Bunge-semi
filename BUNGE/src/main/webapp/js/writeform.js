@@ -21,7 +21,7 @@ $("button").click(function(){
   
 $("input[type=button]:eq(1)").click(function(){
 	console.log('abcd');
-	location.href="BoardList.com";
+	location.href="InfoList.com";
 })
 	
 $("#postcode").click(function () {

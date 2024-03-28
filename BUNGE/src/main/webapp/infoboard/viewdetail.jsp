@@ -4,9 +4,13 @@
 <html>
 <head>
 <title>상세페이지</title>
-<script src = "http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/view.js"></script>
 <link rel="stylesheet" href="css/view.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/view.js"></script>
+
 </head>
  <body>
  	<input type="hidden" id="loginid" value="${m_id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
@@ -56,7 +60,7 @@
               </a>
               <%-- href의 주소를 #으로 설정한다. --%>
               <a href="#">
-                <button class="btn btn-danger" data-toggle="modal"
+                <button class="btn btn-danger" data-toggle="modal" ,type="submit"
                 	    data-target="#myModal">삭제</button>
               </a>
             </c:if>
@@ -72,18 +76,19 @@
       <%-- 게시판 view end --%>
     
     <%-- modal 시작 --%>
-    <div class="modal" id="mymodal">
+    <div class="modal" id="myModal">
     	<div class="modal-dialog">
     		<div class="modal-content">
     		<%-- Modal body --%>
     		<div class="modal-body">
-    			<form name="deleteForm" action="InfoDelete.bo" method="post">
+    			<form name="deleteForm" action="InfoDelete.com" method="post">
     				<%-- http://localhost:8088/Board/BoardDetail.bo?num=22 
     					주소를 보묜 num을 파라미터로 넘기고 있습니다. 
     					이 값을 가져와서 ${param.num}를 사용
     					또는 ${boarddata.board_num}--%>
     			<input type="hidden" name="num" value="${param.num }"
     					id="comment_board_num">
+    			<b>정말 삭제하시겠습니까?</b><p></p>
 				<button type="submit" class="btn btn-primary">전송</button>   				
 				<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>   				
     			</form>
@@ -119,4 +124,5 @@
 		</div><%-- comment-area end--%>
 	</div> <%-- class="container" end --%>
 	</body>
+	</html>
 			
