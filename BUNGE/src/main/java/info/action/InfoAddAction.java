@@ -74,7 +74,7 @@ public class InfoAddAction implements Action {
 				if (success != 0) {
 					System.out.println("첨부파일게시판 등록 왼료");
 					forward.setRedirect(true);
-					forward.setPath("BoardList.com");
+					forward.setPath("InfoList.com");
 					return forward;
 				} else {
 					System.out.println("첨부파일게시판 등록 실패");
@@ -86,7 +86,7 @@ public class InfoAddAction implements Action {
 				if (success != 0) {
 					System.out.println("게시판 등록 왼료");
 					forward.setRedirect(true);
-					forward.setPath("BoardList.com");
+					forward.setPath("InfoList.com");
 					return forward;
 				} else {
 					System.out.println("게시판 등록 실패");

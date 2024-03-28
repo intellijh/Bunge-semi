@@ -5,9 +5,10 @@ import java.io.IOException;
 import chat.ChatListLoadAction;
 import common.action.Action;
 import common.action.ActionForward;
-import info.action.BoardDetailAction;
-import info.action.BoardListAction;
+import info.action.InfoDetailAction;
+import info.action.InfoListAction;
 import info.action.InfoAddAction;
+import info.action.InfoDeleteAction;
 import info.action.InfoWriteAction;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -75,14 +76,17 @@ public class FrontController extends HttpServlet {
                 action = new InfoAddAction();
                 break;
             //글쓰기
-            case "/Write.com" :
+            case "/InfoWrite.com" :
                 action = new InfoWriteAction();
                 break;
-            case "/BoardList.com" :
-                action = new BoardListAction();
+            case "/InfoList.com" :
+                action = new InfoListAction();
                 break;
-            case "/BoardDetail.com" :
-                action = new BoardDetailAction();
+            case "/InfoDetail.com" :
+                action = new InfoDetailAction();
+                break;
+            case "/InfoDelete.com" :
+                action = new InfoDeleteAction();
                 break;
             //채팅 페이지 이동
             case "/chat.com":

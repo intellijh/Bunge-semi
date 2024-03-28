@@ -62,7 +62,7 @@
   	   		&nbsp;
   	   	</c:if>
   	   	
-  	   	<a href="BoardDetail.com?num=${b.inf_num}">
+  	   	<a href="InfoDetail.com?num=${b.inf_num}">
   	   		<c:if test="${b.inf_subject.length()>=20}">
   	   			<c:out value="${b.inf_subject.substring(0,20)}..." />
   	   		</c:if>

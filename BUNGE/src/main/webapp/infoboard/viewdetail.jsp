@@ -51,7 +51,7 @@
         <tr>
           <td colspan="2" class="center">
             <c:if test="${boarddata.m_id == m_id || m_id == 'admin' }">
-              <a href="BoardModify.com?num=${boarddata.inf_num}">
+              <a href="InfoModify.com?num=${boarddata.inf_num}">
                 <button class="btn btn-info">수정</button>
               </a>
               <%-- href의 주소를 #으로 설정한다. --%>
@@ -60,10 +60,10 @@
                 	    data-target="#myModal">삭제</button>
               </a>
             </c:if>
-             <a href="BoardList.com">
+             <a href="InfoList.com">
               <button class="btn btn-warning">목록</button>
             </a>
-            <a href="BoardReply.com?num=${boarddata.inf_num}">
+            <a href="InfoReply.com?num=${boarddata.inf_num}">
               <button class="btn btn-success">답변</button>
             </a>
           </td>
@@ -77,7 +77,7 @@
     		<div class="modal-content">
     		<%-- Modal body --%>
     		<div class="modal-body">
-    			<form name="deleteForm" action="BoardDelete.bo" method="post">
+    			<form name="deleteForm" action="InfoDelete.bo" method="post">
     				<%-- http://localhost:8088/Board/BoardDetail.bo?num=22 
     					주소를 보묜 num을 파라미터로 넘기고 있습니다. 
     					이 값을 가져와서 ${param.num}를 사용

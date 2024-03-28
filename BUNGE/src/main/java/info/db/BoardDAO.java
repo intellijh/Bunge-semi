@@ -80,13 +80,14 @@ public class BoardDAO {
 	public boolean boardinsertFile(int success, Boardfile boardfile) {
 		
 		String sql = "INSERT INTO INFOATTACH " 
-					+ "(INFA_NUM,INF_NUM,INFA_FILENAME,INFA_REGDATE)"
-					+ " values(" + success + ","+ success +", ? , sysdate)";
+					+ "(INFA_NUM,INF_NUM,INFA_FILENAME,INFA_REGDATE,INFA_SERVERNAME)"
+					+ " values(" + success + ","+ success +", ? , sysdate,?)";
 		
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) { 
 		
 			pstmt.setString(1, boardfile.getInfa_filename());
+			pstmt.setString(2, boardfile.getInfa_servername());
 			
 			if (pstmt.executeUpdate() == 1) {
 				System.out.println("첨부파일 등록 성공적");
