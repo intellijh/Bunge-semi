@@ -45,6 +45,27 @@ public class FrontController extends HttpServlet {
             case "/logout.com" :
                 action = new logoutAction();
                 break;
+            case "/join.com" :
+	        	action = new joinAction();
+	        	break;
+	       case "/joinProcess.com" :
+	    	   action = new joinProessAction();
+	    	   break;
+	    	   //아이디 중복 검사
+	       case "/idcheck.com" :
+	    	   action = new idcheckAction();
+	    	   break;
+	    	   //닉네임 중복 검사
+	       case"/nickcheck.com" :
+	    	   action = new nickcheckAction();
+	    	   break;
+	    	   //아이디 찾기
+	       case "/findid.com" :
+	    	   action = new findidAction();
+	    	   break;
+	       case"/findidProcess.com" :
+	    	   action = new findidProcessAction();
+	    	   break;
             //게시판에 글 추가
             case "/InfoAdd.com" :
                 action = new InfoAddAction();
