@@ -5,6 +5,10 @@ import java.io.IOException;
 import chat.ChatListLoadAction;
 import common.action.Action;
 import common.action.ActionForward;
+import info.action.BoardDetailAction;
+import info.action.BoardListAction;
+import info.action.InfoAddAction;
+import info.action.InfoWriteAction;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -49,7 +53,7 @@ public class FrontController extends HttpServlet {
 	        	action = new joinAction();
 	        	break;
 	       case "/joinProcess.com" :
-	    	   action = new joinProessAction();
+	    	   action = new joinProcessAction();
 	    	   break;
 	    	   //아이디 중복 검사
 	       case "/idcheck.com" :

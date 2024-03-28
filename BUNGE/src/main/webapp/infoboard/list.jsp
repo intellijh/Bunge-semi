@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
  <script src="js/list.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
- <script src="${pageContext.request.contextPath}/js/writeform.js"></script>
  <style>
 	h1{font-size:1.5em; text-align:center; color:#1a92b9}
 	.container{width:60%}

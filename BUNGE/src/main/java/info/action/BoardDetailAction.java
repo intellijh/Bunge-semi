@@ -1,11 +1,11 @@
-package common;
+package info.action;
 
 import java.io.IOException;
 
 import common.action.Action;
 import common.action.ActionForward;
-import common.db.Board;
-import common.db.BoardDAO;
+import info.db.Board;
+import info.db.BoardDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

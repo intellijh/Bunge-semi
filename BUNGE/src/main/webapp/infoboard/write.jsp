@@ -54,7 +54,7 @@
   		    <input type="button" value="위치찾기" id="postcode">
   		
   		<div class="form-group">
-				<input type="button">등록
+				<button type="submit">등록</button>
 				<input type="button">취소
 				
 <%-- 				<button type="submit" class="btn btn-primary">등록</button>

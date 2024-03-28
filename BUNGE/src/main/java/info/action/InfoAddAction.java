@@ -1,4 +1,4 @@
-package common;
+package info.action;
 
 import java.io.IOException;
 
@@ -7,9 +7,9 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import common.action.Action;
 import common.action.ActionForward;
-import common.db.Board;
-import common.db.BoardDAO;
-import common.db.Boardfile;
+import info.db.Board;
+import info.db.BoardDAO;
+import info.db.Boardfile;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -56,10 +56,11 @@ public class InfoAddAction implements Action {
 			//시스템 상에 업로드된 실제 파일명을 얻어옵니다.
 			System.out.println("사용자가 저장할 파일 이름 : " + multi.getOriginalFileName("inf_file"));
 			
-			System.out.println("서버에 저장될 파일이름"+multi.getFilesystemName("inf_file"));
+			System.out.println("서버에 저장될 파일이름"+ multi.getFilesystemName("inf_file"));
 			
 			if(multi.getFilesystemName("inf_file") != null) {
-				boardfile.setInfa_filename(multi.getFilesystemName("inf_file"));
+				boardfile.setInfa_filename(multi.getOriginalFileName("inf_file"));
+				boardfile.setInfa_servername(multi.getFilesystemName("inf_file"));
 				System.out.println("inf_file :"+ multi.getFilesystemName("inf_file"));
 				//글 등록 처리를 위해 DAO의 boardInsert()메서드를 호출합니다.
 				//글 등록 폼에서 입력한 정보가 저장되어 있는 boarddata 객체를 전달합니다.

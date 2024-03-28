@@ -1,4 +1,4 @@
-package common.db;
+package info.db;
 
 public class Board {
 	private int inf_num;

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
+
 <link href="${pageContext.request.contextPath}/css/join.css" type="text/css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
 <script src= '${pageContext.request.contextPath}/js/join.js'></script>
