@@ -7,17 +7,30 @@
  <script src="${pageContext.request.contextPath}/js/writeform.js"></script>
  <style>
 	h1{font-size:1.5em; text-align:center; color:#1a92b9}
+	
 	.container{width:60%}
 	
 	label{font-weight:bold}
-	input[type=file] {display:none}
+
 	img{width:20px}
+	
+	#att_zone {
+		width:660px;
+		min-height:150px;
+		padding:10px;
+		border:1px dotted #00f;
+	}
+	
+	#att_zone:empty:before {
+		content:attr(data-placeholder);
+		color:#999;
+		font-size:.9em;
+	}
  </style>
  </head>
  <body>
  <div class="container">
-  <form action="InfoAdd.com" method="post" enctype="multipart/form-data"
-  		name="boardform">
+  <form action="InfoAdd.com" method="post" enctype="multipart/form-data" name="boardform">
   	<div class="form-group">
   		<label for="m_id">글쓴이</label>
   		<input name="m_id" id="m_id" type="text" value="${m_id}" class="form-control" placeholder="Enter m_id" readOnly>
@@ -39,9 +52,19 @@
   		<label for="inf_content">내용</label>
   		<textarea name="inf_content" id="inf_content" rows="10" 	 
   			   class="form-control" ></textarea>
-  		</div>	
+  		</div>
+  		
+  		<div class="form-group" id="image_preview">
+  		<label>파일첨부</label>
+  		  <input type="file" id="btnAtt" name="inf_file" multiple="multiple"/>
+  		  <div id="att_zone"
+  		       data-placeholoder="파일을 첨부하려면 파일 선택 버튼을 클릭하거나 파일을 drag / drop 하세요">
+  		  </div>
+  		</div>
+  		
+ <%--
   		<div class="form-group">
-  		<label>파일첨부<br>
+  		<label>파일첨부<br> 
   		    <img src="image/attach.png" alt="파일첨부">
   		    <input name="inf_file1" id="inf_file1" type="file">
   		      <span id="filevalue1"></span> <br>
@@ -66,20 +89,20 @@
   		    <input name="inf_file5" id="inf_file5" type="file">
   		      <span id="filevalue5"></span> <br>
   		</label>
-  		</div>
-  		
+ --%> 	
+ 
   		 <label for="address">위치</label>
   		    <input type="text" size="50" name="address" id="address">
   		    <input type="button" value="위치찾기" id="postcode">
   		
-  		<div class="form-group">
+   		 <div class="form-group">
 				<button type="submit">등록</button>
 				<input type="button">취소
 				
 <%-- 				<button type="submit" class="btn btn-primary">등록</button>
 				<button type="submit" class="btn btn-danger">취소</button> --%>
 		</div>
-  		</form>
- </div>
+	</form>
+  </div>
  </body>
 </head>
