@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <jsp:include page="../../layout/header.jsp"/>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<html>
 
 
 <style>
@@ -71,10 +72,9 @@
 
 </main>
 
-<footer>
-    <img src="../../footer.png">
+<jsp:include page="../../layout/footer.jsp"/>
 
-</footer>
+
 
 <script type="text/javascript">
     function reload(){
