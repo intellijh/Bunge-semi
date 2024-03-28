@@ -1,11 +1,13 @@
 package info.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import common.action.Action;
 import common.action.ActionForward;
 import info.db.Board;
 import info.db.BoardDAO;
+import info.db.Boardfile;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,6 +32,7 @@ public class InfoDetailAction implements Action {
 		
 		//글의 내용을 DAO에서 읽은 후 얻은 결과를 boarddata 객체에 저장합니다.
 		Board boarddata = boarddao.getDetail(num);
+		ArrayList<Boardfile> list = boarddao.getDetailAttach(num);
 	
 		ActionForward forward = new ActionForward();
 		//boarddata = null; //error 테스트를 위한 값 설정
@@ -45,8 +48,10 @@ public class InfoDetailAction implements Action {
 		
 		//boarddata 객체를 request 객체에 저장합니다.
 		request.setAttribute("boarddata", boarddata);
+		request.setAttribute("boardfile", list);
+		System.out.println(list);
 		forward.setRedirect(false);
-		forward.setPath("infoboard/viewdetail.jsp"); //글 내용을 보기 페이지로 이동하기 위해 경로를 설정합니다.
+		forward.setPath("infoboard/infoviewdetail.jsp"); //글 내용을 보기 페이지로 이동하기 위해 경로를 설정합니다.
 		return forward;
 	}
 }

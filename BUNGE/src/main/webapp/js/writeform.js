@@ -1,8 +1,8 @@
 $(function() {
-	$("#upfile").change(function(){
+	$("input[type=file]").change(function(){
 		console.log($(this).val())
 		const inputfile = $(this).val().split('\\');
-		$('#filevalue').text(inputfile[inputfile.length -1]);
+		$(this).next().text(inputfile[inputfile.length -1]);
 	});
 	
 $("button").click(function(){
@@ -21,7 +21,7 @@ $("button").click(function(){
   
 $("input[type=button]:eq(1)").click(function(){
 	console.log('abcd');
-	location.href="BoardList.com";
+	location.href="InfoList.com";
 })
 	
 $("#postcode").click(function () {

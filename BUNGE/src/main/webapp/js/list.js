@@ -1,5 +1,5 @@
 $(function() {
 	$("button").click(function(){
-		location.href="Write.com";
+		location.href="InfoWrite.com";
 	})
 })

@@ -5,7 +5,7 @@
 <head>
 <title>상세페이지</title>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/view.js"></script>
+<script src="js/viewdetail.js"></script>
 <link rel="stylesheet" href="css/view.css" type="text/css">
 </head>
  <body>
@@ -30,22 +30,26 @@
  					</textarea></td>
  			</tr>
  			
- 			 <c:if test="${boarddata.inf_lev==0}">
-          <%-- 원문글인 경우에만 첨부파일을 추가할 수 있다. --%>
+ 	    <c:if test="${boarddata.inf_lev==0}">
           <tr>
             <td><div>첨부파일</div></td>
             
             <%-- 파일을 첨부한 경우 --%>
-   <%--         <c:if test="${!empty boarddata.inf_file}">
-              <td><img src="image/down.png" width="10px">
-                <a href="BoardFileDown.bo?filename=${boarddata.board_file}">${boarddata.board_file}</a></td>
-            </c:if>--%>
+            <c:if test="${!empty boardfile}">
+              <c:forEach var="a" items="${boardfile}">
+		           <tr>
+		             <td><img src="image/down.png" width="10px">
+		                 <a href="BoardFileDown.bo?filename=${a.infa_filename}">${a.infa_filename}</a>
+		             </td>
+		           </tr>
+              </c:forEach>
+            </c:if>
             
             <%-- 파일을 첨부하지 않은 경우 --%>
-   <%--        <c:if test="${empty boarddata.board_file}">
+           <c:if test="${empty boardfile}">
               <td></td>
-            </c:if>
-          </tr>	--%>
+           </c:if>
+          </tr>
         </c:if>		
         
         <tr>

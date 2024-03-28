@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.oreilly.servlet.MultipartRequest;
+
 public class BoardDAO {
 	private DataSource ds;
 
@@ -26,7 +28,6 @@ public class BoardDAO {
 	
 	
 	public int boardInsert(Board board) {
-		boolean resultcheck = false;
 		int num = 0;
 				
 				String max_sql = "(select nvl(max(inf_num),0)+1 from INFOBOARD)";
@@ -57,9 +58,8 @@ public class BoardDAO {
 						pstmt.setInt(7, 0); // READCOUNT
 						pstmt.setString(8, board.getInf_loc()); // READCOUNT
 			
-						int count = pstmt.executeUpdate();
-						if (count == 1)
-							resultcheck = true;
+						pstmt.executeUpdate();
+						
 					 try (PreparedStatement pstmt2 = con.prepareStatement(select_sql);
 						  ResultSet rs = pstmt2.executeQuery();) {
 						 if (rs.next()) {
@@ -77,29 +77,41 @@ public class BoardDAO {
 				return num;
 	} //boardInsert() end
 	
-	public boolean boardinsertFile(int success, Boardfile boardfile) {
-		
+	public boolean boardinsertFile(int success, MultipartRequest multi, Boardfile boardfile) {
+		boolean result = false;
 		String sql = "INSERT INTO INFOATTACH " 
-					+ "(INFA_NUM,INF_NUM,INFA_FILENAME,INFA_REGDATE,INFA_SERVERNAME)"
-					+ " values(" + success + ","+ success +", ? , sysdate,?)";
+					+ "(INFA_NUM, INF_NUM, INFA_FILENAME, INFA_REGDATE, INFA_SERVERNAME)"
+					+ " values(infa_seq.nextval, "+ success +", ? , sysdate, ?)";
 		
 		try (Connection con = ds.getConnection();
-			 PreparedStatement pstmt = con.prepareStatement(sql);) { 
-		
-			pstmt.setString(1, boardfile.getInfa_filename());
-			pstmt.setString(2, boardfile.getInfa_servername());
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			con.setAutoCommit(false);
 			
-			if (pstmt.executeUpdate() == 1) {
-				System.out.println("첨부파일 등록 성공적");
-				return true;
+			for (int i=1; i<=5; i++) {
+				String userfile = multi.getOriginalFileName("inf_file"+i);
+				String serverfile = multi.getFilesystemName("inf_file"+i);
+				if (userfile != null) {
+					boardfile.setInfa_filename(userfile);
+					boardfile.setInfa_servername(serverfile);
+					pstmt.setString(1, boardfile.getInfa_filename());
+					pstmt.setString(2, boardfile.getInfa_servername());
+					if (pstmt.executeUpdate() == 1) {
+						System.out.println("첨부파일 등록 성공적");
+						result = true;
+					}
+				} else {
+					continue;
+				}
 			}
+			con.commit();
+			con.setAutoCommit(true);
+			
 		} catch (Exception ex) {
 			System.out.println("board_attach() 에러 : " + ex);
 			ex.printStackTrace();
 		}
-		
-		return false;
-	}
+		return result;
+	} //boardinsertFile end
 
 
 	public int getListCount() {
@@ -222,5 +234,60 @@ public class BoardDAO {
 			System.out.println("getListCount() 에러 : " + ex);
 		}
 		return board;
-  }
+  }//getDetail end
+
+
+	public ArrayList<Boardfile> getDetailAttach(int num) {
+		ArrayList<Boardfile> list = new ArrayList<Boardfile>();
+		Boardfile boardfile = null;
+		String sql = "select * from infoattach where inf_num = ?";
+		
+		try (Connection con = ds.getConnection(); 
+			PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, num);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					boardfile = new Boardfile();
+					
+					boardfile.setInfa_num(rs.getInt("infa_num"));
+					boardfile.setInf_num(rs.getInt("inf_num"));
+					boardfile.setInfa_filename(rs.getString("infa_filename"));
+					boardfile.setInfa_regdate(rs.getString("infa_regdate"));
+					boardfile.setInfa_servername(rs.getString("infa_servername"));
+					
+					list.add(boardfile);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getListCount() 에러 : " + ex);
+		}
+		return list;
+	}//getDetailAttach end
+
+
+	public boolean isboardWriter(String id, int num) {
+		boolean result = false;
+		String board_sql = "select M_ID from infoboard where inf_num = ?";
+		  try (Connection con = ds.getConnection();
+			   PreparedStatement pstmt = con.prepareStatement(board_sql);) {
+			   pstmt.setInt(1, num);
+			   try (ResultSet rs = pstmt.executeQuery()) {
+				   if (rs.next()) {
+					   if (id.equals(rs.getString(1))) {
+						   result = true;
+					   }
+				   }
+			   } catch (SQLException e) {
+				   e.printStackTrace();
+			   }
+		  } catch (SQLException ex) {
+			  System.out.println("isboardWriter() 에러" + ex);
+		  }
+		  return result;
+	}//isboardWriter end
 }//class end

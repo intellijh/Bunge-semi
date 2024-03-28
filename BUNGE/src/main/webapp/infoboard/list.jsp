@@ -33,8 +33,6 @@
   		<th><div>조회수</div></th>
   		<th><div>책 표지</div></th>
   		<th><div>좋아요</div></th>
-  		<th><div>댓글</div></th>
-  		<th><div>즐겨찾기</div></th>
   	</tr>
   </thead>
   <tbody>

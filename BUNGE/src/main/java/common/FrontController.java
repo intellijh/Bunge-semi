@@ -7,6 +7,8 @@ import common.action.Action;
 import common.action.ActionForward;
 import info.action.InfoDetailAction;
 import info.action.InfoListAction;
+import info.action.InfoModifyAction;
+import info.action.InfoModifyProcessAction;
 import info.action.InfoAddAction;
 import info.action.InfoDeleteAction;
 import info.action.InfoWriteAction;
@@ -88,6 +90,13 @@ public class FrontController extends HttpServlet {
             case "/InfoDelete.com" :
                 action = new InfoDeleteAction();
                 break;
+            //게시판 글 수정
+            case "/InfoModify.com" :
+            	action = new InfoModifyAction();
+            	break;
+            case "/InfoModifyProcess.com" :
+            	action = new InfoModifyProcessAction();
+            	break;
             //채팅 페이지 이동
             case "/chat.com":
                 action = new ChatListAction();
