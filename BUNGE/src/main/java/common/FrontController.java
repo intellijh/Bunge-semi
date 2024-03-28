@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import chat.ChatListAction;
 
+
 @WebServlet("*.com")
 public class FrontController extends HttpServlet {
 

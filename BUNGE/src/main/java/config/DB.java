@@ -3,16 +3,17 @@ package config;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class DB {
-
     public static Connection getConnection() {
         try {
-            Context init = new InitialContext();
-            DataSource ds = (DataSource) init.lookup("java:/comp/jdbc/OracleDB");
+            Context initContext = new InitialContext();
+            Context envContext  = (Context)initContext.lookup("java:/comp/env");
+            DataSource ds = (DataSource)envContext.lookup("jdbc/OracleDB");
             Connection conn = ds.getConnection();
 
             return conn;
