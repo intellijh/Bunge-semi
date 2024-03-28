@@ -14,6 +14,7 @@ public class idcheckAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		MemberDAO dao = new MemberDAO();
 		int result = dao.idcheck(request.getParameter("m_id"));
 		response.getWriter().print(result);

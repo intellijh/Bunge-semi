@@ -21,7 +21,7 @@ public class MemberDAO {
 		}
 	}
 	public int idcheck(String m_id) {
-		int result = 0; 
+		int result = -1; //db 아이디정보가 없을때 -1을 리턴한다.
 		String idck_sql = "select m_id from MEMBER where m_id = ? ";
 		
 		//try-with-resource문
@@ -31,7 +31,7 @@ public class MemberDAO {
 			
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if(rs.next()) {
-					result=1; //DB에 해당 id가 있다.
+					result=0; //DB에 해당 id가 있다.
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -91,5 +91,26 @@ public class MemberDAO {
 		}
 		return result;
 	}//insert end
+	public int nickcheck(String m_nick) {
+		int result = -1; //db 아이디정보가 없을때 -1을 리턴한다.
+		String nickck_sql = "select m_nick from MEMBER where m_nick = ? ";
+		
+		//try-with-resource문
+		try (Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(nickck_sql);) {
+			pstmt.setString(1, m_nick);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if(rs.next()) {
+					result=0; //DB에 해당 id가 있다.
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+				e.printStackTrace();
+		}
+	return result;
+	}
 
 }

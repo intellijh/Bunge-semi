@@ -49,9 +49,22 @@ public class FrontController extends HttpServlet {
 	       case "/joinProcess.com" :
 	    	   action = new joinProessAction();
 	    	   break;
+	    	   //아이디 중복 검사
 	       case "/idcheck.com" :
 	    	   action = new idcheckAction();
 	    	   break;
+	    	   //닉네임 중복 검사
+	       case"/nickcheck.com" :
+	    	   action = new nickcheckAction();
+	    	   break;
+	    	   //아이디 찾기
+	       case "/findid.com" :
+	    	   action = new findidAction();
+	    	   break;
+	       case"/findidProcess.com" :
+	    	   action = new findidProcessAction();
+	    	   break;
+	    	  
 	        } //switch (command)
 
         forward = action.execute(request, response);

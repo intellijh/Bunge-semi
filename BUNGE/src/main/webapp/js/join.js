@@ -1,48 +1,167 @@
 $(function(){
-	let checkid= false;
-	let checkmail= false;
+	let checkid= false ,  checkpwd = false , checkname= false, checknick = false,  checkmail= false;
 	
-	$("input[name=m_id]").on('keyup',
-			function(){
-		if(!$("input[name=m_id]")){
-				$("#id_message").css('color' , 'red').html('아이디 : 아이디는 필수 입니다.');
-				($("input[name=m_id]")).focus();
-			checkid= false;
-			return 
-		}
-	});
+	//id keyup 시작
 	$("input[name=m_id]").on('keyup',
 		function(){
-			
-			const pattern = /^\w{5,15}$/;
-			const id = $(this).val();
-			
-			if(id.trim() == '') {
-				$("#id_message").css('color' , 'red').html('아이디 : 아이디는 필수 입니다.');
+			const patternid = /^\w{5,15}$/;
+			const id = $(this).val().trim();
+			//id 유효성 검사
+			if(id == "") {
+				$("#id_message").css('color' , 'red').text('아이디 : 아이디는 필수 입니다.');
 				($("input[name=m_id]")).focus();
-				checkid= false;
-			} else if(!pattern.test(id)) {
-				$("#id_message").css('color' , 'red').html('아이디 : 5~15자의 영문, 소문자, 숫자로만 사용 가능합니다.');
-				checkid = false;
-				return
+				return false;
+				
+			} else if(!patternid.test(id)) {
+				$("#id_message").css('color' , 'red').text('아이디 : 5~15자의 영문, 소문자, 숫자로만 사용 가능합니다.');
+				 return false;
 			} //id 유효성 검사
-		
+
 		$.ajax({
 				type : "post" ,
 				url : "idcheck.com" ,
-				data : {"m_id" : m_id} , 
+				data : {"m_id" : id} , 
 				success : function(idck) {
-					if (idck == '1') {
-						$("#id_message").css('color', 'green').html("사용 가능한 아이디입니다.");
-						checkid = true;
+					if (idck == '-1') {
+						$("#id_message").css('color', 'green').text("사용 가능한 아이디입니다.");
+						
 					}else {
-						$("#id_message").css('color', 'red').html("아이디 : 사용할수 없는 아이디입니다. 다른 아이디를 입력해주세요.");
-						checkid = false;
+						$("#id_message").css('color', 'red').text("아이디 : 사용할수 없는 아이디입니다. 다른 아이디를 입력해주세요.");
 					}
 				}
 		}); //ajaxid end
 	})//id keyup end
+	
+	//pwd 유효성 검사
+$("input[name=m_pwd").on('keyup',
+	function(){
+		const patternpwd =/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+		const pwd = $(this).val().trim();
+		
+		if(pwd == "") {
+			$("#pwd_message").css('color' , ' red').html("비밀번호: 비밀번호는 필수입니다.");
+			($("input[name=m_pwd]")).focus();
+			 return false;
+			
+		} else if (!patternpwd.test(pwd)) {
+			$("#pwd_message").css('color', 'red').html("비밀번호:8~16자의 영문 대/소문자, 특수문자를 사용해 주세요. ");
+			 return false;
+		}else {
+			$("#pwd_message").css('color', 'green').html("비밀번호:안전 합니다.");
+			return true;
+		}
+	});//pwd 유효성 검사	end
+	
+	//name 유효성 검사
+$("input[name=m_name]").on('keyup',
+	function(){
+		const patternname = /^[가-힣]{2,4}$/;
+		const name = $(this).val().trim();
+		if(name == "") {
+			$("#name_message").css('color', 'red').html("이름 : 이름은 필수 입니다.");
+			 return false;
+		}else if(!patternname.test(name)){
+			$("#name_message").css('color', 'red').text("이름 : 한글 이름 2~4자 이내로 입력하세요.");
+			return false;
+		}else {
+			$("#name_message").css('color','green').html("이름 : 이름 입력이 완료되었습니다.");
+			return true;
+		}
+	});//name 유효성 검사 end
+	
+	//nick 유효성 검사 
+$("input[name=m_nick]").on('keyup' ,
+	function(){
+		const patternick = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/;
+		const nick = $(this).val().trim();
+		if(nick == "") {
+			$("#nick_message").css('color', 'red').html("닉네임 : 닉네임은 필수 입니다.");
+			return false;
+		}else if(!patternick.test(nick)){
+			$("#nick_message").css('color', 'red').html("닉네임: 닉네임은 한글, 영문, 숫자만 가능하며 2-10자리 가능합니다.");
+			 return false;
+		}//nick 유효성 end
+		
+		$.ajax ({
+			type : "post" ,
+				url : "nickcheck.com" ,
+				data : {"m_nick" : nick} ,
+				success : function(idck) {
+					if (idck == '-1') {
+						$("#nick_message").css('color', 'green').text("사용 가능한 닉네임입니다.");
+						
+					}else {
+						$("#nick_message").css('color', 'red').text("닉네임 : 사용할수 없는 닉네임 입니다. 다른 닉네임를 입력해주세요.");
+					}
+				}
+		}); //ajaxnick end
+	});//nick keyup end
+	//성별 유효성 검사
+$("input[name=m_gender]").click(function(){
+		const gender = $(this).val();
+	if(gender == 0) {
+		$("#gender_message").css('color', 'red').text("성별 : 성별을 선택하세요.");
+		return false;
+	}else {
+		$("#gender_message").css('color', 'green').text("성별 :  체크 완료")
+	}
+});//성별 유효성 검사 end
+//우편 번호 유효성 검사
+$("input[name=m_addr2]").on('keyup',
+	function(){
+		const addr2 = $(this).val();
+		if(addr2 == "") {
+			$("#addr2_message").css('color','red').text("상세주소 : 주소를 입력해주세요.");
+			return false;
+		} else {
+			$("#addr2_message").css('color', 'green').text("상세주소 : 주소가 입력되었습니다.")
+		}
+});
 
+//전화번호 유효성 검사
+$("input[name=m=phone]").on('keyup',
+	function(){
+		const phone = $(this).val().trim();
+		const patterpho = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
+			if(phone == "") {
+				$("#pho_message").css('color', 'red').text("전화번호 : 전화번호는 필수 입니다.");
+			return false;
+			} else if(!patterpho.test(phone)) {
+				$("pho_message").css('color', 'red').text("전화번호 :  전화번호 형식에 맞지 않습니다.");
+				return false;
+			}else {
+				$("pho_message").css('color', 'green').text("전화번호 : 전화번호를 알맞게 입력되었습니다.");
+			}
+	});//전화번호 유효성 검사 end
+	
+//이메일 유효성 검사 
+$("input[name=m_email]").on('keyup', 
+	function(){
+		const email= $(this).val().trim();
+		const patteremail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+		if(email == "") {
+			$("#email_message").css('color', 'red').text("이메일 : 이메일은 필수 입니다.");
+			return false;
+		} else if(!patteremail.test(email)) {
+			$("#email_message").css('color', 'red').text("이메일 : 이메일 형식에 올바르지 않습니다.");
+			return false;
+		}else {
+			$("#email_message").css('color','red').text("이메일 : 이메일을 알맞게 입력되었습니다.");
+		}
+	});//이메일 유효성 검사 end
+	
+	//생년월일 유효성 검사 
+	$("input[name=m_birthdate]").on('keyup', 
+	function(){
+		const btrdate = $(this).val().trim();
+		if(btrdate =="") {
+			$("#birth_message").css('color', 'red').text("생년월일 : 생년월일은 필수 입니다.");
+			return false;
+		}else {
+			$("#birth_message").css('color' , 'green').text("생년월일 : 생년월일이 알맞게 입력되었습니다.");
+		}
+	}); //생년월일 유효성 검사 end
+	
 		//우편번호 검색 버튼 클릭
 	$("input[name=postcode]").click(function() {
 		//window.open('post.html','post','width=500,height=200 ,scrollbars=yes');
@@ -54,15 +173,10 @@ $(function(){
         new daum.Postcode({
             oncomplete: function(data) {
             	console.log(data.zonecode)
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
- 
-                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+
                 var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
                 var extraRoadAddr = ''; // 도로명 조합형 주소 변수
- 
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+
                 if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
                     extraRoadAddr += data.bname;
                 }
