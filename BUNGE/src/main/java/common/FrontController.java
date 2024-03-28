@@ -38,7 +38,7 @@ public class FrontController extends HttpServlet {
             case "/login.com" :
                 action = new loginAction();
                 break;
-            case "/loginProess.com" :
+            case "/loginProcess.com" :
                 action = new loginProcessAction();
                 break;
             //로그아웃
