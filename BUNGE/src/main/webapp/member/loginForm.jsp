@@ -26,10 +26,13 @@ $(function() {
   <b>아이디</b>
   <input type="text" name="m_id" placeholder="Enter id" required>
   
-  <b>Password</b>
+  <b>비밀번호</b>
   <input type="password" name="m_pwd" placeholder="Enter passwrod" required>
   <input type="checkbox" id="remember" name="remember" value="store">
   <span>아이디저장</span>
+<a href="findid.com"><button type="button" class="findidbtn">아이디 찾기</button></a>
+<a href="findpwd.com"><button type="button" class="findpwdbtn">비밀번호찾기</button></a>
+	
   
   <div class="clearfix">
     <button type="submit" class="submitbtn">로그인</button>

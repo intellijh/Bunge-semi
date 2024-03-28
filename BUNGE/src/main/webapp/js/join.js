@@ -96,6 +96,7 @@ $("input[name=m_nick]").on('keyup' ,
 				}
 		}); //ajaxnick end
 	});//nick keyup end
+	
 	//성별 유효성 검사
 $("input[name=m_gender]").click(function(){
 		const gender = $(this).val();
@@ -106,6 +107,7 @@ $("input[name=m_gender]").click(function(){
 		$("#gender_message").css('color', 'green').text("성별 :  체크 완료")
 	}
 });//성별 유효성 검사 end
+
 //우편 번호 유효성 검사
 $("input[name=m_addr2]").on('keyup',
 	function(){
@@ -119,7 +121,7 @@ $("input[name=m_addr2]").on('keyup',
 });
 
 //전화번호 유효성 검사
-$("input[name=m=phone]").on('keyup',
+$("input[name=m_phone]").on('keyup',
 	function(){
 		const phone = $(this).val().trim();
 		const patterpho = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
@@ -146,21 +148,21 @@ $("input[name=m_email]").on('keyup',
 			$("#email_message").css('color', 'red').text("이메일 : 이메일 형식에 올바르지 않습니다.");
 			return false;
 		}else {
-			$("#email_message").css('color','red').text("이메일 : 이메일을 알맞게 입력되었습니다.");
+			$("#email_message").css('color','green').text("이메일 : 이메일을 알맞게 입력되었습니다.");
 		}
 	});//이메일 유효성 검사 end
 	
 	//생년월일 유효성 검사 
-	$("input[name=m_birthdate]").on('keyup', 
+	$("input[name=m_birthdate]").on('mousedown', 
 	function(){
 		const btrdate = $(this).val().trim();
 		if(btrdate =="") {
 			$("#birth_message").css('color', 'red').text("생년월일 : 생년월일은 필수 입니다.");
 			return false;
 		}else {
-			$("#birth_message").css('color' , 'green').text("생년월일 : 생년월일이 알맞게 입력되었습니다.");
-		}
-	}); //생년월일 유효성 검사 end
+				$("#birth_message").css('color' , 'green').text("생년월일 : 생년월일이 알맞게 입력되었습니다.");
+			}
+		}); //생년월일 유효성 검사 end
 	
 		//우편번호 검색 버튼 클릭
 	$("input[name=postcode]").click(function() {

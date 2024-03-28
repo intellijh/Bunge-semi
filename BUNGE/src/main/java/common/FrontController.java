@@ -12,6 +12,7 @@ import chat.message.MessageLoadAction;
 import chat.message.MessageSendAciton;
 import common.action.Action;
 import common.action.ActionForward;
+import common.mypage.mypageAction;
 import info.action.InfoDetailAction;
 import info.action.InfoListAction;
 import info.action.InfoModifyAction;
@@ -83,6 +84,17 @@ public class FrontController extends HttpServlet {
             case "/findidProcess.com":
                 action = new findidProcessAction();
                 break;
+            //비밀번호 찾기
+            case "/findpwd.com" :
+                action = new findpwdAction();
+                break;
+            case "/findpwdProcess.com" :
+                action = new findpwdProcessAction();
+                break;
+            //마이 페이지
+            case "/mypage.com" :
+                action = new mypageAction();
+                break;
             //게시판에 글 추가
             case "/InfoAdd.com":
                 action = new InfoAddAction();
@@ -119,20 +131,20 @@ public class FrontController extends HttpServlet {
                 action = new InfoReplyProcessAction();
                 break;
             case "/CommentAdd.com":
-    			action = new CommentAddAction();
-    			break;
-    		case "/CommentList.com":
-    			action = new CommentListAction();
-    			break;
-    		case "/CommentDelete.com":
-    			action = new CommentDeleteAction();
-    			break;
-    		case "/CommentUpdate.com":
-    			action = new CommentUpdateAction();
-    			break;
-    		case "/CommentReply.com":
-    			action = new CommentReplyAction();
-    			break;
+                action = new CommentAddAction();
+                break;
+            case "/CommentList.com":
+                action = new CommentListAction();
+                break;
+            case "/CommentDelete.com":
+                action = new CommentDeleteAction();
+                break;
+            case "/CommentUpdate.com":
+                action = new CommentUpdateAction();
+                break;
+            case "/CommentReply.com":
+                action = new CommentReplyAction();
+                break;
             //채팅 페이지 이동
             case "/chat.com":
                 action = new ChatListAction();

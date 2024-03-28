@@ -43,8 +43,7 @@ public class loginProcessAction implements Action {
 			out.print("location.href='login.com';");
 			out.print("</script>");
 			out.close();
-		}
-				
+		}		
 		return null;
 	}
 

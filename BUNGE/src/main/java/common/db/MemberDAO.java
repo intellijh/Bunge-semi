@@ -112,5 +112,56 @@ public class MemberDAO {
 		}
 	return result;
 	}
-
-}
+	public String findid(String m_name, String m_email) {
+			String m_id =null;
+		String findid_sql = "select m_id from member where m_name= ? and m_email= ?";
+		
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(findid_sql);) {
+			
+			pstmt.setString(1, m_name);
+			pstmt.setString(2, m_email);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				
+				if(rs.next()) {
+					m_id = rs.getString("m_id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+		
+		return m_id ;
+	}
+	public boolean findpwd(String m_id, String m_name, String m_email) {
+		Boolean m_pwd = false;
+		
+		String findpwd_sql = "select decode(count(*), '1,'true','false') from member "
+										+ "where m_id=? and m_name=? and m_email=?";
+		
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(findpwd_sql);) {
+			
+			pstmt.setString(1, m_id);
+			pstmt.setString(2, m_name);
+			pstmt.setString(3, m_email);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				if(rs.next()) {
+						 if(rs.getBoolean(1)) {
+							m_pwd=true; //일치
+						 }else {
+							m_pwd=false;//불일치
+						}
+					}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+		return m_pwd;
+		}
+	}

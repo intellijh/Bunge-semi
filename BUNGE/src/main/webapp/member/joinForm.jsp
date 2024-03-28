@@ -49,6 +49,7 @@
 		
 		<b>우편번호</b>
 		<input type="text" maxlength="5" name="m_zipcode"  required readonly>
+		
 		<input type="button" value="우편검색" name="postcode">
 		<span id="zipcode_message"></span>
 		
@@ -61,7 +62,7 @@
 		
 		<b>핸드폰</b>
 			<input type="tel" name="m_phone" maxlength="11" placeholder="핸드폰번호 입력('-' 제외 11자리 입력)"  
-				required oninput="autophone(this)">
+				required>
 		<span id="pho_message"></span>
 		
 		<b>이메일 주소</b>
