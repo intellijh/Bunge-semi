@@ -39,7 +39,7 @@ public class FrontController extends HttpServlet {
                 action = new loginAction();
                 break;
             case "/loginProess.com" :
-                action = new loginProessAction();
+                action = new loginProcessAction();
                 break;
             //로그아웃
             case "/logout.com" :
