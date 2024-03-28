@@ -9,7 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/view.js"></script>
+<script src="js/viewdetail.js"></script>
 </head>
  <body>
  	<input type="hidden" id="loginid" value="${m_id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
@@ -84,7 +84,7 @@
     		<div class="modal-content">
     		<%-- Modal body --%>
     		<div class="modal-body">
-    			<form name="deleteForm" action="InfoDelete.bo" method="post">
+    			<form name="deleteForm" action="InfoDelete.com" method="post">
     				<%-- http://localhost:8088/Board/BoardDetail.bo?num=22 
     					주소를 보묜 num을 파라미터로 넘기고 있습니다. 
     					이 값을 가져와서 ${param.num}를 사용
