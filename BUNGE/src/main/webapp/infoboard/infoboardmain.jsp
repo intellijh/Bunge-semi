@@ -3,10 +3,10 @@
 <html>
 <head>
 <title>정보공유게시판 - view</title>
-<jsp:include page="../layout/header.jsp"></jsp:include>
+<%@ include file="/layout/header.jsp" %>
 </head>
 <body>
 안녕하세요! 여기서부터 프로젝트 뷰페이지 시작입니다!
 </body>
-<jsp:include page="../layout/footer.jsp"></jsp:include>
+<%@ include file="/layout/footer.jsp" %>
 </html>

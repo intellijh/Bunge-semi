@@ -4,9 +4,12 @@
 <html>
 <head>
 <title>상세페이지</title>
-<script src = "http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/view.js"></script>
 <link rel="stylesheet" href="css/view.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/viewdetail.js"></script>
 </head>
  <body>
  	<input type="hidden" id="loginid" value="${m_id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
@@ -30,28 +33,32 @@
  					</textarea></td>
  			</tr>
  			
- 			 <c:if test="${boarddata.inf_lev==0}">
-          <%-- 원문글인 경우에만 첨부파일을 추가할 수 있다. --%>
+ 	    <c:if test="${boarddata.inf_lev==0}">
           <tr>
             <td><div>첨부파일</div></td>
             
             <%-- 파일을 첨부한 경우 --%>
-   <%--         <c:if test="${!empty boarddata.inf_file}">
-              <td><img src="image/down.png" width="10px">
-                <a href="BoardFileDown.bo?filename=${boarddata.board_file}">${boarddata.board_file}</a></td>
-            </c:if>--%>
+            <c:if test="${!empty boardfile}">
+              <c:forEach var="a" items="${boardfile}">
+		           <tr>
+		             <td><img src="image/down.png" width="10px">
+		                 <a href="BoardFileDown.bo?filename=${a.infa_filename}">${a.infa_filename}</a>
+		             </td>
+		           </tr>
+              </c:forEach>
+            </c:if>
             
             <%-- 파일을 첨부하지 않은 경우 --%>
-   <%--        <c:if test="${empty boarddata.board_file}">
+           <c:if test="${empty boardfile}">
               <td></td>
-            </c:if>
-          </tr>	--%>
+           </c:if>
+          </tr>
         </c:if>		
         
         <tr>
           <td colspan="2" class="center">
             <c:if test="${boarddata.m_id == m_id || m_id == 'admin' }">
-              <a href="BoardModify.com?num=${boarddata.inf_num}">
+              <a href="InfoModify.com?num=${boarddata.inf_num}">
                 <button class="btn btn-info">수정</button>
               </a>
               <%-- href의 주소를 #으로 설정한다. --%>
@@ -60,10 +67,10 @@
                 	    data-target="#myModal">삭제</button>
               </a>
             </c:if>
-             <a href="BoardList.com">
+             <a href="InfoList.com">
               <button class="btn btn-warning">목록</button>
             </a>
-            <a href="BoardReply.com?num=${boarddata.inf_num}">
+            <a href="InfoReply.com?num=${boarddata.inf_num}">
               <button class="btn btn-success">답변</button>
             </a>
           </td>
@@ -77,7 +84,7 @@
     		<div class="modal-content">
     		<%-- Modal body --%>
     		<div class="modal-body">
-    			<form name="deleteForm" action="BoardDelete.bo" method="post">
+    			<form name="deleteForm" action="InfoDelete.com" method="post">
     				<%-- http://localhost:8088/Board/BoardDetail.bo?num=22 
     					주소를 보묜 num을 파라미터로 넘기고 있습니다. 
     					이 값을 가져와서 ${param.num}를 사용

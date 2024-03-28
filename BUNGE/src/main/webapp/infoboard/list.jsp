@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
  <script src="js/list.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
- <script src="${pageContext.request.contextPath}/js/writeform.js"></script>
  <style>
 	h1{font-size:1.5em; text-align:center; color:#1a92b9}
 	.container{width:60%}
@@ -34,8 +33,6 @@
   		<th><div>조회수</div></th>
   		<th><div>책 표지</div></th>
   		<th><div>좋아요</div></th>
-  		<th><div>댓글</div></th>
-  		<th><div>즐겨찾기</div></th>
   	</tr>
   </thead>
   <tbody>
@@ -63,7 +60,7 @@
   	   		&nbsp;
   	   	</c:if>
   	   	
-  	   	<a href="BoardDetail.com?num=${b.inf_num}">
+  	   	<a href="InfoDetail.com?num=${b.inf_num}">
   	   		<c:if test="${b.inf_subject.length()>=20}">
   	   			<c:out value="${b.inf_subject.substring(0,20)}..." />
   	   		</c:if>

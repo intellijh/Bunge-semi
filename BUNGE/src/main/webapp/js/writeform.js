@@ -1,11 +1,11 @@
 $(function() {
-	$("#upfile").change(function(){
+	$("input[type=file]").change(function(){
 		console.log($(this).val())
 		const inputfile = $(this).val().split('\\');
-		$('#filevalue').text(inputfile[inputfile.length -1]);
+		$(this).next().text(inputfile[inputfile.length -1]);
 	});
 	
-$("input[type=button]:eq(1)").click(function(){
+$("button").click(function(){
 	if($.trim($("#inf_subject").val()) == "") {
 		alert("제목을 입력하세요.");
 		$("inf_subject").focus();
@@ -19,9 +19,9 @@ $("input[type=button]:eq(1)").click(function(){
 	}
  });
   
-$("input[type=button]:eq(2)").click(function(){
+$("input[type=button]:eq(1)").click(function(){
 	console.log('abcd');
-	location.href="BoardList.com";
+	location.href="InfoList.com";
 })
 	
 $("#postcode").click(function () {

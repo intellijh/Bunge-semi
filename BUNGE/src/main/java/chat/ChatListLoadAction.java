@@ -18,9 +18,10 @@ import java.io.PrintWriter;
 public class ChatListLoadAction implements Action {
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getParameter("loginId"));
+        String id = request.getParameter("loginId");
+        System.out.println(id);
 
-        JsonArray array = new ChatDAO().getChatList();
+        JsonArray array = new ChatDAO().getChatList(id);
 /*
         JsonArray array = new JsonArray();
 

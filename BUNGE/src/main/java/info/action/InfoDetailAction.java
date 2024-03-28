@@ -1,16 +1,18 @@
-package common;
+package info.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import common.action.Action;
 import common.action.ActionForward;
-import common.db.Board;
-import common.db.BoardDAO;
+import info.db.Board;
+import info.db.BoardDAO;
+import info.db.Boardfile;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class BoardDetailAction implements Action {
+public class InfoDetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
@@ -22,7 +24,7 @@ public class BoardDetailAction implements Action {
 		
 		//특정 주소로부터의 이동을 확인하는데 사용할 수 있는 정보는 요청 헤더인 "Referer"에 있습니다.
 		String referer = request.getHeader("Referer");
-		if(referer != null  && referer.contains("BoardList.com")) {
+		if(referer != null  && referer.contains("InfoList.com")) {
 			//내용을 확인할 글의 조회수를 증가시킵니다.
 			System.out.println("referer= " + referer);
 			boarddao.setReadCountUpdate(num);
@@ -30,6 +32,7 @@ public class BoardDetailAction implements Action {
 		
 		//글의 내용을 DAO에서 읽은 후 얻은 결과를 boarddata 객체에 저장합니다.
 		Board boarddata = boarddao.getDetail(num);
+		ArrayList<Boardfile> list = boarddao.getDetailAttach(num);
 	
 		ActionForward forward = new ActionForward();
 		//boarddata = null; //error 테스트를 위한 값 설정
@@ -45,8 +48,10 @@ public class BoardDetailAction implements Action {
 		
 		//boarddata 객체를 request 객체에 저장합니다.
 		request.setAttribute("boarddata", boarddata);
+		request.setAttribute("boardfile", list);
+		System.out.println(list);
 		forward.setRedirect(false);
-		forward.setPath("infoboard/viewdetail.jsp"); //글 내용을 보기 페이지로 이동하기 위해 경로를 설정합니다.
+		forward.setPath("infoboard/infoviewdetail.jsp"); //글 내용을 보기 페이지로 이동하기 위해 경로를 설정합니다.
 		return forward;
 	}
 }

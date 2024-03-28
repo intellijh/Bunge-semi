@@ -3,9 +3,25 @@ package common;
 import java.io.IOException;
 
 import chat.ChatListLoadAction;
+import comment.action.CommentAddAction;
+import comment.action.CommentDeleteAction;
+import comment.action.CommentListAction;
+import comment.action.CommentReplyAction;
+import comment.action.CommentUpdateAction;
+import chat.message.MessageLoadAction;
+import chat.message.MessageSendAciton;
 import common.action.Action;
 import common.action.ActionForward;
 import common.mypage.mypageAction;
+import info.action.InfoDetailAction;
+import info.action.InfoListAction;
+import info.action.InfoModifyAction;
+import info.action.InfoModifyProcessAction;
+import info.action.InfoReplyAction;
+import info.action.InfoReplyProcessAction;
+import info.action.InfoAddAction;
+import info.action.InfoDeleteAction;
+import info.action.InfoWriteAction;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,12 +30,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import chat.ChatListAction;
 
+
 @WebServlet("*.com")
 public class FrontController extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected void doProcess(HttpServletRequest request,
+    protected void doProcess(HttpServletRequest request,
                              HttpServletResponse response) throws ServletException, IOException {
 
         String RequestURI = request.getRequestURI();
@@ -36,61 +53,97 @@ public class FrontController extends HttpServlet {
 
         switch (command) {
             //로그인
-            case "/login.com" :
+            case "/login.com":
                 action = new loginAction();
                 break;
-            case "/loginProcess.com" :
+            case "/loginProcess.com":
                 action = new loginProcessAction();
                 break;
             //로그아웃
-            case "/logout.com" :
+            case "/logout.com":
                 action = new logoutAction();
                 break;
-            case "/join.com" :
-	        	action = new joinAction();
-	        	break;
-	       case "/joinProcess.com" :
-	    	   action = new joinProcessAction();
-	    	   break;
-	    	   //아이디 중복 검사
-	       case "/idcheck.com" :
-	    	   action = new idcheckAction();
-	    	   break;
-	    	   //닉네임 중복 검사
-	       case"/nickcheck.com" :
-	    	   action = new nickcheckAction();
-	    	   break;
-	    	   //아이디 찾기
-	       case "/findid.com" :
-	    	   action = new findidAction();
-	    	   break;
-	       case"/findidProcess.com" :
-	    	   action = new findidProcessAction();
-	    	   break;
-	    	   //비밀번호 찾기
-	       case "/findpwd.com" :
-	    	  action = new findpwdAction();
-	    	  break;
-	       case "/findpwdProcess.com" :
-	    	   action = new findpwdProcessAction();
-	    	   break;
-	    	   //마이 페이지
-	       case "/mypage.com" :
-	    	   action = new mypageAction();
-	    	   break;
+            case "/join.com":
+                action = new joinAction();
+                break;
+            case "/joinProcess.com":
+                action = new joinProcessAction();
+                break;
+            //아이디 중복 검사
+            case "/idcheck.com":
+                action = new idcheckAction();
+                break;
+            //닉네임 중복 검사
+            case "/nickcheck.com":
+                action = new nickcheckAction();
+                break;
+            //아이디 찾기
+            case "/findid.com":
+                action = new findidAction();
+                break;
+            case "/findidProcess.com":
+                action = new findidProcessAction();
+                break;
+            //비밀번호 찾기
+            case "/findpwd.com" :
+                action = new findpwdAction();
+                break;
+            case "/findpwdProcess.com" :
+                action = new findpwdProcessAction();
+                break;
+            //마이 페이지
+            case "/mypage.com" :
+                action = new mypageAction();
+                break;
             //게시판에 글 추가
-            case "/InfoAdd.com" :
+            case "/InfoAdd.com":
                 action = new InfoAddAction();
                 break;
             //글쓰기
-            case "/Write.com" :
+            case "/InfoWrite.com" :
                 action = new InfoWriteAction();
                 break;
-            case "/BoardList.com" :
-                action = new BoardListAction();
+            //게시글 목록
+            case "/InfoList.com" :
+                action = new InfoListAction();
                 break;
-            case "/BoardDetail.com" :
-                action = new BoardDetailAction();
+            //게시글 상세페이지
+            case "/InfoDetail.com" :
+                action = new InfoDetailAction();
+                break;
+            //게시글 삭제
+            case "/InfoDelete.com" :
+                action = new InfoDeleteAction();
+                break;
+            //게시판 글 수정
+            case "/InfoModify.com" :
+            	action = new InfoModifyAction();
+            	break;
+            case "/InfoModifyProcess.com" :
+            	action = new InfoModifyProcessAction();
+            	break;
+            //답글 글쓰기로 가기
+            case "/InfoReply.com" :
+                action = new InfoReplyAction();
+                break;
+            //답글 글쓰기 등록까지
+            case "/InfoReplyProcess.com" :
+                action = new InfoReplyProcessAction();
+                break;
+            case "/CommentAdd.com":
+                action = new CommentAddAction();
+                break;
+            case "/CommentList.com":
+                action = new CommentListAction();
+                break;
+            case "/CommentDelete.com":
+                action = new CommentDeleteAction();
+                break;
+            case "/CommentUpdate.com":
+                action = new CommentUpdateAction();
+                break;
+            case "/CommentReply.com":
+                action = new CommentReplyAction();
                 break;
             //채팅 페이지 이동
             case "/chat.com":
@@ -99,6 +152,14 @@ public class FrontController extends HttpServlet {
             //채팅 리스트 불러오기
             case "/chatLoad.com":
                 action = new ChatListLoadAction();
+                break;
+            //채팅 리스트 불러오기
+            case "/messageLoad.com":
+                action = new MessageLoadAction();
+                break;
+            //채팅 리스트 불러오기
+            case "/messageSend.com":
+                action = new MessageSendAciton();
                 break;
         } //switch (command)
 

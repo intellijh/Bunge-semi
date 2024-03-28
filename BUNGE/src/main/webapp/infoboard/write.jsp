@@ -10,7 +10,7 @@
 	.container{width:60%}
 	
 	label{font-weight:bold}
-	#upfile{display:none}
+	input[type=file] {display:none}
 	img{width:20px}
  </style>
  </head>
@@ -20,8 +20,7 @@
   		name="boardform">
   	<div class="form-group">
   		<label for="m_id">글쓴이</label>
-  		<input name="m_id" id="m_id" type="text" class="form-control"
-  			   placeholder="Enter m_id">
+  		<input name="m_id" id="m_id" type="text" value="${m_id}" class="form-control" placeholder="Enter m_id" readOnly>
   		</div>	
   		
   		<div class="form-group">
@@ -42,11 +41,31 @@
   			   class="form-control" ></textarea>
   		</div>	
   		<div class="form-group">
-  		<label>파일첨부
-  		<img src="image/attach.png" alt="파일첨부">
-  		<input name="inf_file" id="inf_file" type="file">
+  		<label>파일첨부<br>
+  		    <img src="image/attach.png" alt="파일첨부">
+  		    <input name="inf_file1" id="inf_file1" type="file">
+  		      <span id="filevalue1"></span> <br>
   		</label>
-  		<span id="filevalue"></span>
+  		<label>
+  		    <img src="image/attach.png" alt="파일첨부">
+  		    <input name="inf_file2" id="inf_file2" type="file">
+  		      <span id="filevalue2"></span> <br>
+  		</label>
+  		<label>
+  		    <img src="image/attach.png" alt="파일첨부">
+  		    <input name="inf_file3" id="inf_file3" type="file">
+  		      <span id="filevalue3"></span> <br>
+  		</label>
+  		<label>    
+  		    <img src="image/attach.png" alt="파일첨부">
+  		    <input name="inf_file4" id="inf_file4" type="file">
+  		      <span id="filevalue4"></span> <br>
+  		</label>
+  		<label>
+  		    <img src="image/attach.png" alt="파일첨부">
+  		    <input name="inf_file5" id="inf_file5" type="file">
+  		      <span id="filevalue5"></span> <br>
+  		</label>
   		</div>
   		
   		 <label for="address">위치</label>
@@ -54,7 +73,7 @@
   		    <input type="button" value="위치찾기" id="postcode">
   		
   		<div class="form-group">
-				<input type="button">등록
+				<button type="submit">등록</button>
 				<input type="button">취소
 				
 <%-- 				<button type="submit" class="btn btn-primary">등록</button>
