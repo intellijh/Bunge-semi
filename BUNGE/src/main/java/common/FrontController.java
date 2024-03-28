@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import chat.ChatListAction;
 
+
 @WebServlet("*.com")
 public class FrontController extends HttpServlet {
 
@@ -49,7 +50,7 @@ public class FrontController extends HttpServlet {
 	        	action = new joinAction();
 	        	break;
 	       case "/joinProcess.com" :
-	    	   action = new joinProessAction();
+	    	   action = new joinProcessAction();
 	    	   break;
 	    	   //아이디 중복 검사
 	       case "/idcheck.com" :
@@ -88,6 +89,16 @@ public class FrontController extends HttpServlet {
             case "/chatLoad.com":
                 action = new ChatListLoadAction();
                 break;
+
+//            case "/tradeBoard.com":
+//                action = new TradeBoardAction();
+//                break;
+//            //
+//            case "/tradeList.com":
+//                action = new TradeListAction();
+//                break;
+
+
         } //switch (command)
 
         forward = action.execute(request, response);
