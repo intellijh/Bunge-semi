@@ -20,7 +20,7 @@ $(function() {
 </script>
 </head>
 <body>
-<form name="loginform" action="loginProcess.com" method="post">
+<form name="loginform" action="loginProess.com" method="post">
   <h1>로그인</h1>
   <hr>
   <b>아이디</b>
