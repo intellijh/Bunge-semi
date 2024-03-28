@@ -4,7 +4,7 @@ import java.security.PrivateKey;
 import java.sql.Timestamp;
 
 public class Trade {
-    private String tradeID;
+    private int tradeID;
     private String sellerID;
     private String title;
     private String description;
@@ -18,14 +18,30 @@ public class Trade {
     private int Likes;
     private Timestamp createDate;
 
+    private int readCount;
 
+    public int getReadCount() {
+        return readCount;
+    }
 
-    public String getTradeID() {
+    public void setReadCount(int readCount) {
+        this.readCount = readCount;
+    }
+
+    public int getTradeID() {
         return tradeID;
     }
 
-    public void setTradeID(String tradeID) {
+    public void setTradeID(int tradeID) {
         this.tradeID = tradeID;
+    }
+
+    public String getSellerID() {
+        return sellerID;
+    }
+
+    public void setSellerID(String sellerID) {
+        this.sellerID = sellerID;
     }
 
     public Timestamp getCreateDate() {

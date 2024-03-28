@@ -24,14 +24,18 @@ public class ChatDAO {
     }
 
 
-    public JsonArray getChatList() {
+    public JsonArray getChatList(String id) {
         JsonArray array = new JsonArray();
         String sql = "SELECT *\n" +
-                "FROM chat";
+                "FROM chat\n" +
+                "WHERE seller_id = ?\n" +
+                "OR buyer_id = ?";
 
         try (Connection conn = ds.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            pstmt.setString(1, id);
+            pstmt.setString(2, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     JsonObject object = new JsonObject();
