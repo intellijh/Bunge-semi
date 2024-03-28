@@ -1,4 +1,4 @@
-package common;
+package info.action;
 
 import java.io.IOException;
 

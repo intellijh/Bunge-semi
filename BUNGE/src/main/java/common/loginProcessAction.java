@@ -28,7 +28,7 @@ public class loginProcessAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("m_id",m_id);
 			forward.setRedirect(true);
-			forward.setPath("BoardList.com");
+			forward.setPath("InfoList.com");
 			return forward;
 		
 		} else {

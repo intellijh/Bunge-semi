@@ -1,4 +1,4 @@
-package common;
+package info.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,13 +10,13 @@ import com.google.gson.JsonObject;
 
 import common.action.Action;
 import common.action.ActionForward;
-import common.db.Board;
-import common.db.BoardDAO;
+import info.db.Board;
+import info.db.BoardDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class BoardListAction implements Action {
+public class InfoListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)

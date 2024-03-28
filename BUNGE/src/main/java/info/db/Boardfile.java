@@ -1,10 +1,11 @@
-package common.db;
+package info.db;
 
 public class Boardfile {
 	private int infa_num;
 	private int inf_num;
 	private String infa_filename;
 	private String infa_regdate;
+	private String infa_servername;
 
 	public int getInfa_num() {
 		return infa_num;
@@ -36,5 +37,13 @@ public class Boardfile {
 
 	public void setInfa_regdate(String infa_regdate) {
 		this.infa_regdate = infa_regdate;
+	}
+
+	public String getInfa_servername() {
+		return infa_servername;
+	}
+
+	public void setInfa_servername(String infa_servername) {
+		this.infa_servername = infa_servername;
 	}
 }

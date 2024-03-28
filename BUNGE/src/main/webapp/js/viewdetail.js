@@ -185,14 +185,6 @@ $(function() {
 	
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	
-	$('form[name="deleteForm"]').submit(function() {
-		if($("#board_pass").val() == '') {
-			alert(" 비밀번호를 입력하세요");
-			$("#board_pass").focus();
-			return false;
-		}
-	})//form
-	
 	$('.comment-area').on('keyup','.comment-write-area-text', function() {
 		const length = $(this).val().length;
 		$(this).prev().text(length+'/200');

@@ -3,10 +3,24 @@ package common;
 import java.io.IOException;
 
 import chat.ChatListLoadAction;
+import comment.action.CommentAddAction;
+import comment.action.CommentDeleteAction;
+import comment.action.CommentListAction;
+import comment.action.CommentReplyAction;
+import comment.action.CommentUpdateAction;
 import chat.message.MessageLoadAction;
 import chat.message.MessageSendAciton;
 import common.action.Action;
 import common.action.ActionForward;
+import info.action.InfoDetailAction;
+import info.action.InfoListAction;
+import info.action.InfoModifyAction;
+import info.action.InfoModifyProcessAction;
+import info.action.InfoReplyAction;
+import info.action.InfoReplyProcessAction;
+import info.action.InfoAddAction;
+import info.action.InfoDeleteAction;
+import info.action.InfoWriteAction;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -74,15 +88,51 @@ public class FrontController extends HttpServlet {
                 action = new InfoAddAction();
                 break;
             //글쓰기
-            case "/Write.com":
+            case "/InfoWrite.com" :
                 action = new InfoWriteAction();
                 break;
-            case "/BoardList.com":
-                action = new BoardListAction();
+            //게시글 목록
+            case "/InfoList.com" :
+                action = new InfoListAction();
                 break;
-            case "/BoardDetail.com":
-                action = new BoardDetailAction();
+            //게시글 상세페이지
+            case "/InfoDetail.com" :
+                action = new InfoDetailAction();
                 break;
+            //게시글 삭제
+            case "/InfoDelete.com" :
+                action = new InfoDeleteAction();
+                break;
+            //게시판 글 수정
+            case "/InfoModify.com" :
+            	action = new InfoModifyAction();
+            	break;
+            case "/InfoModifyProcess.com" :
+            	action = new InfoModifyProcessAction();
+            	break;
+            //답글 글쓰기로 가기
+            case "/InfoReply.com" :
+                action = new InfoReplyAction();
+                break;
+            //답글 글쓰기 등록까지
+            case "/InfoReplyProcess.com" :
+                action = new InfoReplyProcessAction();
+                break;
+            case "/CommentAdd.com":
+    			action = new CommentAddAction();
+    			break;
+    		case "/CommentList.com":
+    			action = new CommentListAction();
+    			break;
+    		case "/CommentDelete.com":
+    			action = new CommentDeleteAction();
+    			break;
+    		case "/CommentUpdate.com":
+    			action = new CommentUpdateAction();
+    			break;
+    		case "/CommentReply.com":
+    			action = new CommentReplyAction();
+    			break;
             //채팅 페이지 이동
             case "/chat.com":
                 action = new ChatListAction();
