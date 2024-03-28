@@ -290,4 +290,140 @@ public class BoardDAO {
 		  }
 		  return result;
 	}//isboardWriter end
+  
+
+	public boolean boardDelete(int num) {
+		String select_sql = "select INF_REF,INF_LEV,INF_SEQ "
+				  + "from infoboard "
+				  + "where INF_NUM=?";
+
+		String board_delete_sql = "delete from infoboard" 
+				+ "				where INF_REF=?" 
+				+ "				and INF_LEV>=?"
+				+ "				and INF_SEQ>=? " 
+				+ "				and INF_SEQ<=("
+				+ "								   nvl((select min(inf_seq)-1 "
+				+ "										from infoboard "
+				+ "										where INF_REF=? " 
+				+ "										and INF_LEV=? " 
+				+ "										and INF_SEQ>?),"
+				+ " 					 				(select max(inf_seq)" 
+				+ "			  		  					from infoboard"
+				+ "			  		  					where inf_ref=?)"
+				+ " ))";
+
+		boolean result_check = false;
+		
+		try (Connection con = ds.getConnection();
+				 PreparedStatement pstmt = con.prepareStatement(select_sql);) {
+			 	
+			 pstmt.setInt(1,num);
+			 try (ResultSet rs = pstmt.executeQuery();) {
+				 if (rs.next()) {
+					 try (PreparedStatement pstmt2 = con.prepareStatement(board_delete_sql);){ 
+							pstmt2.setInt(1, rs.getInt("INF_REF"));
+							pstmt2.setInt(2, rs.getInt("INF_LEV"));
+							pstmt2.setInt(3, rs.getInt("INF_SEQ"));
+							pstmt2.setInt(4, rs.getInt("INF_REF"));
+							pstmt2.setInt(5, rs.getInt("INF_LEV"));
+							pstmt2.setInt(6, rs.getInt("INF_SEQ"));
+							pstmt2.setInt(7, rs.getInt("INF_REF"));
+							int count = pstmt2.executeUpdate();
+							if (count >= 1) 
+								result_check = true; //삭제가 안된 경우에는 false 반환.
+							}
+				 }
+			 }catch (SQLException e) {
+				 e.printStackTrace();
+			 }
+		}catch (Exception ex) {
+			 System.out.println("boardDelete()에러 : " + ex);
+			 ex.printStackTrace();
+		}
+		return result_check;	 
+		}
+
+
+	public int boardReply(Board board) {
+		int num = 0;
+		 
+		 try (Connection con = ds.getConnection();) {
+			 //트랜잭션을 이용하기 위해서 setAutoCommit을 false로 설정합니다.
+			 con.setAutoCommit(false);
+			 
+			 try { 
+				 reply_update(con, board.getInf_ref(), board.getInf_seq());
+				 num = reply_insert(con,board);
+				 con.commit();
+			 }
+			 catch (SQLException e) {
+				 e.printStackTrace();
+				
+				 if(con != null) {
+					 try {
+						 con.rollback();
+					 } catch (SQLException ex) {
+						 ex.printStackTrace();
+					 }
+				 }
+			 }
+			 con.setAutoCommit(true);
+		 } catch (Exception ex) {
+			 ex.printStackTrace();
+			 System.out.println("boardReply()에러 : " + ex);
+		 } 
+		 return num;
+	}
+	
+	public void reply_update(Connection con, int re_ref, int re_seq) throws SQLException {
+		//BOARD_RE_REF,BOARD_RE_SEQ 값을 확인하여 원문 글에 답글이 달려있다면
+		// 달린 답글들의 BOARD_RE_SEQ 값을 1씩 증가합니다.
+		// 현재 글을 이미 달린 답글보다 앞에 출력되게 하기 위해서 입니다.
+		
+		String sql = "update infoboard "
+				   + " set INF_SEQ = INF_SEQ + 1 "
+				   + " where INF_REF = ?"
+				   + " and INF_SEQ > ?";
+		
+		try (PreparedStatement pstmt = con.prepareStatement(sql);) { 
+			pstmt.setInt(1, re_ref);
+			pstmt.setInt(2, re_seq);
+			pstmt.executeUpdate();
+		}
+	}
+	
+	public int reply_insert(Connection con, Board board) throws SQLException {
+		int num = 0;
+		String  board_max_sql = "(select max(inf_num)+1 from infoboard)";
+		try (PreparedStatement pstmt = con.prepareStatement(board_max_sql);) { 
+			try(ResultSet rs = pstmt.executeQuery()) {
+				if(rs.next()) {
+					num=rs.getInt(1);
+				}
+			}
+		}
+		
+		String sql = "insert into infoboard "
+				   + " (INF_NUM,M_ID,INF_SUBJECT,INF_CONTENT, "
+				   + " INF_OPEN,INF_REF,INF_LEV,"
+				   + " INF_SEQ,INF_READCOUNT,INF_LOC,INF_REG)"
+				   + " values(?,?,?,?, "
+				   + "	?,?,?,"
+				   + "	?,?,?,sysdate)";
+		
+		try (PreparedStatement pstmt = con.prepareStatement(sql);) { 
+			pstmt.setInt(1, num);
+			pstmt.setString(2, board.getM_id());
+			pstmt.setString(3, board.getInf_subject());
+			pstmt.setString(4, board.getInf_content());
+			pstmt.setInt(5, board.getInf_open()); //답변에는 파일을 업로드하지 않습니다.
+			pstmt.setInt(6, board.getInf_ref()); //원문의 글번호
+			pstmt.setInt(7, board.getInf_lev()+1);
+			pstmt.setInt(8, board.getInf_seq()+1);
+			pstmt.setInt(9, 0); //BOARD_READCOUNT(조회수)는 0
+			pstmt.setString(10, board.getInf_loc()); 
+			pstmt.executeUpdate();
+		}
+		return num; 
+	}
 }//class end
