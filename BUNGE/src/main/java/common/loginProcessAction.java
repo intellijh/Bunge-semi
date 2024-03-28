@@ -28,7 +28,7 @@ public class loginProcessAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("m_id",m_id);
 			forward.setRedirect(true);
-			forward.setPath("BoardList.com");
+			forward.setPath("index.jsp");
 			return forward;
 		
 		} else {
@@ -43,8 +43,7 @@ public class loginProcessAction implements Action {
 			out.print("location.href='login.com';");
 			out.print("</script>");
 			out.close();
-		}
-				
+		}		
 		return null;
 	}
 

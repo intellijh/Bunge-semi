@@ -59,7 +59,7 @@
             <div>
                 <c:choose>
                     <c:when test="${fn:length(board.content) > 20}">
-                        <c:out value="${fn:substring(board.content,0,19)}" />....
+                        <c:out value="${fn:substring(board.content,0,19)}" />
                     </c:when>
                     <c:otherwise>
                         <c:out value="${board.content }" />

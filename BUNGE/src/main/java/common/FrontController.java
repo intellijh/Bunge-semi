@@ -5,6 +5,7 @@ import java.io.IOException;
 import chat.ChatListLoadAction;
 import common.action.Action;
 import common.action.ActionForward;
+import common.mypage.mypageAction;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -65,6 +66,17 @@ public class FrontController extends HttpServlet {
 	    	   break;
 	       case"/findidProcess.com" :
 	    	   action = new findidProcessAction();
+	    	   break;
+	    	   //비밀번호 찾기
+	       case "/findpwd.com" :
+	    	  action = new findpwdAction();
+	    	  break;
+	       case "/findpwdProcess.com" :
+	    	   action = new findpwdProcessAction();
+	    	   break;
+	    	   //마이 페이지
+	       case "/mypage.com" :
+	    	   action = new mypageAction();
 	    	   break;
             //게시판에 글 추가
             case "/InfoAdd.com" :
