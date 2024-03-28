@@ -78,7 +78,7 @@ public class InfoAddAction implements Action {
 				} else {
 					System.out.println("첨부파일게시판 등록 실패");
 					forward.setRedirect(false); 
-					forward.setPath("error.jsp");
+					forward.setPath("error/error.jsp");
 					return forward;
 				}
 			} else {
@@ -90,14 +90,14 @@ public class InfoAddAction implements Action {
 				} else {
 					System.out.println("게시판 등록 실패");
 					forward.setRedirect(false); 
-					forward.setPath("error.jsp");
+					forward.setPath("error/error.jsp");
 					return forward;
 				}
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			forward.setRedirect(false);
-			forward.setPath("error.jsp");
+			forward.setPath("error/error.jsp");
 			return forward;
 		}
 	}
