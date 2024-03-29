@@ -151,18 +151,23 @@ public class FrontController extends HttpServlet {
             case "/InfoReplyProcess.com" :
                 action = new InfoReplyProcessAction();
                 break;
+            //댓글 등록
             case "/CommentAdd.com":
                 action = new CommentAddAction();
                 break;
+            //댓글 목록
             case "/CommentList.com":
                 action = new CommentListAction();
                 break;
+            //댓글 삭제
             case "/CommentDelete.com":
                 action = new CommentDeleteAction();
                 break;
+            //댓글 수정
             case "/CommentUpdate.com":
                 action = new CommentUpdateAction();
                 break;
+            //대댓글
             case "/CommentReply.com":
                 action = new CommentReplyAction();
                 break;

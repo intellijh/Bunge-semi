@@ -28,7 +28,7 @@ private DataSource ds;
 	public int commentsInsert(Comment c) {
 		int result = 0;
 		String sql = "insert into infocomm"
-				   + " values(com_seq.nextval,?,?,?,?,?,com_seq.nextval,sysdate)";
+				   + " values(com_seq.nextval,?,?,?,com_seq.nextval,?,?,sysdate)";
 		
 		try (Connection con = ds.getConnection();
 				 PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -36,8 +36,8 @@ private DataSource ds;
 	    pstmt.setString(1, c.getM_id());
 	    pstmt.setInt(2, c.getInf_num());
 	    pstmt.setString(3, c.getComm_content());
-	    pstmt.setInt(4, c.getComm_ref());
-	    pstmt.setInt(5, c.getComm_lev());
+	    pstmt.setInt(4, c.getComm_lev());
+	    pstmt.setInt(5, c.getComm_seq());
 	   
 	    result = pstmt.executeUpdate();
 	    if(result == 1)
@@ -74,7 +74,7 @@ private DataSource ds;
 		if(state == 2) {
 			sort = "desc";
 		}
-		String sql = "select comm_num, memberimg.m_id, comm_content, comm_reg, comm_lev, "
+		String sql = "select comm_num, infocomm.m_id, comm_content, comm_reg, comm_lev, "
 				   + "		 comm_seq, "
 				   + " 		 comm_ref, memberimg.pof_savename"
 				   + " from  infocomm join memberimg " 
@@ -93,13 +93,13 @@ private DataSource ds;
 			  try (ResultSet rs = pstmt.executeQuery()) {
 					while (rs.next()) {
 						JsonObject object = new JsonObject();
-						object.addProperty("num", rs.getInt(1));
-						object.addProperty("id", rs.getString(2));
-						object.addProperty("content", rs.getString(3));
-						object.addProperty("reg_date", rs.getString(4));
-						object.addProperty("comment_re_lev", rs.getInt(5));
-						object.addProperty("comment_re_seq", rs.getInt(6));
-						object.addProperty("comment_re_ref", rs.getInt(7));
+						object.addProperty("comm_num", rs.getInt(1));
+						object.addProperty("m_id", rs.getString(2));
+						object.addProperty("comm_content", rs.getString(3));
+						object.addProperty("comm_reg", rs.getString(4));
+						object.addProperty("comm_lev", rs.getInt(5));
+						object.addProperty("comm_seq", rs.getInt(6));
+						object.addProperty("comm_ref", rs.getInt(7));
 						object.addProperty("memberfile", rs.getString(8));
 						
 						array.add(object);

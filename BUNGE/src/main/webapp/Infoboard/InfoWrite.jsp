@@ -15,7 +15,6 @@
 	img{width:20px}
 	
 	input[type=file]{display:none}
-	
  </style>
  </head>
  <body>
