@@ -1,11 +1,13 @@
 package info.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import common.action.Action;
 import common.action.ActionForward;
 import info.db.Board;
 import info.db.BoardDAO;
+import info.db.Boardfile;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,6 +24,7 @@ public class InfoModifyAction implements Action {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		Board board = boarddao.getDetail(num);
+		ArrayList<Boardfile> boardfile = boarddao.getDetailAttach(num);
 		
 		if (board == null) {
 			System.out.println("(수정)상세보기 실패");
@@ -30,6 +33,7 @@ public class InfoModifyAction implements Action {
 		} else {
 			System.out.println("(수정)상세보기 성공");
 			request.setAttribute("board", board);
+			request.setAttribute("boardfile", boardfile);
 			forward.setPath("Infoboard/InfoboardModify.jsp");
 		}
 		

@@ -171,6 +171,7 @@ public class BoardDAO {
 					board.setInf_seq(rs.getInt("INF_SEQ"));
 					board.setInf_loc(rs.getString("INF_LOC"));
 					board.setInf_reg(rs.getString("INF_REG"));
+					board.setInf_readcount(rs.getInt("INF_READCOUNT"));
 					board.setCnt(rs.getInt("cnt"));
 
 					list.add(board);
