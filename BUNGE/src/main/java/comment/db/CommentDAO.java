@@ -189,7 +189,7 @@ private DataSource ds;
 	public int commentDelete(int num) {
 		int result = 0;
 		
-		String delete_sql = "delete infocomm where num = ?";
+		String delete_sql = "delete infocomm where comm_num = ?";
 		try (Connection con = ds.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(delete_sql);) {
 			
