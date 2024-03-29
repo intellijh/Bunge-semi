@@ -20,7 +20,7 @@ public class CommentReplyAction implements Action {
 		Comment co = new Comment();
 		co.setM_id(request.getParameter("m_id"));
 		co.setComm_content(request.getParameter("comm_content"));
-		co.setInf_num(Integer.parseInt(request.getParameter("num")));
+		co.setInf_num(Integer.parseInt(request.getParameter("inf_num")));
 		co.setComm_lev(Integer.parseInt(request.getParameter("comm_lev")));
 		co.setComm_seq(Integer.parseInt(request.getParameter("comm_seq")));
 		co.setComm_ref(Integer.parseInt(request.getParameter("comm_ref")));
