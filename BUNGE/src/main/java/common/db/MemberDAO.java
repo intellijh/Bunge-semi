@@ -194,6 +194,7 @@ public class MemberDAO {
 		return m_pwd;
 		}//findpwd() end
 	//
+	
 	public int pwdreset(Member m) {
 		int result = 1;
 		String pwdupdate = "update member set m_pwd=? where m_id=?";
@@ -202,10 +203,41 @@ public class MemberDAO {
 				pstmt.setString(1, m.getM_pwd());
 				pstmt.setString(2, m.getM_id());
 				result=pstmt.executeUpdate();
-		}catch (Exception e) {
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	public Member mypage_info(String m_id) {
+		Member m = null;
+		String info_sql = "select * from member where m_id=?";
+		
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(info_sql);) {
+			pstmt.setString(1, m_id);
+			
+			try(ResultSet rs = pstmt.executeQuery()) {
+				if(rs.next()) {
+					m=new Member();
+					m.setM_id(rs.getString(1));
+					m.setM_pwd(rs.getString(2));
+					m.setM_name(rs.getString(3));
+					m.setM_nick(rs.getString(4));
+					m.setM_gender(rs.getString(5));
+					m.setM_zipcode(rs.getString(6));
+					m.setM_addr1(rs.getString(7));
+					m.setM_addr2(rs.getString(8));
+					m.setM_phone(rs.getString(9));
+					m.setM_email(rs.getString(10));
+					m.setM_birthdate(rs.getDate(11));
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return m;
 	}
 	
 	}

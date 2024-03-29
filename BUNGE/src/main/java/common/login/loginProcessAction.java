@@ -7,6 +7,7 @@ import common.action.Action;
 import common.action.ActionForward;
 import common.db.MemberDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -23,12 +24,24 @@ public class loginProcessAction implements Action {
 		int result = mdao.loginid(m_id, m_pwd);
 		System.out.println("결과 : " + result);
 		
-		
 		if(result == 1) {
 			HttpSession session = request.getSession();
 			session.setAttribute("m_id",m_id);
+			
+			String IDStore = request.getParameter("remember");
+			Cookie cookie = new Cookie("m_id", m_id);
+			
+			//ID 기억하기를 체크한 경우
+			if(IDStore != null && IDStore.equals("store")) {
+				cookie.setMaxAge(2 * 60);
+				response.addCookie(cookie);
+			}else {
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
+			}
+			
 			forward.setRedirect(true);
-			forward.setPath("InfoList.com");
+			forward.setPath("index.jsp");
 			return forward;
 		
 		} else {
