@@ -14,7 +14,7 @@
         if (mode.equals("제목")){
             tradeList = tradeDAO.searchTradeByTitle(keyword);
         } else if (mode.equals("내용")){
-            tradeList = tradeDAO.searchVideoByDesc(keyword);
+            tradeList = tradeDAO.searchTradeByDesc(keyword);
         }
     }
 

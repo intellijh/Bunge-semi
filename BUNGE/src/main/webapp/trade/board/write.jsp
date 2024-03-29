@@ -24,7 +24,8 @@
   	  	(실제 보여질 이미지 크기입니다)<br><br>
   	  	<hr><br><br>
   	  	<div id="write-controller">
-	  	  	<input type="text" id="write-author" name="author" placeholder="닉네임" maxlength="30">
+	  	  	<input type="text" id="write-author" name="sellerID" placeholder="판매자id" maxlength="30">
+	  	  	<input type="text" id="write-category" name="sellerID" placeholder="카테고리" maxlength="30">
 	  	  	<input type="password" id="write-password" name="password" placeholder="비밀번호" maxlength="20">
 	  	  	<input type="button" class="btn btn-danger" id="write-cancel" value="취소" onclick="cancel()">
 	  	  	<input type="button" class="btn btn-info" id="write-submit" value="업로드" onclick="checkSubmit()">

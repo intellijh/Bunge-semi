@@ -52,13 +52,6 @@ public class Trade {
         this.createDate = createDate;
     }
 
-    public String getsellerID() {
-        return sellerID;
-    }
-
-    public void setsellerID(String sellerID) {
-        sellerID = sellerID;
-    }
 
     public String getTitle() {
         return title;

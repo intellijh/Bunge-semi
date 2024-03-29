@@ -20,12 +20,17 @@ public class TradeDAO {
     // 사진 업로드
     public int insertTrade(Trade trade) throws SQLException{
         // 비밀번호는 SHA-1 암호화
-        String sql = "INSERT INTO trade (tradeid,imageID) values(?,?)";
+        String sql = "INSERT INTO trade (tradeID,imageID,sellerID,description,title,categoryID) values (?,?,?,?,?,?) ";
 
 
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, trade.getTradeID());
         pstmt.setString(2, trade.getImageID());
+        pstmt.setString(3, trade.getSellerID());
+        pstmt.setString(4,trade.getDescription());
+        pstmt.setString(5,trade.getTitle());
+        pstmt.setString(6,trade.getCategory());
+
 
         pstmt.executeUpdate();
 
@@ -110,8 +115,8 @@ public class TradeDAO {
     }
 
     // 내용으로 책 검색
-    public ArrayList<Trade> searchVideoByDesc(String keyword) throws SQLException{
-        String sql = "SELECT thumbnail,title,author,date,id from video where description like ? order by id desc";
+    public ArrayList<Trade> searchTradeByDesc(String keyword) throws SQLException{
+        String sql = "SELECT imageID,title,sellerID,createdate,tradeID from trade where description like ? order by tradeID desc";
 
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, "%"+keyword+"%");
@@ -161,21 +166,21 @@ public class TradeDAO {
 //        pstmt.execute();
 //    }
 //
-//    // 비디오 수정
-//    public void updateVideo(Video video) throws SQLException {
-//        String sql = "UPDATE video SET title=?,video=?,thumbnail=?,description=? WHERE id=?";
-//
-//
-//        pstmt = con.prepareStatement(sql);
-//        pstmt.setString(1, video.getTitle());
-//        pstmt.setString(2, video.getVideo());
-//        pstmt.setString(3, video.getThumbnail());
-//        pstmt.setString(4, video.getDesc());
-//        pstmt.setInt(5, video.getId());
-//
-//        pstmt.executeUpdate();
-//    }
-//
+    // 비디오 수정
+    public void updateTrade(Trade trade) throws SQLException {
+        String sql = "UPDATE trade SET title=?,imageID=?,description=?,sellerID=? WHERE tradeID=?";
+
+
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, trade.getTitle());
+        pstmt.setString(2, trade.getImageID());
+        pstmt.setString(3, trade.getDescription());
+        pstmt.setString(4, trade.getSellerID());
+        pstmt.setInt(5, trade.getTradeID());
+
+        pstmt.executeUpdate();
+    }
+
     public void close() throws SQLException {
         if(rs != null) rs.close();
         if(pstmt != null) pstmt.close();
