@@ -4,11 +4,10 @@
 <head>
 <title>MVC 게시판</title>
 <%@ include file="/layout/header.jsp" %>
-<script src="js/modifyform.js"></script>
+<script src="js/infomodifyform.js"></script>
 <style>
  .container {width:60%}
  h1 {font-size:1.5rem; text-align:center; color:#1a92b9}
- #upfile {display:none}
 </style>
 </head>
 <body>
@@ -40,10 +39,10 @@
         <br>
         <c:forEach var="a" items="${boardfile}" begin="0" varStatus="status">
         	<img src="image/down.png" alt="파일첨부" width="10px">
-        	<input type="file" id="upfile" name="board_file">
-        	<img src="boardupload/${a.infa_filename}" width="10px">
+        	<input type="file" id="upfile${status.count}" name="board_file">
+        	<img src="boardupload/${a.infa_filename}" width="10px" class="uploadedfile${status.count}">
         	<span id="filevalue${status.count}">${a.infa_filename}</span>
-	        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove"><br>
+	        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove${status.count}"><br>
         </c:forEach>
 
       </div>

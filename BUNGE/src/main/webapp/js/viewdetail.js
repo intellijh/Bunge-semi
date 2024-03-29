@@ -5,7 +5,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    $.ajax({
 			type:"post",
 			url : "CommentList.com",
-			data: {"num" : $("#comment_board_num").val(), state:state},
+			data: {"num" : $("#inf_num").val(), "state":state},
 			dataType : "json",
 			success : function(rdata){
 				$('#count').text(rdata.listcount).css('font-family','arial,sans-serif')
@@ -21,14 +21,15 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 			if(rdata.commentlist.length > 0) {
 				output += '<li class="comment-order-item ' + red1 + '">'
 					   + '	<a href="javascript:getList(1)" class="comment-order-button">등록순 </a>'
+					   + ' </li>'
 					   + ' <li class="comment-order-item ' + red2 + '">'
 					   + '	<a href="javascript:getList(2)" class="comment-order-button">최신순 </a>'
-					   + '</li>';
+					   + ' </li>';
 				$('.comment-order-list').html(output);
 				
 				output = '';
 				$(rdata.commentlist).each(function (){
-					const lev = this.comment_re_lev;
+					const lev = this.comm_lev;
 					let comment_reply = '';
 					 if(lev == 1) {
 						 comment_reply = ' comment-list-item--reply lev1';
@@ -41,41 +42,41 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						src = 'memberupload/' + profile;
 					}
 					
-				output += '<li id="' + this.num + '" class="comment-list-item' + comment_reply + '">   '
+				output += '<li id="' + this.comm_num + '" class="comment-list-item' + comment_reply + '">   '
 	     		   	   + '	<div class="comment-nick-area">' 
 	      			   + '    <img src="' + src + '" alt="프로필 사진" width="36" height="36">'    
 	       			   + '    <div class="comment-box"> '     
 	         		   + '		<div class="comment-nick-box">'            
 	               	   + '			<div class="comment-nick-info">'               
-	         	       + '				<div class="comment-nickname">' + this.id + '</div>'
+	         	       + '				<div class="comment-nickname">' + this.m_id + '</div>'
 	          	       + '			</div>'       
 	         	       + '		</div>'    
 	    		       + '	  </div>'    
 		      	       + '	  <div class="comment-text-box">'       
 		      		   + '	    <p class="comment-text-view">'         
-	       		       + '		   <span class="text-comment">' + this.content + '</span>'       
+	       		       + '		   <span class="text-comment">' + this.comm_content + '</span>'       
 	         	       + '		</p>'    
 	     		       + '	  </div>'    
 	         	       + '	  <div class="comment-info-box">' 
-	         	       + ' 		<span class="comment-info-date">' + this.reg_date + '</span> ' 
+	         	       + ' 		<span class="comment-info-date">' + this.comm_reg + '</span> ' 
 	        if (lev < 2) {
-				output += ' <a href="javascript:replyform(' + this.num +','
-					   + lev + ',' + this.comment_re_seq + ','
-					   + this.comment_re_ref + ')" class="comment-info-button">답글쓰기</a>'   
+				output += ' <a href="javascript:replyform(' + this.comm_num +','
+					   + lev + ',' + this.comm_seq + ','
+					   + this.comm_ref + ')" class="comment-info-button">답글쓰기</a>'   
 				}
 				output += '	  </div>'
 				
-			if($("#loginid").val() == this.id) {    
+			if($("#loginid").val() == this.m_id) {    
 				output += '<div class="comment-tool">'
 					   + '	<div title="더보기" class="comment-tool-button">'		
 					   + '		<div>&#46;,&#46;,&#46;</div>'		
 					   + '	</div>'		
-					   + '	<div id="comment-list-item-layer' + this.num + '" class="LayerMore">'		
+					   + '	<div id="comment-list-item-layer' + this.comm_num + '" class="LayerMore">'		
 					   + '	 <ul class="layer-list">'		
 					   + '	  <li class="layer-item">'		
-					   + '	   <a href="javascript:updateForm('+ this.num +')"' 
+					   + '	   <a href="javascript:updateForm('+ this.comm_num +')"' 
 					   + '		  class="layer-button">수정</a>&nbsp;&nbsp;'		
-					   + '	   <a href="javascript:del('+ this.num +')"' 
+					   + '	   <a href="javascript:del('+ this.comm_num +')"' 
 					   + '	      class="layer-button">삭제</a></li></ul>'	
 					   + '	</div>'
 					   + ' </div>'
@@ -204,7 +205,7 @@ $(function() {
 			data : {
 				m_id : $("#loginid").val(),
 				comm_content : comm_content,
-				num : $("#comment_board_num").val(),
+				inf_num : $("#inf_num").val(),
 				comm_lev : 0, //원문인 경우 comment_re_seq는 0,
 									//comment_re_ref는 댓글의 원문 글번호
 				comm_seq : 0
@@ -286,7 +287,7 @@ $(function() {
 			data : {
 					m_id :$('#loginid').val(), 
 					comm_content : comm_content,
-					num : $("#comment_board_num").val(),
+					inf_num : $("#inf_num").val(),
 					comm_lev : comm_lev,
 					comm_ref : comm_ref,
 					comm_seq : comm_seq

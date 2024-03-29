@@ -91,7 +91,7 @@
     					이 값을 가져와서 ${param.num}를 사용
     					또는 ${boarddata.board_num}--%>
     			<input type="hidden" name="num" value="${boarddata.inf_num}"
-    					id="comment_board_num">
+    					id="inf_num">
 				<button type="submit" class="btn btn-primary">전송</button>   				
 				<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>   				
     			</form>

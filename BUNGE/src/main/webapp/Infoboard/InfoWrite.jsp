@@ -14,18 +14,7 @@
 
 	img{width:20px}
 	
-	#att_zone {
-		width:660px;
-		min-height:150px;
-		padding:10px;
-		border:1px dotted #00f;
-	}
-	
-	#att_zone:empty:before {
-		content:attr(data-placeholder);
-		color:#999;
-		font-size:.9em;
-	}
+	input[type=file]{display:none}
  </style>
  </head>
  <body>
