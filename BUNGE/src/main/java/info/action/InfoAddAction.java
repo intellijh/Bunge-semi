@@ -52,7 +52,7 @@ public class InfoAddAction implements Action {
 			board.setInf_content(multi.getParameter("inf_content"));
 			board.setInf_reg(multi.getParameter("inf_reg"));
 			System.out.println("inf_open : "+ board.getInf_open());
-			
+
 			success = dao.boardInsert(board);
 			
 			result = dao.boardinsertFile(success, multi, boardfile);
