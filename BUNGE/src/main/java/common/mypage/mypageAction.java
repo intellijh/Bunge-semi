@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import common.action.Action;
 import common.action.ActionForward;
+import common.db.Member;
 import common.db.MemberDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,22 +19,28 @@ public class mypageAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ActionForward forward = new ActionForward();
-		MemberDAO dao = new MemberDAO();
 		PrintWriter out = response.getWriter();
-		
-		String m_id = request.getParameter("m_id");
-		
 		HttpSession session = request.getSession();
-		session.setAttribute("m_id", m_id);
+		MemberDAO mdao = new MemberDAO();
+		
+		String m_id = (String) session.getAttribute("m_id"); 
+		
 		if(m_id != null) {
 			forward.setRedirect(false);
+			Member m = mdao.mypage_info(m_id);
 			forward.setPath("mypage/mypage.jsp");
+			request.setAttribute("pageinfo", m);
 			return forward;
 		}else {
-			
+			response.setContentType("text/html; charset=utf-8");
+			String message= "로그인이후 이용 가능합니다.";
+			out.print("<script>");
+			out.print("alert('"+message+"');");
+			out.print("location.href='login.com';");
+			out.print("</script>");
+			out.close();
 		}
-		return forward;
-		
+		return null;
 	}
 
 }

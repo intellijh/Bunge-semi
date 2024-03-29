@@ -23,15 +23,15 @@ public class CommentListAction implements Action {
 		CommentDAO dao = new CommentDAO();
 		  
 		//{"comment_board_num" : $("#comment_board_num").val(),state:state}, //state값이 1=>등록순, 2=> 최신순
-		int comment_board_num = Integer.parseInt(request.getParameter("comment_board_num"));
-		System.out.println(comment_board_num);
+		int inf_num = Integer.parseInt(request.getParameter("num"));
+		System.out.println(inf_num);
 		int state = Integer.parseInt(request.getParameter("state"));
-		int listcount = dao.getListCount(comment_board_num);
+		int listcount = dao.getListCount(inf_num);
 		
 		JsonObject object = new JsonObject();
 		object.addProperty("listcount", listcount);
 		
-		JsonArray jarray = dao.getCommentList(comment_board_num, state);
+		JsonArray jarray = dao.getCommentList(inf_num, state);
 		JsonElement je = new Gson().toJsonTree(jarray);
 		object.add("commentlist", je);
 		

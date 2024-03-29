@@ -4,6 +4,7 @@
 <head>
 <title>MVC 게시판 </title>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
+<%@ include file="/layout/header2.jsp" %>
  <script src="js/reply.js"></script>
  <style>
 	h1{font-size:1.5em; text-align:center; color:#1a92b9}

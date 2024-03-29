@@ -171,6 +171,7 @@ public class BoardDAO {
 					board.setInf_seq(rs.getInt("INF_SEQ"));
 					board.setInf_loc(rs.getString("INF_LOC"));
 					board.setInf_reg(rs.getString("INF_REG"));
+					board.setInf_readcount(rs.getInt("INF_READCOUNT"));
 					board.setCnt(rs.getInt("cnt"));
 
 					list.add(board);
@@ -269,28 +270,6 @@ public class BoardDAO {
 		return list;
 	}//getDetailAttach end
 
-
-	public boolean isboardWriter(String id, int num) {
-		boolean result = false;
-		String board_sql = "select M_ID from infoboard where inf_num = ?";
-		  try (Connection con = ds.getConnection();
-			   PreparedStatement pstmt = con.prepareStatement(board_sql);) {
-			   pstmt.setInt(1, num);
-			   try (ResultSet rs = pstmt.executeQuery()) {
-				   if (rs.next()) {
-					   if (id.equals(rs.getString(1))) {
-						   result = true;
-					   }
-				   }
-			   } catch (SQLException e) {
-				   e.printStackTrace();
-			   }
-		  } catch (SQLException ex) {
-			  System.out.println("isboardWriter() 에러" + ex);
-		  }
-		  return result;
-	}//isboardWriter end
-  
 
 	public boolean boardDelete(int num) {
 		String select_sql = "select INF_REF,INF_LEV,INF_SEQ "

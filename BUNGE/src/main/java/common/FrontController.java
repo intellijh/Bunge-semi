@@ -12,6 +12,19 @@ import chat.message.MessageLoadAction;
 import chat.message.MessageSendAciton;
 import common.action.Action;
 import common.action.ActionForward;
+import common.join.emailcheckAction;
+import common.join.idcheckAction;
+import common.join.joinAction;
+import common.join.joinProcessAction;
+import common.join.nickcheckAction;
+import common.login.findidAction;
+import common.login.findidProcessAction;
+import common.login.findpwdAction;
+import common.login.findpwdProcessAction;
+import common.login.loginAction;
+import common.login.loginProcessAction;
+import common.login.logoutAction;
+import common.login.pwdresetAction;
 import common.mypage.mypageAction;
 import info.action.InfoDetailAction;
 import info.action.InfoListAction;
@@ -77,6 +90,10 @@ public class FrontController extends HttpServlet {
             case "/nickcheck.com":
                 action = new nickcheckAction();
                 break;
+            //이메일 중복 검사
+            case "/emailcheck.com" :
+            	action = new emailcheckAction();
+            	break;
             //아이디 찾기
             case "/findid.com":
                 action = new findidAction();
@@ -91,6 +108,10 @@ public class FrontController extends HttpServlet {
             case "/findpwdProcess.com" :
                 action = new findpwdProcessAction();
                 break;
+                //비밀번호 재설정
+            case "/pwdreset.com" :
+            	action = new pwdresetAction();
+            	break;
             //마이 페이지
             case "/mypage.com" :
                 action = new mypageAction();
@@ -130,18 +151,23 @@ public class FrontController extends HttpServlet {
             case "/InfoReplyProcess.com" :
                 action = new InfoReplyProcessAction();
                 break;
+            //댓글 등록
             case "/CommentAdd.com":
                 action = new CommentAddAction();
                 break;
+            //댓글 목록
             case "/CommentList.com":
                 action = new CommentListAction();
                 break;
+            //댓글 삭제
             case "/CommentDelete.com":
                 action = new CommentDeleteAction();
                 break;
+            //댓글 수정
             case "/CommentUpdate.com":
                 action = new CommentUpdateAction();
                 break;
+            //대댓글
             case "/CommentReply.com":
                 action = new CommentReplyAction();
                 break;
