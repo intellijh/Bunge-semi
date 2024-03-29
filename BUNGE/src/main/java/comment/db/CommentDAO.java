@@ -173,14 +173,14 @@ private DataSource ds;
 	public int reply_insert(Connection con, Comment c) throws SQLException{
 		int result = 0;
 		String insert_sql = "insert into infocomm "
-				   		+  "values(com_seq.nextval,?,?,sysdate,?,?,?,?)";
+				   		+  "values(com_seq.nextval,?,?,?,?,?,?,sysdate)";
 		try (PreparedStatement pstmt = con.prepareStatement(insert_sql);) {
 			pstmt.setString(1, c.getM_id());
-			pstmt.setString(2, c.getComm_content());
-			pstmt.setInt(3, c.getInf_num());
-			pstmt.setInt(4, c.getComm_lev()+1);
-			pstmt.setInt(5, c.getComm_seq()+1);
-			pstmt.setInt(6, c.getComm_ref());
+			pstmt.setInt(2, c.getInf_num());
+			pstmt.setString(3, c.getComm_content());
+			pstmt.setInt(4, c.getComm_ref());
+			pstmt.setInt(5, c.getComm_lev()+1);
+			pstmt.setInt(6, c.getComm_seq()+1);
 			result = pstmt.executeUpdate();
 	}
 		return result;

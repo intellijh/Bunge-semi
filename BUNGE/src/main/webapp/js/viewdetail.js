@@ -273,7 +273,7 @@ $(function() {
 	$('.comment-area').on('click','.reply',function(){
 		
 		const comm_content = $(this).parent().parent().find('.comment-write-area-text').val();
-		if(!content) {//내용없이 답글 완료한 경우
+		if(!comm_content) {//내용없이 답글 완료한 경우
 		alert("답글을 입력하세요");
 		return;
 		}
@@ -286,7 +286,7 @@ $(function() {
 			data : {
 					m_id :$('#loginid').val(), 
 					comm_content : comm_content,
-					inf_num : $("#inf_num").val(),
+					num : $("#comment_board_num").val(),
 					comm_lev : comm_lev,
 					comm_ref : comm_ref,
 					comm_seq : comm_seq
