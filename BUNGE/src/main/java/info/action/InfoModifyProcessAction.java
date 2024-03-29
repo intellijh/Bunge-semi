@@ -34,17 +34,17 @@ public class InfoModifyProcessAction implements Action {
 		System.out.println("realFolder="+realFolder);
 		try {
 			MultipartRequest multi =
-					new MultipartRequest(request, realFolder, filesize, "utf-8",
-										 new DefaultFileRenamePolicy());
+			new MultipartRequest(request, realFolder, filesize, "utf-8",
+								 new DefaultFileRenamePolicy());
 			
-			String id = multi.getParameter("m_id");
 			int num = Integer.parseInt(multi.getParameter("inf_num"));
 			
 			board.setInf_num(num);
 			board.setInf_subject(multi.getParameter("inf_subject"));
 			board.setInf_content(multi.getParameter("inf_content"));
 			
-			String check
+			
+			
 			
 		}
 		

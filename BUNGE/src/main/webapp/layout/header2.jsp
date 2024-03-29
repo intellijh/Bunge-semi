@@ -30,7 +30,7 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">정보공유게시판</a>
+          <a class="nav-link" href="InfoList.com">정보공유게시판</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">거래게시판</a>
