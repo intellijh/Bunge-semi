@@ -21,6 +21,7 @@ public class InfoDetailAction implements Action {
 
 		// 글 번호 파라미터 값을 num변수에 저장합니다.
 		int num = Integer.parseInt(request.getParameter("num"));
+		System.out.println("num : " + num);
 		
 		//특정 주소로부터의 이동을 확인하는데 사용할 수 있는 정보는 요청 헤더인 "Referer"에 있습니다.
 		String referer = request.getHeader("Referer");
