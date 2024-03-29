@@ -87,7 +87,7 @@ public class TradeDAO {
 //
 //    // 제목으로 책 검색
     public ArrayList<Trade> searchTradeByTitle(String keyword) throws SQLException{
-        String sql = "SELECT thumbnail,title,author,date,id from video where title like ? order by id desc";
+        String sql = "SELECT imageID,title,sellerID,createdate,tradeID from trade where title like ? order by tradeID desc";
 
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, "%"+keyword+"%");

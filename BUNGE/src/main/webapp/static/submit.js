@@ -1,11 +1,7 @@
 function checkSubmit(){
-	if($('#write-video').val() == ''){
-		alert('비디오를 업로드해주세요.');
-		return;
-	}
 	
-	if($('#write-thumbnail').val() == ''){
-		alert('썸네일을 업로드해주세요.');
+	if($('#write-photo').val() == ''){
+		alert('사진을 업로드해주세요.');
 		return;
 	}
 	
