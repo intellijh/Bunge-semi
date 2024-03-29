@@ -14,7 +14,7 @@
         if (mode.equals("제목")){
             tradeList = tradeDAO.searchTradeByTitle(keyword);
         } else if (mode.equals("내용")){
-            tradeList = tradeDAO.searchVideoByDesc(keyword);
+            tradeList = tradeDAO.searchTradeByDesc(keyword);
         }
     }
 
@@ -25,18 +25,18 @@
 <head>
     <jsp:include page="../../layout/header.jsp" />
     <meta charset="EUC-KR">
-    <title>Video Board</title>
-    <link rel="stylesheet" href="./static/bootstrap.min.css">
-    <link rel="stylesheet" href="./static/style.css">
+    <title>Trade Board</title>
+    <link rel="stylesheet" href="../../static/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/style.css">
 </head>
 <body>
 <div id="upper-bar">
-    <a href="index.jsp" id="title">Video Board</a>
-    <a href="write.jsp"><img src="./static/upload_icon.png" id="button-write" height="43px"/></a>
+    <a href="newtradeindex.jsp" id="title">거래 게시판</a>
+    <a href="write.jsp"><img src="../../static/upload_icon.png" id="button-write" height="43px"/></a>
 </div>
 <div id="navi-bar">
     <div id="search">
-        <form action="index.jsp" method="GET">
+        <form action="newtradeindex.jsp" method="GET">
             <select class="form-control" id="search-mode" name="mode">
                 <option>제목</option>
                 <option>내용</option>
@@ -61,9 +61,9 @@
     </div>
     <% } %>
 </div>
-<div id="under-bar">인터넷 프로그래밍 동영상 관리 게시판</div>
+<div id="under-bar">중고 거래 게시판</div>
 </body>
-<script type="text/javascript" src="./static/jquery.js"></script>
-<script type="text/javascript" src="./static/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../static/jquery.js"></script>
+<script type="text/javascript" src="../../static/bootstrap.min.js"></script>
 </html>
 

@@ -16,8 +16,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class InfoModifyProcessAction implements Action {
-
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -50,5 +48,3 @@ public class InfoModifyProcessAction implements Action {
 		
 		
 	}
-
-}
