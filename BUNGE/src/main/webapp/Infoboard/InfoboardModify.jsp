@@ -37,26 +37,14 @@
     <%-- 원문글인 경우에만 파일 첨부 수정 가능하다 --%>
     <c:if test="${board.inf_lev==0}">
       <div class="form-group">
-        <label>파일첨부<br>
-          <img src="image/attach.png" alt="파일첨부" width="20px">
-          <input type="file" id="infa_filename1" name="infa_filename1"><br>
-          <img src="image/attach.png" alt="파일첨부" width="20px">
-          <input type="file" id="infa_filename2" name="infa_filename2"><br>
-          <img src="image/attach.png" alt="파일첨부" width="20px">
-          <input type="file" id="infa_filename3" name="infa_filename3"><br>
-          <img src="image/attach.png" alt="파일첨부" width="20px">
-          <input type="file" id="infa_filename4" name="infa_filename4"><br>
-          <img src="image/attach.png" alt="파일첨부" width="20px">
-          <input type="file" id="infa_filename5" name="infa_filename5"><br>
-        </label>
         <br>
-        <c:forEach var="a" items="${boardfile}">
-        	<img src="image/down.png" width="10px">
+        <c:forEach var="a" items="${boardfile}" begin="0" varStatus="status">
+        	<img src="image/down.png" alt="파일첨부" width="10px">
+        	<input type="file" id="upfile" name="board_file">
         	<img src="boardupload/${a.infa_filename}" width="10px">
-        	<a href="BoardFileDown.bo?filename=${a.infa_filename}">${a.infa_filename}</a><br>
+        	<span id="filevalue${status.count}">${a.infa_filename}</span>
+	        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove"><br>
         </c:forEach>
-<%--      <span id="filevalue">${boardfile.infa_filename}</span>  --%>
-        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove">
       </div>
     </c:if>
     

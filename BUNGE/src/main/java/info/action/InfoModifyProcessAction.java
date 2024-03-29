@@ -39,18 +39,6 @@ public class InfoModifyProcessAction implements Action {
 			
 			String id = multi.getParameter("m_id");
 			int num = Integer.parseInt(multi.getParameter("inf_num"));
-			boolean usercheck = boarddao.isboardWriter(id, num);
-			
-			if (!usercheck) {
-				response.setContentType("text/html;charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('글 작성자가 아닙니다.');");
-				out.println("history.back();");
-				out.println("</script>");
-				out.close();
-				return null;
-			}
 			
 			board.setInf_num(num);
 			board.setInf_subject(multi.getParameter("inf_subject"));
