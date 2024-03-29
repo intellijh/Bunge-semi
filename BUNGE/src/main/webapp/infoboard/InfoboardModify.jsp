@@ -15,42 +15,37 @@
   <%-- 게시판 수정 --%>
   <div class="container">
     <form action="InfoModifyProcess.com" method="post" name="modifyform" enctype="multipart/form-data">
-      <input type="hidden" name="inf_num" value="${boarddata.inf_num}">
+      <input type="hidden" name="inf_num" value="${board.inf_num}">
       <h1>MVC 게시판 - 수정</h1>
       <div class="form-group">
         <label for="m_id">글쓴이</label>
         <input type="text" class="from-control"
-        	   value="${boarddata.m_id}" readOnly>
+        	   value="${board.m_id}" readOnly>
       </div>
       <div class="form-group">
         <label for="inf_subject">제목</label>
         <input name="inf_subject"
         	   id="inf_subject" type="text" class="from-control"
-        	   value="${boarddata.inf_subject}">
+        	   value="${board.inf_subject}">
       </div>
       
       <div class="form-group">
         <label for="inf_content">내용</label>
         <textarea name="inf_content" id="inf_content"
-        	   	  class="form-control" rows="10">${boarddata.inf_content}</textarea>
+        	   	  class="form-control" rows="10">${board.inf_content}</textarea>
       </div>
     <%-- 원문글인 경우에만 파일 첨부 수정 가능하다 --%>
-    <c:if test="${boarddata.inf_lev==0}">
+    <c:if test="${board.inf_lev==0}">
       <div class="form-group">
-        <label>파일첨부
-          <img src="image/attach.png" alt="파일첨부" width="20px">
-          <input type="file" id="infa_filename1" name="infa_filename1">
-          <img src="image/attach.png" alt="파일첨부" width="20px">
-          <input type="file" id="infa_filename2" name="infa_filename2">
-          <img src="image/attach.png" alt="파일첨부" width="20px">
-          <input type="file" id="infa_filename3" name="infa_filename3">
-          <img src="image/attach.png" alt="파일첨부" width="20px">
-          <input type="file" id="infa_filename4" name="infa_filename4">
-          <img src="image/attach.png" alt="파일첨부" width="20px">
-          <input type="file" id="infa_filename5" name="infa_filename5">
-        </label>
-        <span id="filevalue">${boarddata.board_file}</span>
-        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove">
+        <br>
+        <c:forEach var="a" items="${boardfile}" begin="0" varStatus="status">
+        	<img src="image/down.png" alt="파일첨부" width="10px">
+        	<input type="file" id="upfile" name="board_file">
+        	<img src="boardupload/${a.infa_filename}" width="10px">
+        	<span id="filevalue${status.count}">${a.infa_filename}</span>
+	        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove"><br>
+        </c:forEach>
+
       </div>
     </c:if>
     

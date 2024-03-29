@@ -37,7 +37,7 @@ public class InfoReplyAction implements Action {
 			 request.setAttribute("boarddata", boarddata);
 			 
 			 //글 수정 폼 페에지로 이동하기 위해 경로를 설정합니다.
-			 forward.setPath("infoboard/InfoReply.jsp");
+			 forward.setPath("Infoboard/InfoReply.jsp");
 		}
 		forward.setRedirect(false);
 		return forward;

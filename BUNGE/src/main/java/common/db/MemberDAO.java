@@ -139,7 +139,22 @@ public class MemberDAO {
 		return result;
 	}//join end
 	
-	//findid()
+	public int imginsert(Member m,Memberimg mimg) {
+		int result = 0;
+		String join_sql = "insert into memberimg "
+						+ "(pof_num,m_id) "
+						+ "values (mimg_seq.nextval,?)";
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(join_sql);) {
+			pstmt.setString(1, m.getM_id());
+			result= pstmt.executeUpdate();  //inset 성공시 result는1
+				}catch (Exception e) {
+					e.printStackTrace();
+		}
+		return result;
+	}//insert end
+	
+
 	public String findid(String m_name, String m_email) {
 			String m_id =null;
 		String findid_sql = "select m_id from member where m_name= ? and m_email= ?";
@@ -206,6 +221,7 @@ public class MemberDAO {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 		return result;
 	}
 	public Member mypage_info(String m_id) {
@@ -241,3 +257,4 @@ public class MemberDAO {
 	}
 	
 	}
+
