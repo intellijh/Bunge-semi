@@ -4,8 +4,8 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    option=state;
 	    $.ajax({
 			type:"post",
-			url : "CommentList.bo",
-			data: {"comment_board_num" : $("#comment_board_num").val(), state:state},
+			url : "CommentList.com",
+			data: {"num" : $("#comment_board_num").val(), state:state},
 			dataType : "json",
 			success : function(rdata){
 				$('#count').text(rdata.listcount).css('font-family','arial,sans-serif')
@@ -137,7 +137,7 @@ function del(num){//num : 댓글 번호
 		   return;
 	   }
 	   	$.ajax({
-			url : 'CommentDelete.bo', //원문 등록
+			url : 'CommentDelete.com', //원문 등록
 			data : {num : num},
 			success : function(rdata) {
 				if(rdata == 1) {
@@ -193,21 +193,21 @@ $(function() {
 	
 	//댓글 등록을 클릭하면 데이터베이스에 저장 -> 저장 성공 후에 리스트 불러옵니다.
 	$('ul+.comment-write .btn-register').click(function() {
-		const content = $('.comment-write-area-text').val();
-		if(!content) { //내용 없이 등록 클릭한 경우
+		const comm_content = $('.comment-write-area-text').val();
+		if(!comm_content) { //내용 없이 등록 클릭한 경우
 			alert("댓글을 입력하세요");
 			return;
 		}
 		
 		$.ajax({
-			url : 'CommentAdd.bo', //원문 등록
+			url : 'CommentAdd.com', //원문 등록
 			data : {
-				id : $("#loginid").val(),
-				content : content,
-				comment_board_num : $("#comment_board_num").val(),
-				comment_re_lev : 0, //원문인 경우 comment_re_seq는 0,
+				m_id : $("#loginid").val(),
+				comm_content : comm_content,
+				num : $("#comment_board_num").val(),
+				comm_lev : 0, //원문인 경우 comment_re_seq는 0,
 									//comment_re_ref는 댓글의 원문 글번호
-				comment_re_seq : 0
+				comm_seq : 0
 			},
 			type : 'post',
 			success : function(rdata) {
@@ -234,15 +234,15 @@ $(function() {
 	
 	//수정 후 수정완료를 클릭한 경우
 	$('.comment-area').on('click','.update',function(){
-		const content = $(this).parent().parent().find('textarea').val();
-		if(!content){ //내용없이 등록 클릭한 경우
+		const comm_content = $(this).parent().parent().find('textarea').val();
+		if(!comm_content){ //내용없이 등록 클릭한 경우
 			alert("수정할 글을 입력하세요.");
 			return;	
 		}
-		const num = $(this).attr('data-id'); 
+		const comm_num = $(this).attr('data-id'); 
 		$.ajax({
-			url : 'CommentUpdate.bo',
-			data : {num:num, content:content},
+			url : 'CommentUpdate.com',
+			data : {comm_num:comm_num, comm_content:comm_content},
 			success : function(rdata) {
 				if(rdata == 1) {
 					getList(option);
@@ -255,8 +255,8 @@ $(function() {
 	//수정 후 취소 버튼을 클릭한 경우
 	$('.comment-area').on('click','.btn-cancel',function(){
 		//댓글 번호를 구합니다
-		const num = $(this).next().attr('data-id');
-		const selector = '#' + num;
+		const comm_num = $(this).next().attr('data-id');
+		const selector = '#' + comm_num;
 		
 		//.comment-write 영역 삭제합니다.
 		$(selector + '.comment-write').remove();
@@ -272,24 +272,24 @@ $(function() {
 	//답글완료 클릭한 경우
 	$('.comment-area').on('click','.reply',function(){
 		
-		const content = $(this).parent().parent().find('.comment-write-area-text').val();
+		const comm_content = $(this).parent().parent().find('.comment-write-area-text').val();
 		if(!content) {//내용없이 답글 완료한 경우
 		alert("답글을 입력하세요");
 		return;
 		}
-		const comment_re_ref = $(this).attr('data-ref');
-		const lev = $(this).attr('data-lev');
-		const seq = $(this).attr('data-seq');
+		const comm_ref = $(this).attr('data-ref');
+		const comm_lev = $(this).attr('data-lev');
+		const comm_seq = $(this).attr('data-seq');
 		
 		$.ajax({
-			url : "CommentReply.bo",
+			url : "CommentReply.com",
 			data : {
-					id :$('#loginid').val(), 
-					content : content,
-					comment_board_num : $("#comment_board_num").val(),
-					comment_re_lev : lev,
-					comment_re_ref : comment_re_ref,
-					comment_re_seq : seq
+					m_id :$('#loginid').val(), 
+					comm_content : comm_content,
+					inf_num : $("#inf_num").val(),
+					comm_lev : comm_lev,
+					comm_ref : comm_ref,
+					comm_seq : comm_seq
 					},
 			type : 'post',
 			success : function(rdata) {

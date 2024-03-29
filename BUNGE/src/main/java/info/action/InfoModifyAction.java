@@ -30,7 +30,7 @@ public class InfoModifyAction implements Action {
 		} else {
 			System.out.println("(수정)상세보기 성공");
 			request.setAttribute("board", board);
-			forward.setPath("infoboard/infoboardModify.jsp");
+			forward.setPath("Infoboard/InfoboardModify.jsp");
 		}
 		
 		forward.setRedirect(false);

@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>MVC 게시판</title>
-<%@ include file="/layout/header.jsp" %>
+<%@ include file="/layout/header2.jsp" %>
 <script src="js/modifyform.js"></script>
 <style>
  .container {width:60%}

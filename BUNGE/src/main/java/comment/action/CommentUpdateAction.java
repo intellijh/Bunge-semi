@@ -17,8 +17,8 @@ public class CommentUpdateAction implements Action {
 			throws ServletException,IOException {
 		CommentDAO dao = new CommentDAO();
 		Comment co = new Comment();
-		co.setComm_content(request.getParameter("content"));
-		System.out.println("content = " + co.getComm_content());
+		co.setComm_content(request.getParameter("comm_content"));
+		System.out.println("comm_content = " + co.getComm_content());
 		
 		co.setComm_num(Integer.parseInt(request.getParameter("comm_num")));
 		

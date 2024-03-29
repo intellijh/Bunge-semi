@@ -51,7 +51,7 @@ public class InfoDetailAction implements Action {
 		request.setAttribute("boardfile", list);
 		System.out.println(list);
 		forward.setRedirect(false);
-		forward.setPath("infoboard/infoviewdetail.jsp"); //글 내용을 보기 페이지로 이동하기 위해 경로를 설정합니다.
+		forward.setPath("Infoboard/InfoViewDetail.jsp"); //글 내용을 보기 페이지로 이동하기 위해 경로를 설정합니다.
 		return forward;
 	}
 }

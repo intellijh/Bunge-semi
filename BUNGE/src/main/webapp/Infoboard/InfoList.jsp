@@ -5,6 +5,7 @@
 <head>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
  <script src="js/list.js"></script>
+ <%@ include file="/layout/header2.jsp" %>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
  <style>
 	h1{font-size:1.5em; text-align:center; color:#1a92b9}

@@ -15,7 +15,7 @@ public class CommentDeleteAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("num"));
+		int num = Integer.parseInt(request.getParameter("comm_num"));
 		
 		CommentDAO dao = new CommentDAO();
 		

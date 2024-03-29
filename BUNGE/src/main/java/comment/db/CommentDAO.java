@@ -28,16 +28,16 @@ private DataSource ds;
 	public int commentsInsert(Comment c) {
 		int result = 0;
 		String sql = "insert into infocomm"
-				   + " values(com_seq.nextval,?,?,sysdate,?,?,?,com_seq.nextval)";
+				   + " values(com_seq.nextval,?,?,?,?,?,com_seq.nextval,sysdate)";
 		
 		try (Connection con = ds.getConnection();
 				 PreparedStatement pstmt = con.prepareStatement(sql);) {
 		//새 글을 등록하는 부분입니다.
 	    pstmt.setString(1, c.getM_id());
-	    pstmt.setString(2, c.getComm_content());
-	    pstmt.setInt(3, c.getInf_num());
-	    pstmt.setInt(4, c.getComm_lev());
-	    pstmt.setInt(5, c.getComm_seq());
+	    pstmt.setInt(2, c.getInf_num());
+	    pstmt.setString(3, c.getComm_content());
+	    pstmt.setInt(4, c.getComm_ref());
+	    pstmt.setInt(5, c.getComm_lev());
 	   
 	    result = pstmt.executeUpdate();
 	    if(result == 1)
@@ -74,11 +74,11 @@ private DataSource ds;
 		if(state == 2) {
 			sort = "desc";
 		}
-		String sql = "select comm_num, infocomm.m_id, comm_content, comm_reg, comm_lev, "
+		String sql = "select comm_num, memberimg.m_id, comm_content, comm_reg, comm_lev, "
 				   + "		 comm_seq, "
-				   + " 		 comm_ref, memberimg.memberfile "
-				   + " from  infocomm join member " 
-				   + " on 	 infocomm.id = member.m_id "
+				   + " 		 comm_ref, memberimg.pof_savename"
+				   + " from  infocomm join memberimg " 
+				   + " on 	 infocomm.m_id = memberimg.m_id "
 				   + " where inf_num = ? "
 				   + " order by comm_ref " + sort + ","
 				   +" 		 comm_seq asc";
