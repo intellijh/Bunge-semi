@@ -1,4 +1,4 @@
-package common;
+package common.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;

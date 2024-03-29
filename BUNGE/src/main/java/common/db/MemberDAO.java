@@ -20,6 +20,7 @@ public class MemberDAO {
 			System.out.println("DB 연결 실패 : " + ex);
 		}
 	}
+	//idcheck()
 	public int idcheck(String m_id) {
 		int result = -1; //db 아이디정보가 없을때 -1을 리턴한다.
 		String idck_sql = "select m_id from MEMBER where m_id = ? ";
@@ -36,12 +37,57 @@ public class MemberDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		} catch (Exception e) {
-				e.printStackTrace();
+		} catch (Exception ex) {
+				ex.printStackTrace();
 		}
 	return result;
 	}//idcheck() end
 	
+	//nickcheck()
+	public int nickcheck(String m_nick) {
+		int result = -1; //db 닉네임정보가 없을때 -1을 리턴한다.
+		String nickck_sql = "select m_nick from MEMBER where m_nick = ? ";
+		
+		//try-with-resource문
+		try (Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(nickck_sql);) {
+			pstmt.setString(1, m_nick);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if(rs.next()) {
+					result=0; //DB에 해당 nick가 있다.
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (Exception ex) {
+				ex.printStackTrace();
+		}
+	return result;
+	}//nickcheck() end
+	
+	//emailcheck()
+	public int emailcheck(String m_email) {
+		int result = -1;
+		String email_sql = "select m_email from member where m_email = ?";
+		
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(email_sql);) {
+			pstmt.setString(1, m_email);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if(rs.next()) {
+					result=0; //DB에 해당 email이 있다.
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return result;
+	}
+	//loginid()
 	public int loginid(String m_id, String m_pwd) {
 		int result = -1; //db에 해당 아이디가 없을때
 		String login_sql = "select m_id, m_pwd from MEMBER where m_id = ?";
@@ -67,6 +113,7 @@ public class MemberDAO {
 		return result;
 	}//loginid() end
 	
+	//join()
 	public int joininsert(Member m) {
 		int result = 0;
 		String join_sql =  "insert into member "
@@ -90,7 +137,7 @@ public class MemberDAO {
 					e.printStackTrace();
 		}
 		return result;
-	}//insert end
+	}//join end
 	
 	public int imginsert(Member m,Memberimg mimg) {
 		int result = 0;
@@ -107,27 +154,6 @@ public class MemberDAO {
 		return result;
 	}//insert end
 	
-	public int nickcheck(String m_nick) {
-		int result = -1; //db 아이디정보가 없을때 -1을 리턴한다.
-		String nickck_sql = "select m_nick from MEMBER where m_nick = ? ";
-		
-		//try-with-resource문
-		try (Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(nickck_sql);) {
-			pstmt.setString(1, m_nick);
-			
-			try (ResultSet rs = pstmt.executeQuery()) {
-				if(rs.next()) {
-					result=0; //DB에 해당 id가 있다.
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
-				e.printStackTrace();
-		}
-	return result;
-	}
 
 	public String findid(String m_name, String m_email) {
 			String m_id =null;
@@ -146,16 +172,18 @@ public class MemberDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-				}catch (Exception e) {
-					e.printStackTrace();
+				}catch (Exception ex) {
+					ex.printStackTrace();
 				}
 		
 		return m_id ;
-	}
+	}//findid end
+	
+	//findpwd()
 	public boolean findpwd(String m_id, String m_name, String m_email) {
 		Boolean m_pwd = false;
 		
-		String findpwd_sql = "select decode(count(*), '1,'true','false') from member "
+		String findpwd_sql = "select decode(count(*), 1 ,'true' , 'false') as result from member "
 										+ "where m_id=? and m_name=? and m_email=?";
 		
 		try(Connection con = ds.getConnection();
@@ -165,20 +193,68 @@ public class MemberDAO {
 			pstmt.setString(2, m_name);
 			pstmt.setString(3, m_email);
 			try(ResultSet rs = pstmt.executeQuery()) {
-				if(rs.next()) {
-						 if(rs.getBoolean(1)) {
-							m_pwd=true; //일치
-						 }else {
-							m_pwd=false;//불일치
-						}
+				if(rs.next()) {		
+							String result = rs.getString("result");// 결과 값을 문자열로 가져옴
+							if(result != null) {
+								m_pwd = Boolean.valueOf(result); // 문자열을 Boolean으로 변환
+							}
 					}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-				}catch (Exception e) {
-					e.printStackTrace();
+				}catch (Exception ex) {
+					ex.printStackTrace();
 				}
 		return m_pwd;
+		}//findpwd() end
+	//
+	
+	public int pwdreset(Member m) {
+		int result = 1;
+		String pwdupdate = "update member set m_pwd=? where m_id=?";
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(pwdupdate);) {
+				pstmt.setString(1, m.getM_pwd());
+				pstmt.setString(2, m.getM_id());
+				result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
 		}
-}
+
+		return result;
+	}
+	public Member mypage_info(String m_id) {
+		Member m = null;
+		String info_sql = "select * from member where m_id=?";
+		
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(info_sql);) {
+			pstmt.setString(1, m_id);
+			
+			try(ResultSet rs = pstmt.executeQuery()) {
+				if(rs.next()) {
+					m=new Member();
+					m.setM_id(rs.getString(1));
+					m.setM_pwd(rs.getString(2));
+					m.setM_name(rs.getString(3));
+					m.setM_nick(rs.getString(4));
+					m.setM_gender(rs.getString(5));
+					m.setM_zipcode(rs.getString(6));
+					m.setM_addr1(rs.getString(7));
+					m.setM_addr2(rs.getString(8));
+					m.setM_phone(rs.getString(9));
+					m.setM_email(rs.getString(10));
+					m.setM_birthdate(rs.getDate(11));
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return m;
+	}
+	
+	}
+

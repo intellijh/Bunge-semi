@@ -38,12 +38,27 @@
         <li class="nav-item">
           <a class="nav-link" href="#">알림</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">프로필사진</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">login/logout</a>
-        </li>
+        <c:choose>
+        <c:when test="${m_id ==null }">
+        <li class="nav-item"><a class="nav-link" href="login.com">로그인</a></li>
+        </c:when>
+ 	<c:when test="${m_id != null}">
+	    <li class="nav-item"><a class="nav-link" href="#">프로필사진</a></li>
+	 	<li class="nav-item"><a class="nav-link" href="logout.com">${m_id}님 (로그아웃)</a></li>
+	    <li class="nav-item"><a class="nav-link" href="mypage.com">마이페이지</a></li>
+	     <li class="nav-item"><a class="nav-link" href="#">중고거래</a></li>
+	      <li class="nav-item"><a class="nav-link" href="#">리뷰활동</a></li>
+ 	</c:when>
+</c:choose>
+       <c:if test="${id == 'admin'}">
+     		 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop"
+                       data-toggle="dropdown"> 관리자 </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">회원정보</a>
+                        <a class="dropdown-item" href="#">게시판</a>
+</div>
+     	</c:if>
       </ul>
     </div>
   </div>
