@@ -45,6 +45,7 @@
         	<span id="filevalue${status.count}">${a.infa_filename}</span>
 	        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove"><br>
         </c:forEach>
+
       </div>
     </c:if>
     
