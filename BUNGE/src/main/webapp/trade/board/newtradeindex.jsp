@@ -25,14 +25,14 @@
 <head>
     <jsp:include page="../../layout/header.jsp" />
     <meta charset="EUC-KR">
-    <title>Video Board</title>
-    <link rel="stylesheet" href="./static/bootstrap.min.css">
-    <link rel="stylesheet" href="./static/style.css">
+    <title>Trade Board</title>
+    <link rel="stylesheet" href="../../static/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/style.css">
 </head>
 <body>
 <div id="upper-bar">
-    <a href="index.jsp" id="title">Video Board</a>
-    <a href="write.jsp"><img src="./static/upload_icon.png" id="button-write" height="43px"/></a>
+    <a href="newtradeindex.jsp" id="title">거래 게시판</a>
+    <a href="write.jsp"><img src="../../static/upload_icon.png" id="button-write" height="43px"/></a>
 </div>
 <div id="navi-bar">
     <div id="search">

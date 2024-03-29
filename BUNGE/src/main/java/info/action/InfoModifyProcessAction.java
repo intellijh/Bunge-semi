@@ -16,51 +16,51 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class InfoModifyProcessAction implements Action {
+//public class InfoModifyProcessAction implements Action {
 
-	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		BoardDAO boarddao = new BoardDAO();
-		Board board = new Board();
-		Boardfile boardfile = new Boardfile();
-		ActionForward forward = new ActionForward();
-		
-		String saveFolder = "boardupload";
-		int filesize = 10 * 1024 * 1024;
-		ServletContext sc = request.getServletContext();
-		String realFolder = sc.getRealPath(saveFolder);
-		System.out.println("realFolder="+realFolder);
-		try {
-			MultipartRequest multi =
-					new MultipartRequest(request, realFolder, filesize, "utf-8",
-										 new DefaultFileRenamePolicy());
-			
-			String id = multi.getParameter("m_id");
-			int num = Integer.parseInt(multi.getParameter("inf_num"));
-			boolean usercheck = boarddao.isboardWriter(id, num);
-			
-			if (!usercheck) {
-				response.setContentType("text/html;charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('글 작성자가 아닙니다.');");
-				out.println("history.back();");
-				out.println("</script>");
-				out.close();
-				return null;
-			}
-			
-			board.setInf_num(num);
-			board.setInf_subject(multi.getParameter("inf_subject"));
-			board.setInf_content(multi.getParameter("inf_content"));
-			
-			String check
-			
-		}
-		
-		
-	}
+//	@Override
+//	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//
+//		BoardDAO boarddao = new BoardDAO();
+//		Board board = new Board();
+//		Boardfile boardfile = new Boardfile();
+//		ActionForward forward = new ActionForward();
+//
+//		String saveFolder = "boardupload";
+//		int filesize = 10 * 1024 * 1024;
+//		ServletContext sc = request.getServletContext();
+//		String realFolder = sc.getRealPath(saveFolder);
+//		System.out.println("realFolder="+realFolder);
+//		try {
+//			MultipartRequest multi =
+//					new MultipartRequest(request, realFolder, filesize, "utf-8",
+//										 new DefaultFileRenamePolicy());
+//
+//			String id = multi.getParameter("m_id");
+//			int num = Integer.parseInt(multi.getParameter("inf_num"));
+//			boolean usercheck = boarddao.isboardWriter(id, num);
+//
+//			if (!usercheck) {
+//				response.setContentType("text/html;charset=utf-8");
+//				PrintWriter out = response.getWriter();
+//				out.println("<script>");
+//				out.println("alert('글 작성자가 아닙니다.');");
+//				out.println("history.back();");
+//				out.println("</script>");
+//				out.close();
+//				return null;
+//			}
+//
+//			board.setInf_num(num);
+//			board.setInf_subject(multi.getParameter("inf_subject"));
+//			board.setInf_content(multi.getParameter("inf_content"));
+//
+//			String check;
+//
+//		}
+//
+//
+//	}
 
-}
+//}
