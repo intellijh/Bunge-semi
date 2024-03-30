@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<title>정보공유게시판 - view</title>
+<title>정보공유게시판</title>
 <jsp:include page="../layout/header2.jsp"></jsp:include>
 </head>
 <body>
