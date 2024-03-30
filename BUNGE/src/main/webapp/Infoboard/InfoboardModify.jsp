@@ -42,8 +42,9 @@
         <c:forEach var="a" items="${boardfile}" begin="0" varStatus="status">
           <label class="attach">파일첨부
         	<img src="image/down.png" alt="파일첨부" width="10px">
-        	<input type="file" id="upfile${status.count}" name="board_file">
         	<img src="boardupload/${a.infa_filename}" width="10px" class="uploadedfile${status.count}">
+        	<input type="file" id="upfile${status.count}" class="upfile${status.count}" name="boardfile${status.count}" onchange="readURL(this)">
+        	<img id="preview${status.count}" width="10px">
         	<span id="filevalue${status.count}">${a.infa_filename}</span>
           </label>
 	        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove${status.count}"><br>
