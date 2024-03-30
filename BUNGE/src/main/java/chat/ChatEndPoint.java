@@ -30,7 +30,7 @@ public class ChatEndPoint {
     }
 
     @OnMessage
-    public void onMessage(String message) throws IOException {
+    public void onMessage(String message, Session session) throws IOException {
         System.out.println(message);
 
         synchronized(clients) {
@@ -51,7 +51,9 @@ public class ChatEndPoint {
                     JsonArray arr = new JsonArray();
                     arr.add(data);
 
-                    client.getBasicRemote().sendText(arr.toString());
+                    if (!client.equals(session)) {
+                        client.getBasicRemote().sendText(arr.toString());
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Exception in: " + e.getStackTrace()[0]);

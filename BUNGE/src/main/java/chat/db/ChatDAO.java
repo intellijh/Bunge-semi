@@ -39,9 +39,10 @@ public class ChatDAO {
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     JsonObject object = new JsonObject();
+                    object.addProperty("chatId", rs.getString("chat_id"));
                     object.addProperty("sellerId", rs.getString("seller_id"));
                     object.addProperty("buyerId", rs.getString("buyer_id"));
-                    object.addProperty("openDate", rs.getString("open_date").substring(0, 16));
+                    object.addProperty("updateDate", rs.getString("update_date").substring(0, 16));
                     array.add(object);
                 }
             }

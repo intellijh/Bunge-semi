@@ -12,25 +12,37 @@ function getChatList() {
             if (rdata.chat.length <= 0) {
                 return;
             }
+            const loginId = $("#loginId").val();
+            console.log("loginId = " + loginId);
 
             console.log("0over?");
             let output = ``;
-            let num = 0;
             $(rdata.chat).each(function () {
-                console.log(rdata.chat);
-                num = num + 1;
+                console.log(this);
+                console.log(this.sellerId);
+                console.log(this.buyerId);
+                console.log(this.chatId);
+
                 output +=
-                    `<li id=${num} style="cursor: pointer">
+                    `<li id=${this.chatId} style="cursor: pointer">
                             <div class="d-flex bd-highlight">
                                 <div class="img_cont">
                                     <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
                                          class="rounded-circle user_img">
                                     <span class="online_icon"></span>
                                 </div>
-                                <div class="user_info">
-                                    <span>${this.sellerId}</span>
+                                <div class="user_info">`;
+                if (this.sellerId == loginId) {
+                    output += `     <span>${this.buyerId}</span>
+                                    <p>${this.sellerId}</p>
+                                    <p>${this.updateDate}</p>`;
+                } else {
+                    output += `     <span>${this.sellerId}</span>
                                     <p>${this.buyerId}</p>
-                                    <p>${this.openDate}</p>
+                                    <p>${this.updateDate}</p>`;
+                }
+
+                output += `
                                 </div>
                             </div>
                         </li>`;
@@ -54,12 +66,13 @@ function getChatList() {
         }
     });
 
-    setTimeout(getChatList, 1000);
+    // setTimeout(getChatList, 1000);
 }
 
 $(document).on('click', '.contacts li', function() {
     chatId = $(this).attr("id");
     console.log("click chatId = " + chatId);
+    getChatList();
 });
 
 // getMessage = setInterval(function () {
@@ -150,5 +163,5 @@ $(function () {
     //     sendMessage();
     // });
 
-    // getChatList();
+    getChatList();
 });
