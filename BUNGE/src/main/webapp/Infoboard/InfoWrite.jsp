@@ -12,7 +12,7 @@
 	
 	label{font-weight:bold}
 
-	img{width:20px}
+	img{width:15px}
 	
 	input[type=file]{display:none}
  </style>
@@ -33,8 +33,8 @@
   		
   		<div class="form-inline">
   		<label for="inf_open">공개설정</label>
-  		<input type="radio" name="inf_open" id="inf_open" value="0" class="radio"><span class="pr_0">공개</span>&nbsp;&nbsp;&nbsp;
-  		<input type="radio" name="inf_open" id="inf_open" value="1" class="radio"><span class="pr_1">비공개</span>
+  		<input type="radio" name="inf_open" id="inf_open1" value="0" class="radio"><span class="pr_0">공개</span>&nbsp;&nbsp;&nbsp;
+  		<input type="radio" name="inf_open" id="inf_open2" value="1" class="radio"><span class="pr_1">비공개</span>
   		</div>	
   		
   		<div class="form-group">
@@ -43,36 +43,56 @@
   			   class="form-control" ></textarea>
   		</div>
   		
+  		<%-- 이 부분 <c:forEach> 이용해서 바꿀 수 있을 것 같다 --%>
+  		<%-- 시간이 된다면, X버튼 만들어서 첨부파일 취소하는 기능 추가 --%>
   		<div class="form-group">
 	 		<label>파일첨부<br> 
 	 		    <img src="image/attach.png" alt="파일첨부">
-	 		    <input name="inf_file1" id="inf_file1" type="file">
-	 		      <span id="filevalue1"></span> <br>
+	 		    <img id="preview1">
+	 		    <input name="inf_file1" id="inf_file1" type="file" onchange="readURL(this)">
+	 		      <span id="filevalue1"></span>
 	 		</label>
+	 		    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove1">
+	 		<br>
+	 		
 	 		<label>
 	 		    <img src="image/attach.png" alt="파일첨부">
-	 		    <input name="inf_file2" id="inf_file2" type="file">
-	 		      <span id="filevalue2"></span> <br>
+	 		    <img id="preview2">
+	 		    <input name="inf_file2" id="inf_file2" type="file" onchange="readURL(this)">
+	 		      <span id="filevalue2"></span>
 	 		</label>
+	 		    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove2">
+	 		<br>
+	 		
 	 		<label>
 	 		    <img src="image/attach.png" alt="파일첨부">
-	 		    <input name="inf_file3" id="inf_file3" type="file">
-	 		      <span id="filevalue3"></span> <br>
+	 		    <img id="preview3">
+	 		    <input name="inf_file3" id="inf_file3" type="file" onchange="readURL(this)">
+	 		      <span id="filevalue3"></span>
 	 		</label>
+	 		    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove3">
+	 		<br>
+	 		
 	 		<label>    
 	 		    <img src="image/attach.png" alt="파일첨부">
-	 		    <input name="inf_file4" id="inf_file4" type="file">
-	 		      <span id="filevalue4"></span> <br>
+	 		    <img id="preview4">
+	 		    <input name="inf_file4" id="inf_file4" type="file" onchange="readURL(this)">
+	 		      <span id="filevalue4"></span>
 	 		</label>
+	 		    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove4">
+	 		<br>
+	 		
 	 		<label>
 	 		    <img src="image/attach.png" alt="파일첨부">
-	 		    <input name="inf_file5" id="inf_file5" type="file">
-	 		      <span id="filevalue5"></span> <br>
-  		</label>
+	 		    <img id="preview5">
+	 		    <input name="inf_file5" id="inf_file5" type="file" onchange="readURL(this)">
+	 		      <span id="filevalue5"></span>
+	  		</label>
+	 		    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove5">
   		</div>
  
   		 <label for="address">위치</label>
-  		    <input type="text" size="50" name="address" id="address">
+  		    <input type="text" size="50" name="inf_loc" id="address">
   		    <input type="button" value="위치찾기" id="postcode">
   		
    		 <div class="form-group">

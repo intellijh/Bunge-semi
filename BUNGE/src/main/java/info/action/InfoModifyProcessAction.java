@@ -25,6 +25,8 @@ public class InfoModifyProcessAction implements Action {
 		Board board = new Board();
 		Boardfile boardfile;
 		ActionForward forward = new ActionForward();
+		boolean board_result = false;
+		boolean file_result = false;
 		
 		String saveFolder = "boardupload";
 		int filesize = 10 * 1024 * 1024;
@@ -36,17 +38,36 @@ public class InfoModifyProcessAction implements Action {
 			new MultipartRequest(request, realFolder, filesize, "utf-8",
 								 new DefaultFileRenamePolicy());
 			
-			int num = Integer.parseInt(multi.getParameter("inf_num"));
+			int inf_num = Integer.parseInt(multi.getParameter("inf_num"));
 			
-			board.setInf_num(num);
+			board.setInf_num(inf_num);
+			board.setInf_open(Integer.parseInt(multi.getParameter("inf_open")));
 			board.setInf_subject(multi.getParameter("inf_subject"));
 			board.setInf_content(multi.getParameter("inf_content"));
+			board.setInf_subject(multi.getParameter("inf_loc"));
+			
+			board_result = boarddao.boardModify(board);
+			
+			boarddao.boardfileReset(inf_num);
 			
 			for (int i=1; i<=5; i++) {
-				String fileserver = multi.getFilesystemName("boardfile"+i);
 				String fileorigin = multi.getOriginalFileName("boardfile"+i);
-				
-				
+				String fileserver = multi.getFilesystemName("boardfile"+i);
+				boardfile = new Boardfile();
+				if (fileorigin != null && fileserver != null) {
+					boardfile.setInfa_filename(fileorigin);
+					boardfile.setInfa_servername(fileserver);
+					file_result = boarddao.boardfileModify(inf_num, boardfile);
+				}
+			}
+			
+			if (board_result && file_result) {
+				System.out.println("게시판 수정 완료");
+				forward.setPath("InfoDetail.com?num=" + board.getInf_num());
+			} else {
+				System.out.println("게시판 수정 실패");
+				forward.setRedirect(false);
+				forward.setPath("error/error.jsp");
 			}
 			
 			return forward;

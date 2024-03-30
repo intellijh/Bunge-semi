@@ -28,10 +28,18 @@
  				<td><c:out value="${boarddata.inf_subject}" /></td>
  			</tr>
  			<tr>
+ 				<td><div>공개설정</div></td>
+ 				<td><div>${boarddata.inf_oepn}"</div></td>
+ 			</tr>
+ 			<tr>
  				<td><div>내용</div></td>
  				<td style="padding-right:0px">
  					<textarea class="form-control" rows="5" readOnly>${boarddata.inf_content}
  					</textarea></td>
+ 			</tr>
+ 			<tr>
+ 				<td><div>위치</div></td>
+ 				<td><c:out value="${boarddata.inf_loc}" /></td>
  			</tr>
  			
  	    <c:if test="${boarddata.inf_lev==0}">

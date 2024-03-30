@@ -39,44 +39,6 @@ $(document).ready(function() {
 	show();
 	
 	
-	let filenames = new Array(5)
-	let changenames = new Array(5)
-	for (let i=0; i<5; i++) {
-		console.log($("#filevalue"+(i+1)).text())
-		filenames[i] = $("#filevalue"+(i+1)).text()
-	}
-	console.log(filenames)
-	
-	$("input[type=file]").change(function() {
-		console.log($(this).val())
-		let thisid = $(this).attr("id")
-		console.log(thisid)
-		const inputfile = $(this).val().split('\\');
-		let change = inputfile[inputfile.length - 1]
-		$('#filevalue'+thisid.substr(6,1)).text(change)
-		$('.uploadedfile'+thisid.substr(6,1)).attr('src','')
-		console.log('change : '+change);
-		changenames[thisid.substr(6,1)-1] = change
-		console.log('changenames : ' + changenames)
-		console.log(changenames)
-
-
-		for (let i=0; i<5; i++) {
-			if (filenames[i] != changenames[i] && changenames[i]!=null) {
-				filenames[i] = changenames[i]
-			} else {
-				filenames[i] = filenames[i]
-			}
-		}
-			console.log(filenames);
-	})//input[type=file].change end
-	
-		
-	
-
-		
-		
-	
 	//remove 이미지를 클릭하면 파일명을 ''로 변경하고 remove 이미지를 보이지 않게 한다.
 	
 	$(".remove1").click(function() {
@@ -109,6 +71,39 @@ $(document).ready(function() {
 		$("#preview5").attr('src','')
 		$(".remove5").css('display','none')
 	})
+	
+	
+	let filenames = new Array(5)
+	let changenames = new Array(5)
+	for (let i=0; i<5; i++) {
+		console.log($("#filevalue"+(i+1)).text())
+		filenames[i] = $("#filevalue"+(i+1)).text()
+	}
+	console.log(filenames)
+	
+	$("input[type=file]").change(function() {
+		console.log($(this).val())
+		let thisid = $(this).attr("id")
+		console.log(thisid)
+		const inputfile = $(this).val().split('\\');
+		let change = inputfile[inputfile.length - 1]
+		$('#filevalue'+thisid.substr(6,1)).text(change)
+		$('.uploadedfile'+thisid.substr(6,1)).attr('src','')
+		console.log('change : '+change);
+		changenames[thisid.substr(6,1)-1] = change
+		console.log('changenames : ' + changenames)
+		console.log(changenames)
+
+
+		for (let i=0; i<5; i++) {
+			if (filenames[i] != changenames[i] && changenames[i]!=null) {
+				filenames[i] = changenames[i]
+			} else {
+				filenames[i] = filenames[i]
+			}
+		}
+			console.log(filenames);
+	})//input[type=file].change end
 })// ready end
 
 	function readURL(input) {

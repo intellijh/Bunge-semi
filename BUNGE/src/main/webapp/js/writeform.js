@@ -2,10 +2,33 @@ $(function() {
 	
 	$("input[type=file]").change(function(){
 		console.log($(this).val())
+		console.log($(this).attr('id').substr(8,1))
 		const inputfile = $(this).val().split('\\');
 		$(this).next().text(inputfile[inputfile.length -1]);
 	});
-
+	
+	
+	$(".remove1").click(function() {
+		$("#filevalue1").text('');
+		$("#preview1").attr('src','')
+	})
+	$(".remove2").click(function() {
+		$("#filevalue2").text('');
+		$("#preview2").attr('src','')
+	})
+	$(".remove3").click(function() {
+		$("#filevalue3").text('');
+		$("#preview3").attr('src','')
+	})
+	$(".remove4").click(function() {
+		$("#filevalue4").text('');
+		$("#preview4").attr('src','')
+	})
+	$(".remove5").click(function() {
+		$("#filevalue5").text('');
+		$("#preview5").attr('src','')
+	})
+	
 $("button").click(function(){
 	if($.trim($("#inf_subject").val()) == "") {
 		alert("제목을 입력하세요.");
@@ -61,6 +84,20 @@ $("#postcode").click(function () {
                 $("#address").val(fullRoadAddr);
             }
         }).open();
-	} //
- })
-})
+	} //Postcode() end
+ }) //$("#postcode").click end
+}) //ready end
+
+
+function readURL(input) {
+	console.log((input.id).substr(8,1))
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById('preview'+(input.id).substr(8,1)).src = e.target.result;
+		}
+		reader.readAsDataURL(input.files[0]);
+	} else {
+		document.getElementById('preview'+(input.id).substr(8,1)).src = "";
+	}
+}

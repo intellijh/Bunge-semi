@@ -23,6 +23,15 @@
         <input type="text" class="from-control"
         	   value="${board.m_id}" readOnly>
       </div>
+	
+      <%-- 공개/비공개 추가 --%>
+      
+      <div class="form-group">
+  		<label for="inf_open">공개설정</label>
+  		<input type="radio" name="inf_open" id="inf_open1" value="0" class="radio"><span class="pr_0">공개</span>&nbsp;&nbsp;&nbsp;
+  		<input type="radio" name="inf_open" id="inf_open2" value="1" class="radio"><span class="pr_1">비공개</span>
+      </div>
+      
       <div class="form-group">
         <label for="inf_subject">제목</label>
         <input name="inf_subject"
@@ -35,6 +44,9 @@
         <textarea name="inf_content" id="inf_content"
         	   	  class="form-control" rows="10">${board.inf_content}</textarea>
       </div>
+      
+      <%-- 장소 추가 --%>
+      
     <%-- 원문글인 경우에만 파일 첨부 수정 가능하다 --%>
     <c:if test="${board.inf_lev==0}">
       <div class="form-group">
