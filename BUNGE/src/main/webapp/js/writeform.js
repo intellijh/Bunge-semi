@@ -3,7 +3,7 @@ $(function() {
 	$("input[type=file]").change(function(){
 		console.log($(this).val())
 		const inputfile = $(this).val().split('\\');
-		$(this).append(inputfile[inputfile.length -1]);
+		$(this).next().text(inputfile[inputfile.length -1]);
 	});
 
 $("button").click(function(){

@@ -6,8 +6,10 @@
 <%@ include file="/layout/header.jsp" %>
 <script src="js/infomodifyform.js"></script>
 <style>
- .container {width:60%}
- h1 {font-size:1.5rem; text-align:center; color:#1a92b9}
+  .container {width:60%}
+  h1 {font-size:1.5rem; text-align:center; color:#1a92b9}
+  input[type=file] {display:none}
+  .attach {display:inline-block;}
 </style>
 </head>
 <body>
@@ -38,10 +40,12 @@
       <div class="form-group">
         <br>
         <c:forEach var="a" items="${boardfile}" begin="0" varStatus="status">
+          <label class="attach">파일첨부
         	<img src="image/down.png" alt="파일첨부" width="10px">
         	<input type="file" id="upfile${status.count}" name="board_file">
         	<img src="boardupload/${a.infa_filename}" width="10px" class="uploadedfile${status.count}">
         	<span id="filevalue${status.count}">${a.infa_filename}</span>
+          </label>
 	        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove${status.count}"><br>
         </c:forEach>
 
