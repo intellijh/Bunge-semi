@@ -26,16 +26,17 @@
   		</div>	
   		
   		<div class="form-group">
+  		<label for="inf_open">공개설정</label>
+  		<input type="radio" name="inf_open" id="inf_open1" value="0" class="radio"><span class="pr_0">공개</span>&nbsp;&nbsp;&nbsp;
+  		<input type="radio" name="inf_open" id="inf_open2" value="1" class="radio"><span class="pr_1">비공개</span>
+  		</div>	
+
+  		<div class="form-group">
   		<label for="inf_subject">제목</label>
   		<input name="inf_subject" id="inf_subject" type="text" maxlength="100"		 
   			   class="form-control" placeholder="Enter inf_subject">
   		</div>	
   		
-  		<div class="form-inline">
-  		<label for="inf_open">공개설정</label>
-  		<input type="radio" name="inf_open" id="inf_open1" value="0" class="radio"><span class="pr_0">공개</span>&nbsp;&nbsp;&nbsp;
-  		<input type="radio" name="inf_open" id="inf_open2" value="1" class="radio"><span class="pr_1">비공개</span>
-  		</div>	
   		
   		<div class="form-group">
   		<label for="inf_content">내용</label>
@@ -92,7 +93,7 @@
   		</div>
  
   		 <label for="address">위치</label>
-  		    <input type="text" size="50" name="inf_loc" id="address">
+  		    <input type="text" size="50" name="inf_loc" id="inf_loc">
   		    <input type="button" value="위치찾기" id="postcode">
   		
    		 <div class="form-group">

@@ -11,6 +11,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <%@ include file="/layout/header2.jsp" %>
 <script src="js/viewdetail.js"></script>
+<style>
+ .uploadedfile {width:50px}
+</style>
 </head>
  <body>
  	<input type="hidden" id="loginid" value="${m_id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
@@ -29,7 +32,7 @@
  			</tr>
  			<tr>
  				<td><div>공개설정</div></td>
- 				<td><div>${boarddata.inf_oepn}"</div></td>
+ 				<td><div>${boarddata.inf_open}</div></td>
  			</tr>
  			<tr>
  				<td><div>내용</div></td>
@@ -45,27 +48,21 @@
  	    <c:if test="${boarddata.inf_lev==0}">
           <tr>
             <td><div>첨부파일</div></td>
-            
-            <%-- 파일을 첨부한 경우 --%>
-            <c:if test="${!empty boardfile}">
               <c:forEach var="a" items="${boardfile}">
-		           <tr>
-		             <td><img src="image/down.png" width="10px">
-		                 <a href="BoardFileDown.bo?filename=${a.infa_filename}">${a.infa_filename}</a>
-		             </td>
-		           </tr>
+                <c:if test="${a.infa_filename != null}">
+		          <td><img src="image/down.png" width="10px">
+		            <a href="BoardFileDown.bo?filename=${a.infa_filename}">${a.infa_filename}</a>
+		            <img src="boardupload/${a.infa_servername}" class="uploadedfile">
+		          </td>
+		        </c:if>
+		        <c:if test="${a.infa_filename == null}">
+		        </c:if>
               </c:forEach>
-            </c:if>
-            
-            <%-- 파일을 첨부하지 않은 경우 --%>
-           <c:if test="${empty boardfile}">
-              <td></td>
-           </c:if>
           </tr>
         </c:if>		
         
         <tr>
-          <td colspan="2" class="center">
+          <td colspan="3" class="center">
             <c:if test="${boarddata.m_id == m_id || m_id == 'admin' }">
               <a href="InfoModify.com?num=${boarddata.inf_num}">
                 <button class="btn btn-info">수정</button>

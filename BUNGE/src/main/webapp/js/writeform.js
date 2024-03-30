@@ -81,7 +81,7 @@ $("#postcode").click(function () {
                 }
                 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                $("#address").val(fullRoadAddr);
+                $("#inf_loc").val(fullRoadAddr);
             }
         }).open();
 	} //Postcode() end

@@ -49,10 +49,10 @@ public class InfoAddAction implements Action {
 			board.setM_id(multi.getParameter("m_id"));
 			board.setInf_subject(multi.getParameter("inf_subject"));
 			board.setInf_content(multi.getParameter("inf_content"));
+			board.setInf_open(Integer.parseInt(multi.getParameter("inf_open")));
 			board.setInf_loc(multi.getParameter("inf_loc"));
 			System.out.println("inf_loc :" + multi.getParameter("inf_loc"));
 			board.setInf_reg(multi.getParameter("inf_reg"));
-			board.setInf_open(Integer.parseInt(multi.getParameter("inf_open")));
 
 			success = dao.boardInsert(board);
 			

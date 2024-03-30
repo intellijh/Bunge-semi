@@ -90,7 +90,6 @@ public class BoardDAO {
 			for (int i=1; i<=5; i++) {
 				String userfile = multi.getOriginalFileName("inf_file"+i);
 				String serverfile = multi.getFilesystemName("inf_file"+i);
-				if (userfile != null) {
 					boardfile.setInfa_filename(userfile);
 					boardfile.setInfa_servername(serverfile);
 					pstmt.setString(1, boardfile.getInfa_filename());
@@ -99,12 +98,9 @@ public class BoardDAO {
 						System.out.println("첨부파일 등록 성공적");
 						result = true;
 					}
-				} else {
-					continue;
-				}
-			}
 			con.commit();
 			con.setAutoCommit(true);
+			}
 			
 		} catch (Exception ex) {
 			System.out.println("board_attach() 에러 : " + ex);
@@ -218,13 +214,13 @@ public class BoardDAO {
 					board.setM_id(rs.getString("M_ID"));
 					board.setInf_subject(rs.getString("INF_SUBJECT"));
 					board.setInf_content(rs.getString("INF_CONTENT"));
+					board.setInf_open(rs.getInt("INF_OPEN"));
 					board.setInf_ref(rs.getInt("INF_REF"));
 					board.setInf_lev(rs.getInt("INF_LEV"));
 					board.setInf_seq(rs.getInt("INF_SEQ"));
 					board.setInf_readcount(rs.getInt("INF_READCOUNT"));
 					board.setInf_loc(rs.getString("INF_LOC"));
 					board.setInf_reg(rs.getString("INF_REG"));
-					board.setInf_open(rs.getInt("INF_OPEN"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -429,7 +425,7 @@ public class BoardDAO {
 		return false;
 	} //boardModify() end
 
-
+/*
 	public void boardfileReset(int inf_num) {
 		int result = -1;
 		String sql = "delete infoattach "
@@ -446,7 +442,7 @@ public class BoardDAO {
 			System.out.println("boardfileReset() 에러 : " + ex);
 		}
 	} //boardfileReset() end
-
+*/
 
 	public boolean boardfileModify(int inf_num, Boardfile boardfile) {
 		int result = -1;
@@ -469,6 +465,33 @@ public class BoardDAO {
 		}
 		return false;
 	} //boardfileModify() end
-	
-	
+
+
+	public int checkfile(int inf_num, String nextToken) {
+		int result = 0;
+		String sql = "select infa_num "
+				   + "from infoattach "
+				   + "where inf_num=? "
+				   + "and infa_filename=? ";
+		
+		try (Connection con = ds.getConnection();
+				 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, inf_num);
+			pstmt.setString(2, nextToken);
+			
+			try (ResultSet rs = pstmt.executeQuery();) {
+				if (rs.next()) {
+					result = rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("checkfile() 에러 : " + ex);
+		}
+		return result;
+	}//checkfile end
 }//class end
