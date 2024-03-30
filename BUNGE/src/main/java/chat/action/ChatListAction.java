@@ -1,4 +1,4 @@
-package chat;
+package chat.action;
 
 import chat.db.Chat;
 import com.google.gson.Gson;

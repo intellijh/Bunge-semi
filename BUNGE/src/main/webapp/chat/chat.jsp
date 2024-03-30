@@ -13,8 +13,9 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat.css">
-    <script src="${pageContext.request.contextPath}/js/chat.js"></script>
-    <title>채팅 : 번지</title>
+    <script src="${pageContext.request.contextPath}/js/chat/chat.js"></script>
+    <script src="${pageContext.request.contextPath}/js/chat/message.js"></script>
+    <title>채팅 : 번지</title>+
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/layout/header.jsp"/>
@@ -67,6 +68,7 @@
                     </div>
                 </div>
                 <div class="card-body msg_card_body">
+<%--
                     <div class="d-flex justify-content-start mb-4">
                         <div class="img_cont_msg">
                             <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
@@ -137,6 +139,7 @@
                             <span class="msg_time">9:12 AM, Today</span>
                         </div>
                     </div>
+--%>
                 </div>
                 <div class="card-footer">
                     <div class="input-group">

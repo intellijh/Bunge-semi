@@ -2,7 +2,7 @@ package common;
 
 import java.io.IOException;
 
-import chat.ChatListLoadAction;
+import chat.action.ChatListLoadAction;
 import comment.action.CommentAddAction;
 import comment.action.CommentDeleteAction;
 import comment.action.CommentListAction;
@@ -41,7 +41,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import chat.ChatListAction;
+import chat.action.ChatListAction;
 
 
 @WebServlet("*.com")
