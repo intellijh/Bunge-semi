@@ -1,0 +1,48 @@
+package chat.action;
+
+import chat.db.Chat;
+import chat.db.ChatDAO;
+import common.action.Action;
+import common.action.ActionForward;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class ChatCreateAction implements Action {
+    @Override
+    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        Chat chat = new Chat();
+        chat.setChatId(Long.parseLong(request.getParameter("chatId")));
+        chat.setSellerId(request.getParameter("sellerId"));
+        chat.setBuyerId((String) session.getAttribute("m_id"));
+
+        ChatDAO dao = new ChatDAO();
+        boolean hasChatExist = dao.hasChatExist(chat);
+        if (hasChatExist) {
+            //채팅방 존재할 때 해당 채팅방 입장 로직 구현 필요
+        } else {
+            int result = dao.createChat(chat);
+            if (result == 0) {
+                response.setContentType("text/html;charset=utf-8");
+                PrintWriter out = response.getWriter();
+                out.println("<script>");
+                out.println("   alert('채팅방 생성에 실패했습니다.');");
+                out.println("   history.back();");
+                out.println("</script>");
+                out.close();
+                return null;
+            }
+        }
+
+        ActionForward forward = new ActionForward();
+        forward.setRedirect(true);
+        forward.setPath("/chat.com");
+        return forward;
+    }
+}

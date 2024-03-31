@@ -2,6 +2,8 @@ package common;
 
 import java.io.IOException;
 
+import chat.action.ChatCreateAction;
+import chat.action.ChatEnterAction;
 import chat.action.ChatListLoadAction;
 import comment.action.CommentAddAction;
 import comment.action.CommentDeleteAction;
@@ -91,9 +93,9 @@ public class FrontController extends HttpServlet {
                 action = new nickcheckAction();
                 break;
             //이메일 중복 검사
-            case "/emailcheck.com" :
-            	action = new emailcheckAction();
-            	break;
+            case "/emailcheck.com":
+                action = new emailcheckAction();
+                break;
             //아이디 찾기
             case "/findid.com":
                 action = new findidAction();
@@ -102,18 +104,18 @@ public class FrontController extends HttpServlet {
                 action = new findidProcessAction();
                 break;
             //비밀번호 찾기
-            case "/findpwd.com" :
+            case "/findpwd.com":
                 action = new findpwdAction();
                 break;
-            case "/findpwdProcess.com" :
+            case "/findpwdProcess.com":
                 action = new findpwdProcessAction();
                 break;
-                //비밀번호 재설정
-            case "/pwdreset.com" :
-            	action = new pwdresetAction();
-            	break;
+            //비밀번호 재설정
+            case "/pwdreset.com":
+                action = new pwdresetAction();
+                break;
             //마이 페이지
-            case "/mypage.com" :
+            case "/mypage.com":
                 action = new mypageAction();
                 break;
             //게시판에 글 추가
@@ -121,34 +123,31 @@ public class FrontController extends HttpServlet {
                 action = new InfoAddAction();
                 break;
             //글쓰기
-            case "/InfoWrite.com" :
+            case "/InfoWrite.com":
                 action = new InfoWriteAction();
                 break;
             //게시글 목록
-            case "/InfoList.com" :
+            case "/InfoList.com":
                 action = new InfoListAction();
                 break;
             //게시글 상세페이지
-            case "/InfoDetail.com" :
+            case "/InfoDetail.com":
                 action = new InfoDetailAction();
                 break;
             //게시글 삭제
-            case "/InfoDelete.com" :
+            case "/InfoDelete.com":
                 action = new InfoDeleteAction();
                 break;
             //게시판 글 수정
-            case "/InfoModify.com" :
-            	action = new InfoModifyAction();
-            	break;
-//            case "/InfoModifyProcess.com" :
-//            	action = new InfoModifyProcessAction();
-//            	break;
+            case "/InfoModify.com":
+                action = new InfoModifyAction();
+                break;
             //답글 글쓰기로 가기
-            case "/InfoReply.com" :
+            case "/InfoReply.com":
                 action = new InfoReplyAction();
                 break;
             //답글 글쓰기 등록까지
-            case "/InfoReplyProcess.com" :
+            case "/InfoReplyProcess.com":
                 action = new InfoReplyProcessAction();
                 break;
             //댓글 등록
@@ -179,13 +178,13 @@ public class FrontController extends HttpServlet {
             case "/chatLoad.com":
                 action = new ChatListLoadAction();
                 break;
-            //채팅 리스트 불러오기
-            case "/messageLoad.com":
-                action = new MessageLoadAction();
+            //임시 채팅방 입장 페이지
+            case "/chatEnter.com":
+                action = new ChatEnterAction();
                 break;
-            //채팅 리스트 불러오기
-            case "/messageSend.com":
-                action = new MessageSendAciton();
+            //채팅방 생성
+            case "/chatCreate.com":
+                action = new ChatCreateAction();
                 break;
         } //switch (command)
 
