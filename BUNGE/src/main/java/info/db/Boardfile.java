@@ -4,7 +4,6 @@ public class Boardfile {
 	private int infa_num;
 	private int inf_num;
 	private String infa_filename;
-	private String infa_regdate;
 	private String infa_servername;
 
 	public int getInfa_num() {
@@ -29,14 +28,6 @@ public class Boardfile {
 
 	public void setInfa_filename(String infa_filename) {
 		this.infa_filename = infa_filename;
-	}
-
-	public String getInfa_regdate() {
-		return infa_regdate;
-	}
-
-	public void setInfa_regdate(String infa_regdate) {
-		this.infa_regdate = infa_regdate;
 	}
 
 	public String getInfa_servername() {

@@ -30,6 +30,7 @@ import common.mypage.mypageAction;
 import info.action.InfoDetailAction;
 import info.action.InfoListAction;
 import info.action.InfoModifyAction;
+import info.action.InfoModifyProcessAction;
 //import info.action.InfoModifyProcessAction;
 import info.action.InfoReplyAction;
 import info.action.InfoReplyProcessAction;
@@ -144,9 +145,10 @@ public class FrontController extends HttpServlet {
             case "/InfoModify.com" :
             	action = new InfoModifyAction();
             	break;
-//            case "/InfoModifyProcess.com" :
-//            	action = new InfoModifyProcessAction();
-//            	break;
+            //게시판 글 수정 등록
+            case "/InfoModifyProcess.com" :
+           	action = new InfoModifyProcessAction();
+            	break;
             //답글 글쓰기로 가기
             case "/InfoReply.com" :
                 action = new InfoReplyAction();

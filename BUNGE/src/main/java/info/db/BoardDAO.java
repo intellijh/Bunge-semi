@@ -34,12 +34,12 @@ public class BoardDAO {
 		
 				// 원문글의 BOARD_RE_REF 필드는 자신의 글번호입니다.
 				String sql = "INSERT INTO INFOBOARD " 
-							+ "(INF_NUM,M_ID,INF_SUBJECT,INF_CONTENT, "
-							+ " INF_OPEN, INF_REF," 
-							+ " INF_LEV, INF_SEQ, INF_READCOUNT,INF_LOC,INF_REG)"
-							+ " values(" + max_sql + ",?,?,?," 
-							+ " 	  	  ?," + max_sql + "," 
-							+ " 	  	  ?,?,?,?,sysdate)";
+							+ "(INF_NUM, M_ID, INF_SUBJECT, INF_CONTENT, INF_REF, "
+							+ " INF_LEV, INF_SEQ, INF_READCOUNT, INF_LOC, "
+							+ " INF_REG, INF_OPEN) " 
+							+ " values(" + max_sql + " , ?, ?, ?, " + max_sql 
+							+ " 	   , ?, ?, ?, ? "
+							+ "        , sysdate, ?)"; 
 				
 				
 				String select_sql = "select max(inf_num) "
@@ -50,13 +50,13 @@ public class BoardDAO {
 						pstmt.setString(1, board.getM_id());
 						pstmt.setString(2, board.getInf_subject());
 						pstmt.setString(3, board.getInf_content());
-						pstmt.setInt(4, board.getInf_open());
 			
 						// 원문의 경우 BOARD_RE_LEV, BOARD_RE_SEQ 필드 값은 0입니다.
-						pstmt.setInt(5, 0); // LEV
-						pstmt.setInt(6, 0); // SEQ
-						pstmt.setInt(7, 0); // READCOUNT
-						pstmt.setString(8, board.getInf_loc()); // READCOUNT
+						pstmt.setInt(4, 0); // LEV
+						pstmt.setInt(5, 0); // SEQ
+						pstmt.setInt(6, 0); // READCOUNT
+						pstmt.setString(7, board.getInf_loc()); // LOC
+						pstmt.setInt(8, board.getInf_open());//OPEN
 			
 						pstmt.executeUpdate();
 						
@@ -80,8 +80,8 @@ public class BoardDAO {
 	public boolean boardinsertFile(int success, MultipartRequest multi, Boardfile boardfile) {
 		boolean result = false;
 		String sql = "INSERT INTO INFOATTACH " 
-					+ "(INFA_NUM, INF_NUM, INFA_FILENAME, INFA_REGDATE, INFA_SERVERNAME)"
-					+ " values(infa_seq.nextval, "+ success +", ? , sysdate, ?)";
+					+ "(INFA_NUM, INF_NUM, INFA_FILENAME, INFA_SERVERNAME)"
+					+ " values(infa_seq.nextval, "+ success +", ?, ?)";
 		
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -96,11 +96,15 @@ public class BoardDAO {
 					pstmt.setString(1, boardfile.getInfa_filename());
 					pstmt.setString(2, boardfile.getInfa_servername());
 					if (pstmt.executeUpdate() == 1) {
-						System.out.println("첨부파일 등록 성공적");
+						System.out.println("첨부파일 등록 성공");
 						result = true;
 					}
 				} else {
-					continue;
+					pstmt.setString(1, "0");
+					pstmt.setString(2, "0");
+					if (pstmt.executeUpdate() == 1) {
+						System.out.println("null 첨부파일 등록 성공");
+					}
 				}
 			}
 			con.commit();
@@ -254,7 +258,6 @@ public class BoardDAO {
 					boardfile.setInfa_num(rs.getInt("infa_num"));
 					boardfile.setInf_num(rs.getInt("inf_num"));
 					boardfile.setInfa_filename(rs.getString("infa_filename"));
-					boardfile.setInfa_regdate(rs.getString("infa_regdate"));
 					boardfile.setInfa_servername(rs.getString("infa_servername"));
 					
 					list.add(boardfile);
@@ -405,4 +408,96 @@ public class BoardDAO {
 		}
 		return num; 
 	}
+
+
+	public boolean boardModify(Board board) {
+		String sql = "update infoboard "
+				   + "set inf_subject=?, inf_content=?, inf_open=?, inf_loc=? "
+				   + "where inf_num=?";
+		try (Connection con = ds.getConnection();
+		     PreparedStatement pstmt = con.prepareStatement(sql);) {
+				pstmt.setString(1, board.getInf_subject());
+				pstmt.setString(2, board.getInf_content());
+				pstmt.setInt(3, board.getInf_open());
+				pstmt.setString(4, board.getInf_loc());
+				pstmt.setInt(5, board.getInf_num());
+				
+				int result = pstmt.executeUpdate();
+				if (result == 1) {
+					System.out.println("업데이트 성공");
+					return true;
+				}
+		} catch (Exception ex) {
+			System.out.println("boardModify() 에러 : " + ex);
+		}
+		return false;
+	} //boardModify() end
+
+/*
+	public void boardfileReset(int inf_num) {
+		int result = -1;
+		String sql = "delete infoattach "
+				   + "where inf_num = ?";
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+				pstmt.setInt(1, inf_num);
+				result = pstmt.executeUpdate();
+				
+				if (result != -1) {
+					System.out.println("첨부파일 초기화 성공");
+				}
+		} catch (Exception ex) {
+			System.out.println("boardfileReset() 에러 : " + ex);
+		}
+	} //boardfileReset() end
+*/
+
+	public boolean boardfileModify(int inf_num, Boardfile boardfile) {
+		int result = -1;
+		String sql = "insert into infoattach " 
+				+ "(infa_num, inf_num, infa_filename, infa_servername)"
+				+ " values(infa_seq.nextval, "+ inf_num +", ?, ?)";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setString(1, boardfile.getInfa_filename());
+			pstmt.setString(2, boardfile.getInfa_servername());
+			result = pstmt.executeUpdate();
+			
+			if (result != -1) {
+				System.out.println("첨부파일 수정 완료");
+				return true;
+			}
+		} catch (Exception ex) {
+			System.out.println("boardfileModify() 에러 : " + ex);
+		}
+		return false;
+	} //boardfileModify() end
+
+
+	public void boardnochangefileModify(int inf_num, String[] nochange) {
+		int length = nochange.length;
+		
+		String sqlplus = "and infa_filename !=?";
+		
+		String sql = "delete infoattach "
+				   + "where inf_num=? "
+				   + "and infa_filename !=? ";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, inf_num);
+			for (int i=0; i<nochangefiles.length; i++) {
+				pstmt.setString(2, nochangefiles[i]);
+				
+				
+			}
+			
+		}
+		
+	}
+
+
+
+
 }//class end
