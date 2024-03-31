@@ -8,6 +8,7 @@ import common.action.Action;
 import common.action.ActionForward;
 import common.db.Member;
 import common.db.MemberDAO;
+import common.db.Memberimg;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,6 +31,7 @@ public class joinProcessAction implements Action {
 		Date m_birthdate = Date.valueOf(request.getParameter("m_birthdate"));
 		
 		Member m = new Member();
+		
 		m.setM_id(m_id); m.setM_pwd(m_pwd); m.setM_name(m_name); m.setM_nick(m_nick);
 		m.setM_gender(m_gerder); m.setM_zipcode(m_zipcode); m.setM_addr1(m_addr1);
 		m.setM_addr2(m_addr2);m.setM_phone(m_phone); m.setM_email(m_email);
@@ -37,6 +39,7 @@ public class joinProcessAction implements Action {
 		
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.joininsert(m);
+		
 		
 		if(result == 0 ) { // 가입 실패
 			System.out.println("회원가입에 실패했습니다.");

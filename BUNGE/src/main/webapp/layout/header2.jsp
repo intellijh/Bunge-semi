@@ -23,11 +23,11 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="${pageContext.request.contextPath}/image/logo.png" alt="logo" width="140" height="30" class="d-inline-block align-text-top"></a>
+    <a class="navbar-brand" href="index.jsp"><img src="${pageContext.request.contextPath}/image/logo.png" alt="logo" width="140" height="30" class="d-inline-block align-text-top"></a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="InfoList.com">정보공유게시판</a>
@@ -47,7 +47,7 @@
 	 	<li class="nav-item"><a class="nav-link" href="logout.com">${m_id}님 (로그아웃)</a></li>
 	    <li class="nav-item"><a class="nav-link" href="mypage.com">마이페이지</a></li>
 	     <li class="nav-item"><a class="nav-link" href="#">중고거래</a></li>
-	      <li class="nav-item"><a class="nav-link" href="#">리뷰활동</a></li>
+	      <li class="nav-item"><a class="nav-link" href="myinfoboard.com">리뷰활동</a></li>
  	</c:when>
 </c:choose>
        <c:if test="${id == 'admin'}">

@@ -22,33 +22,36 @@ public class pwdresetAction implements Action {
 	    PrintWriter out = response.getWriter();
 	    HttpSession session = request.getSession();
 
-	    String m_id = (String) session.getAttribute("m_id"); 
+	    String find_m_id = (String) session.getAttribute("find_m_id"); 
 	    String m_pwd = request.getParameter("m_pwd");
 
 	    Member m = new Member();
-	    m.setM_id(m_id);
+	    m.setM_id(find_m_id);
 	    m.setM_pwd(m_pwd); 
 
-	    int result = dao.pwdreset(m);
+	    boolean result = dao.pwdreset(m);
 	    System.out.println(result);
-	    if(result != 1) {
+	    
+	    System.out.println("id="+find_m_id);
+		System.out.println("password="+m_pwd);
+		
+	    response.setContentType("text/html; charset=utf-8");
+	    if(result == true) {
 	        // 비밀번호가 성공적으로 변경되었을 때
-	        forward.setRedirect(true);
-	        forward.setPath("login.com");
-	        session.invalidate(); 
-	        String message = "비밀번호가 수정되었습니다.";
-	        out.println("<script>");
-	        out.println("alert('"+message+"');");
-	        out.println("</script>");
-	        return forward;    
-	    } else {
-	    	response.setContentType("text/html; charset=utf-8");
-	    	out.println("<script>");
-			out.println("alert('비밀번호 수정이 실패했습니다.');");
+			forward.setRedirect(false);
+			session.removeAttribute("find_m_id");
+			out.println("<script>");
+			out.println("alert('비밀번호 수정이 성공했습니다.');");
 			out.println("location.href='login.com';");
 			out.println("</script>");
+
+	    }else {
+	    	out.println("<script>");
+			out.println("alert('비밀번호 수정이 실패했습니다.');");
+			out.println("history.back()");
+			out.println("</script>");
 			out.close();
-			return null;
 	    }	    
+	    return null;
 	}
 }
