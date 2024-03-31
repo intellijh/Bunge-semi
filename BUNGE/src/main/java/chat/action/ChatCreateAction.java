@@ -32,8 +32,8 @@ public class ChatCreateAction implements Action {
                 response.setContentType("text/html;charset=utf-8");
                 PrintWriter out = response.getWriter();
                 out.println("<script>");
-                out.println("   alert('채팅방 생성에 실패했습니다.');");
-                out.println("   history.back();");
+                out.println("   alert('로그인 후 이용해주세요.');");
+                out.println("   location.href = 'login.com';");
                 out.println("</script>");
                 out.close();
                 return null;

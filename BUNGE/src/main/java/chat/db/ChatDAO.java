@@ -55,7 +55,7 @@ public class ChatDAO {
 
     public long hasChatExist(Chat chat) {
 
-        long chatId = 0;
+        long chatId = 0L;
         String sql =
                 "SELECT *\n" +
                 "FROM chat\n" +
@@ -98,20 +98,25 @@ public class ChatDAO {
             pstmt.setLong(4, chat.getTrade_id());
             result = pstmt.executeUpdate();
         } catch (Exception e) {
-            System.out.println("createChat() 에러 : " + e.getStackTrace()[0]);
+//            System.out.println("createChat() 에러 : " + e.getStackTrace()[0]);
+            e.printStackTrace();
         }
         return result;
     }
 
     private long incrementChatId(Connection conn) throws SQLException {
+        long result = 0L;
         String sql =
                 "SELECT MAX(NVL(chat_id, 0)) + 1\n" +
                 "FROM chat";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             try (ResultSet rs = pstmt.executeQuery()) {
-                return rs.getLong(1);
+                if (rs.next()) {
+                    result = rs.getLong(1);
+                }
             }
         }
+        return result;
     }
 }
