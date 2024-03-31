@@ -56,7 +56,7 @@
       <%-- 장소 추가 --%>
       
     <%-- 원문글인 경우에만 파일 첨부 수정 가능하다 --%>
-
+    
     <c:if test="${board.inf_lev==0}">
       <div class="form-group">
         <br>
@@ -83,12 +83,13 @@
         </c:forEach>
       </div>
     </c:if>
+    
       <div class="form-group">
         <label for="inf_loc">위치</label>
         <input type="text" size="50" name="inf_loc" id="inf_loc" value="${board.inf_loc}">
         <input type="button" value="위치수정" id="postcode">
       </div>
-    
+      
       <div class="form-group">
         <button type=submit class="btn btn-primary">수정</button>
         <button type=reset class="btn btn-danger" onClick="history.go(-1)">취소</button>
