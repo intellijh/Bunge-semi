@@ -90,17 +90,25 @@ public class BoardDAO {
 			for (int i=1; i<=5; i++) {
 				String userfile = multi.getOriginalFileName("inf_file"+i);
 				String serverfile = multi.getFilesystemName("inf_file"+i);
+				if (userfile != null) {
 					boardfile.setInfa_filename(userfile);
 					boardfile.setInfa_servername(serverfile);
 					pstmt.setString(1, boardfile.getInfa_filename());
 					pstmt.setString(2, boardfile.getInfa_servername());
 					if (pstmt.executeUpdate() == 1) {
-						System.out.println("첨부파일 등록 성공적");
+						System.out.println("첨부파일 등록 성공");
 						result = true;
 					}
+				} else {
+					pstmt.setString(1, "0");
+					pstmt.setString(2, "0");
+					if (pstmt.executeUpdate() == 1) {
+						System.out.println("null 첨부파일 등록 성공");
+					}
+				}
+			}
 			con.commit();
 			con.setAutoCommit(true);
-			}
 			
 		} catch (Exception ex) {
 			System.out.println("board_attach() 에러 : " + ex);
@@ -467,31 +475,29 @@ public class BoardDAO {
 	} //boardfileModify() end
 
 
-	public int checkfile(int inf_num, String nextToken) {
-		int result = 0;
-		String sql = "select infa_num "
-				   + "from infoattach "
+	public void boardnochangefileModify(int inf_num, String[] nochange) {
+		int length = nochange.length;
+		
+		String sqlplus = "and infa_filename !=?";
+		
+		String sql = "delete infoattach "
 				   + "where inf_num=? "
-				   + "and infa_filename=? ";
+				   + "and infa_filename !=? ";
 		
 		try (Connection con = ds.getConnection();
-				 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, inf_num);
-			pstmt.setString(2, nextToken);
-			
-			try (ResultSet rs = pstmt.executeQuery();) {
-				if (rs.next()) {
-					result = rs.getInt(1);
-				}
+			for (int i=0; i<nochangefiles.length; i++) {
+				pstmt.setString(2, nochangefiles[i]);
 				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} 
-		
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			System.out.println("checkfile() 에러 : " + ex);
+				
+			}
+			
 		}
-		return result;
-	}//checkfile end
+		
+	}
+
+
+
+
 }//class end

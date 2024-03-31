@@ -50,10 +50,23 @@ public class InfoModifyProcessAction implements Action {
 			board_result = boarddao.boardModify(board);
 			
 		//	boarddao.boardfileReset(inf_num);
+			String[] origin = multi.getParameter("originvalue").split(",");
+			String[] nochange = new String[5];
+			for (int k=1; k<=5; k++) {
+				System.out.println("원래 첨부된 파일 이름 : " + multi.getParameter("originvalue"));
+				System.out.println("수정없는 파일 이름 : " + multi.getParameter("filevalue"+k));
+					nochange[k-1] = multi.getParameter("filevalue"+k);
+			}
 			
+			for (String item : nochange) {
+				System.out.println("item : " + item);
+			}
 			
-			System.out.println("nochangefiles : " + multi.getParameter("nochangefiles"));
-
+		//	boarddao.boardmodifyDelete(inf_num, nochange);
+			
+		//	for (int k=1; k<=5; k++) {
+		//		System.out.println("수정이 없는 파일 이름 : " + multi.getParameter("filevalue"+k));
+		//	}
 			
 			
 			for (int i=1; i<=5; i++) {
@@ -66,14 +79,6 @@ public class InfoModifyProcessAction implements Action {
 					boardfile.setInfa_filename(fileorigin);
 					boardfile.setInfa_servername(fileserver);
 					file_result = boarddao.boardfileModify(inf_num, boardfile);
-				} else {
-					String nochangefiles = multi.getParameter("nochangefiles");
-					StringTokenizer st = new StringTokenizer(nochangefiles, ",");
-					while (st.hasMoreTokens()) {
-						System.out.println(st.nextToken());
-						int existinfa_num = boarddao.checkfile(inf_num, st.nextToken());
-						System.out.println("existinfa_num : " + existinfa_num);
-					}
 				}
 			}
 			

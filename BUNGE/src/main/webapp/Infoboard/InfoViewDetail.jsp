@@ -49,13 +49,13 @@
           <tr>
             <td><div>첨부파일</div></td>
               <c:forEach var="a" items="${boardfile}">
-                <c:if test="${a.infa_filename != null}">
+                <c:if test="${a.infa_filename != '0'}">
 		          <td><img src="image/down.png" width="10px">
 		            <a href="BoardFileDown.bo?filename=${a.infa_filename}">${a.infa_filename}</a>
 		            <img src="boardupload/${a.infa_servername}" class="uploadedfile">
 		          </td>
 		        </c:if>
-		        <c:if test="${a.infa_filename == null}">
+		        <c:if test="${a.infa_filename == '0'}">
 		        </c:if>
               </c:forEach>
           </tr>

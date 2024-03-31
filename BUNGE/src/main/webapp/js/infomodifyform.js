@@ -1,4 +1,14 @@
 $(document).ready(function() {
+	let check = 0
+	
+	let filenames = new Array(5)
+	let changenames = new Array(5)
+	let nochangefiles = new Array(5)
+	for (let i=0; i<5; i++) {
+		console.log($("#filevalue"+(i+1)).text())
+		filenames[i] = $("#filevalue"+(i+1)).text()
+	}
+	console.log('filenames : ' + filenames)
 	
 	//submit 버튼 클릭할 때 이벤트 부분
 	$("form[name=modifyform]").submit(function() {
@@ -16,9 +26,24 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		const html = "<input type='hidden' value='" + nochangefiles + "' name='nochangefiles'>";
-		console.log(html);
-		$(this).append(html);
+		
+		const html_origin = "<input type='hidden' value='" + filenames + "' name='originvalue'>"
+		console.log(html_origin)
+		$("form").append(html_origin);
+		
+		
+		//파일변동이 없는 경우
+		if (check == 0) {
+			for (let i=1; i<=5; i++) {
+				
+				if ($('#filevalue'+i).text() != '0') {
+					console.log('전송될 filevalue : ' + $('#filevalue'+i).text())
+					const html = "<input type='hidden' value='" + $('#filevalue'+i).text() + "' name='filevalue"+i+"'>"
+					console.log(html)
+					$("form").append(html);
+				}
+			}
+		} 
 	});//submit end
 	
 	function show() {
@@ -72,16 +97,10 @@ $(document).ready(function() {
 	})
 	
 	
-	let filenames = new Array(5)
-	let changenames = new Array(5)
-	let nochangefiles = new Array(5)
-	for (let i=0; i<5; i++) {
-		console.log($("#filevalue"+(i+1)).text())
-		filenames[i] = $("#filevalue"+(i+1)).text()
-	}
-	console.log('filenames : ' + filenames)
+
 	
 	$("input[type=file]").change(function() {
+		check++
 		console.log($(this).val())
 		let thisid = $(this).attr("id")
 		console.log(thisid)

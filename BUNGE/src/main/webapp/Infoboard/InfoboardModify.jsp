@@ -61,7 +61,7 @@
       <div class="form-group">
         <br>
         <c:forEach var="a" items="${boardfile}" varStatus="status">
-          <c:if test="${a.infa_filename != null}" >
+          <c:if test="${a.infa_filename != '0'}" >
 	          <label class="attach">파일첨부
 	        	<img src="image/down.png" alt="파일첨부" width="10px">
 	        	<img src="boardupload/${a.infa_filename}" width="10px" class="uploadedfile${status.count}">
@@ -71,12 +71,12 @@
 	          </label>
 		        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove${status.count}"><br>
 	      </c:if>
-	      <c:if test="${a.infa_filename == null}" >
+	      <c:if test="${a.infa_filename == '0'}" >
 	        <label class="attach">파일첨부
 	          <img src="image/down.png" alt="파일첨부" width="10px">
 	          <input type="file" id="upfile${status.count}" class="upfile${status.count}" name="boardfile${status.count}" onchange="readURL(this)">
 	        	<img id="preview${status.count}" width="10px">
-	        	<span id="filevalue${status.count}">${a.infa_filename}</span>
+	        	<span id="filevalue${status.count}"></span>
 	        </label>
 	          <img src="image/remove.png" alt="파일삭제" width="10px" class="remove${status.count}"><br>
 	      </c:if>
