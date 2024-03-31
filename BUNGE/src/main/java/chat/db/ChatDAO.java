@@ -53,9 +53,9 @@ public class ChatDAO {
         return array;
     }
 
-    public boolean hasChatExist(Chat chat) {
+    public long hasChatExist(Chat chat) {
 
-        boolean result = false;
+        long chatId = 0;
         String sql =
                 "SELECT *\n" +
                 "FROM chat\n" +
@@ -71,7 +71,7 @@ public class ChatDAO {
             pstmt.setLong(3, chat.getTrade_id());
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    result = true;
+                    chatId = rs.getLong("chat_id");
                 }
             } catch (SQLException e) {
                 System.out.println("hasChatExist() 에러 : " + e.getStackTrace()[0]);
@@ -79,7 +79,7 @@ public class ChatDAO {
         } catch (Exception e) {
             System.out.println("hasChatExist() 에러 : " + e.getStackTrace()[0]);
         }
-        return result;
+        return chatId;
     }
 
     public int createChat(Chat chat) {

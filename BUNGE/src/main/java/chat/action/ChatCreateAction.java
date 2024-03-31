@@ -18,13 +18,13 @@ public class ChatCreateAction implements Action {
         HttpSession session = request.getSession();
 
         Chat chat = new Chat();
-        chat.setChatId(Long.parseLong(request.getParameter("chatId")));
         chat.setSellerId(request.getParameter("sellerId"));
         chat.setBuyerId((String) session.getAttribute("m_id"));
+        chat.setTrade_id(Long.parseLong(request.getParameter("tradeId")));
 
         ChatDAO dao = new ChatDAO();
-        boolean hasChatExist = dao.hasChatExist(chat);
-        if (hasChatExist) {
+        long chatId = dao.hasChatExist(chat);
+        if (chatId > 0) {
             //채팅방 존재할 때 해당 채팅방 입장 로직 구현 필요
         } else {
             int result = dao.createChat(chat);

@@ -1,9 +1,5 @@
 $(function(){
-    var textarea = document.getElementById("messageWindow");
     var webSocket = new WebSocket('ws://localhost:8088/chat');
-
-// 로컬에서 테스트할 때 사용하는 URL입니다.
-//     var webSocket = new WebSocket('ws://localhost/DevEricServers/webChatServer');
     var inputMessage = $(".type_msg");
 
     webSocket.onerror = function(e){
