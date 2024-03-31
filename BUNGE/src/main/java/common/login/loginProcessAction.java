@@ -28,7 +28,7 @@ public class loginProcessAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("m_id",m_id);
 			
-			String IDStore = request.getParameter("remember");
+			String IDStore = request.getParameter("checkid");
 			Cookie cookie = new Cookie("m_id", m_id);
 			
 			//ID 기억하기를 체크한 경우

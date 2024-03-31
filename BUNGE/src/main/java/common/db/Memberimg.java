@@ -1,7 +1,5 @@
 package common.db;
 
-import java.sql.Date;
-
 public class Memberimg {
 	private int pof_num;
 	private String m_id;
