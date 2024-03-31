@@ -9,7 +9,7 @@ function getChatList() {
         dataType: "json",
         success: function (rdata) {
             console.log("ajax");
-            if (rdata.chat.length <= 0) {
+            if (rdata.chatList.length <= 0) {
                 return;
             }
             const loginId = $("#loginId").val();
@@ -17,7 +17,7 @@ function getChatList() {
 
             console.log("0over?");
             let output = ``;
-            $(rdata.chat).each(function () {
+            $(rdata.chatList).each(function () {
                 console.log(this);
                 console.log(this.sellerId);
                 console.log(this.buyerId);

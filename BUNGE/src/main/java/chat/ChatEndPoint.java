@@ -1,6 +1,7 @@
 package chat;
 
 import chat.configurator.ChatConfigurator;
+import chat.db.Chat;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import jakarta.servlet.http.HttpSession;

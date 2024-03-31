@@ -27,8 +27,8 @@ public class ChatCreateAction implements Action {
         if (chatId > 0) {
             //채팅방 존재할 때 해당 채팅방 입장 로직 구현 필요
         } else {
-            int result = dao.createChat(chat);
-            if (result == 0) {
+            chatId = dao.createChat(chat);
+            if (chatId == 0) {
                 response.setContentType("text/html;charset=utf-8");
                 PrintWriter out = response.getWriter();
                 out.println("<script>");
@@ -39,6 +39,9 @@ public class ChatCreateAction implements Action {
                 return null;
             }
         }
+
+        chat.setChatId(chatId);
+        session.setAttribute("chat", chat);
 
         ActionForward forward = new ActionForward();
         forward.setRedirect(true);

@@ -25,7 +25,7 @@ public class ChatListLoadAction implements Action {
         JsonArray array = new ChatDAO().getChatList(id);
         JsonElement element = new Gson().toJsonTree(array);
         JsonObject object = new JsonObject();
-        object.add("chat", element);
+        object.add("chatList", element);
 
         PrintWriter out = response.getWriter();
         out.print(object);

@@ -82,9 +82,9 @@ public class ChatDAO {
         return chatId;
     }
 
-    public int createChat(Chat chat) {
+    public long createChat(Chat chat) {
 
-        int result = 0;
+        long chatId = 0;
         String sql =
                 "INSERT INTO chat\n" +
                 "VALUES (?, ?, ?, ?, SYSTIMESTAMP, SYSTIMESTAMP)";
@@ -92,16 +92,17 @@ public class ChatDAO {
         try (Connection conn = ds.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setLong(1, incrementChatId(conn)); //서비스 전에 chat_seq.nextval 로 변경
+            chatId = incrementChatId(conn);
+            pstmt.setLong(1, chatId); //서비스 전에 chat_seq.nextval 로 변경
             pstmt.setString(2, chat.getSellerId());
             pstmt.setString(3, chat.getBuyerId());
             pstmt.setLong(4, chat.getTrade_id());
-            result = pstmt.executeUpdate();
+            pstmt.executeUpdate();
         } catch (Exception e) {
 //            System.out.println("createChat() 에러 : " + e.getStackTrace()[0]);
             e.printStackTrace();
         }
-        return result;
+        return chatId;
     }
 
     private long incrementChatId(Connection conn) throws SQLException {
