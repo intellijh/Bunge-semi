@@ -13,6 +13,9 @@
 <script src="js/viewdetail.js"></script>
 <style>
  .uploadedfile {width:50px}
+
+ img {width : 30px;
+ 	  height : 30px}
 </style>
 </head>
  <body>
@@ -81,6 +84,7 @@
             </a>
           </td>
         </tr>
+        <tr><td><img src="${pageContext.request.contextPath}/image/like_off.png" onclick="${infolike.no}"><b>${infolike.no}</b></td></tr>
       </table>
       <%-- 게시판 view end --%>
     
@@ -95,7 +99,7 @@
     					주소를 보묜 num을 파라미터로 넘기고 있습니다. 
     					이 값을 가져와서 ${param.num}를 사용
     					또는 ${boarddata.board_num}--%>
-    			<input type="hidden" name="num" value="${boarddata.inf_num}"
+    			<input type="hidden" name="inf_num" value="${boarddata.inf_num}"
     					id="inf_num">
 				<button type="submit" class="btn btn-primary">전송</button>   				
 				<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>   				

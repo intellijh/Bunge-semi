@@ -24,9 +24,9 @@ public class CommentAddAction implements Action {
 		co.setM_id(request.getParameter("m_id"));
 		System.out.println("id : " + request.getParameter("m_id"));
 		co.setComm_content(request.getParameter("comm_content"));
-		System.out.println("content = " + co.getComm_content());
+		System.out.println("comm_content = " + co.getComm_content());
 		co.setInf_num(Integer.parseInt(request.getParameter("inf_num")));
-		System.out.println("num = " + request.getParameter("num"));
+		System.out.println("inf_num = " + request.getParameter("inf_num"));
 		co.setComm_lev(Integer.parseInt(request.getParameter("comm_lev")));
 		co.setComm_seq(Integer.parseInt(request.getParameter("comm_seq")));
 		

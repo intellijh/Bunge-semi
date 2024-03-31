@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>마이 페이지 수정</title>
+<script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
+<script>
+$("input[value='${pageinfo.m_gender}']").prop('checked',true);
+
+$(".cancelbtn").click(function(){
+	history.back();
+});
+</script>
 </head>
 <body>
  <jsp:include page="${Context.request.contextPath}/layout/header2.jsp" />
