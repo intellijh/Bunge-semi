@@ -49,7 +49,7 @@
 	                   <a href="javascript:del(52)" class="layer-button">삭제</a>
 	                 </li>
 	              </ul>    
-	             </div>   
+	             </div> 
 	           </div>
 	        </div>
 	       </li>

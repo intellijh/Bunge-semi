@@ -5,6 +5,7 @@ public class Memberimg {
 	private String m_id;
 	private String pof_savename;
 	private String pof_filename;
+	
 	public int getPof_num() {
 		return pof_num;
 	}

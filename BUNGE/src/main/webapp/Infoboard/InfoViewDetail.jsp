@@ -11,6 +11,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <%@ include file="/layout/header2.jsp" %>
 <script src="js/viewdetail.js"></script>
+<style>
+ img {width : 30px;
+ 	  height : 30px}
+</style>
 </head>
  <body>
  	<input type="hidden" id="loginid" value="${m_id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
@@ -76,6 +80,7 @@
             </a>
           </td>
         </tr>
+        <tr><td><img src="${pageContext.request.contextPath}/image/like_off.png" onclick="${infolike.no}"><b>${infolike.no}</b></td></tr>
       </table>
       <%-- 게시판 view end --%>
     
@@ -90,7 +95,7 @@
     					주소를 보묜 num을 파라미터로 넘기고 있습니다. 
     					이 값을 가져와서 ${param.num}를 사용
     					또는 ${boarddata.board_num}--%>
-    			<input type="hidden" name="num" value="${boarddata.inf_num}"
+    			<input type="hidden" name="inf_num" value="${boarddata.inf_num}"
     					id="inf_num">
 				<button type="submit" class="btn btn-primary">전송</button>   				
 				<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>   				

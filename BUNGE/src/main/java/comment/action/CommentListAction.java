@@ -23,7 +23,7 @@ public class CommentListAction implements Action {
 		CommentDAO dao = new CommentDAO();
 		  
 		//{"comment_board_num" : $("#comment_board_num").val(),state:state}, //state값이 1=>등록순, 2=> 최신순
-		int inf_num = Integer.parseInt(request.getParameter("num"));
+		int inf_num = Integer.parseInt(request.getParameter("inf_num"));
 		System.out.println(inf_num);
 		int state = Integer.parseInt(request.getParameter("state"));
 		int listcount = dao.getListCount(inf_num);

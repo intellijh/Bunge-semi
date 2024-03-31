@@ -3,17 +3,16 @@
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+<title>정보공유게시판 리스트</title>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
  <script src="js/list.js"></script>
  <%@ include file="/layout/header2.jsp" %>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
  <style>
 	h1{font-size:1.5em; text-align:center; color:#1a92b9}
 	.container{width:60%}
 	
 	label{font-weight:bold}
 	#upfile{display:none}
-	img{width:20px}
  </style>
  </head>
  <body>
@@ -54,7 +53,7 @@
   	   		<c:forEach var="a" begin="0" end="${b.inf_lev*2}" step="1">
   	   		&nbsp;
   	   		</c:forEach>
-  	   		<img src="image/line.gif">
+  	   		<img src="image/line.gif" style="width:20px">
   	   	</c:if>
   	   	
   	   	<c:if test="${b.inf_lev == 0}"> <%-- 원문인 경우 --%>
@@ -82,7 +81,8 @@
  <c:if test="${listcount == 0}">
  	<h3 style="text-align:center">등록된 글이 없습니다.</h3>
  </c:if>
-<button type="button">+글쓰기</button>
+
  </table>
+ <button type="button" style="position:relative;" class="btn btn-primary float-right">+글쓰기</button>
  </body>
 </head>

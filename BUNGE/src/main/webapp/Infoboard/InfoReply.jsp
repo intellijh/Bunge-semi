@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>MVC 게시판 </title>
+<title>답글 쓰기 </title>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
 <%@ include file="/layout/header2.jsp" %>
  <script src="js/reply.js"></script>

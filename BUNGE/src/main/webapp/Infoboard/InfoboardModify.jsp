@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<title>MVC 게시판</title>
+<title>수정 페이지</title>
 <%@ include file="/layout/header.jsp" %>
 <script src="js/infomodifyform.js"></script>
 <style>
