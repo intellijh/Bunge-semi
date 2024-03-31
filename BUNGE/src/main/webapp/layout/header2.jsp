@@ -47,7 +47,7 @@
 	 	<li class="nav-item"><a class="nav-link" href="logout.com">${m_id}님 (로그아웃)</a></li>
 	    <li class="nav-item"><a class="nav-link" href="mypage.com">마이페이지</a></li>
 	     <li class="nav-item"><a class="nav-link" href="#">중고거래</a></li>
-	      <li class="nav-item"><a class="nav-link" href="#">리뷰활동</a></li>
+	      <li class="nav-item"><a class="nav-link" href="myinfoboard.com">리뷰활동</a></li>
  	</c:when>
 </c:choose>
        <c:if test="${id == 'admin'}">

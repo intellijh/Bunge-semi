@@ -25,6 +25,7 @@ import common.login.loginAction;
 import common.login.loginProcessAction;
 import common.login.logoutAction;
 import common.login.pwdresetAction;
+import common.mypage.myinfoboardAction;
 import common.mypage.mypageAction;
 import info.action.InfoDetailAction;
 import info.action.InfoListAction;
@@ -116,6 +117,9 @@ public class FrontController extends HttpServlet {
             case "/mypage.com" :
                 action = new mypageAction();
                 break;
+               case "/myinfoboard.com" :
+            	   action = new myinfoboardAction();
+            	   break;
             //게시판에 글 추가
             case "/InfoAdd.com":
                 action = new InfoAddAction();

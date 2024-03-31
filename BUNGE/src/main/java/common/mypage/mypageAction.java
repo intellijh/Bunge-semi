@@ -8,6 +8,8 @@ import common.action.ActionForward;
 import common.db.Member;
 import common.db.MemberDAO;
 import common.db.Memberimg;
+import common.db.MypageDAO;
+import common.db.mypage;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,17 +24,14 @@ public class mypageAction implements Action {
 		ActionForward forward = new ActionForward();
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
-		MemberDAO mdao = new MemberDAO();
-		Member m = new Member();
-		Memberimg img = new Memberimg();
 		
 		String m_id = (String) session.getAttribute("m_id"); 
 		
 		if(m_id != null) {
-			forward.setRedirect(false);
-			 m = mdao.mypage_info(m_id);
+			forward.setRedirect(false); 
+			MypageDAO mypage = mypage.mypage_info(m_id);
 			forward.setPath("mypage/mypage.jsp");
-			request.setAttribute("pageinfo", m);
+			request.setAttribute("pageinfo", mypage);
 			return forward;
 		}else {
 			response.setContentType("text/html; charset=utf-8");
