@@ -210,23 +210,33 @@ public class MemberDAO {
 		}//findpwd() end
 	//
 	
-	public int pwdreset(Member m) {
-		int result = 1;
+	public boolean pwdreset(Member m) {
+		boolean result=false;
 		String pwdupdate = "update member set m_pwd=? where m_id=?";
 		try(Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(pwdupdate);) {
+			
 				pstmt.setString(1, m.getM_pwd());
 				pstmt.setString(2, m.getM_id());
-				result=pstmt.executeUpdate();
+				
+				System.out.println("비밀번호 수정 완료");
+				
+				int row=pstmt.executeUpdate();
+				
+				if(row > 0) {
+					result = true;
+				}
 		}catch (SQLException e) {
 			e.printStackTrace();
+		}catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
 		return result;
 	}
+	//회원정보 조회
 	public Member mypage_info(String m_id) {
 		Member m = null;
-		String info_sql = "select * from member where m_id=?";
+		String info_sql = "select * from member as inner join infoattach  where m_id=?";
 		
 		try(Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(info_sql);) {

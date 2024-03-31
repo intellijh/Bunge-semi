@@ -24,7 +24,7 @@ span {
 		<input type="password" name="m_pwd_check" placeholder="비밀번호 재입력"  maxlength="15">
 		<span id="pwd_check_message"></span>
 		<div class="clearfix">
-			<button type="submit" class="submitbtn">로그인 페이지로 이동</button>
+			<button type="submit" class="submitbtn">비밀번호 재설정 완료</button>
 		</div>
 		</form>
 </body>

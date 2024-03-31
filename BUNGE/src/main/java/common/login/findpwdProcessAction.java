@@ -9,6 +9,7 @@ import common.db.MemberDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class findpwdProcessAction implements Action {
 
@@ -18,6 +19,7 @@ public class findpwdProcessAction implements Action {
 		 MemberDAO mdao = new MemberDAO(); 
 		    ActionForward forward = new ActionForward(); 
 		    PrintWriter out = response.getWriter(); 
+		    HttpSession session = request.getSession();
 
 		    // 요청 파라미터에서 회원 아이디, 이름, 이메일을 받아옴
 		    String m_id = request.getParameter("m_id");
@@ -30,9 +32,10 @@ public class findpwdProcessAction implements Action {
 
 		    if (m_pwd) { // 비밀번호 찾기가 성공한 경우
 		        forward.setRedirect(false); 
-		        request.getSession().setAttribute("m_pwd", m_pwd);
+		        session.setAttribute("find_m_id", m_id);
 		        forward.setPath("member/pwdreset.jsp");
 		        String message = "비밀번호 찾기 성공하셨습니다.";
+		        System.out.println(m_id);
 		        out.print("<script>"); 
 		        out.print("alert('" + message + "');"); 
 		        out.print("</script>"); 
