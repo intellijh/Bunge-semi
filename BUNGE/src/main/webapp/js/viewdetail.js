@@ -5,7 +5,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    $.ajax({
 			type:"post",
 			url : "CommentList.com",
-			data: {"num" : $("#inf_num").val(), "state":state},
+			data: {"inf_num" : $("#inf_num").val(), "state":state},
 			dataType : "json",
 			success : function(rdata){
 				$('#count').text(rdata.listcount).css('font-family','arial,sans-serif')
@@ -61,7 +61,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	         	       + ' 		<span class="comment-info-date">' + this.comm_reg + '</span> ' 
 	        if (lev < 2) {
 				output += ' <a href="javascript:replyform(' + this.comm_num +','
-					   + lev + ',' + this.comm_seq + ','
+					   + lev + ',' + this.comm_seq + ','	
 					   + this.comm_ref + ')" class="comment-info-button">답글쓰기</a>'   
 				}
 				output += '	  </div>'
