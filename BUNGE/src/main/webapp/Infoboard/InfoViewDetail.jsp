@@ -9,6 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <%@ include file="/layout/header2.jsp" %>
 <script src="js/viewdetail.js"></script>
 </head>
  <body>
@@ -89,8 +90,8 @@
     					주소를 보묜 num을 파라미터로 넘기고 있습니다. 
     					이 값을 가져와서 ${param.num}를 사용
     					또는 ${boarddata.board_num}--%>
-    			<input type="hidden" name="num" value="${param.num }"
-    					id="comment_board_num">
+    			<input type="hidden" name="num" value="${boarddata.inf_num}"
+    					id="inf_num">
 				<button type="submit" class="btn btn-primary">전송</button>   				
 				<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>   				
     			</form>

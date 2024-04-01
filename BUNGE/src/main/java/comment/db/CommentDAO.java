@@ -28,14 +28,14 @@ private DataSource ds;
 	public int commentsInsert(Comment c) {
 		int result = 0;
 		String sql = "insert into infocomm"
-				   + " values(com_seq.nextval,?,?,sysdate,?,?,?,com_seq.nextval)";
+				   + " values(com_seq.nextval,?,?,?,com_seq.nextval,?,?,sysdate)";
 		
 		try (Connection con = ds.getConnection();
 				 PreparedStatement pstmt = con.prepareStatement(sql);) {
 		//새 글을 등록하는 부분입니다.
 	    pstmt.setString(1, c.getM_id());
-	    pstmt.setString(2, c.getComm_content());
-	    pstmt.setInt(3, c.getInf_num());
+	    pstmt.setInt(2, c.getInf_num());
+	    pstmt.setString(3, c.getComm_content());
 	    pstmt.setInt(4, c.getComm_lev());
 	    pstmt.setInt(5, c.getComm_seq());
 	   
@@ -76,9 +76,9 @@ private DataSource ds;
 		}
 		String sql = "select comm_num, infocomm.m_id, comm_content, comm_reg, comm_lev, "
 				   + "		 comm_seq, "
-				   + " 		 comm_ref, memberimg.memberfile "
-				   + " from  infocomm join member " 
-				   + " on 	 infocomm.id = member.m_id "
+				   + " 		 comm_ref, memberimg.pof_savename"
+				   + " from  infocomm join memberimg " 
+				   + " on 	 infocomm.m_id = memberimg.m_id "
 				   + " where inf_num = ? "
 				   + " order by comm_ref " + sort + ","
 				   +" 		 comm_seq asc";
@@ -93,13 +93,13 @@ private DataSource ds;
 			  try (ResultSet rs = pstmt.executeQuery()) {
 					while (rs.next()) {
 						JsonObject object = new JsonObject();
-						object.addProperty("num", rs.getInt(1));
-						object.addProperty("id", rs.getString(2));
-						object.addProperty("content", rs.getString(3));
-						object.addProperty("reg_date", rs.getString(4));
-						object.addProperty("comment_re_lev", rs.getInt(5));
-						object.addProperty("comment_re_seq", rs.getInt(6));
-						object.addProperty("comment_re_ref", rs.getInt(7));
+						object.addProperty("comm_num", rs.getInt(1));
+						object.addProperty("m_id", rs.getString(2));
+						object.addProperty("comm_content", rs.getString(3));
+						object.addProperty("comm_reg", rs.getString(4));
+						object.addProperty("comm_lev", rs.getInt(5));
+						object.addProperty("comm_seq", rs.getInt(6));
+						object.addProperty("comm_ref", rs.getInt(7));
 						object.addProperty("memberfile", rs.getString(8));
 						
 						array.add(object);
@@ -173,14 +173,14 @@ private DataSource ds;
 	public int reply_insert(Connection con, Comment c) throws SQLException{
 		int result = 0;
 		String insert_sql = "insert into infocomm "
-				   		+  "values(com_seq.nextval,?,?,sysdate,?,?,?,?)";
+				   		+  "values(com_seq.nextval,?,?,?,?,?,?,sysdate)";
 		try (PreparedStatement pstmt = con.prepareStatement(insert_sql);) {
 			pstmt.setString(1, c.getM_id());
-			pstmt.setString(2, c.getComm_content());
-			pstmt.setInt(3, c.getInf_num());
-			pstmt.setInt(4, c.getComm_lev()+1);
-			pstmt.setInt(5, c.getComm_seq()+1);
-			pstmt.setInt(6, c.getComm_ref());
+			pstmt.setInt(2, c.getInf_num());
+			pstmt.setString(3, c.getComm_content());
+			pstmt.setInt(4, c.getComm_ref());
+			pstmt.setInt(5, c.getComm_lev()+1);
+			pstmt.setInt(6, c.getComm_seq()+1);
 			result = pstmt.executeUpdate();
 	}
 		return result;
@@ -189,7 +189,7 @@ private DataSource ds;
 	public int commentDelete(int num) {
 		int result = 0;
 		
-		String delete_sql = "delete infocomm where num = ?";
+		String delete_sql = "delete infocomm where comm_num = ?";
 		try (Connection con = ds.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(delete_sql);) {
 			

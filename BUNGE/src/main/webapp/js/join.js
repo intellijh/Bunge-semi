@@ -1,6 +1,5 @@
 $(function(){
-	let checkid= false ,  checkpwd = false , checkname= false, checknick = false,  checkmail= false;
-	
+
 	//id keyup 시작
 	$("input[name=m_id]").on('keyup',
 		function(){
@@ -44,7 +43,7 @@ $("input[name=m_pwd").on('keyup',
 			 return false;
 			
 		} else if (!patternpwd.test(pwd)) {
-			$("#pwd_message").css('color', 'red').html("비밀번호:8~16자의 영문 대/소문자, 특수문자를 사용해 주세요. ");
+			$("#pwd_message").css('color', 'red').html("비밀번호:8~16자의 영문 대/소문자, 특수문자를 사용해 주세요.(/제외) ");
 			 return false;
 		}else {
 			$("#pwd_message").css('color', 'green').html("비밀번호:안전 합니다.");
@@ -83,12 +82,12 @@ $("input[name=m_nick]").on('keyup' ,
 		}//nick 유효성 end
 		
 		$.ajax ({
-			type : "post" ,
+				type : "post" ,
 				url : "nickcheck.com" ,
 				data : {"m_nick" : nick} ,
-				success : function(idck) {
-					if (idck == '-1') {
-						$("#nick_message").css('color', 'green').text("사용 가능한 닉네임입니다.");
+				success : function(nick) {
+					if (nick == '-1') {
+						$("#nick_message").css('color', 'green').text("닉네임 : 사용 가능한 닉네임입니다.");
 						
 					}else {
 						$("#nick_message").css('color', 'red').text("닉네임 : 사용할수 없는 닉네임 입니다. 다른 닉네임를 입력해주세요.");
@@ -121,18 +120,19 @@ $("input[name=m_addr2]").on('keyup',
 });
 
 //전화번호 유효성 검사
-$("input[name=m_phone]").on('keyup',
+$("input[name=m_phone]").on('keyup' ,
 	function(){
 		const phone = $(this).val().trim();
-		const patterpho = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
+		const patterpho = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 			if(phone == "") {
 				$("#pho_message").css('color', 'red').text("전화번호 : 전화번호는 필수 입니다.");
 			return false;
 			} else if(!patterpho.test(phone)) {
-				$("pho_message").css('color', 'red').text("전화번호 :  전화번호 형식에 맞지 않습니다.");
+				$("#pho_message").css('color', 'red').text("전화번호 :  전화번호 형식에 맞지 않습니다.");
 				return false;
 			}else {
-				$("pho_message").css('color', 'green').text("전화번호 : 전화번호를 알맞게 입력되었습니다.");
+				$("#pho_message").css('color', 'green').text("전화번호 : 전화번호를 알맞게 입력되었습니다.");
+				return true;
 			}
 	});//전화번호 유효성 검사 end
 	
@@ -140,20 +140,32 @@ $("input[name=m_phone]").on('keyup',
 $("input[name=m_email]").on('keyup', 
 	function(){
 		const email= $(this).val().trim();
-		const patteremail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+		const patteremail =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
 		if(email == "") {
 			$("#email_message").css('color', 'red').text("이메일 : 이메일은 필수 입니다.");
 			return false;
 		} else if(!patteremail.test(email)) {
 			$("#email_message").css('color', 'red').text("이메일 : 이메일 형식에 올바르지 않습니다.");
 			return false;
-		}else {
-			$("#email_message").css('color','green').text("이메일 : 이메일을 알맞게 입력되었습니다.");
 		}
+		
+		$.ajax ({
+			type : "post" ,
+				url : "emailcheck.com" ,
+				data : {"m_email" : email} ,
+				success : function(emck) {
+					if (emck == '-1') {
+				$("#email_message").css('color', 'green').text("이메일 : 사용 가능한 이메일 입니다.");				
+				}else {
+			$("#email_message").css('color','red').text("이메일 : 사용할 수 없는 이메일입니다. 다른 이메일을 입력해주세요.");
+			}
+		}	
+		});
 	});//이메일 유효성 검사 end
 	
 	//생년월일 유효성 검사 
-	$("input[name=m_birthdate]").on('mousedown', 
+	$("input[name=m_birthdate]").on('mouseup', 
 	function(){
 		const btrdate = $(this).val().trim();
 		if(btrdate =="") {
@@ -161,6 +173,7 @@ $("input[name=m_email]").on('keyup',
 			return false;
 		}else {
 				$("#birth_message").css('color' , 'green').text("생년월일 : 생년월일이 알맞게 입력되었습니다.");
+			return true;
 			}
 		}); //생년월일 유효성 검사 end
 	

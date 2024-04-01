@@ -14,23 +14,12 @@
 
 	img{width:20px}
 	
-	#att_zone {
-		width:660px;
-		min-height:150px;
-		padding:10px;
-		border:1px dotted #00f;
-	}
-	
-	#att_zone:empty:before {
-		content:attr(data-placeholder);
-		color:#999;
-		font-size:.9em;
-	}
+	input[type=file]{display:none}
  </style>
  </head>
  <body>
  <div class="container">
-  <form action="InfoAdd.com" method="post" enctype="multipart/form-data" name="boardform">
+  <form action="InfoAdd.com" method="post" enctype="multipart/form-data" name="boardform" id="frmAttachedFiles">
   	<div class="form-group">
   		<label for="m_id">글쓴이</label>
   		<input name="m_id" id="m_id" type="text" value="${m_id}" class="form-control" placeholder="Enter m_id" readOnly>
@@ -54,42 +43,33 @@
   			   class="form-control" ></textarea>
   		</div>
   		
-  		<div class="form-group" id="image_preview">
-  		<label>파일첨부</label>
-  		  <input type="file" id="btnAtt" name="inf_file" multiple="multiple"/>
-  		  <div id="att_zone"
-  		       data-placeholoder="파일을 첨부하려면 파일 선택 버튼을 클릭하거나 파일을 drag / drop 하세요">
-  		  </div>
-  		</div>
-  		
- <%--
   		<div class="form-group">
-  		<label>파일첨부<br> 
-  		    <img src="image/attach.png" alt="파일첨부">
-  		    <input name="inf_file1" id="inf_file1" type="file">
-  		      <span id="filevalue1"></span> <br>
+	 		<label>파일첨부<br> 
+	 		    <img src="image/attach.png" alt="파일첨부">
+	 		    <input name="inf_file1" id="inf_file1" type="file">
+	 		      <span id="filevalue1"></span> <br>
+	 		</label>
+	 		<label>
+	 		    <img src="image/attach.png" alt="파일첨부">
+	 		    <input name="inf_file2" id="inf_file2" type="file">
+	 		      <span id="filevalue2"></span> <br>
+	 		</label>
+	 		<label>
+	 		    <img src="image/attach.png" alt="파일첨부">
+	 		    <input name="inf_file3" id="inf_file3" type="file">
+	 		      <span id="filevalue3"></span> <br>
+	 		</label>
+	 		<label>    
+	 		    <img src="image/attach.png" alt="파일첨부">
+	 		    <input name="inf_file4" id="inf_file4" type="file">
+	 		      <span id="filevalue4"></span> <br>
+	 		</label>
+	 		<label>
+	 		    <img src="image/attach.png" alt="파일첨부">
+	 		    <input name="inf_file5" id="inf_file5" type="file">
+	 		      <span id="filevalue5"></span> <br>
   		</label>
-  		<label>
-  		    <img src="image/attach.png" alt="파일첨부">
-  		    <input name="inf_file2" id="inf_file2" type="file">
-  		      <span id="filevalue2"></span> <br>
-  		</label>
-  		<label>
-  		    <img src="image/attach.png" alt="파일첨부">
-  		    <input name="inf_file3" id="inf_file3" type="file">
-  		      <span id="filevalue3"></span> <br>
-  		</label>
-  		<label>    
-  		    <img src="image/attach.png" alt="파일첨부">
-  		    <input name="inf_file4" id="inf_file4" type="file">
-  		      <span id="filevalue4"></span> <br>
-  		</label>
-  		<label>
-  		    <img src="image/attach.png" alt="파일첨부">
-  		    <input name="inf_file5" id="inf_file5" type="file">
-  		      <span id="filevalue5"></span> <br>
-  		</label>
- --%> 	
+  		</div>
  
   		 <label for="address">위치</label>
   		    <input type="text" size="50" name="address" id="address">
