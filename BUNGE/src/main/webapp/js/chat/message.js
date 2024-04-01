@@ -107,7 +107,6 @@ $(function(){
             return;
         }
         console.log("type_msg keydown");
-
     });
 
     $('.send_btn').click(function(){
