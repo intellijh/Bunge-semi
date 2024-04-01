@@ -1,17 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 리뷰 활동 페이지</title>
-<jsp:include page="/layout/header.jsp" />
+<title>게시글에 단 댓글 페이지</title>
 </head>
 <body>
-<!-- tab menu 시작 -->
+	<!-- tab menu 시작 -->
 	<div class="tab_container">
 		<div class="tab-slider--nav">
-		  <ul class="tab-slider--tabs">
+		  <ul class="tab-slider--tabs">      
 			<li class="tab-slider--trigger active" rel="tab1"><span>작성글</span></li>
 			<li class="tab-slider--trigger"  rel="tab2"><span>작성댓글</span></li>
 			<li class="tab-slider--trigger"  rel="tab3"><span>즐겨찾기</span></li>

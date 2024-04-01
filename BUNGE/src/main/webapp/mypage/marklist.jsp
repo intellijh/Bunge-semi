@@ -1,14 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 리뷰 활동 페이지</title>
-<jsp:include page="/layout/header.jsp" />
+<title>즐겨찾기 페이지</title>
 </head>
 <body>
-<!-- tab menu 시작 -->
+	<!-- tab menu 시작 -->
 	<div class="tab_container">
 		<div class="tab-slider--nav">
 		  <ul class="tab-slider--tabs">
