@@ -1,4 +1,4 @@
-package chat.message;
+package chat.action;
 
 import chat.db.ChatDAO;
 import common.action.Action;

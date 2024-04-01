@@ -30,7 +30,9 @@ public class InfoLikeAddAction implements Action {
 		if(referer != null  && referer.contains("InfoLike.com")) {
 			//내용을 확인할 글의 조회수를 증가시킵니다.
 			System.out.println("referer= " + referer);
+
 			infolikedao.getInfoLikeInsert(inf_num,m_id);
+
 		}
 		
 /*		//글의 내용을 DAO에서 읽은 후 얻은 결과를 boarddata 객체에 저장합니다.

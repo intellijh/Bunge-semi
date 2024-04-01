@@ -390,9 +390,11 @@ $(function() {
 			},
 			success : function () {
 				console.log('댓글 좋아요 데이터 받아 왔다')
+				commlikecount();
 			},
 			error : function() {
 				console.log('댓글 좋아요 버튼 실패')
+				
 			}
 		})
 		
@@ -414,7 +416,29 @@ $(function() {
 	//댓글 싫어요 버튼 클릭시
 		
 	})
+
 	})//ready
+
+	
+	
+	
+
+
+function commlikecount() {
+	$.ajax ({
+		url : "InfocommLikeCount.com",
+		type : "POST",
+		data : {
+			comm_num :
+			m_id :
+		}
+	})
+}
+
+
+
+	
+
 
 	/*
 	//댓글 좋아요 카운트
@@ -434,4 +458,6 @@ $(function() {
 			}
 		})
 	}
+
 	*/
+

@@ -139,7 +139,6 @@ public class BoardDAO {
 		return x;
 	}
 
-
 	public List<Board> getBoardList(int page, int limit) {
 		String board_list_sql = "select * " 
 			    + " from (select rownum rnum, c.*" 
@@ -190,7 +189,6 @@ public class BoardDAO {
 		}
 		return list;
 	}
-
 
 	public void setReadCountUpdate(int num) {
 		String sql = "update  infoboard"
@@ -321,6 +319,7 @@ public class BoardDAO {
 				 }
 			 }catch (SQLException e) {
 				 e.printStackTrace();
+				 System.out.println("boardDelete()에러 : " + e);
 			 }
 		}catch (Exception ex) {
 			 System.out.println("boardDelete()에러 : " + ex);
