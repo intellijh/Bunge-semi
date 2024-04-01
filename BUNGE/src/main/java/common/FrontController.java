@@ -41,6 +41,8 @@ import info.action.InfoReplyProcessAction;
 import info.action.InfoAddAction;
 import info.action.InfoDeleteAction;
 import info.action.InfoWriteAction;
+import infocommlike.action.InfocommLikeAction;
+import infocommlike.action.InfocommLikeCountAction;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -203,6 +205,14 @@ public class FrontController extends HttpServlet {
             case "/chatCreate.com":
                 action = new ChatCreateAction();
                 break;
+            //댓글 좋아요 추가
+            case "/InfocommLike.com":
+            	action = new InfocommLikeAction();
+            	break;
+            //댓글 좋아요 카운트
+            case "/InfocommLikeCount.com":
+            	action = new InfocommLikeCountAction();
+            	break;
 
         } //switch (command)
 

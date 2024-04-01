@@ -1,40 +1,56 @@
 $(function(){
-    var webSocket = new WebSocket('ws://localhost:8088/chat');
-    var inputMessage = $(".type_msg");
+
+    const webSocket = new WebSocket('ws://localhost:8088/chat');
+    let inputMessage = $(".type_msg");
 
     webSocket.onerror = function(e){
         onError(e);
     };
+
     webSocket.onopen = function(e){
         onOpen(e);
     };
+
     webSocket.onmessage = function(e){
         onMessage(e);
     };
 
     function onMessage(e){
-        var chatMsg = JSON.parse(e.data);
-        var date = new Date();
-        var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        // if(chatMsg.substring(0,6) == 'server'){
-        //     var $chat = $("<div class='chat notice'>" + chatMsg[0].msg + "</div>");
-        //     $('#chat-container').append($chat);
-        // }else{
-        //     var $chat = $("<div class='chat-box'><div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
-        //     $('#chat-container').append($chat);
-        // }
-        // var $chat = $("<div class='chat-box'><div class='chat'>" + chatMsg[0].msg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
-        // $('#chat-container').append($chat);
 
-        var $chat = $(`
+        const chatData = JSON.parse(e.data);
+  /*      const date = new Date();
+        var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+        if(chatMsg.substring(0,6) == 'server'){
+            var $chat = $("<div class='chat notice'>" + chatMsg[0].msg + "</div>");
+            $('#chat-container').append($chat);
+        }else{
+            var $chat = $("<div class='chat-box'><div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
+            $('#chat-container').append($chat);
+        }
+        var $chat = $("<div class='chat-box'><div class='chat'>" + chatMsg[0].msg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
+        $('#chat-container').append($chat);*/
+
+        console.log("onMessage chatId: " + chatData[0].chatId);
+        console.log("onMessage sellerId: " + chatData[0].sellerId);
+        console.log("onMessage buyerId: " + chatData[0].buyerId);
+
+        if (chatData[0].chatId != selectedChatId) {
+            return;
+        }
+        if (chatData[0].sellerId != selectedSellerId || chatData[0].buyerId != selectedBuyerId) {
+            return;
+        }
+
+        const $chat = $(`
                     <div class="d-flex justify-content-start mb-4">
                         <div class="img_cont_msg">
                             <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
                                  class="rounded-circle user_img_msg">
                         </div>
                         <div class="msg_cotainer">
-                            ${chatMsg[0].msg}
-                            <span class="msg_time">${chatMsg[0].time}</span>
+                            ${chatData[0].msg}
+                            <span class="msg_time">${chatData[0].time}</span>
                         </div>
                     </div>
         `);
@@ -53,14 +69,15 @@ $(function(){
     }
 
     function send(){
-        var chatMsg = inputMessage.val();
+
+        const chatMsg = inputMessage.val();
         console.log(chatMsg);
         if(chatMsg == ''){
             return;
         }
-        var date = new Date();
-        var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        var $chat = $(`
+        const date = new Date();
+        const dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        const $chat = $(`
                     <div class="d-flex justify-content-end mb-4">
                         <div class="msg_cotainer_send">
                             ${chatMsg}
@@ -73,9 +90,12 @@ $(function(){
                     </div>
         `);
         $('.msg_card_body').append($chat);
-        webSocket.send(chatMsg);
+
+        const chatData = selectedChatId + "|split|" + selectedSellerId + "|split|" +
+            selectedBuyerId + "|split|" + chatMsg;;
+        webSocket.send(chatData);
         inputMessage.value = "";
-        // $('.msg_card_body').scrollTop($('.msg_card_body')[0].scrollHeight+20);
+        // $('.msg_card_body').scrollTop($('.msg_card_body')[0].scro\llHeight+20);
     }
 
     $('.type_msg').keydown(function(key){
@@ -86,6 +106,7 @@ $(function(){
         }
         console.log("type_msg keydown");
     });
+
     $('.send_btn').click(function(){
         send();
         $('.type_msg').val("");
