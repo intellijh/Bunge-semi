@@ -11,8 +11,6 @@ import comment.action.CommentDeleteAction;
 import comment.action.CommentListAction;
 import comment.action.CommentReplyAction;
 import comment.action.CommentUpdateAction;
-import chat.message.MessageLoadAction;
-import chat.message.MessageSendAciton;
 import common.action.Action;
 import common.action.ActionForward;
 import common.join.emailcheckAction;

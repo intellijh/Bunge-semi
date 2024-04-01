@@ -94,17 +94,23 @@ $(function(){
         const chatData = selectedChatId + "|split|" + selectedSellerId + "|split|" +
             selectedBuyerId + "|split|" + chatMsg;;
         webSocket.send(chatData);
-        inputMessage.value = "";
+        inputMessage.val("");
         // $('.msg_card_body').scrollTop($('.msg_card_body')[0].scro\llHeight+20);
+
+
     }
 
-    $('.type_msg').keydown(function(key){
+    $(".type_msg").keydown(function(key){
         if(key.keyCode == 13){
             $('.type_msg').focus();
-            // send();
             $('.send_btn').click();
+            return;
         }
         console.log("type_msg keydown");
+
+        if ($(".type_msg").val().length > 100) {
+            return;
+        }
     });
 
     $('.send_btn').click(function(){
