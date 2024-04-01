@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import info.db.Board;
+
 public class InfoLikeDAO {
 	private DataSource ds;
 
@@ -109,17 +111,60 @@ public class InfoLikeDAO {
 
 
 
-	public void setNoUpdate(String m_id) {
-		
-		String sql = "update  infolike"
-				   + " set	 no = no+1"
-				   + " where m_Id = ?";
+	public void InfoLikeDelete(int inf_num) {
+		String sql = "delete infolike"
+				   + " where inf_num=?";
 		 try (Connection con = ds.getConnection();
 				 PreparedStatement pstmt = con.prepareStatement(sql);) {
-			 pstmt.setString(1, m_id);
+			 pstmt.setInt(1, inf_num);
 			 pstmt.executeUpdate();
 		 } catch (SQLException ex) {
 			 System.out.println("setNoUpdate() 에러 : " + ex);
 		 }
 	}//setReadCountUpdate()메서드 end
+	
+	public int getInfoLikeInsert(int no,String m_id) {
+		int num = 0;
+		String sql = "INSERT INTO INFOLIKE " 
+					+ " values(infolike_seq.nextval,?,?)"; 
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+				pstmt.setInt(1, no);
+				pstmt.setString(2, m_id);
+	
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}catch (Exception ex) {
+			System.out.println("InfolikeInsert() 에러 : " + ex);
+			ex.printStackTrace();
+		}
+		return num;
+	} //boardInsert() end
+
+
+
+	public int getinfolikecnt(String m_id, int inf_num) {
+		int result = 0;
+		String sql = "select count(*) from infolike where inf_NUM = ?";
+				    
+		try (Connection con = ds.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1,  inf_num);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+				result = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getListCount() 에러 : " + ex);
+		}
+		return result;
+  }//getDetail end
 }//class end

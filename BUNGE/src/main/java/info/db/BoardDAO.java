@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import infoboardlike.db.InfoLike;
+
 public class BoardDAO {
 	private DataSource ds;
 
@@ -141,16 +143,16 @@ public class BoardDAO {
 
 	public List<Board> getBoardList(int page, int limit) {
 		String board_list_sql = "select * " 
-				+ " from	(select rownum rnum, c.* "
-				+ " 		 from (select a.*, nvl(cnt,0) cnt "
-				+ "			  	   from infoboard a left outer join (select inf_num,count(*) cnt"
-				+ "										   	   from infocomm"
-				+ "				   							   group by inf_num) b"
-				+ " 		       on a.inf_num=b.inf_num" 
-				+ "			 	   order by inf_ref desc,"
-				+ "			  	   inf_seq asc) c " 
-				+ " 		 where rownum <= ? " + ") "
-				+ " where rnum >= ? and rnum<=?";
+			    + " from (select rownum rnum, c.*" 
+			    + "         from (select a.*, nvl(cnt,0) cnt " 
+			    + "                 from infoboard a " 
+			    + "                      left outer join (select inf_num, count(*) cnt " 
+			    + "                                         from infocomm " 
+			    + "                                        group by inf_num) b " 
+			    + "                      on a.inf_num = b.inf_num " 
+			    + "               order by inf_ref desc, inf_seq asc) c " 
+			    + "       where rownum <= ?) " 
+			    + " where rnum >= ? and rnum <= ?";
 
 		List<Board> list = new ArrayList<Board>();
 		// 한 페이지 당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, ...
@@ -573,6 +575,26 @@ public class BoardDAO {
 		return false;
 	} //boardmodifyDelete() end
 
+	public int getinfolikeInsert(int no,String m_id) {
+		int num = 0;
+		String sql = "INSERT INTO INFOLIKE " 
+					+ " values(infolike_seq.nextval,?,?)"; 
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+				pstmt.setInt(1, no);
+				pstmt.setString(2, m_id);
+	
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}catch (Exception ex) {
+			System.out.println("boardInsert() 에러 : " + ex);
+			ex.printStackTrace();
+		}
+		return num;
+	} //boardInsert() end
+	
 	public boolean commLike(String m_id, int comm_num) {
 		int result = -1;
 		String sql = "insert into infocommlike (no, m_id, comm_num) "
@@ -621,8 +643,4 @@ public class BoardDAO {
 		}
 		return count;
 	} //commlikecount end
-
-
-
-
 }//class end

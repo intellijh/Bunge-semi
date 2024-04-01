@@ -7,7 +7,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    $.ajax({
 			type:"post",
 			url : "CommentList.com",
-			data: {"inf_num" : $("#inf_num").val(), "state":state},
+			data: {inf_num : $("#inf_num").val(), state:state},
 			dataType : "json",
 			success : function(rdata){
 				$('#count').text(rdata.listcount).css('font-family','arial,sans-serif')
@@ -76,6 +76,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 				output += '	  </div>'
 				
 			if($("#loginid").val() == this.m_id) {    
+
 				output +='<div class="comment-tool">'
 					   + '	<div title="더보기" class="comment-tool-button">'
 					   + '		<div>&#46;&#46;&#46;</div>'
@@ -148,7 +149,7 @@ function del(num){//num : 댓글 번호
 	   }
 	   	$.ajax({
 			url : 'CommentDelete.com', //원문 등록
-			data : {num : num},
+			data : {inf_num : num},
 			success : function(rdata) {
 				if(rdata == 1) {
 					getList(option);
@@ -341,6 +342,24 @@ $(function() {
 		}
 	})//답글쓰기 클릭 후 계속 누르는 것을 방지하기 위한 작업
 	
+		$('#likeclick').click(function(){
+		$.ajax({
+			url : "InfoLikeAdd.com",
+			type : 'post',
+			data : { 
+				m_id :$('#loginid').val(),
+				inf_num : $("#inf_num").val()
+			},
+			success : function(rdata) {
+				console.log('infolikecnt 성공')
+				$('b').html(rdata);
+				
+			}, 
+			error : function(){
+				console.log('infolikecnt 실패');
+			}		
+		});
+	})
 	
 	//댓글 좋아요 버튼 클릭시(좋아요 추가 또는 좋아요 철회)
 	$('.comment-list').on('click', '.like', function() {
@@ -382,6 +401,27 @@ $(function() {
 	
 })//ready
 
+
+infolikecnt();
+function infolikecnt(){
+		$.ajax({
+			url : "InfoLike.com",
+			type : 'post',
+			data : { 
+				m_id :$('#loginid').val(),
+				inf_num : $("#inf_num").val()
+			},
+			success : function(rdata) {
+				console.log(rdata);
+				$('b').html(rdata);
+			}, 
+			error : function(){
+				console.log('infolikecnt 실패');
+			}		
+	});
+}
+	
+
 	/*
 	//댓글 좋아요 카운트
 	function likeCount() {
@@ -403,4 +443,5 @@ $(function() {
 	*/
 
 
+>>>>>>> branch 'main' of https://github.com/kjh936/Bunge.git
  

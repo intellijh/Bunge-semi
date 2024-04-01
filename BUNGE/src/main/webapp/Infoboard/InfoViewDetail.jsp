@@ -14,8 +14,7 @@
 <style>
  .uploadedfile {width:50px}
 
- img {width : 30px;
- 	  height : 30px}
+ 
 </style>
 </head>
  <body>
@@ -84,7 +83,7 @@
             </a>
           </td>
         </tr>
-        <tr><td><img src="${pageContext.request.contextPath}/image/like_off.png" onclick="${infolike.no}"><b>${infolike.no}</b></td></tr>
+        <tr><td><button type="button" id="likeclick">좋아요&nbsp;<b></b></td></tr>
       </table>
       <%-- 게시판 view end --%>
     

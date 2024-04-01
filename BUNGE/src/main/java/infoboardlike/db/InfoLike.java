@@ -4,7 +4,7 @@ public class InfoLike {
 	private int no;
 	private int inf_num;
 	private String m_id;
-	
+
 	public int getNo() {
 		return no;
 	}
