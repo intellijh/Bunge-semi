@@ -19,11 +19,11 @@ import java.util.Set;
 public class ChatEndPoint {
 
     private static Set<Session> clients = Collections.synchronizedSet(new HashSet<>());
-
     private HttpSession hSession;
 
     @OnOpen
     public void onOpen(Session session, EndpointConfig config) {
+
         this.hSession = (HttpSession) config.getUserProperties().get("hSession"); // 넣어놨던 HTTP Session을 꺼낸다.
         clients.add(session);
         System.out.println("ChatEndPoint onOpne() id: " + hSession.getAttribute("m_id")); // 세션 안의 키를 통해 값을 꺼낸다.
@@ -32,7 +32,17 @@ public class ChatEndPoint {
 
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
+
         System.out.println(message);
+        String[] msgArray = message.split("\\|split\\|");
+        String chatId = msgArray[0];
+        String sellerId = msgArray[1];
+        String buyerId = msgArray[2];
+        String msg = msgArray[3];
+        System.out.println("msgArray[0] = " + chatId);
+        System.out.println("msgArray[1] = " + sellerId);
+        System.out.println("msgArray[2] = " + buyerId);
+        System.out.println("msgArray[3] = " + msg);
 
         synchronized(clients) {
             String loginID = (String) hSession.getAttribute("m_id");
@@ -46,7 +56,10 @@ public class ChatEndPoint {
 
                     JsonObject data = new JsonObject();
                     data.addProperty("sender", loginID);
-                    data.addProperty("msg", message);
+                    data.addProperty("chatId", chatId);
+                    data.addProperty("sellerId", sellerId);
+                    data.addProperty("buyerId", buyerId);
+                    data.addProperty("msg", msg);
                     data.addProperty("time", nowTime);
 
                     JsonArray arr = new JsonArray();

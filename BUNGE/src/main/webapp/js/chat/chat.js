@@ -36,11 +36,11 @@ function getChatList() {
                                 </div>
                                 <div class="user_info">`;
                 if (this.sellerId == loginId) {
-                    output += `     <span>${this.buyerId}</span>
+                    output += `     <span class="buyer">${this.buyerId}</span>
                                     <p>${this.sellerId}</p>
                                     <p>${this.updateDate}</p>`;
                 } else {
-                    output += `     <span>${this.sellerId}</span>
+                    output += `     <span class="seller">${this.sellerId}</span>
                                     <p>${this.buyerId}</p>
                                     <p>${this.updateDate}</p>`;
                 }
@@ -55,8 +55,15 @@ function getChatList() {
 
             if (selectedChatId == 0) {
                 selectedChatId = $(".contacts li").eq(0).attr("id");
-                selectedSellerId = $(".contacts li:eq(0) .user_info span").text();
-                selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
+                const position = document.querySelector(".contacts li:first-child .user_info span").classList;
+                console.log("position: " + position);
+                if (position.contains("seller")) {
+                    selectedBuyerId = $(".contacts li:eq(0) .user_info .seller").text();
+                    selectedSellerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
+                } else {
+                    selectedSellerId = $(".contacts li:eq(0) .user_info .buyer").text();
+                    selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
+                }
             }
             console.log("stored chatId = " + selectedChatId);
             console.log("stored sellerId = " + selectedSellerId);
@@ -72,8 +79,19 @@ function getChatList() {
 
 $(document).on('click', '.contacts li', function() {
     selectedChatId = $(this).attr("id");
-    selectedSellerId = $(".contacts li:eq(0) .user_info span").text();
-    selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
+    console.log("this: " + $(this).find("span").text());
+
+    const position = $(this).find("span");
+    if (position.hasClass("seller")) {
+        selectedSellerId = $(this).find(".seller").text();
+        selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
+        console.log("click p1" + $(this).find("p").eq(0).text());
+    } else {
+        selectedBuyerId = $(this).find(".buyer").text();
+        selectedSellerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
+        console.log("click p2" + $(this).find("p").eq(0).text());
+    }
+
     console.log("click chatId = " + selectedChatId);
     console.log("click sellerId = " + selectedSellerId);
     console.log("click buyerId = " + selectedBuyerId);
