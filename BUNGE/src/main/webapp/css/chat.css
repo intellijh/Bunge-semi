@@ -169,6 +169,8 @@ body, html {
     background-color: #82ccdd;
     padding: 10px;
     position: relative;
+    word-break: break-all;
+    overflow: hidden;
 }
 
 .msg_cotainer_send {
@@ -179,6 +181,8 @@ body, html {
     background-color: #78e08f;
     padding: 10px;
     position: relative;
+    word-break: break-all;
+    overflow: hidden;
 }
 
 .msg_time {
