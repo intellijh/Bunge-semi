@@ -31,7 +31,7 @@ public class InfoLikeAction implements Action {
 		
 		//특정 주소로부터의 이동을 확인하는데 사용할 수 있는 정보는 요청 헤더인 "Referer"에 있습니다.
 		String referer = request.getHeader("Referer");
-		if(referer != null  && referer.contains("InfoDetail.com")) {
+		if(referer != null  && referer.contains("InfoLike.com")) {
 			//내용을 확인할 글의 조회수를 증가시킵니다.
 			System.out.println("referer= " + referer);
 			boarddao.setNoUpdate(m_id);

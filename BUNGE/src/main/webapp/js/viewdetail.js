@@ -139,7 +139,7 @@ function del(num){//num : 댓글 번호
 	   }
 	   	$.ajax({
 			url : 'CommentDelete.com', //원문 등록
-			data : {num : num},
+			data : {inf_num : num},
 			success : function(rdata) {
 				if(rdata == 1) {
 					getList(option);
@@ -321,6 +321,19 @@ $(function() {
 		}
 	})//답글쓰기 클릭 후 계속 누르는 것을 방지하기 위한 작업
 	
+/*	$("img").click(function(){
+		const no = $().val();
+		location.href="InfoLike.com";
+		$.ajax({
+			url : "InfoLike.com",
+			data : { 
+				m_id :$('#loginid').val(), 
+				no : ,
+				inf_num : $("#inf_num").val(),
+			}
+		})
+		
+	})		*/
 	
 })//ready
 

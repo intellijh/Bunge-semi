@@ -37,6 +37,7 @@ import info.action.InfoReplyProcessAction;
 import info.action.InfoAddAction;
 import info.action.InfoDeleteAction;
 import info.action.InfoWriteAction;
+import infoboardlike.action.InfoLikeAction;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -118,9 +119,9 @@ public class FrontController extends HttpServlet {
             case "/mypage.com" :
                 action = new mypageAction();
                 break;
-               case "/myinfoboard.com" :
-            	   action = new myinfoboardAction();
-            	   break;
+            case "/myinfoboard.com" :
+            	action = new myinfoboardAction();
+            	break;
             //게시판에 글 추가
             case "/InfoAdd.com":
                 action = new InfoAddAction();
@@ -176,6 +177,10 @@ public class FrontController extends HttpServlet {
             //대댓글
             case "/CommentReply.com":
                 action = new CommentReplyAction();
+                break;
+              //게시글 좋아요
+            case "/InfoLike.com":
+                action = new InfoLikeAction();
                 break;
             //채팅 페이지 이동
             case "/chat.com":
