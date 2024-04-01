@@ -28,92 +28,9 @@ public class InfoLikeDAO {
 		}
 	}
 
-	
-
-	public InfoLike getDetail(int num) {
-		InfoLike infolike = null;
-		
-		String sql = "select * from infolike where inf_NUM = ?";
-				    
-		try (Connection con = ds.getConnection(); 
-				PreparedStatement pstmt = con.prepareStatement(sql);) {
-			pstmt.setInt(1, num);
-			
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					infolike = new InfoLike();
-					
-					infolike.setNo(rs.getInt("NO"));
-					infolike.setInf_num(rs.getInt("INF_NUM"));
-					infolike.setM_id(rs.getString("M_ID"));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} 
-		
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			System.out.println("getListCount() 에러 : " + ex);
-		}
-		return infolike;
-  }//getDetail end
-
-	public boolean boardDelete(int num) {
-		String select_sql = "select INF_REF,INF_LEV,INF_SEQ "
-				  + "from infoboard "
-				  + "where INF_NUM=?";
-
-		String board_delete_sql = "delete from infoboard" 
-				+ "				where INF_REF=?" 
-				+ "				and INF_LEV>=?"
-				+ "				and INF_SEQ>=? " 
-				+ "				and INF_SEQ<=("
-				+ "								   nvl((select min(inf_seq)-1 "
-				+ "										from infoboard "
-				+ "										where INF_REF=? " 
-				+ "										and INF_LEV=? " 
-				+ "										and INF_SEQ>?),"
-				+ " 					 				(select max(inf_seq)" 
-				+ "			  		  					from infoboard"
-				+ "			  		  					where inf_ref=?)"
-				+ " ))";
-
-		boolean result_check = false;
-		
-		try (Connection con = ds.getConnection();
-				 PreparedStatement pstmt = con.prepareStatement(select_sql);) {
-			 	
-			 pstmt.setInt(1,num);
-			 try (ResultSet rs = pstmt.executeQuery();) {
-				 if (rs.next()) {
-					 try (PreparedStatement pstmt2 = con.prepareStatement(board_delete_sql);){ 
-							pstmt2.setInt(1, rs.getInt("INF_REF"));
-							pstmt2.setInt(2, rs.getInt("INF_LEV"));
-							pstmt2.setInt(3, rs.getInt("INF_SEQ"));
-							pstmt2.setInt(4, rs.getInt("INF_REF"));
-							pstmt2.setInt(5, rs.getInt("INF_LEV"));
-							pstmt2.setInt(6, rs.getInt("INF_SEQ"));
-							pstmt2.setInt(7, rs.getInt("INF_REF"));
-							int count = pstmt2.executeUpdate();
-							if (count >= 1) 
-								result_check = true; //삭제가 안된 경우에는 false 반환.
-							}
-				 }
-			 }catch (SQLException e) {
-				 e.printStackTrace();
-			 }
-		}catch (Exception ex) {
-			 System.out.println("boardDelete()에러 : " + ex);
-			 ex.printStackTrace();
-		}
-		return result_check;	 
-		}
-
-
-
 	public void InfoLikeDelete(int inf_num) {
-		String sql = "delete infolike"
-				   + " where inf_num=?";
+		String sql = "delete infolike "
+				   + " where inf_num=? and m_id";
 		 try (Connection con = ds.getConnection();
 				 PreparedStatement pstmt = con.prepareStatement(sql);) {
 			 pstmt.setInt(1, inf_num);
@@ -143,11 +60,9 @@ public class InfoLikeDAO {
 		return num;
 	} //boardInsert() end
 
-
-
-	public int getinfolikecnt(String m_id, int inf_num) {
+	public int getInfolikecnt(int inf_num) {
 		int result = 0;
-		String sql = "select count(*) from infolike where inf_NUM = ?";
+		String sql = "select count(*) from infolike where inf_NUM = ? ";
 				    
 		try (Connection con = ds.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql);) {

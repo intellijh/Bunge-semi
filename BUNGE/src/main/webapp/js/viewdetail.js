@@ -193,7 +193,6 @@ function replyform(num,lev,seq,ref){
 
 $(function() {
 	
-	
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	
 	$('.comment-area').on('keyup','.comment-write-area-text', function() {
@@ -347,19 +346,37 @@ $(function() {
 			url : "InfoLikeAdd.com",
 			type : 'post',
 			data : { 
-				m_id :$('#loginid').val(),
+//				m_id :$('#loginid').val(),
 				inf_num : $("#inf_num").val()
 			},
 			success : function(rdata) {
 				console.log('infolikecnt 성공')
 				$('b').html(rdata);
-				
+				infolikecnt();
 			}, 
 			error : function(){
 				console.log('infolikecnt 실패');
 			}		
 		});
 	})
+	
+	
+	function infolikecnt(){
+		$.ajax({
+			url : "InfoLike.com",
+			type : 'post',
+			data : { 
+				inf_num : $("#inf_num").val()
+			},
+			success : function(rdata) {
+				console.log(rdata);
+				$('b').html(rdata);
+			}, 
+			error : function(){
+				console.log('infolikecnt 실패');
+			}		
+	});
+}
 	
 	//댓글 좋아요 버튼 클릭시(좋아요 추가 또는 좋아요 철회)
 	$('.comment-list').on('click', '.like', function() {
@@ -397,30 +414,7 @@ $(function() {
 	//댓글 싫어요 버튼 클릭시
 		
 	})
-	
-	
-})//ready
-
-
-infolikecnt();
-function infolikecnt(){
-		$.ajax({
-			url : "InfoLike.com",
-			type : 'post',
-			data : { 
-				m_id :$('#loginid').val(),
-				inf_num : $("#inf_num").val()
-			},
-			success : function(rdata) {
-				console.log(rdata);
-				$('b').html(rdata);
-			}, 
-			error : function(){
-				console.log('infolikecnt 실패');
-			}		
-	});
-}
-	
+	})//ready
 
 	/*
 	//댓글 좋아요 카운트
@@ -441,7 +435,3 @@ function infolikecnt(){
 		})
 	}
 	*/
-
-
->>>>>>> branch 'main' of https://github.com/kjh936/Bunge.git
- 
