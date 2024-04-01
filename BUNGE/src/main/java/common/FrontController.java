@@ -1,6 +1,7 @@
 package common;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import chat.ChatListLoadAction;
 import comment.action.CommentAddAction;
@@ -45,6 +46,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import chat.ChatListAction;
 
+import javax.naming.NamingException;
+
 
 @WebServlet("*.com")
 public class FrontController extends HttpServlet {
@@ -52,7 +55,7 @@ public class FrontController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doProcess(HttpServletRequest request,
-                             HttpServletResponse response) throws ServletException, IOException {
+                             HttpServletResponse response) throws ServletException, IOException, SQLException, NamingException {
 
         String RequestURI = request.getRequestURI();
         System.out.println("RequestURI = " + RequestURI);
@@ -193,6 +196,7 @@ public class FrontController extends HttpServlet {
             case "/messageSend.com":
                 action = new MessageSendAciton();
                 break;
+
         } //switch (command)
 
         forward = action.execute(request, response);
@@ -210,12 +214,24 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        doProcess(request, response);
+        try {
+            doProcess(request, response);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (NamingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        doProcess(request, response);
+        try {
+            doProcess(request, response);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (NamingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

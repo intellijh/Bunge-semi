@@ -18,29 +18,28 @@ public class TradeDAO {
 
 
     // 사진 업로드
-    public int insertTrade(Trade trade) throws SQLException{
-        // 비밀번호는 SHA-1 암호화
-        String sql = "INSERT INTO trade (tradeID,imageID,sellerID,description,title,categoryID) values (?,?,?,?,?,?) ";
+    public int insertTrade(Trade trade) throws SQLException {
+        String sql = "INSERT INTO trade (imageID, sellerID, description, title, category, quality, condition, tradeMethod) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-
-        pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1, trade.getTradeID());
-        pstmt.setString(2, trade.getImageID());
-        pstmt.setString(3, trade.getSellerID());
-        pstmt.setString(4,trade.getDescription());
-        pstmt.setString(5,trade.getTitle());
-        pstmt.setString(6,trade.getCategory());
-
+        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        pstmt.setString(1, trade.getImageID());
+        pstmt.setString(2, trade.getSellerID());
+        pstmt.setString(3, trade.getDescription());
+        pstmt.setString(4, trade.getTitle());
+        pstmt.setString(5, trade.getCategory());
+        pstmt.setString(6, trade.getQuality());
+        pstmt.setString(7, trade.getCondition());
+        pstmt.setString(8, trade.getTradeMethod());
 
         pstmt.executeUpdate();
 
-        // 마지막 업로드된 ID 가져옴 (비권장)
-        sql = "SELECT LAST_INSERT_ID() AS last_id";
-        pstmt = conn.prepareStatement(sql);
-        rs = pstmt.executeQuery();
-        rs.next();
-
-        return rs.getInt("last_id");
+        // 새로 삽입된 거래의 ID 반환
+        rs = pstmt.getGeneratedKeys();
+        if (rs.next()) {
+            return rs.getInt(1);
+        } else {
+            throw new SQLException("Failed to insert trade, no ID obtained.");
+        }
     }
 
      //조회를 위한 비디오 하나의 정보 SELECT
@@ -138,18 +137,18 @@ public class TradeDAO {
         return list;
     }
 
-//    // 비밀번호 일치 체크
-//    public boolean passwordCheck(int id,String password) throws SQLException {
-//        String sql = "select EXISTS (select * from video where id=? and password=password(?)) as success";
-//
-//        pstmt = con.prepareStatement(sql);
-//        pstmt.setInt(1, id);
-//        pstmt.setString(2, password);
-//        rs = pstmt.executeQuery();
-//
-//        rs.next();
-//        return rs.getBoolean("success");
-//    }
+    // 비밀번호 일치 체크
+    public boolean passwordCheck(int tradeID,String password) throws SQLException {
+        String sql = "select EXISTS (select * from video where tradeID=? and password=password(?)) as success";
+
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, tradeID);
+        pstmt.setString(2, password);
+        rs = pstmt.executeQuery();
+
+        rs.next();
+        return rs.getBoolean("success");
+    }
 //
 //    // 비디오 삭제
 //    public void deleteVideo(int id) throws SQLException{

@@ -14,11 +14,20 @@ public class Trade {
     private String quality;
     private String tradeMethod;
     private String imageID;
-    private String TransactionID;
-    private int Likes;
+    private int likes;
     private Timestamp createDate;
 
     private int readCount;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    private String password;
 
     public int getReadCount() {
         return readCount;
@@ -69,8 +78,17 @@ public class Trade {
         this.description = description;
     }
 
+
     public int getPrice() {
         return price;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     public void setPrice(int price) {
@@ -117,19 +135,5 @@ public class Trade {
         this.imageID = imageID;
     }
 
-    public String getTransactionID() {
-        return TransactionID;
-    }
 
-    public void setTransactionID(String transactionID) {
-        TransactionID = transactionID;
-    }
-
-    public int getLikes() {
-        return Likes;
-    }
-
-    public void setLikes(int likes) {
-        Likes = likes;
-    }
 }
