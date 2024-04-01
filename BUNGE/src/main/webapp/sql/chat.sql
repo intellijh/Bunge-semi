@@ -42,6 +42,7 @@ CREATE TABLE notification
     CONSTRAINT fk_sender_id FOREIGN KEY (sender_id) REFERENCES member (m_id)
 );
 
+-- 더미데이터
 INSERT INTO chat
 VALUES (1, 'A1234', 'B1234', 1, SYSDATE, null);
 INSERT INTO chat
@@ -50,3 +51,18 @@ INSERT INTO chat
 VALUES (3, 'B1234', 'C1234', 1, SYSDATE, null);
 INSERT INTO chat
 VALUES (4, 'C1234', 'A1234', 1, SYSDATE, null);
+
+-- 채팅 중복 확인
+SELECT *
+FROM chat
+WHERE seller_id = 'B1234'
+AND buyer_id = 'A1234'
+AND trade_id = 1;
+
+-- 채팅 id max값 추출
+SELECT MAX(NVL(chat_id, 0)) + 1
+FROM chat;
+
+-- 채팅방 생성
+INSERT INTO chat
+VALUES (7, 'C1234', 'A1234', 6, SYSTIMESTAMP, SYSTIMESTAMP);
