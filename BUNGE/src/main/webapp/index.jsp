@@ -10,7 +10,6 @@
 
 <jsp:include page="/layout/header.jsp" />
 
-<h1><%= "Hello World!" %></h1>
 <br/>
 </body>
 </html>

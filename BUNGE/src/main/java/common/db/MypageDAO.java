@@ -1,7 +1,6 @@
 package common.db;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,39 +62,46 @@ private DataSource ds;
 			}
 			return x;
 	}
+	
 	public List<mypage> getBoardList(String m_id, int page, int limit) {
-		List<mypage> boardlist = new ArrayList<>();
-		
-		String board_list_sql = "SELECT b.inf_num, b.inf_subject, b.inf_content, b.inf_reg, b.inf_readcount, count(*) as k.inf_num "
-				+ "FROM (SELECT ROWNUM AS rnum, b.* "
-				+ "      FROM (SELECT * "
-				+ "            FROM member m "
-				+ "            JOIN infoboard b ON m.m_id = b.m_id "
-				+ "            JOIN infolike k ON b.m_id = k.m_id "
-				+ "            WHERE m.m_id = ? "
-				+ "            ORDER BY b.inf_reg DESC) b "
-				+ "      WHERE ROWNUM <= ?) "
-				+ "WHERE rnum >= ?";
- 
+	    List<mypage> boardlist = new ArrayList<>();
+	    
+	    String board_list_sql = "SELECT * FROM ("
+	            + " SELECT b.inf_num,  b.inf_subject,  b.inf_content, "
+	            + "        COUNT(DISTINCT l.m_id) AS like_count, "
+	            + "        COUNT(DISTINCT c.m_id) AS comment_count, "
+	            + "        ROW_NUMBER() OVER (ORDER BY b.inf_num DESC) AS row_num "
+	            + "    FROM   member m"
+	            + "    JOIN  infoboard b ON m.m_id = b.m_id "
+	            + "    LEFT JOIN infolike l ON m.m_id = l.m_id AND b.inf_num = l.inf_num "
+	            + "    LEFT JOIN  infocomm c ON m.m_id = c.m_id AND b.inf_num = c.inf_num "
+	            + "    WHERE m.m_id = ? "
+	            + "    GROUP BY   b.inf_num,  b.inf_subject, b.inf_content "
+	            + ") AS sub WHERE row_num > (? - 1) * ? AND row_num <= ? * ?";
+
 	    int startrow = (page - 1) * limit + 1;
 	    int endrow = startrow + limit - 1;
-	    
+
 	    try (Connection con = ds.getConnection();
 	         PreparedStatement pstmt = con.prepareStatement(board_list_sql)) {
-	        
+
 	        pstmt.setString(1, m_id);
-	        pstmt.setInt(2, endrow);
-	        pstmt.setInt(3, startrow);
+	        pstmt.setInt(2, startrow);
+	        pstmt.setInt(3, endrow);
+	        pstmt.setInt(4, startrow);
+	        pstmt.setInt(5, endrow);
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
 	            while (rs.next()) {
 	                mypage board = new mypage();
-	                board.getBo().setInf_num(rs.getInt("inf_num"));
-	                board.getBo().setInf_subject(rs.getString("inf_subject"));
-	                board.getBo().setInf_content(rs.getString("inf_content"));
-	                board.getBo().setInf_reg(rs.getString("inf_reg"));
-	                board.getBo().setInf_readcount(rs.getInt("inf_readcount"));
-	                board.getLike().setInf_num(rs.getInt("inf_num"));
+	                board.getBoard().setInf_num(rs.getInt("inf_num"));
+	                board.getBoard().setInf_subject(rs.getString("inf_subject"));
+	                board.getBoard().setInf_content(rs.getString("inf_content"));
+	                board.getBoard().setInf_reg(rs.getString("inf_reg"));
+	                board.getBoard().setInf_readcount(rs.getInt("inf_readcount"));
+	                board.getInfoLike().setInf_num(rs.getInt("like_count"));
+	                board.getComment().setInf_num(rs.getInt("comment_count"));
+	                
 	                boardlist.add(board);
 	            }
 	        } catch (SQLException e) {
@@ -103,8 +109,10 @@ private DataSource ds;
 	        }
 	    } catch (Exception ex) {
 	        ex.printStackTrace();
+	        System.out.println("getListCount() 에러" + ex);
 	    }
 	    return boardlist;
 	}
+
 
 }

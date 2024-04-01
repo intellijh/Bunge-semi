@@ -28,6 +28,16 @@ public class findidProcessAction implements Action {
 		if(m_id != null) {
 			forward.setRedirect(false);
 			request.getSession().setAttribute("m_id", m_id);
+			// 아이디 일부 가리기
+		    String find_id = "";
+		    if (m_id.length() > 2) {
+		        find_id = m_id.substring(0, m_id.length() - 2) + "**";
+		    } else {
+		        find_id = m_id.substring(0, 1) + "**";
+		    }
+		    
+		    request.setAttribute("find_id", find_id);
+		    
 			forward.setPath("member/idcompleteForm.jsp");
 			String message = "아이디 찾기에 성공하셨습니다.";
 			out.print("<script>");
