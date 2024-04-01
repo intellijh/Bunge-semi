@@ -16,10 +16,10 @@ function checkSubmit(){
 		return;
 	}
 	
-	if ($('#write-author').val().length < 2){
-		alert('작성자를 2자 이상 입력해주세요');
-		return;
-	}
+	// if ($('#write-author').val().length < 2){
+	// 	alert('작성자를 2자 이상 입력해주세요');
+	// 	return;
+	// }
 	
 	if ($('#write-password').val().length < 2){
 		alert('비밀번호를 2자 이상 입력해주세요');

@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import info.db.Board;
+
 public class InfoLikeDAO {
 	private DataSource ds;
 
@@ -25,6 +27,8 @@ public class InfoLikeDAO {
 			System.out.println("DB 연결 실패 : " + ex);
 		}
 	}
+
+	
 
 	public InfoLike getDetail(int num) {
 		InfoLike infolike = null;
@@ -54,18 +58,113 @@ public class InfoLikeDAO {
 		return infolike;
   }//getDetail end
 
-	public void setNoUpdate(String m_id) {
+	public boolean boardDelete(int num) {
+		String select_sql = "select INF_REF,INF_LEV,INF_SEQ "
+				  + "from infoboard "
+				  + "where INF_NUM=?";
+
+		String board_delete_sql = "delete from infoboard" 
+				+ "				where INF_REF=?" 
+				+ "				and INF_LEV>=?"
+				+ "				and INF_SEQ>=? " 
+				+ "				and INF_SEQ<=("
+				+ "								   nvl((select min(inf_seq)-1 "
+				+ "										from infoboard "
+				+ "										where INF_REF=? " 
+				+ "										and INF_LEV=? " 
+				+ "										and INF_SEQ>?),"
+				+ " 					 				(select max(inf_seq)" 
+				+ "			  		  					from infoboard"
+				+ "			  		  					where inf_ref=?)"
+				+ " ))";
+
+		boolean result_check = false;
 		
-		String sql = "update  infolike"
-				   + " set	 no = no+1"
-				   + " where m_Id = ?";
+		try (Connection con = ds.getConnection();
+				 PreparedStatement pstmt = con.prepareStatement(select_sql);) {
+			 	
+			 pstmt.setInt(1,num);
+			 try (ResultSet rs = pstmt.executeQuery();) {
+				 if (rs.next()) {
+					 try (PreparedStatement pstmt2 = con.prepareStatement(board_delete_sql);){ 
+							pstmt2.setInt(1, rs.getInt("INF_REF"));
+							pstmt2.setInt(2, rs.getInt("INF_LEV"));
+							pstmt2.setInt(3, rs.getInt("INF_SEQ"));
+							pstmt2.setInt(4, rs.getInt("INF_REF"));
+							pstmt2.setInt(5, rs.getInt("INF_LEV"));
+							pstmt2.setInt(6, rs.getInt("INF_SEQ"));
+							pstmt2.setInt(7, rs.getInt("INF_REF"));
+							int count = pstmt2.executeUpdate();
+							if (count >= 1) 
+								result_check = true; //삭제가 안된 경우에는 false 반환.
+							}
+				 }
+			 }catch (SQLException e) {
+				 e.printStackTrace();
+			 }
+		}catch (Exception ex) {
+			 System.out.println("boardDelete()에러 : " + ex);
+			 ex.printStackTrace();
+		}
+		return result_check;	 
+		}
+
+
+
+	public void InfoLikeDelete(int inf_num) {
+		String sql = "delete infolike"
+				   + " where inf_num=?";
 		 try (Connection con = ds.getConnection();
 				 PreparedStatement pstmt = con.prepareStatement(sql);) {
-			 pstmt.setString(1, m_id);
+			 pstmt.setInt(1, inf_num);
 			 pstmt.executeUpdate();
 		 } catch (SQLException ex) {
 			 System.out.println("setNoUpdate() 에러 : " + ex);
 		 }
 	}//setReadCountUpdate()메서드 end
 	
+	public int getInfoLikeInsert(int no,String m_id) {
+		int num = 0;
+		String sql = "INSERT INTO INFOLIKE " 
+					+ " values(infolike_seq.nextval,?,?)"; 
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+				pstmt.setInt(1, no);
+				pstmt.setString(2, m_id);
+	
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}catch (Exception ex) {
+			System.out.println("InfolikeInsert() 에러 : " + ex);
+			ex.printStackTrace();
+		}
+		return num;
+	} //boardInsert() end
+
+
+
+	public int getinfolikecnt(String m_id, int inf_num) {
+		int result = 0;
+		String sql = "select count(*) from infolike where inf_NUM = ?";
+				    
+		try (Connection con = ds.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1,  inf_num);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+				result = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getListCount() 에러 : " + ex);
+		}
+		return result;
+  }//getDetail end
 }//class end

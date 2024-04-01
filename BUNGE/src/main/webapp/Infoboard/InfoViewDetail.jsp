@@ -83,10 +83,7 @@
             </a>
           </td>
         </tr>
-        <tr><td><img style="width:30px; height:30px" src="${pageContext.request.contextPath}/image/like_off.png" onclick="${infolike.no}"><b>${infolike.no}</b></td></tr>
-        	<c:if test='${!empty m_id}'>
-			<strong style="color:red">아이디가 존재하지 않습니다.</strong>
-		</c:if>
+        <tr><td><button type="button" id="likeclick">좋아요&nbsp;<b></b></td></tr>
       </table>
       <%-- 게시판 view end --%>
     

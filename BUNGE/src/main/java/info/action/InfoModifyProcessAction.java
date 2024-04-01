@@ -50,40 +50,56 @@ public class InfoModifyProcessAction implements Action {
 			board_result = boarddao.boardModify(board);
 			
 		//	boarddao.boardfileReset(inf_num);
-			String[] origin = multi.getParameter("originvalue").split(",");
-			String[] nochange = new String[5];
+			String[] origin = new String[5]; 
+			String[] lastname = new String[5];
+			String deleteitem;
 			for (int k=1; k<=5; k++) {
-				System.out.println("원래 첨부된 파일 이름 : " + multi.getParameter("originvalue"));
-				System.out.println("수정없는 파일 이름 : " + multi.getParameter("filevalue"+k));
-					nochange[k-1] = multi.getParameter("filevalue"+k);
+				System.out.println("원래 첨부된 파일 이름 : " + multi.getParameter("originvalue"+k));
+					origin[k-1] = multi.getParameter("originvalue"+k);
+				System.out.println("수정 할 때 등록된 파일 이름 : " + multi.getParameter("filevalue"+k));
+					lastname[k-1] = multi.getParameter("filevalue"+k);
 			}
 			
-			for (String item : nochange) {
-				System.out.println("item : " + item);
+			for (String no : lastname) {
+				System.out.println("lasntname[]수정할 때 등록된 파일 이름 : " + no);
 			}
 			
-		//	boarddao.boardmodifyDelete(inf_num, nochange);
-			
-		//	for (int k=1; k<=5; k++) {
-		//		System.out.println("수정이 없는 파일 이름 : " + multi.getParameter("filevalue"+k));
-		//	}
-			
+			for (String orig : origin) {
+				System.out.println("origin[]원래 첨부된 파일 이름 : " + orig);
+			}
 			
 			for (int i=1; i<=5; i++) {
 				String fileorigin = multi.getOriginalFileName("boardfile"+i);
-				System.out.println("boardfile1_original : " + multi.getOriginalFileName("boardfile"+i));
+				System.out.println("fileorigin : " + multi.getOriginalFileName("boardfile"+i));
 				String fileserver = multi.getFilesystemName("boardfile"+i);
-				System.out.println("boardfile1_file : " + multi.getFilesystemName("boardfile"+i));
+				System.out.println("fileserver : " + multi.getFilesystemName("boardfile"+i));
 				if (fileorigin != null) {
-				boardfile = new Boardfile();
-					boardfile.setInfa_filename(fileorigin);
-					boardfile.setInfa_servername(fileserver);
-					file_result = boarddao.boardfileModify(inf_num, boardfile);
+					//원래 첨부하지 않은 곳에 새롭게 첨부하는 경우
+					if (origin[i-1].isEmpty()) {
+						origin[i-1] = "0";
+						boardfile = new Boardfile();
+						boardfile.setInfa_filename(fileorigin);
+						boardfile.setInfa_servername(fileserver);
+						file_result = boarddao.boardnofileModify(inf_num, boardfile, origin[i-1]);
+					//원래 첨부파일이 있떤 곳에 새롭게 첨부하는 경우
+					} else {
+						boardfile = new Boardfile();
+						boardfile.setInfa_filename(fileorigin);
+						boardfile.setInfa_servername(fileserver);
+						file_result = boarddao.boardfileModify(inf_num, boardfile, origin[i-1]);
+					}
+					//원래 존재하던 첨부파일을 삭제하는 경우
+				} else {
+					if (!origin[i-1].equals(lastname[i-1]) && lastname[i-1].isEmpty()) {
+						deleteitem = origin[i-1];
+						file_result = boarddao.boardmodifyDelete(inf_num, deleteitem);
+					}
 				}
 			}
 			
-			if (board_result && file_result) {
+			if (board_result) {
 				System.out.println("게시판 수정 완료");
+				forward.setRedirect(true);
 				forward.setPath("InfoDetail.com?num=" + board.getInf_num());
 			} else {
 				System.out.println("게시판 수정 실패");

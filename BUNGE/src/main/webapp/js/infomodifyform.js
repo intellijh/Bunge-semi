@@ -10,6 +10,13 @@ $(document).ready(function() {
 	}
 	console.log('filenames : ' + filenames)
 	
+	for (let i=1; i<=5; i++) {
+		const html_origin = "<input type='hidden' value='" + $('#filevalue'+i).text() + "' name='originvalue"+i+"'>"
+		console.log(html_origin)
+		$("form").append(html_origin);
+	}
+		
+		
 	//submit 버튼 클릭할 때 이벤트 부분
 	$("form[name=modifyform]").submit(function() {
 		const $inf_subject = $("#inf_subject");
@@ -27,13 +34,9 @@ $(document).ready(function() {
 		}
 		
 		
-		const html_origin = "<input type='hidden' value='" + filenames + "' name='originvalue'>"
-		console.log(html_origin)
-		$("form").append(html_origin);
 		
 		
-		//파일변동이 없는 경우
-		if (check == 0) {
+		//수정 폼에서 최종적으로 첨부된 목록
 			for (let i=1; i<=5; i++) {
 				
 				if ($('#filevalue'+i).text() != '0') {
@@ -43,7 +46,6 @@ $(document).ready(function() {
 					$("form").append(html);
 				}
 			}
-		} 
 	});//submit end
 	
 	function show() {

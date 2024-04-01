@@ -5,7 +5,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    $.ajax({
 			type:"post",
 			url : "CommentList.com",
-			data: {"inf_num" : $("#inf_num").val(), "state":state},
+			data: {inf_num : $("#inf_num").val(), state:state},
 			dataType : "json",
 			success : function(rdata){
 				$('#count').text(rdata.listcount).css('font-family','arial,sans-serif')
@@ -69,7 +69,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 			if($("#loginid").val() == this.m_id) {    
 				output += '<div class="comment-tool">'
 					   + '	<div title="더보기" class="comment-tool-button">'		
-					   + '		<div>&#46;,&#46;,&#46;</div>'		
+					   + '		<div>&#46;&#46;&#46;</div>'		
 					   + '	</div>'		
 					   + '	<div id="comment-list-item-layer' + this.comm_num + '" class="LayerMore">'		
 					   + '	 <ul class="layer-list">'		
@@ -321,20 +321,44 @@ $(function() {
 		}
 	})//답글쓰기 클릭 후 계속 누르는 것을 방지하기 위한 작업
 	
-/*	$("img").click(function(){
-		const no = $().val();
-		location.href="InfoLike.com";
+		$('#likeclick').click(function(){
+		$.ajax({
+			url : "InfoLikeAdd.com",
+			type : 'post',
+			data : { 
+				m_id :$('#loginid').val(),
+				inf_num : $("#inf_num").val()
+			},
+			success : function(rdata) {
+				console.log('infolikecnt 성공')
+				$('b').html(rdata);
+				
+			}, 
+			error : function(){
+				console.log('infolikecnt 실패');
+			}		
+		});
+	})
+
+
+infolikecnt();
+function infolikecnt(){
 		$.ajax({
 			url : "InfoLike.com",
+			type : 'post',
 			data : { 
-				m_id :$('#loginid').val(), 
-				no : ,
-				inf_num : $("#inf_num").val(),
-			}
-		})
+				m_id :$('#loginid').val(),
+				inf_num : $("#inf_num").val()
+			},
+			success : function(rdata) {
+				console.log(rdata);
+				$('b').html(rdata);
+			}, 
+			error : function(){
+				console.log('infolikecnt 실패');
+			}		
+	});
+}
 		
-	})		*/
-	
-})//ready
-
+ })//ready
  

@@ -1,48 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-		 pageEncoding="utf-8" import="net.trade.db.Trade,net.trade.db.TradeDAO"%>
-<%
-	request.setCharacterEncoding("utf-8");
-
-	TradeDAO tradeDAO = new TradeDAO();
-	// 글 정보 조회
-	Trade trade = tradeDAO.selectOneTradeById(Integer.parseInt(request.getParameter("tradeID")));
-
-	tradeDAO.close();
-%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" import="net.trade.db.Trade" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title><%=trade.getTitle()%> - Trade Board</title>
+	<jsp:include page="../../layout/header.jsp" />
+	<meta charset="UTF-8">
+	<title>거래글 열람</title>
 	<link rel="stylesheet" href="../../static/bootstrap.min.css">
 	<link rel="stylesheet" href="../../static/style.css">
 </head>
 <body>
 <div id="upper-bar">
-	<a href="newtradeindex.jsp" id="title">Trade Board</a>
+	<a href="../../trade.net" id="title">거래 게시판</a>
 </div>
 <div id="content-view">
 	<div id="content-view-inner">
 		<div id="video-wrap">
-			<img src="<%= "../../upload/" + trade.getTradeID() + ".jpg" %>" width="360" height="202">
+			<img src="<c:out value="${trade.imageID}" />" width="140" height="200">
 		</div>
 		<div id="video-info">
-			<div id="video-title"><%=trade.getTitle()%></div>
-			<span id="video-author"><%=trade.getSellerID()%></span>
-			<span id="video-date" style="float:right"><%=trade.getCreateDate()%></span>
+			<div id="video-title"><c:out value="${trade.TITLE}" /></div>
+			<span id="video-author"><c:out value="${trade.sellerID}" /></span>
+			<span id="video-date" style="float:right"><c:out value="${trade.createDate}" /></span>
+			<!-- 수정, 삭제 폼 -->
 			<form method="POST" id="delete-or-update-form">
-				<input type="hidden" name="id" value="<%=trade.getSellerID()%>">
+				<input type="hidden" name="id" value="<c:out value="${trade.tradeID}" />">
 				<input type="password" name="password" style="margin-left:0px; margin-top:10px" id="write-password" placeholder="비밀번호">
 				<input type="button" value="수정" id="update-button" class="btn btn-info" onclick="update()">
 				<input type="button" value="삭제" id="delete-button" class="btn btn-danger" onclick="del()">
 			</form>
-			<p style="margin-top:30px"><%=trade.getDescription()%></p>
+			<p style="margin-top:30px"><c:out value="${trade.description}" /></p>
 		</div>
+		<!-- 댓글 -->
 		<div id="comment">
 			<span id="comment-title">댓글</span>
 			<hr>
 			<div id="comment-write-form">
-				<input type="hidden" id="videoId" value="<%=trade.getSellerID()%>">
+				<input type="hidden" id="videoId" value="<c:out value="${trade.tradeID}" />">
 				<div id="comment-write-info">
 					<input type="text" id="comment-write-author" placeholder="작성자" value="익명">
 					<hr>
