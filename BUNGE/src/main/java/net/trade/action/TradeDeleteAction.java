@@ -2,7 +2,6 @@ package net.trade.action;
 
 import common.action.Action;
 import common.action.ActionForward;
-import net.trade.db.Trade;
 import net.trade.db.TradeDAO;
 
 import jakarta.servlet.ServletException;
@@ -10,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class TradeUpdateCheckAction implements Action {
+public class TradeDeleteAction implements Action {
 
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
@@ -23,22 +22,20 @@ public class TradeUpdateCheckAction implements Action {
             int tradeID = Integer.parseInt(request.getParameter("tradeID"));
             String password = request.getParameter("password");
 
-            // TradeDAO를 사용하여 비밀번호 확인
+            // TradeDAO를 사용하여 비밀번호 확인 및 거래 삭제
             TradeDAO tradeDAO = new TradeDAO();
             if (tradeDAO.passwordCheck(tradeID, password)) {
-                // 비밀번호가 일치하는 경우 해당 거래 정보를 얻어와서 업데이트 페이지로 이동
-                Trade trade = tradeDAO.selectOneTradeById(tradeID);
+                // 비밀번호가 일치하는 경우 해당 거래 삭제
+                tradeDAO.deleteTrade(tradeID);
                 tradeDAO.close();
 
-                // 조회된 거래 정보를 request에 설정
-                request.setAttribute("trade", trade);
-
-                // 업데이트 페이지로 포워딩
-                forward.setPath("update_check.net");
-                forward.setRedirect(false);
+                // 삭제 완료 메시지 출력 후 이전 페이지로 이동
+                forward.setPath("trade.net"); // 이동할 페이지 지정
+                forward.setRedirect(true); // 리다이렉트 설정
             } else {
                 // 비밀번호가 일치하지 않는 경우 에러 메시지 출력 후 이전 페이지로 이동
                 tradeDAO.close();
+                // 에러 메시지 출력 및 이전 페이지로 리다이렉트
                 forward.setPath("error.jsp");
                 forward.setRedirect(false);
             }

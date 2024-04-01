@@ -22,7 +22,7 @@
 		thumbnailFile.delete();
 		
 		// DB에서 삭제
-		dao.deleteVideo(id);
+		dao.delete(id);
 		%> 
 			alert('삭제가 완료되었습니다');
 			location.href="index.jsp";

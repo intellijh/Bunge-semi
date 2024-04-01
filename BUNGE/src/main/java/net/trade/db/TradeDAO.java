@@ -19,27 +19,34 @@ public class TradeDAO {
 
     // 사진 업로드
     public int insertTrade(Trade trade) throws SQLException {
-        String sql = "INSERT INTO trade (imageID, sellerID, description, title, category, quality, condition, tradeMethod) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        pstmt.setString(1, trade.getImageID());
-        pstmt.setString(2, trade.getSellerID());
-        pstmt.setString(3, trade.getDescription());
-        pstmt.setString(4, trade.getTitle());
-        pstmt.setString(5, trade.getCategory());
-        pstmt.setString(6, trade.getQuality());
-        pstmt.setString(7, trade.getCondition());
-        pstmt.setString(8, trade.getTradeMethod());
-
-        pstmt.executeUpdate();
-
-        // 새로 삽입된 거래의 ID 반환
-        rs = pstmt.getGeneratedKeys();
-        if (rs.next()) {
-            return rs.getInt(1);
-        } else {
-            throw new SQLException("Failed to insert trade, no ID obtained.");
+        int tradeid =0;
+        String tradeid_sql ="SELECT TRADE_SEQUENCE.NEXTVAL FROM DUAL";
+        try (PreparedStatement pstmt = conn.prepareStatement(tradeid_sql);) {
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    tradeid = rs.getInt(1);
+                }
+            }
         }
+
+        String sql = "INSERT INTO trade (imageID, sellerID, description, title, category, quality, condition, tradeMethod, price,tradeID) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setString(1, trade.getImageID());
+            pstmt.setString(2, trade.getSellerID());
+            pstmt.setString(3, trade.getDescription());
+            pstmt.setString(4, trade.getTitle());
+            pstmt.setString(5, trade.getCategory());
+            pstmt.setString(6, trade.getQuality());
+            pstmt.setString(7, trade.getCondition());
+            pstmt.setString(8, trade.getTradeMethod());
+            pstmt.setInt(9, trade.getPrice());
+            pstmt.setInt(10, tradeid);
+
+            pstmt.executeUpdate();
+
+        }
+        return tradeid;
     }
 
      //조회를 위한 비디오 하나의 정보 SELECT
@@ -59,6 +66,7 @@ public class TradeDAO {
             trade.setDescription(rs.getString("description"));
             trade.setImageID(rs.getString("imageID"));
             trade.setTitle(rs.getString("title"));
+            trade.setPrice(rs.getInt("price"));
 
             return trade;
         } else {
@@ -68,7 +76,7 @@ public class TradeDAO {
 //
 //    // 목록 출력을 위한 SELECT
     public ArrayList<Trade> getTradeList() throws SQLException{
-        String sql = "SELECT imageID,title,sellerID,createDate,tradeID from trade order by tradeID desc";
+        String sql = "SELECT imageID,title,sellerID,createDate,tradeID,price from trade order by tradeID desc";
 
         pstmt = conn.prepareStatement(sql);
         rs = pstmt.executeQuery();
@@ -82,6 +90,8 @@ public class TradeDAO {
             trade.setCreateDate(rs.getTimestamp("createDate"));
             trade.setImageID(rs.getString("imageID"));
             trade.setTitle(rs.getString("title"));
+            trade.setPrice(rs.getInt("price"));
+
 
             list.add(trade);
         }
@@ -149,22 +159,17 @@ public class TradeDAO {
         rs.next();
         return rs.getBoolean("success");
     }
-//
-//    // 비디오 삭제
-//    public void deleteVideo(int id) throws SQLException{
-//        String sql = "DELETE from video WHERE id=?";
-//
-//        pstmt = con.prepareStatement(sql);
-//        pstmt.setInt(1, id);
-//        pstmt.execute();
-//
-//        // 연관된 댓글 삭제
-//        sql = "DELETE from comment WHERE video_id=?";
-//        pstmt = con.prepareStatement(sql);
-//        pstmt.setInt(1, id);
-//        pstmt.execute();
-//    }
-//
+
+    // 비디오 삭제
+    public void deleteTrade(int tradeID) throws SQLException{
+        String sql = "DELETE from trade WHERE tradeID=?";
+
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, tradeID);
+        pstmt.execute();
+
+    }
+
     // 비디오 수정
     public void updateTrade(Trade trade) throws SQLException {
         String sql = "UPDATE trade SET title=?,imageID=?,description=?,sellerID=? WHERE tradeID=?";
@@ -185,6 +190,19 @@ public class TradeDAO {
         if(pstmt != null) pstmt.close();
         if(conn != null) conn.close();
     }
+
+//    public void insertImagePath(String imagePath) {
+//        String sql = "INSERT INTO trade (imageID) VALUES (?)";
+//
+//        try {
+//            PreparedStatement pstmt = conn.prepareStatement(sql);
+//            pstmt.setString(1, imagePath);
+//            pstmt.executeUpdate();
+//            pstmt.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 //}
 
 
