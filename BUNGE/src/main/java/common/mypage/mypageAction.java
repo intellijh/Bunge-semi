@@ -8,7 +8,7 @@ import common.action.ActionForward;
 import common.db.Member;
 import common.db.MemberDAO;
 import common.db.Memberimg;
-import common.db.MypageDAO;
+//import common.db.MypageDAO;
 import common.db.mypage;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

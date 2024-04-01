@@ -101,14 +101,14 @@ body {
 	display: none;
 }
 
-#video-wrap {
+#image-wrap {
 	overflow: hidden;
-	padding-bottom: 56.25%;
+	padding-bottom: 50%;
 	position: relative;
 	height: 0;
 }
 
-#video-wrap video {
+#image-wrap image {
 	left: 0;
 	top: 0;
 	height: 100%;
@@ -116,7 +116,7 @@ body {
 	position: absolute;
 }
 
-#video-title {
+#image-title {
 	font-size: 30px;
 	font-weight: bold;
 }

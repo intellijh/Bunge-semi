@@ -12,14 +12,14 @@ import javax.sql.DataSource;
 public class MypageDAO {
 /*private DataSource ds;
 	
-	public MypageDAO() {
-		try {
-			Context init = new InitialContext();
-			this.ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
-		} catch (Exception ex) {
-			System.out.println("DB 연결 실패 : " + ex);
-		}
-	}
+//	public MypageDAO() {
+//		try {
+//			Context init = new InitialContext();
+//			this.ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
+//		} catch (Exception ex) {
+//			System.out.println("DB 연결 실패 : " + ex);
+//		}
+//	}
 	//회원정보 조회
 	public MypageDAO mypage_info(String m_id) {
 		mypage m = null;
