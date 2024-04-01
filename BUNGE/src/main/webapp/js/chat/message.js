@@ -1,18 +1,22 @@
 $(function(){
+
     var webSocket = new WebSocket('ws://localhost:8088/chat');
     var inputMessage = $(".type_msg");
 
     webSocket.onerror = function(e){
         onError(e);
     };
+
     webSocket.onopen = function(e){
         onOpen(e);
     };
+
     webSocket.onmessage = function(e){
         onMessage(e);
     };
 
     function onMessage(e){
+
         var chatMsg = JSON.parse(e.data);
         var date = new Date();
         var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -53,6 +57,7 @@ $(function(){
     }
 
     function send(){
+
         var chatMsg = inputMessage.val();
         console.log(chatMsg);
         if(chatMsg == ''){
@@ -86,6 +91,7 @@ $(function(){
         }
         console.log("type_msg keydown");
     });
+
     $('.send_btn').click(function(){
         send();
         $('.type_msg').val("");

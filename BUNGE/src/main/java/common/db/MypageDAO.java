@@ -10,7 +10,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class MypageDAO {
-private DataSource ds;
+/*private DataSource ds;
 	
 	public MypageDAO() {
 		try {
@@ -51,5 +51,5 @@ private DataSource ds;
 			ex.printStackTrace();
 		}
 		return m;
-	}
+	}*/
 }

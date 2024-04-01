@@ -1,4 +1,6 @@
-let chatId = 0;
+let selectedChatId = 0;
+let selectedSellerId = null;
+let selectedBuyerId = null;
 
 function getChatList() {
 
@@ -51,13 +53,17 @@ function getChatList() {
             });
             $(".contacts").html(output);
 
-            if (chatId == 0) {
-                chatId = $(".contacts li").eq(0).attr("id");
+            if (selectedChatId == 0) {
+                selectedChatId = $(".contacts li").eq(0).attr("id");
+                selectedSellerId = $(".contacts li:eq(0) .user_info span").text();
+                selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
             }
-            console.log("stored chatId = " + chatId);
+            console.log("stored chatId = " + selectedChatId);
+            console.log("stored sellerId = " + selectedSellerId);
+            console.log("stored buyerId = " + selectedBuyerId);
 
             $(".contacts li").removeClass("active");
-            $("#"+chatId).addClass("active");
+            $("#"+selectedChatId).addClass("active");
         }
     });
 
@@ -65,8 +71,12 @@ function getChatList() {
 }
 
 $(document).on('click', '.contacts li', function() {
-    chatId = $(this).attr("id");
-    console.log("click chatId = " + chatId);
+    selectedChatId = $(this).attr("id");
+    selectedSellerId = $(".contacts li:eq(0) .user_info span").text();
+    selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
+    console.log("click chatId = " + selectedChatId);
+    console.log("click sellerId = " + selectedSellerId);
+    console.log("click buyerId = " + selectedBuyerId);
     getChatList();
 });
 

@@ -18,7 +18,7 @@ import java.util.Set;
 @ServerEndpoint(value = "/chat", configurator = ChatConfigurator.class)
 public class ChatEndPoint {
 
-    private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
+    private static Set<Session> clients = Collections.synchronizedSet(new HashSet<>());
 
     private HttpSession hSession;
 
