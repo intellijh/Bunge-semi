@@ -48,6 +48,29 @@ private DataSource ds;
 		return result;
 	}
 	
+	public int commentsinsertedNum() {
+		int comm_num = -1;
+		String sql = "select * "
+				   + "from infocomm "
+				   + "where comm_num = (select max(comm_num) from infocomm)";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			try (ResultSet rs = pstmt.executeQuery();) {
+				if(rs.next()) {
+					comm_num = rs.getInt("comm_num");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("comm_num 을 불러오는데 실패" + e);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("comm_num 불러오는 데 실패 + e");
+		}
+		return comm_num;
+	} //commentsinsertedNum end
+	
 	public int getListCount(int inf_num) {
 		int x = 0;
 		
@@ -93,7 +116,7 @@ private DataSource ds;
 			  try (ResultSet rs = pstmt.executeQuery()) {
 					while (rs.next()) {
 						JsonObject object = new JsonObject();
-						object.addProperty("comm_num", rs.getInt(1));
+						object.addProperty("comm_num", rs.getInt(1) );
 						object.addProperty("m_id", rs.getString(2));
 						object.addProperty("comm_content", rs.getString(3));
 						object.addProperty("comm_reg", rs.getString(4));
@@ -202,6 +225,8 @@ private DataSource ds;
 		}
 		return result;
 	}
+
+
 }
 	
 //http://localhost:8088/Board_Ajax/CommentList.bo?comment_board_num=7&state=1

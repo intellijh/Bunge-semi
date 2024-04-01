@@ -1,7 +1,9 @@
 let option = 1; // 선택한 등록순과 최신순을 수정, 삭제,추가 후에도 유지되도록 하기 위한 변수로 사용합니다.
+
 function getList(state){//현재 선택한 댓글 정렬방식을 저장합니다. 1=>등록순, 2=>최신순
 	    console.log(state)
 	    option=state;
+	    
 	    $.ajax({
 			type:"post",
 			url : "CommentList.com",
@@ -24,7 +26,8 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 					   + ' </li>'
 					   + ' <li class="comment-order-item ' + red2 + '">'
 					   + '	<a href="javascript:getList(2)" class="comment-order-button">최신순 </a>'
-					   + ' </li>';
+					   + ' </li>'
+					   + ' <li id=comm_num>'
 				$('.comment-order-list').html(output);
 				
 				output = '';
@@ -51,7 +54,13 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	         	       + '				<div class="comment-nickname">' + this.m_id + '</div>'
 	          	       + '			</div>'       
 	         	       + '		</div>'    
-	    		       + '	  </div>'    
+	    		       + '	  </div>'
+	    		       + '<div class="comment-like">'
+					   + '    <button class="like" id="like" data-comm_num=' + this.comm_num + '>좋아요</button>'
+					   + '    <span class="likecount"></span>'
+					   + '	  <button class="hate" id="hate" data-comm_num=' + this.comm_num + '>싫어요</button>'	
+					   + '    <span class="hatecount"></span>'
+					   + '</div>'    
 		      	       + '	  <div class="comment-text-box">'       
 		      		   + '	    <p class="comment-text-view">'         
 	       		       + '		   <span class="text-comment">' + this.comm_content + '</span>'       
@@ -67,9 +76,10 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 				output += '	  </div>'
 				
 			if($("#loginid").val() == this.m_id) {    
-				output += '<div class="comment-tool">'
-					   + '	<div title="더보기" class="comment-tool-button">'		
-					   + '		<div>&#46;&#46;&#46;</div>'		
+
+				output +='<div class="comment-tool">'
+					   + '	<div title="더보기" class="comment-tool-button">'
+					   + '		<div>&#46;&#46;&#46;</div>'
 					   + '	</div>'		
 					   + '	<div id="comment-list-item-layer' + this.comm_num + '" class="LayerMore">'		
 					   + '	 <ul class="layer-list">'		
@@ -202,6 +212,8 @@ $(function() {
 		
 		$.ajax({
 			url : 'CommentAdd.com', //원문 등록
+			dataType : "json",
+			cache : "false",
 			data : {
 				m_id : $("#loginid").val(),
 				comm_content : comm_content,
@@ -212,10 +224,19 @@ $(function() {
 			},
 			type : 'post',
 			success : function(rdata) {
-				if(rdata == 1) {
+				console.log('commentaddaction 성공!!')
+				if(rdata.ok == 1) {
 					getList(option);
 				}
-			} 			
+				
+				console.log('rdata.comm_num :' + rdata.comm_num)
+				if(rdata.comm_num != -1) {
+					
+				}
+			},
+			error : function() {
+				console.log('commentadd 댓글 등록 ajax 실패')
+			}
 		})
 		
 		$('.comment-write-area-text').val('');	//textarea 초기화
@@ -339,6 +360,46 @@ $(function() {
 			}		
 		});
 	})
+	
+	//댓글 좋아요 버튼 클릭시(좋아요 추가 또는 좋아요 철회)
+	$('.comment-list').on('click', '.like', function() {
+		console.log('클릭중');
+		$.ajax({
+			url : "InfocommLike.com",
+			type : "POST",
+			data : {
+				comm_num : $(this).attr("data-comm_num"),
+				m_id : $("#loginid").val()
+			},
+			success : function () {
+				console.log('댓글 좋아요 데이터 받아 왔다')
+			},
+			error : function() {
+				console.log('댓글 좋아요 버튼 실패')
+			}
+		})
+		
+		$.ajax ({
+			url : "InfocommLikeCount.com",
+			type : "POST",
+			data : {
+				comm_num : $(this).attr("data-comm_num"),
+				m_id : $("#loginid").val()
+			},
+			success : function (rdata) {
+				console.log('댓글 카운트 ajax 성공')
+				if (rdata) {
+					$(this).find('span').html(rdata)
+				}
+			}
+		})
+		
+	//댓글 싫어요 버튼 클릭시
+		
+	})
+	
+	
+})//ready
 
 
 infolikecnt();
@@ -359,6 +420,28 @@ function infolikecnt(){
 			}		
 	});
 }
-		
- })//ready
+	
+
+	/*
+	//댓글 좋아요 카운트
+	function likeCount() {
+		$.ajax ({
+			url : "InfocommLikeCount.com",
+			type : "POST",
+			data : {
+				comm_num : $().attr("data-comm_num"),
+				m_id : $("#loginid").val()
+			},
+			success : function (rdata) {
+				console.log('댓글 카운트 ajax 성공')
+				if (rdata) {
+					$(".likecount").html(rdata);
+				}
+			}
+		})
+	}
+	*/
+
+
+>>>>>>> branch 'main' of https://github.com/kjh936/Bunge.git
  

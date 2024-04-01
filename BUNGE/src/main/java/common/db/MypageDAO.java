@@ -1,9 +1,12 @@
 package common.db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -31,18 +34,7 @@ private DataSource ds;
 			
 			try(ResultSet rs = pstmt.executeQuery()) {
 				if(rs.next()) {
-					m=new mypage();
-					m.setM(rs.getString(m_id));
-					m.setM_pwd(rs.getString(2));
-					m.setM_name(rs.getString(3));
-					m.setM_nick(rs.getString(4));
-					m.setM_gender(rs.getString(5));
-					m.setM_zipcode(rs.getString(6));
-					m.setM_addr1(rs.getString(7));
-					m.setM_addr2(rs.getString(8));
-					m.setM_phone(rs.getString(9));
-					m.setM_email(rs.getString(10));
-					m.setM_birthdate(rs.getDate(11));
+				
 				}
 			}catch (SQLException e) {
 				e.printStackTrace();
@@ -50,6 +42,69 @@ private DataSource ds;
 		}catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return m;
+
+		return null;
 	}
+	public int getList() {
+		String List_sql="select count(*) from infoboard";
+		int x=0;
+		try(Connection con =ds.getConnection();
+				PreparedStatement pstmt= con.prepareStatement(List_sql);) {
+			
+				try(ResultSet rs = pstmt.executeQuery()) {
+					if(rs.next()) {
+						x = rs.getInt(1);
+					}
+				}catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			return x;
+	}
+	public List<mypage> getBoardList(String m_id, int page, int limit) {
+		List<mypage> boardlist = new ArrayList<>();
+		
+		String board_list_sql = "SELECT b.inf_num, b.inf_subject, b.inf_content, b.inf_reg, b.inf_readcount, count(*) as k.inf_num "
+				+ "FROM (SELECT ROWNUM AS rnum, b.* "
+				+ "      FROM (SELECT * "
+				+ "            FROM member m "
+				+ "            JOIN infoboard b ON m.m_id = b.m_id "
+				+ "            JOIN infolike k ON b.m_id = k.m_id "
+				+ "            WHERE m.m_id = ? "
+				+ "            ORDER BY b.inf_reg DESC) b "
+				+ "      WHERE ROWNUM <= ?) "
+				+ "WHERE rnum >= ?";
+ 
+	    int startrow = (page - 1) * limit + 1;
+	    int endrow = startrow + limit - 1;
+	    
+	    try (Connection con = ds.getConnection();
+	         PreparedStatement pstmt = con.prepareStatement(board_list_sql)) {
+	        
+	        pstmt.setString(1, m_id);
+	        pstmt.setInt(2, endrow);
+	        pstmt.setInt(3, startrow);
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            while (rs.next()) {
+	                mypage board = new mypage();
+	                board.getBo().setInf_num(rs.getInt("inf_num"));
+	                board.getBo().setInf_subject(rs.getString("inf_subject"));
+	                board.getBo().setInf_content(rs.getString("inf_content"));
+	                board.getBo().setInf_reg(rs.getString("inf_reg"));
+	                board.getBo().setInf_readcount(rs.getInt("inf_readcount"));
+	                board.getLike().setInf_num(rs.getInt("inf_num"));
+	                boardlist.add(board);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	    return boardlist;
+	}
+
 }

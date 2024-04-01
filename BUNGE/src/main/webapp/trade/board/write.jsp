@@ -16,38 +16,51 @@
 <div id="content-view">
 	<div id="content-view-inner">
 		<div id="write-view-title">거래글 업로드</div>
-		<br>
+		<hr><br>
 
 		<form id="write-form" action="tradeSubmit.net" method="post" enctype="multipart/form-data">
 			<!-- 거래글 제목 -->
 			<input type="text" id="write-title" name="title" placeholder="거래글 제목(30자 이내)" maxlength="30"><br><br>
 
 			<!-- 드롭다운 리스트들 -->
+			카테고리
 			<select name="category">
-				<option value="1">항목 1</option>
-				<option value="2">항목 2</option>
+				<option value="철학">철학</option>
+				<option value="종교">종교</option>
+				<option value="사회과학">사회과학</option>
+				<option value="자연과학">자연과학</option>
+				<option value="기술과학">기술과학</option>
+				<option value="예술">예술</option>
+				<option value="언어">언어</option>
+				<option value="문학">문학</option>
+				<option value="역사">역사</option>
+				<option value="IT">IT</option>
 				<!-- 나머지 항목 추가 -->
-			</select>
+			</select><br><br>
+			책 상태
 			<select name="quality">
 				<option value="A">A</option>
 				<option value="B">B</option>
 				<option value="C">C</option>
-			</select>
+			</select><br><br>
+			거래 상태
 			<select name="condition">
 				<option value="판매중">판매중</option>
 				<option value="예약중">예약중</option>
 				<option value="거래완료">거래완료</option>
-			</select>
+			</select><br><br>
+			선호 거래방식
 			<select name="tradeMethod">
 				<option value="택배거래">택배거래</option>
 				<option value="직거래">직거래</option>
 			</select><br><br>
+			<input type="text" id="price" name="price" placeholder="가격을 입력하세요" maxlength="20">
 
 			<!-- 거래글 내용 -->
 			<textarea id="write-desc" name="desc" placeholder="거래글 내용(1000자 이내)" maxlength="1000"></textarea><br><br>
 
 			<!-- 이미지 업로드 -->
-			<input type="file" id="write-thumbnail" name="thumbnail" accept=".jpeg,.jpg,.png" required><br>
+			<input type="file" id="write-thumbnail" name="imageID" accept=".jpeg,.jpg,.png" required><br>
 			<!-- 이미지 미리보기 -->
 			<img style="width: 140px; height: 200px; margin-top:30px;" id="preview-image" src="static/thumbnailPreview.png" alt="썸네일 미리보기"><br>
 			(실제 보여질 이미지 크기입니다)<br><br>

@@ -30,6 +30,7 @@ import common.login.logoutAction;
 import common.login.pwdresetAction;
 import common.mypage.myinfoboardAction;
 import common.mypage.mypageAction;
+import common.mypage.reviewlistAction;
 import info.action.InfoDetailAction;
 import info.action.InfoListAction;
 import info.action.InfoModifyAction;
@@ -42,6 +43,8 @@ import info.action.InfoDeleteAction;
 import info.action.InfoWriteAction;
 import infoboardlike.action.InfoLikeAction;
 import infoboardlike.action.InfoLikeAddAction;
+import infocommlike.action.InfocommLikeAction;
+import infocommlike.action.InfocommLikeCountAction;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -128,6 +131,10 @@ public class FrontController extends HttpServlet {
             case "/myinfoboard.com":
                 action = new myinfoboardAction();
                 break;
+                //리뷰 활동 페이지
+            case "/reviewlist.com" :
+            	action = new reviewlistAction();
+            	break;
             //게시판에 글 추가
             case "/InfoAdd.com":
                 action = new InfoAddAction();
@@ -208,6 +215,14 @@ public class FrontController extends HttpServlet {
             case "/chatCreate.com":
                 action = new ChatCreateAction();
                 break;
+            //댓글 좋아요 추가
+            case "/InfocommLike.com":
+            	action = new InfocommLikeAction();
+            	break;
+            //댓글 좋아요 카운트
+            case "/InfocommLikeCount.com":
+            	action = new InfocommLikeCountAction();
+            	break;
 
         } //switch (command)
 

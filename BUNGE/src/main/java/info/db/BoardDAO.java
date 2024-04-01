@@ -247,7 +247,10 @@ public class BoardDAO {
 	public ArrayList<Boardfile> getDetailAttach(int num) {
 		ArrayList<Boardfile> list = new ArrayList<Boardfile>();
 		Boardfile boardfile = null;
-		String sql = "select * from infoattach where inf_num = ?";
+		String sql = "select * "
+				   + "from infoattach "
+				   + "where inf_num = ? "
+				   + "order by infa_num";
 		
 		try (Connection con = ds.getConnection(); 
 			PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -543,7 +546,7 @@ public class BoardDAO {
 		
 		String sql2 = "insert into infoattach "
 				    + "(infa_num, inf_num, infa_filename, infa_servername) "
-				    + "values(select max(infa_num)+1 from infoattach, ?, '0', '0') ";
+				    + "values(infa_seq.nextval, ?, '0', '0') ";
 		
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -591,4 +594,53 @@ public class BoardDAO {
 		}
 		return num;
 	} //boardInsert() end
+	
+	public boolean commLike(String m_id, int comm_num) {
+		int result = -1;
+		String sql = "insert into infocommlike (no, m_id, comm_num) "
+				   + "values((select nvl(max(no),0)+1 from infocommlike), ?, ?) ";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setString(1, m_id);
+			pstmt.setInt(2, comm_num);
+			result = pstmt.executeUpdate();
+			
+			if (result != -1) {
+				System.out.println("commLike() 성공 : 데이터 삽입 성공");
+			}
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("commLike() 에러" + e);
+		}
+		return false;
+	} //commLike() end
+
+	public int commlikecount(int comm_num) {
+		int count = -1;
+		String sql = "select count(no) "
+				   + "from infocommlike "
+				   + "where comm_num = ?";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, comm_num);
+			
+			try (ResultSet rs = pstmt.executeQuery();) {
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+				
+				if(count != -1)
+					return count;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("commlikecount()에러" + e);
+			}
+		} catch (Exception e) {
+			System.out.println("commlikecount()에러" + e);
+		}
+		return count;
+	} //commlikecount end
 }//class end
