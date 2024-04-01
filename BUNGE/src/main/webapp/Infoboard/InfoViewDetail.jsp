@@ -107,7 +107,9 @@
     		</div>
     		</div>
     	</div>
-    </div>
+    </div> 
+    
+   <%-- 댓글 시작 부분 --%>
    <div class="comment-area">
 			<div class="comment-head">
 				<h3 class="comment-count">
@@ -115,6 +117,7 @@
 				</h3>
 				<div class="comment-order">
 					<ul class="comment-order-list">
+					<%-- 등록순 / 최신순 들어가는 부분 --%>
 					</ul>
 				</div>
 			</div><%-- comment-head end--%>

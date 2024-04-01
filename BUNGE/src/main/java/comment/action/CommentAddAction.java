@@ -1,6 +1,9 @@
 package comment.action;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import com.google.gson.JsonObject;
 
 import comment.db.Comment;
 import comment.db.CommentDAO;
@@ -31,7 +34,16 @@ public class CommentAddAction implements Action {
 		co.setComm_seq(Integer.parseInt(request.getParameter("comm_seq")));
 		
 		int ok = dao.commentsInsert(co);
-		response.getWriter().print(ok);
+		int comm_num = dao.commentsinsertedNum();
+		
+		JsonObject object = new JsonObject();
+		object.addProperty("ok", ok);
+		object.addProperty("comm_num", comm_num);
+		
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(object.toString());
+		
 		return null;
 	}
 }
