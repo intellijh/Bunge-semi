@@ -320,6 +320,7 @@ public class BoardDAO {
 				 }
 			 }catch (SQLException e) {
 				 e.printStackTrace();
+				 System.out.println("boardDelete()에러 : " + e);
 			 }
 		}catch (Exception ex) {
 			 System.out.println("boardDelete()에러 : " + ex);

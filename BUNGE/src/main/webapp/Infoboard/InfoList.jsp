@@ -6,7 +6,7 @@
 <title>정보공유게시판 리스트</title>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
  <script src="js/list.js"></script>
- <%@ include file="/layout/header2.jsp" %>
+ <%@ include file="/layout/header.jsp" %>
  <style>
 	h1{font-size:1.5em; text-align:center; color:#1a92b9}
 	.container{width:60%}

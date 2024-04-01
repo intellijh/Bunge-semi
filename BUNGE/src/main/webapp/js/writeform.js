@@ -1,10 +1,20 @@
 $(function() {
 	
+	let inputcount=1
+	
+	$("#inputfile-btn").click(function() {
+		$('.input-group'+inputcount).css('display', 'block')
+		//console.log(inputcount)
+		inputcount++
+	})
+	
 	$("input[type=file]").change(function(){
-		console.log($(this).val())
-		console.log($(this).attr('id').substr(8,1))
+		//console.log($(this).val())
 		const inputfile = $(this).val().split('\\');
-		$(this).next().text(inputfile[inputfile.length -1]);
+		//console.log(inputfile)
+		//console.log($(this).attr('name'))
+		//console.log($(this).attr('name').substr(8,1))
+		$('#filevalue'+$(this).attr('name').substr(8,1)).text(inputfile[inputfile.length-1])
 	});
 	
 	
@@ -29,7 +39,9 @@ $(function() {
 		$("#preview5").attr('src','')
 	})
 	
-$("button").click(function(){
+$("form[name=boardform]").submit(function(e){
+	
+	
 	if($.trim($("#inf_subject").val()) == "") {
 		alert("제목을 입력하세요.");
 		$("inf_subject").focus();
@@ -41,11 +53,11 @@ $("button").click(function(){
 		$("inf_content").focus();
 		return false;
 	}
+	
  });
   
-$("input[type=button]:eq(1)").click(function(){
-	console.log('abcd');
-	location.href="InfoList.com";
+$(".cancel-btn").click(function(){
+	location.href = "InfoList.com"
 })
 	
 $("#postcode").click(function () {

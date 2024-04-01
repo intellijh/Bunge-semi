@@ -4,7 +4,7 @@
 <head>
 <title>답글 쓰기 </title>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
-<%@ include file="/layout/header2.jsp" %>
+<%@ include file="/layout/header.jsp" %>
  <script src="js/reply.js"></script>
  <style>
 	h1{font-size:1.5em; text-align:center; color:#1a92b9}
