@@ -41,13 +41,15 @@
         <c:choose>
         <c:when test="${m_id ==null }">
         <li class="nav-item"><a class="nav-link" href="login.com">로그인</a></li>
+         <li class="nav-item"><a class="nav-link" href="join.com">회원가입</a></li>
         </c:when>
  	<c:when test="${m_id != null}">
 	    <li class="nav-item"><a class="nav-link" href="#">프로필사진</a></li>
 	 	<li class="nav-item"><a class="nav-link" href="logout.com">${m_id}님 (로그아웃)</a></li>
 	    <li class="nav-item"><a class="nav-link" href="mypage.com">마이페이지</a></li>
-	     <li class="nav-item"><a class="nav-link" href="#">중고거래</a></li>
-	      <li class="nav-item"><a class="nav-link" href="myinfoboard.com">리뷰활동</a></li>
+	     <li class="nav-item"><a class="nav-link" href="trade.net">중고거래</a></li>
+	      <li class="nav-item"><a class="nav-link" href="reviewlist.com">리뷰활동</a></li>
+	      <li class="nav-item"><a class="nav-link" href="chat.com">채팅</a></li>
  	</c:when>
 </c:choose>
        <c:if test="${id == 'admin'}">

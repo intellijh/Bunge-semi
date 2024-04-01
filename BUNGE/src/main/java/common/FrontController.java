@@ -30,6 +30,7 @@ import common.login.logoutAction;
 import common.login.pwdresetAction;
 import common.mypage.myinfoboardAction;
 import common.mypage.mypageAction;
+import common.mypage.reviewlistAction;
 import info.action.InfoDetailAction;
 import info.action.InfoListAction;
 import info.action.InfoModifyAction;
@@ -128,6 +129,10 @@ public class FrontController extends HttpServlet {
             case "/myinfoboard.com":
                 action = new myinfoboardAction();
                 break;
+                //리뷰 활동 페이지
+            case "/reviewlist.com" :
+            	action = new reviewlistAction();
+            	break;
             //게시판에 글 추가
             case "/InfoAdd.com":
                 action = new InfoAddAction();

@@ -165,7 +165,7 @@ $("input[name=m_email]").on('keyup',
 	});//이메일 유효성 검사 end
 	
 	//생년월일 유효성 검사 
-	$("input[name=m_birthdate]").on('mouseup', 
+	$("input[name=m_birthdate]").on('input', 
 	function(){
 		const btrdate = $(this).val().trim();
 		if(btrdate =="") {
