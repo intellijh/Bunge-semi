@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>정보공유게시판</title>
-<jsp:include page="../layout/header2.jsp"></jsp:include>
+<jsp:include page="../layout/header.jsp"></jsp:include>
 </head>
 <body>
 안녕하세요! 여기서부터 프로젝트 뷰페이지 시작입니다!

@@ -15,12 +15,14 @@
 
 	img{width:15px}
 	
+	.input-group1, .input-group2, .input-group3, .input-group4, .input-group5 {display:none}
+	
 	input[type=file]{display:none}
  </style>
  </head>
  <body>
  <div class="container">
-  <form action="InfoAdd.com" method="post" enctype="multipart/form-data" name="boardform" id="frmAttachedFiles">
+  <form action="InfoAdd.com" method="post" enctype="multipart/form-data" name="boardform">
   	<div class="form-group">
   		<label for="m_id">글쓴이</label>
   		<input name="m_id" id="m_id" type="text" value="${m_id}" class="form-control" placeholder="Enter m_id" readOnly>
@@ -47,62 +49,62 @@
   		
   		<%-- 이 부분 <c:forEach> 이용해서 바꿀 수 있을 것 같다 --%>
   		<%-- 시간이 된다면, X버튼 만들어서 첨부파일 취소하는 기능 추가 --%>
-  		<div class="form-group">
-	 		<label>파일첨부<br> 
-	 		    <img src="image/attach.png" alt="파일첨부">
-	 		    <img id="preview1">
-	 		    <input name="inf_file1" id="inf_file1" type="file" onchange="readURL(this)">
-	 		      <span id="filevalue1"></span>
-	 		</label>
-	 		    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove1">
-	 		<br>
-	 		
-	 		<label>
-	 		    <img src="image/attach.png" alt="파일첨부">
-	 		    <img id="preview2">
-	 		    <input name="inf_file2" id="inf_file2" type="file" onchange="readURL(this)">
-	 		      <span id="filevalue2"></span>
-	 		</label>
-	 		    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove2">
-	 		<br>
-	 		
-	 		<label>
-	 		    <img src="image/attach.png" alt="파일첨부">
-	 		    <img id="preview3">
-	 		    <input name="inf_file3" id="inf_file3" type="file" onchange="readURL(this)">
-	 		      <span id="filevalue3"></span>
-	 		</label>
-	 		    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove3">
-	 		<br>
-	 		
-	 		<label>    
-	 		    <img src="image/attach.png" alt="파일첨부">
-	 		    <img id="preview4">
-	 		    <input name="inf_file4" id="inf_file4" type="file" onchange="readURL(this)">
-	 		      <span id="filevalue4"></span>
-	 		</label>
-	 		    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove4">
-	 		<br>
-	 		
-	 		<label>
-	 		    <img src="image/attach.png" alt="파일첨부">
-	 		    <img id="preview5">
-	 		    <input name="inf_file5" id="inf_file5" type="file" onchange="readURL(this)">
-	 		      <span id="filevalue5"></span>
-	  		</label>
-	 		    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove5">
+  		<button type="button" id="inputfile-btn">파일추가</button> (파일 첨부는 최대 5개까지 가능합니다...)
+  		<div class="input-group1">
+	 	  <label>
+	 	    첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <input type="file" name="inf_file1" onchange="readURL(this)">
+	 	  </label>
+	 	    <span id="filevalue1"></span>
   		</div>
- 
+  		
+  		<div class="input-group2">
+	 	  <label for="inf_file">
+	 	  첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <input type="file" name="inf_file2" onchange="readURL(this)">
+	 	    <span id="filevalue2"></span>
+	 	  </label>
+  		</div>
+  		
+  		<div class="input-group3">
+	 	  <label for="inf_file">
+	 	  첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <input type="file" name="inf_file3" onchange="readURL(this)">
+	 	    <span id="filevalue3"></span>
+	 	  </label>
+  		</div>
+  		
+  		<div class="input-group4">
+	 	  <label for="inf_file">
+	 	  첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <input type="file" name="inf_file4" onchange="reaudURL(this)">
+	 	    <span id="filevalue4"></span>
+	 	  </label>
+  		</div>
+  		
+  		<div class="input-group5">
+	 	  <label for="inf_file">
+	 	  첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <input type="file" name="inf_file5" onchange="reaudURL(this)">
+	 	    <span id="filevalue5"></span>
+	 	  </label>
+  		</div>
+  		
+ 		
+ 		<div class="form-group">
   		 <label for="address">위치</label>
   		    <input type="text" size="50" name="inf_loc" id="inf_loc">
   		    <input type="button" value="위치찾기" id="postcode">
+ 		</div>
   		
    		 <div class="form-group">
-				<button type="submit">등록</button>
-				<input type="button">취소
-				
-<%-- 				<button type="submit" class="btn btn-primary">등록</button>
-				<button type="submit" class="btn btn-danger">취소</button> --%>
+				<button type="submit" class="submit-btn">등록</button>
+				<button type="reset" class="cancel-btn">취소</button>
 		</div>
 	</form>
   </div>

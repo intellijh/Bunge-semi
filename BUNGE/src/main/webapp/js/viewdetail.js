@@ -373,9 +373,11 @@ $(function() {
 			},
 			success : function () {
 				console.log('댓글 좋아요 데이터 받아 왔다')
+				commlikecount();
 			},
 			error : function() {
 				console.log('댓글 좋아요 버튼 실패')
+				
 			}
 		})
 		
@@ -398,8 +400,20 @@ $(function() {
 		
 	})
 	
+	infolikecnt();
 	
 })//ready
+
+function commlikecount() {
+	$.ajax ({
+		url : "InfocommLikeCount.com",
+		type : "POST",
+		data : {
+			comm_num :
+			m_id :
+		}
+	})
+}
 
 
 infolikecnt();
@@ -416,7 +430,7 @@ function infolikecnt(){
 				$('b').html(rdata);
 			}, 
 			error : function(){
-				console.log('infolikecnt 실패');
+				console.log("infolikecnt ajax에러")
 			}		
 	});
 }
@@ -441,7 +455,3 @@ function infolikecnt(){
 		})
 	}
 	*/
-
-
->>>>>>> branch 'main' of https://github.com/kjh936/Bunge.git
- 
