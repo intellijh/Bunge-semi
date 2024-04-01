@@ -3,6 +3,7 @@ let option = 1; // 선택한 등록순과 최신순을 수정, 삭제,추가 후
 function getList(state){//현재 선택한 댓글 정렬방식을 저장합니다. 1=>등록순, 2=>최신순
 	    console.log(state)
 	    option=state;
+	    
 	    $.ajax({
 			type:"post",
 			url : "CommentList.com",
@@ -54,11 +55,11 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	          	       + '			</div>'       
 	         	       + '		</div>'    
 	    		       + '	  </div>'
-	    		       + '<div class="comment-tool">'
+	    		       + '<div class="comment-like">'
 					   + '    <button class="like" id="like" data-comm_num=' + this.comm_num + '>좋아요</button>'
-					   + '      <span class="likecount"></span>'
-					   + '	  <button class="hate" id="hate">싫어요</button>'	
-					   + '      <span class="hatecount"></span>'
+					   + '    <span class="likecount"></span>'
+					   + '	  <button class="hate" id="hate" data-comm_num=' + this.comm_num + '>싫어요</button>'	
+					   + '    <span class="hatecount"></span>'
 					   + '</div>'    
 		      	       + '	  <div class="comment-text-box">'       
 		      		   + '	    <p class="comment-text-view">'         
@@ -341,7 +342,6 @@ $(function() {
 	})//답글쓰기 클릭 후 계속 누르는 것을 방지하기 위한 작업
 	
 	
-	
 	//댓글 좋아요 버튼 클릭시(좋아요 추가 또는 좋아요 철회)
 	$('.comment-list').on('click', '.like', function() {
 		console.log('클릭중');
@@ -355,6 +355,9 @@ $(function() {
 			success : function () {
 				console.log('댓글 좋아요 데이터 받아 왔다')
 			},
+			error : function() {
+				console.log('댓글 좋아요 버튼 실패')
+			}
 		})
 		
 		$.ajax ({
@@ -367,12 +370,12 @@ $(function() {
 			success : function (rdata) {
 				console.log('댓글 카운트 ajax 성공')
 				if (rdata) {
-					$(".likecount").html(rdata);
+					$(this).find('span').html(rdata)
 				}
 			}
 		})
 		
-	//	
+	//댓글 싫어요 버튼 클릭시
 		
 	})
 	

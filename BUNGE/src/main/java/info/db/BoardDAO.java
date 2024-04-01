@@ -576,7 +576,7 @@ public class BoardDAO {
 	public boolean commLike(String m_id, int comm_num) {
 		int result = -1;
 		String sql = "insert into infocommlike (no, m_id, comm_num) "
-				   + "values(infocommlike_seq.nextval, ?, ?) ";
+				   + "values((select nvl(max(no),0)+1 from infocommlike), ?, ?) ";
 		
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -585,7 +585,7 @@ public class BoardDAO {
 			result = pstmt.executeUpdate();
 			
 			if (result != -1) {
-				System.out.println("commLike() 에러 : 데이터 삽입 실패");
+				System.out.println("commLike() 성공 : 데이터 삽입 성공");
 			}
 			return true;
 		} catch (SQLException e) {

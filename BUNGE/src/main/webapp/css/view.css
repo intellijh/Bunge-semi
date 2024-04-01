@@ -168,6 +168,12 @@ textarea.comment-write-area-text {
 	right: 0;
 }
 
+.comment-area .comment-list .comment-like {
+	position: absolute;
+	top: 12px;
+	right: 30;
+}
+
 .comment-tool-button div {
 	transform: rotate(90deg);
 	color: #979797
