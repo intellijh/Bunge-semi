@@ -15,11 +15,11 @@ public class CommentDeleteAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("inf_num"));
+		int comm_num = Integer.parseInt(request.getParameter("num"));
 		
 		CommentDAO dao = new CommentDAO();
 		
-		int result = dao.commentDelete(num);
+		int result = dao.commentDelete(comm_num);
 		PrintWriter out = response.getWriter();
 		out.print(result);
 		

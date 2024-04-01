@@ -13,7 +13,6 @@ import javax.sql.DataSource;
 
 import com.oreilly.servlet.MultipartRequest;
 
-import infoboardlike.db.InfoLike;
 
 public class BoardDAO {
 	private DataSource ds;
@@ -570,30 +569,9 @@ public class BoardDAO {
 		} catch (Exception ex) {
 			System.out.println("boardmodifyDelete() 에러 : " + ex);
 		}
-		
 		return false;
 	} //boardmodifyDelete() end
 
-	public int getinfolikeInsert(int no,String m_id) {
-		int num = 0;
-		String sql = "INSERT INTO INFOLIKE " 
-					+ " values(infolike_seq.nextval,?,?)"; 
-		
-		try (Connection con = ds.getConnection();
-			 PreparedStatement pstmt = con.prepareStatement(sql);) {
-				pstmt.setInt(1, no);
-				pstmt.setString(2, m_id);
-	
-				pstmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}catch (Exception ex) {
-			System.out.println("boardInsert() 에러 : " + ex);
-			ex.printStackTrace();
-		}
-		return num;
-	} //boardInsert() end
-	
 	public boolean commLike(String m_id, int comm_num) {
 		int result = -1;
 		String sql = "insert into infocommlike (no, m_id, comm_num) "

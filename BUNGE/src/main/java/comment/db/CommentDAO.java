@@ -225,8 +225,6 @@ private DataSource ds;
 		}
 		return result;
 	}
-
-
 }
 	
 //http://localhost:8088/Board_Ajax/CommentList.bo?comment_board_num=7&state=1
