@@ -1,7 +1,7 @@
 $(function(){
 
     const webSocket = new WebSocket('ws://localhost:8088/chat');
-    let inputMessage = $(".type_msg");
+    const $inputMessage = $(".type_msg");
 
     webSocket.onerror = function(e){
         onError(e);
@@ -70,7 +70,7 @@ $(function(){
 
     function send(){
 
-        const chatMsg = inputMessage.val();
+        const chatMsg = $inputMessage.val();
         console.log(chatMsg);
         if(chatMsg == ''){
             return;
@@ -94,13 +94,13 @@ $(function(){
         const chatData = selectedChatId + "|split|" + selectedSellerId + "|split|" +
             selectedBuyerId + "|split|" + chatMsg;;
         webSocket.send(chatData);
-        inputMessage.val("");
+        $inputMessage.val("");
         // $('.msg_card_body').scrollTop($('.msg_card_body')[0].scro\llHeight+20);
 
 
     }
 
-    $(".type_msg").keydown(function(key){
+    $inputMessage.keydown(function(key){
         if(key.keyCode == 13){
             $('.type_msg').focus();
             $('.send_btn').click();
@@ -108,14 +108,11 @@ $(function(){
         }
         console.log("type_msg keydown");
 
-        if ($(".type_msg").val().length > 100) {
-            return;
-        }
     });
 
     $('.send_btn').click(function(){
         send();
-        $('.type_msg').val("");
+        $inputMessage.val("");
         console.log("send_btn click");
     });
 })
