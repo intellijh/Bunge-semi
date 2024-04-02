@@ -438,6 +438,7 @@ $(function() {
 	});
 }
 })//ready
+
 /*
 function commlikecount() {
 	$.ajax ({
@@ -451,6 +452,12 @@ function commlikecount() {
 }
 
 */
+
+
+	
+
+
+
 	/*
 	//댓글 좋아요 카운트
 	function likeCount() {
