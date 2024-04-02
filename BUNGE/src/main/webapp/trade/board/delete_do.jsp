@@ -1,39 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8" import="net.trade.db.*,java.io.File"%>
-<script>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"
+         import="net.trade.db.*, java.io.File" %>
 <%
-	request.setCharacterEncoding("utf-8");
-
-	int id = Integer.parseInt(request.getParameter("id"));
-	String password = request.getParameter("password");
-	TradeDAO dao = new TradeDAO();
-	
-	if(dao.passwordCheck(id, password)){	// 비밀번호 체크
-		Video video = repo.selectOneVideoById(id);
-		ServletContext context = getServletContext();
-		String realFolder = context.getRealPath("upload");
-		
-		// 기존 비디오, 썸네일 경로
-		File videoFile = new File(realFolder+"/"+video.getVideo());
-		File thumbnailFile = new File(realFolder+"/"+video.getThumbnail());
-		
-		// 기존 비디오 썸네일 삭제
-		videoFile.delete();
-		thumbnailFile.delete();
-		
-		// DB에서 삭제
-		dao.delete(id);
-		%> 
-			alert('삭제가 완료되었습니다');
-			location.href="index.jsp";
-		<%
-	} else {
-		%>	
-			alert('비밀번호가 다르거나 존재하지 않는 비디오입니다.');
-			history.back();
-		<%
-	}
-		
-	dao.close();
+    request.setAttribute("message", "비밀번호를 잘못 입력했습니다. 다시 입력하세요.");
 %>
+
+<script>
+    var message = '<%= request.getAttribute("message") %>';
+    if (message !== null && message !== '') {
+        alert(message);
+        // 다시 입력하는 페이지로 리디렉션할 수 있으면 해당 URL로 변경하시면 됩니다.
+        window.location.href = 'view.jsp'; // 다시 입력하는 페이지로 리디렉션
+    }
 </script>

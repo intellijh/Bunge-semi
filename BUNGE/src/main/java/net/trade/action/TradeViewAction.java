@@ -33,7 +33,7 @@ public class TradeViewAction implements Action {
         } catch (Exception e) {
             e.printStackTrace();
             // 에러 발생 시 에러 페이지로 이동하도록 설정
-            forward.setPath("error.jsp");
+            forward.setPath("error/error.jsp");
             forward.setRedirect(false);
         }
 
