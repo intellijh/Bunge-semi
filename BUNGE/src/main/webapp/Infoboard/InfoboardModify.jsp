@@ -121,7 +121,8 @@
     </c:if>
     
     <c:if test="${boardfile[2] == null}">
- 	  <div class="input-group3">
+ 	  <div c
+ 	  lass="input-group3">
 	 	  <label>
 	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
   		    <img id="preview3" width="50px">

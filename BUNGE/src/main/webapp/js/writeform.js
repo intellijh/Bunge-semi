@@ -1,16 +1,20 @@
 $(function() {
 	
-	let inputcount=2
-	
 	$("#inputfile-btn").click(function() {
-		if ($('#filevalue'+(inputcount-1)).text() != "") {
-			$('.input-group'+inputcount).css('display', 'block')
-			inputcount++
-		} else {
-			alert('첨부된 파일이 없습니다..!')
+		let cntnofile = countnofile()
+		console.log(cntnofile)
+		let cntexistfile = existfile()
+		console.log(cntexistfile)
+		if (cntnofile <= 5) {
+			$('.input-group'+(cntexistfile+1)).css('display', 'block')
+		} 
+		
+		if (cntnofile == 0) {
+			alert('파일 첨부는 5개까지 가능합니다...')
 			const target = document.getElementById("inputfile-btn");
 			target.disabled = true;
 		}
+		
 		//console.log(inputcount)
 	})
 	
@@ -23,13 +27,16 @@ $(function() {
 		$('#filevalue'+$(this).attr('name').substr(8,1)).text(inputfile[inputfile.length-1])
 		const target = document.getElementById("inputfile-btn");
 		target.disabled = false;
-		$(".remove"+$(this).attr('name').substr(8,1)).css('display', 'inline-block')
+		if ($('.filename').text() != "") {
+			$(".remove"+$(this).attr('name').substr(8,1)).css('display', 'inline-block')
+		}
 	})
 	
 	
 	$(".remove1").click(function() {
 		$("#filevalue1").text('');
 		$("#preview1").attr('src','')
+		$(".input-group1").css('display', 'none')
 		$(this).css('display', 'none')
 	})
 	$(".remove2").click(function() {
@@ -37,28 +44,24 @@ $(function() {
 		$("#preview2").attr('src','')
 		$(".input-group2").css('display','none')
 		$(this).css('display', 'none')
-		inputcount--
 	})
 	$(".remove3").click(function() {
 		$("#filevalue3").text('');
 		$("#preview3").attr('src','')
 		$(".input-group3").css('display','none')
 		$(this).css('display', 'none')
-		inputcount--
 	})
 	$(".remove4").click(function() {
 		$("#filevalue4").text('');
 		$("#preview4").attr('src','')
 		$(".input-group4").css('display','none')
 		$(this).css('display', 'none')
-		inputcount--
 	})
 	$(".remove5").click(function() {
 		$("#filevalue5").text('');
 		$("#preview5").attr('src','')
 		$(".input-group5").css('display','none')
 		$(this).css('display', 'none')
-		inputcount--
 	})
 	
 $("form[name=boardform]").submit(function(e){
@@ -122,9 +125,28 @@ $("#postcode").click(function () {
  }) //$("#postcode").click end
 }) //ready end
 
+function countnofile() {
+	let nofile = 0;
+	for (let i=1; i<=5; i++) {
+		if ($('#filevalue'+i).text() == "") {
+			nofile++
+		}
+	}
+	return nofile;
+}
+
+function existfile() {
+	let existfile = 0;
+	for (let i=1; i<=5; i++) {
+		if ($('#filevalue'+i).text() != "") {
+			existfile++
+		}
+	}
+	return existfile;
+}
 
 function readURL(input) {
-	console.log((input.name).substr(8,1))
+	//console.log((input.name).substr(8,1))
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
