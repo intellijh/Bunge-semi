@@ -23,16 +23,23 @@ public class InfoBoardFileDownAction implements Action {
 			
 			String savepath = "boardupload";
 			
+			//boardupload의 실제 경료. 오라클에서 파일을 관리하는 실제 경로
 			ServletContext context = request.getServletContext();
 			String downloadpath = context.getRealPath(savepath);
 			
+			//운영체제마다 파일 경로 구분자가 다른데,
+			//OS 따른 경로 차이를 신경쓰지 않고, 파일 경로를 설정한다.
 			String filepath = downloadpath + File.separator + filename;
 			System.out.println("filepath : " + filepath);
+//filepath : C:\semi\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BUNGE\boardupload\긍정 해동의 힘.jpg
+
 			
 			byte[] b = new byte[4096];
 			
+			//바이너리 파일 <-> 텍스트 파일
 			String mimetype = context.getMimeType(filepath);
-			System.out.println("mimetype" + mimetype);
+			System.out.println("mimetype" + mimetype); //mimetypeimage/jpeg
+
 			
 			if (mimetype == null)
 				mimetype = "application/octet-stream";
@@ -41,6 +48,8 @@ public class InfoBoardFileDownAction implements Action {
 			
 			String encoding = new String(filename.getBytes("utf-8"), "ISO-8859-1");
 			System.out.println("encoding : " + encoding);
+//encoding : ê¸ì  í´ëì í.jpg
+//encoding : sample4.jpg
 			
 			response.setHeader("Content-Disposition", "attachment; filename=" + encoding);
 			
@@ -56,7 +65,6 @@ public class InfoBoardFileDownAction implements Action {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
 		
 		return null;
 	} //execute end
