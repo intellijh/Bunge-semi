@@ -321,7 +321,6 @@ $(function() {
 		})	
 	})//답글완료 클릭한 경우
 	
-	
 	//답글쓰기 후 취소 버튼을 클릭한 경우
 	$('.comment-area').on('click','.reply-cancel',function(){
 		$(this).parent().parent().parent().remove();
@@ -346,13 +345,15 @@ $(function() {
 			url : "InfoLikeAdd.com",
 			type : 'post',
 			data : { 
-//				m_id :$('#loginid').val(),
+				m_id :$('#loginid').val(),
 				inf_num : $("#inf_num").val()
 			},
 			success : function(rdata) {
+				if (rdata == 1) {
 				console.log('infolikecnt 성공')
-				$('b').html(rdata);
 				infolikecnt();
+				}
+				
 			}, 
 			error : function(){
 				console.log('infolikecnt 실패');
@@ -361,22 +362,7 @@ $(function() {
 	})
 	
 	
-	function infolikecnt(){
-		$.ajax({
-			url : "InfoLike.com",
-			type : 'post',
-			data : { 
-				inf_num : $("#inf_num").val()
-			},
-			success : function(rdata) {
-				console.log(rdata);
-				$('b').html(rdata);
-			}, 
-			error : function(){
-				console.log('infolikecnt 실패');
-			}		
-	});
-}
+	
 	
 	//댓글 좋아요 버튼 클릭시(좋아요 추가 또는 좋아요 철회)
 	$('.comment-list').on('click', '.like', function() {
@@ -416,14 +402,33 @@ $(function() {
 	//댓글 싫어요 버튼 클릭시
 		
 	})
+	
+	infolikecnt();
 
-	})//ready
+})//ready
 
 	
-	
+	function infolikecnt(){
+		$.ajax({
+			url : "InfoLike.com",
+			type : 'post',
+			data : { 
+				inf_num : $("#inf_num").val()
+			},
+			success : function(rdata) {
+				if (rdata != -1) {
+				console.log('infolikecnt :'+rdata); 
+				$('#likecnt').html(rdata);
+				}
+			}, 
+			error : function(){
+				console.log('infolikecnt 실패');
+			}		
+	});
+}
 	
 
-
+/*
 function commlikecount() {
 	$.ajax ({
 		url : "InfocommLikeCount.com",
@@ -435,10 +440,7 @@ function commlikecount() {
 	})
 }
 
-
-
-	
-
+*/
 
 	/*
 	//댓글 좋아요 카운트
@@ -460,4 +462,3 @@ function commlikecount() {
 	}
 
 	*/
-

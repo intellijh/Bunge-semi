@@ -83,7 +83,7 @@
             </a>
           </td>
         </tr>
-        <tr><td><button type="button" id="likeclick">좋아요&nbsp;<b></b></td></tr>
+        <tr><td><button type="button" id="likeclick">좋아요&nbsp;</button><b id="likecnt"></b></td></tr>
       </table>
       <%-- 게시판 view end --%>
     

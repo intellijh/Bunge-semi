@@ -16,24 +16,21 @@ public class InfoLikeAddAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		InfoLikeDAO infolikedao = new InfoLikeDAO();
 
-		// 글 번호 파라미터 값을 num변수에 저장합니다.
-		String m_id = (String)session.getAttribute("m_id");
+		String m_id = request.getParameter("m_id");
 		int inf_num = Integer.parseInt(request.getParameter("inf_num"));
 		System.out.println("m_id : " + m_id);
-		System.out.println("num : " + inf_num);
+		System.out.println("inf_num : " + inf_num);
 		
-		//특정 주소로부터의 이동을 확인하는데 사용할 수 있는 정보는 요청 헤더인 "Referer"에 있습니다.
-		String referer = request.getHeader("Referer");
-		if(referer != null  && referer.contains("InfoLike.com")) {
-			//내용을 확인할 글의 조회수를 증가시킵니다.
-			System.out.println("referer= " + referer);
+		int result = infolikedao.getInfoLikeInsert(inf_num,m_id);
+			
+		PrintWriter out = response.getWriter();
+		out.print(result);
 
-			infolikedao.getInfoLikeInsert(inf_num,m_id);
-
-		}
+		return null;
+	}
+}
 		
 /*		//글의 내용을 DAO에서 읽은 후 얻은 결과를 boarddata 객체에 저장합니다.
 		int infodata = infolikedao.getInfoLikeInsert(inf_num,m_id);
@@ -57,6 +54,4 @@ public class InfoLikeAddAction implements Action {
 		System.out.println(infodata);
 		forward.setRedirect(false);
 		forward.setPath("Infoboard/InfoViewDetail.jsp"); //글 내용을 보기 페이지로 이동하기 위해 경로를 설정합니다.		*/
-		return null;
-	}
-}
+

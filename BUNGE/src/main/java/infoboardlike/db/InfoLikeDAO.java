@@ -40,17 +40,17 @@ public class InfoLikeDAO {
 		 }
 	}//setReadCountUpdate()메서드 end
 	
-	public int getInfoLikeInsert(int no,String m_id) {
+	public int getInfoLikeInsert(int inf_num,String m_id) {
 		int num = 0;
 		String sql = "INSERT INTO INFOLIKE " 
-					+ " values(infolike_seq.nextval,?,?)"; 
+				   + " values(infolike_seq.nextval,?,?)"; 
 		
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) {
-				pstmt.setInt(1, no);
+				pstmt.setInt(1, inf_num);
 				pstmt.setString(2, m_id);
 	
-				pstmt.executeUpdate();
+				num = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}catch (Exception ex) {
@@ -61,7 +61,7 @@ public class InfoLikeDAO {
 	} //boardInsert() end
 
 	public int getInfolikecnt(int inf_num) {
-		int result = 0;
+		int result = -1;
 		String sql = "select count(*) from infolike where inf_NUM = ? ";
 				    
 		try (Connection con = ds.getConnection(); 
