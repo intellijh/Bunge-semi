@@ -33,7 +33,7 @@
           <a class="nav-link" href="InfoList.com">정보공유게시판</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">거래게시판</a>
+          <a class="nav-link" href="trade.net">거래게시판</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">알림</a>

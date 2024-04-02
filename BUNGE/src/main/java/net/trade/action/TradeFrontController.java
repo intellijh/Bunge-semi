@@ -57,8 +57,8 @@ public class TradeFrontController extends jakarta.servlet.http.HttpServlet {
             case "/tradeSubmit.net" :
                 action = new TradeSubmitAction();
                 break;
-            case "/tradeUpdateCheck.net" :
-                action = new TradeUpdateCheckAction();
+            case "/tradeUpdate.net" :
+                action = new TradeUpdateAction();
                 break;
             case "/view.net" :
                 action = new TradeViewAction();
@@ -66,6 +66,7 @@ public class TradeFrontController extends jakarta.servlet.http.HttpServlet {
             case "/tradeDelete.net" :
                 action = new TradeDeleteAction();
                 break;
+
 
 
 
