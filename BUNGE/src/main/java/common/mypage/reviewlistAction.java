@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 import common.action.Action;
 import common.action.ActionForward;
 import common.db.MypageDAO;
+import common.db.myboard;
 import common.db.mypage;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +28,7 @@ public class reviewlistAction implements Action {
 	        throws ServletException, IOException, SQLException, NamingException {
 	    ActionForward forward = new ActionForward();
 	    MypageDAO mypagedao = new MypageDAO();
-	    List<mypage> boardlist = new ArrayList<>();
+	    List<myboard> boardlist = new ArrayList<>();
 	    HttpSession session= request.getSession();
 	    
 	    String m_id= (String)session.getAttribute("m_id");

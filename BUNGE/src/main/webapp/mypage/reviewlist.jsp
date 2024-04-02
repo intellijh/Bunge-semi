@@ -23,42 +23,40 @@
 			<div class="tab_box">
 			  <!-- 글 시작 -->
 			  <c:choose>
-				<c:when test="${empty board}">
+				<c:when test="${empty boardlist}">
 				  <p>작성된 글이 없습니다.</p>
 				</c:when>
-				<c:when test="${!empty board}">
-				  <c:forEach var="mypage" items="${board}" varStatus="loop">
-					
-
+				<c:when test="${!empty boardlist}">
+				<c:set var="num" value="${listcount-(page-1)*limit}"/>
+				  <c:forEach var="b" items="${board}" >
 				  <div class="user_board">
 					<div class="board-section">	  
 					<div class="board">                                     
-					  <div class="board_box">게시글 박스 제목이랑 내용                         
+					  <div class="board_box">게시글 박스 제목이랑 내용    
+					  <p>작성글 보기${b.board.inf_num}</p>                     
 						<div class="board_subject">
-							<h3 class="board_inf_subject_title">내가 쓴 글 제목</h3>
+							<h3 class="board_inf_subject_title">${b.inf_subject}</h3>
 						</div>
 						  <div class="board_content">
-							<p class="board_inf_contet_text">내가 쓴 글 내용</p>
+							<p class="board_inf_contet_text">${b.inf_content}</p>
 						  </div>
 					</div>   
 
-					
 						  <div class="board-img">내가 쓴 글 이미지</div>
 
 						  <div class="like_comm_box">좋아요, 댓글 박스
 							<div class="inf_like_num">내가 쓴 글 좋아요 갯수
 								<div>좋아요 이미지</div>
-								<div>좋아요 갯수</div>
+								<div>좋아요 갯수${b.like_count}</div>
 							</div>
 							<div class="inf_comm_num">내가 쓴 글 댓글 갯수
 								<div>댓글 이미지</div>
-								<div>댓글 갯수</div>
+								<div>댓글 갯수${b.comment_count}</div>
 							</div>
 						  </div>
 					   </div>
 					</div>
 				  </div>
-				  
 				  </c:forEach>
 				</c:when>
 			  </c:choose>
