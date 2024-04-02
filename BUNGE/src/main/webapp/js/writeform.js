@@ -1,11 +1,17 @@
 $(function() {
 	
-	let inputcount=1
+	let inputcount=2
 	
 	$("#inputfile-btn").click(function() {
-		$('.input-group'+inputcount).css('display', 'block')
+		if ($('#filevalue'+(inputcount-1)).text() != "") {
+			$('.input-group'+inputcount).css('display', 'block')
+			inputcount++
+		} else {
+			alert('첨부된 파일이 없습니다..!')
+			const target = document.getElementById("inputfile-btn");
+			target.disabled = true;
+		}
 		//console.log(inputcount)
-		inputcount++
 	})
 	
 	$("input[type=file]").change(function(){
@@ -15,28 +21,36 @@ $(function() {
 		//console.log($(this).attr('name'))
 		//console.log($(this).attr('name').substr(8,1))
 		$('#filevalue'+$(this).attr('name').substr(8,1)).text(inputfile[inputfile.length-1])
-	});
+		const target = document.getElementById("inputfile-btn");
+		target.disabled = false;
+		$(".remove"+$(this).attr('name').substr(8,1)).css('display', 'inline-block')
+	})
 	
 	
 	$(".remove1").click(function() {
 		$("#filevalue1").text('');
 		$("#preview1").attr('src','')
+		$(this).css('display', 'none')
 	})
 	$(".remove2").click(function() {
 		$("#filevalue2").text('');
 		$("#preview2").attr('src','')
+		$(this).css('display', 'none')
 	})
 	$(".remove3").click(function() {
 		$("#filevalue3").text('');
 		$("#preview3").attr('src','')
+		$(this).css('display', 'none')
 	})
 	$(".remove4").click(function() {
 		$("#filevalue4").text('');
 		$("#preview4").attr('src','')
+		$(this).css('display', 'none')
 	})
 	$(".remove5").click(function() {
 		$("#filevalue5").text('');
 		$("#preview5").attr('src','')
+		$(this).css('display', 'none')
 	})
 	
 $("form[name=boardform]").submit(function(e){
@@ -102,14 +116,14 @@ $("#postcode").click(function () {
 
 
 function readURL(input) {
-	console.log((input.id).substr(8,1))
+	console.log((input.name).substr(8,1))
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById('preview'+(input.id).substr(8,1)).src = e.target.result;
+			document.getElementById('preview'+(input.name).substr(8,1)).src = e.target.result;
 		}
 		reader.readAsDataURL(input.files[0]);
 	} else {
-		document.getElementById('preview'+(input.id).substr(8,1)).src = "";
+		document.getElementById('preview'+(input.name).substr(8,1)).src = "";
 	}
 }
