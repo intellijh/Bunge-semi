@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class InfoLikeAddAction implements Action {
+public class InfoLikeDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
@@ -25,12 +25,11 @@ public class InfoLikeAddAction implements Action {
 		System.out.println("m_id : " + m_id);
 		System.out.println("inf_num : " + inf_num);
 		
-		int add = infolikedao.InfoLikeInsert(inf_num,m_id);
-		
-		System.out.println("add : " + add);
+		int del = infolikedao.InfoLikeDelete(inf_num,m_id);
+		System.out.println("del : " + del);
 		
 		PrintWriter out = response.getWriter();
-		out.print(add);
+		out.print(del);
 
 		return null;
 	}
