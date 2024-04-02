@@ -36,6 +36,7 @@ import info.action.InfoModifyProcessAction;
 import info.action.InfoReplyAction;
 import info.action.InfoReplyProcessAction;
 import info.action.InfoAddAction;
+import info.action.InfoBoardFileDownAction;
 import info.action.InfoDeleteAction;
 import info.action.InfoWriteAction;
 import infoboardlike.action.InfoLikeCntAction;
@@ -236,6 +237,10 @@ public class FrontController extends HttpServlet {
             //댓글 좋아요 카운트
             case "/InfocommLikeCount.com":
             	action = new InfocommLikeCountAction();
+            	break;
+            //첨부파일 저장
+            case "/InfoBoardFileDown.com":
+            	action = new InfoBoardFileDownAction();
             	break;
 
         } //switch (command)
