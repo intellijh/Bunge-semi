@@ -15,7 +15,7 @@
 
 	img{width:15px}
 	
-	.input-group2, .input-group3, .input-group4, .input-group5 {display:none}
+	.input-group1, .input-group2, .input-group3, .input-group4, .input-group5 {display:none}
 	
 	input[type=file]{display:none}
 	
@@ -103,7 +103,7 @@
 	 	    <img id="preview5">
 	 	    <input type="file" name="inf_file5" onchange="readURL(this)">
 	 	  </label>
-	 	    <span class="filename" id="filevalue"></span>
+	 	    <span class="filename" id="filevalue5"></span>
 	 	    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove5">
   		</div>
   		
