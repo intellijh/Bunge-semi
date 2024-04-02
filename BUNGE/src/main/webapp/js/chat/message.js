@@ -37,11 +37,15 @@ $(function(){
         console.log("onMessage buyerId: " + chatData[0].buyerId);
 
         if (chatData[0].chatId != selectedChatId) {
+            console.log("selectedChatId: " + selectedChatId);
             return;
         }
         if (chatData[0].sellerId != selectedSellerId || chatData[0].buyerId != selectedBuyerId) {
+            console.log("selectedSellerId: " + selectedSellerId);
+            console.log("selectedBuyerId: " + selectedBuyerId);
             return;
         }
+        console.log("return문 넘김");
 
         const $chat = $(`
                     <div class="d-flex justify-content-start mb-4">
@@ -76,7 +80,7 @@ $(function(){
             return;
         }
         const date = new Date();
-        const dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        const dateInfo = date.getHours() + ":" + date.getMinutes();
         console.log("send dateInfo" + dateInfo);
         const $chat = $(`
                     <div class="d-flex justify-content-end mb-4">
@@ -124,6 +128,7 @@ $(function(){
 
     function loadMessage() {
         console.log("loadMessage() Start");
+        $('.msg_card_body').empty();
         $.ajax({
             type: "post",
             url: "messageLoad.com",
