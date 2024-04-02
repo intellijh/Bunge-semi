@@ -19,7 +19,7 @@ public class ChatListLoadAction implements Action {
 
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("loginId");
+        String id = (String) request.getSession().getAttribute("m_id");
         System.out.println(id);
 
         JsonArray array = new ChatDAO().getChatList(id);

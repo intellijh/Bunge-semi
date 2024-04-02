@@ -43,7 +43,7 @@ public class ChatDAO {
                     object.addProperty("chatId", rs.getString("chat_id"));
                     object.addProperty("sellerId", rs.getString("seller_id"));
                     object.addProperty("buyerId", rs.getString("buyer_id"));
-                    object.addProperty("updateDate", rs.getString("update_date").substring(0, 16));
+                    object.addProperty("updateDate", rs.getString("update_date"));
                     array.add(object);
                 }
             }

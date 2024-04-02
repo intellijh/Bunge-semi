@@ -66,3 +66,15 @@ FROM chat;
 -- 채팅방 생성
 INSERT INTO chat
 VALUES (7, 'C1234', 'A1234', 6, SYSTIMESTAMP, SYSTIMESTAMP);
+
+-- 메세지 시퀀스 생성 (적용 필요)
+CREATE SEQUENCE message_seq
+    INCREMENT BY 1
+    START WITH 1;
+
+-- 채팅 메세지 삽입
+INSERT INTO chat_message
+VALUES(1, 1, 'A1234', '하이', SYSTIMESTAMP, 'N');
+
+SELECT *
+FROM chat_message;

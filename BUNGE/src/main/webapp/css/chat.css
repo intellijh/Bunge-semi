@@ -170,7 +170,7 @@ body, html {
     padding: 10px;
     position: relative;
     word-break: break-all;
-    overflow: hidden;
+    overflow-wrap: anywhere;
 }
 
 .msg_cotainer_send {
@@ -182,7 +182,7 @@ body, html {
     padding: 10px;
     position: relative;
     word-break: break-all;
-    overflow: hidden;
+    overflow-wrap: anywhere;
 }
 
 .msg_time {

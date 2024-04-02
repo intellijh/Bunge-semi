@@ -1,6 +1,7 @@
 let selectedChatId = 0;
 let selectedSellerId = null;
-let selectedBuyerId = null;
+let selectedBuyerId = null
+let loginId = null;
 
 function getChatList() {
 
@@ -8,15 +9,12 @@ function getChatList() {
     $.ajax({
         type: "post",
         url: "chatLoad.com",
-        data: {"loginId": $("#loginId").val()},
         dataType: "json",
         success: function (rdata) {
             console.log("ajax");
             if (rdata.chatList.length <= 0) {
                 return;
             }
-            const loginId = $("#loginId").val();
-            console.log("loginId = " + loginId);
 
             console.log("0over?");
             let output = ``;
@@ -78,6 +76,7 @@ function getChatList() {
 }
 
 $(document).on('click', '.contacts li', function() {
+
     selectedChatId = $(this).attr("id");
     console.log("this: " + $(this).find("span").text());
 
@@ -99,6 +98,9 @@ $(document).on('click', '.contacts li', function() {
 });
 
 $(function () {
+    loginId = $("#loginId").val();
+    console.log("myId = " + loginId);
+
     $('#action_menu_btn').click(function () {
         $('.action_menu').toggle();
     });
