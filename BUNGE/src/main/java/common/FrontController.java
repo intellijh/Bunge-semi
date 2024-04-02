@@ -3,9 +3,7 @@ package common;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import chat.action.ChatCreateAction;
-import chat.action.ChatEnterAction;
-import chat.action.ChatListLoadAction;
+import chat.action.*;
 import comment.action.CommentAddAction;
 import comment.action.CommentDeleteAction;
 import comment.action.CommentListAction;
@@ -50,7 +48,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import chat.action.ChatListAction;
 
 import javax.naming.NamingException;
 
@@ -217,6 +214,14 @@ public class FrontController extends HttpServlet {
             //채팅방 생성
             case "/chatCreate.com":
                 action = new ChatCreateAction();
+                break;
+            //보낸 메세지 저장
+            case "/messageStore.com":
+                action = new MessageStoreAciton();
+                break;
+            //저장된 메세지 불러오기
+            case "/messageLoad.com":
+                action = new MessageLoadAction();
                 break;
             //댓글 좋아요 추가
             case "/InfocommLike.com":
