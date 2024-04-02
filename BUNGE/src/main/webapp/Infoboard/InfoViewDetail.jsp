@@ -12,9 +12,8 @@
   <%@ include file="/layout/header.jsp" %>
 <script src="js/viewdetail.js"></script>
 <style>
- .uploadedfile {width:50px}
+ .inf_file {width:50px}
 
- .imglike img {width:30px; height:30px}
 </style>
 </head>
  <body>
@@ -50,14 +49,14 @@
  	    <c:if test="${boarddata.inf_lev==0}">
           <tr>
             <td><div>첨부파일</div></td>
-              <c:forEach var="a" items="${boardfile}">
-                <c:if test="${a.infa_filename != '0'}">
+              <c:forEach var="a" items="${boardfile}" varStatus="status">
+                <c:if test="${a.infa_filename != null}">
 		          <td><img src="image/down.png" width="10px">
-		            <a href="BoardFileDown.bo?filename=${a.infa_filename}">${a.infa_filename}</a>
-		            <img src="boardupload/${a.infa_servername}" class="uploadedfile">
+		            <a href="InfoBoardFileDown.com?filename=${a.infa_filename}">${a.infa_filename}</a>
+		            <img src="boardupload/${a.infa_servername}" class="inf_file" id="inf_file${status.count}">
 		          </td>
 		        </c:if>
-		        <c:if test="${a.infa_filename == '0'}">
+		        <c:if test="${a.infa_filename == null}">
 		        </c:if>
               </c:forEach>
           </tr>

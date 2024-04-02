@@ -394,11 +394,11 @@ $(function() {
 				m_id :$('#loginid').val(),
 				inf_num : $("#inf_num").val()
 			},
-			async : false,
+			async : false, //asnyc=true 기본값.(비동기) async=false (동기)
 			success : function(rdata) {
 				if (rdata == 1) 
 				console.log("rdata.add : " + rdata);
-				$('#likecnt').html(rdata);
+				$('#likecnt').html(rdata); //희원씨 이 부분 코드는 필요 없을 것 같아요. 왜 그럴까요?
 				infolikecnt();
 			}, 
 			error : function(){

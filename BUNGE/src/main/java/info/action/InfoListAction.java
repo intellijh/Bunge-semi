@@ -59,7 +59,7 @@ public class InfoListAction implements Action {
 		int maxpage = (listcount + limit -1) / limit;
 		System.out.println("총 페이지 수 = " + maxpage);
 		/*
-		 * startopage : 현재 페이지 그룹에서 맨 처음에 표시될 페이지 수를 의미합니다.
+		 * startpage : 현재 페이지 그룹에서 맨 처음에 표시될 페이지 수를 의미합니다.
 		 * ([1],[11],[21]등 ...) 보여줄 페이지가 30개일 경우
 		 * [1][2][3]...[30]까지 다 표시하기에는 너무 많기 때문에 보통 한 페이지에는
 		 * 10페이지 정도까지는 이동할 수 있게 표시합니다.
