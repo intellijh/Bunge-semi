@@ -5,7 +5,7 @@ import info.db.Board;
 import infoboardlike.db.InfoLike;
 import net.trade.db.Trade;
 
-public class mypage {
+public class Mypage {
 
 	private Member Member = new Member();
 	private Board Board = new Board(); //내가 쓴 글 
@@ -54,7 +54,7 @@ public class mypage {
 		Trade = trade;
 	}
 
-	public mypage() {
+	public Mypage() {
 		
 	}
 

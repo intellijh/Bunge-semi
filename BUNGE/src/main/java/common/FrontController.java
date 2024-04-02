@@ -24,7 +24,8 @@ import common.login.loginAction;
 import common.login.loginProcessAction;
 import common.login.logoutAction;
 import common.login.pwdresetAction;
-import common.mypage.myinfoboardAction;
+import common.mypage.mybookmarklistAction;
+import common.mypage.mycommlistAction;
 import common.mypage.mypageAction;
 import common.mypage.reviewlistAction;
 import info.action.InfoDetailAction;
@@ -120,16 +121,21 @@ public class FrontController extends HttpServlet {
             case "/pwdreset.com":
                 action = new pwdresetAction();
                 break;
-            //마이 페이지
+            //내 정보 수정 페이지
             case "/mypage.com":
                 action = new mypageAction();
-                break;
-            case "/myinfoboard.com":
-                action = new myinfoboardAction();
                 break;
                 //리뷰 활동 페이지
             case "/reviewlist.com" :
             	action = new reviewlistAction();
+            	break;
+            	//내가 쓴 댓글 페이지
+            case"/mycommlist.com" :
+            	action = new mycommlistAction();
+            	break;
+            	//즐겨찾기 페이지
+            case "/mybookmarklist.com" :
+            	action = new mybookmarklistAction();
             	break;
             //게시판에 글 추가
             case "/InfoAdd.com":

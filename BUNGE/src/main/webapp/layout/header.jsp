@@ -52,7 +52,7 @@
 	      <li class="nav-item"><a class="nav-link" href="chat.com">채팅</a></li>
  	</c:when>
 </c:choose>
-       <c:if test="${id == 'admin'}">
+       <c:if test="${m_id == 'admin'}">
      		 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop"
                        data-toggle="dropdown"> 관리자 </a>

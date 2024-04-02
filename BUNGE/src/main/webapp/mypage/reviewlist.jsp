@@ -12,9 +12,9 @@
 	<div class="tab_container">
 		<div class="tab-slider--nav">
 		  <ul class="tab-slider--tabs">
-			<li class="tab-slider--trigger active" rel="tab1"><span>작성글</span></li>
-			<li class="tab-slider--trigger"  rel="tab2"><span>작성댓글</span></li>
-			<li class="tab-slider--trigger"  rel="tab3"><span>즐겨찾기</span></li>
+			<a href="reviewlist.com"><li class="tab-slider--trigger active" rel="tab1"><span>작성글</span></li></a>
+			<a href="mycommlist.com"><li class="tab-slider--trigger"  rel="tab2"><span>작성댓글</span></li></a>
+			<a href="mybookmarklist.com"><li class="tab-slider--trigger"  rel="tab3"><span>즐겨찾기</span></li></a>
 		  </ul>
 		</div>
 		<div class="tab-slider--container">
@@ -23,42 +23,39 @@
 			<div class="tab_box">
 			  <!-- 글 시작 -->
 			  <c:choose>
-				<c:when test="${empty board}">
+				<c:when test="${empty boardlist}">
 				  <p>작성된 글이 없습니다.</p>
 				</c:when>
-				<c:when test="${!empty board}">
-				  <c:forEach var="mypage" items="${board}" varStatus="loop">
-					
-
+				<c:when test="${!empty boardlist}">
+				  <c:forEach var="b" items="${boardlist}" >
 				  <div class="user_board">
 					<div class="board-section">	  
 					<div class="board">                                     
-					  <div class="board_box">게시글 박스 제목이랑 내용                         
+					  <div class="board_box">게시글 박스 제목이랑 내용    
+					  <p>작성글 보기</p>                   
 						<div class="board_subject">
-							<h3 class="board_inf_subject_title">내가 쓴 글 제목</h3>
+							<h3 class="board_inf_subject_title">제목 : ${b.board.inf_subject}</h3>
 						</div>
 						  <div class="board_content">
-							<p class="board_inf_contet_text">내가 쓴 글 내용</p>
+							<p class="board_inf_contet_text">내용 : ${b.board.inf_content}</p>
 						  </div>
 					</div>   
 
-					
 						  <div class="board-img">내가 쓴 글 이미지</div>
 
 						  <div class="like_comm_box">좋아요, 댓글 박스
 							<div class="inf_like_num">내가 쓴 글 좋아요 갯수
-								<div>좋아요 이미지</div>
-								<div>좋아요 갯수</div>
+								<div>
+									<img src="${pageContext.request.contextPath}/image/like_on.png" alt="Like Icon">${b.infoLike.inf_num}
+								</div>
 							</div>
 							<div class="inf_comm_num">내가 쓴 글 댓글 갯수
-								<div>댓글 이미지</div>
-								<div>댓글 갯수</div>
+								<div><img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg">${b.comment.inf_num}</div>
 							</div>
 						  </div>
 					   </div>
 					</div>
 				  </div>
-				  
 				  </c:forEach>
 				</c:when>
 			  </c:choose>

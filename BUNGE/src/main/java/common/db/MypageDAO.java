@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import infomark.db.InfoMark;
+
 public class MypageDAO {
 private DataSource ds;
 	
@@ -24,7 +26,7 @@ private DataSource ds;
 	}
 	//회원정보 조회
 	public MypageDAO mypage_info(String m_id) {
-		mypage m = null;
+		Mypage m = null;
 		String info_sql = "select * from member  where m_id=?";
 		
 		try(Connection con = ds.getConnection();
@@ -44,6 +46,8 @@ private DataSource ds;
 
 		return null;
 	}
+	
+	//리스트 조회
 	public int getList() {
 		String List_sql="select count(*) from infoboard";
 		int x=0;
@@ -62,43 +66,40 @@ private DataSource ds;
 			}
 			return x;
 	}
-	
-	public List<mypage> getBoardList(String m_id, int page, int limit) {
-	    List<mypage> boardlist = new ArrayList<>();
+	//내가 쓴 게시글 조회
+	public List<Myboard> getBoardList(String m_id) {
+	    List<Myboard> boardlist = new ArrayList<>();
 	    
-	    String board_list_sql = "SELECT * "
-	    		+ "	FROM (SELECT b.inf_subject, b.inf_content, "
-	    		+ "        COUNT(DISTINCT k.inf_num) AS like_count, "
-	    		+ "        COUNT(DISTINCT c.inf_num) AS comment_count, "
-	    		+ "        ROW_NUMBER() OVER (ORDER BY b.inf_num DESC) AS row_num "
-	    		+ "        FROM member m "
-	    		+ "    JOIN infoboard b ON m.m_id = b.m_id "
-	    		+ "    LEFT JOIN infoLike k ON m.m_id = k.m_id "
-	    		+ "    LEFT JOIN infocomm c ON m.m_id = c.m_id "
-	    		+ "    WHERE m.m_id = ?"
-	    		+ " 	 GROUP BY  "
-	    		+ "    b.inf_subject, b.inf_content) AS sub "
-	    		+ " 	 WHERE "
-	    		+ "    row_num > (? - 1) * ? AND row_num <= ? * ?";
-
-	    int startrow = (page - 1) * limit + 1;
-	    int endrow = startrow + limit - 1;
+	    String board_list_sql = "SELECT"
+	    		+"     b.inf_num, "	
+	    		+ "    b.inf_subject, "
+	    		+ "    b.inf_content, "
+	    		+ "    COUNT(DISTINCT c.inf_num) AS comment_count, "
+	    		+ "    COUNT(DISTINCT k.inf_num) AS like_count "
+	    		+ "FROM "
+	    		+ "    infoboard b "
+	    		+ "LEFT JOIN "
+	    		+ "    infocomm c ON b.inf_num = c.inf_num "
+	    		+ "LEFT JOIN "
+	    		+ "    infolike k ON b.inf_num = k.inf_num "
+	    		+ "WHERE "
+	    		+ "    b.m_id = ? AND b.inf_lev = 0 "
+	    		+ "group by  b.inf_num, b.inf_subject, b.inf_content";
 
 	    try (Connection con = ds.getConnection();
 	         PreparedStatement pstmt = con.prepareStatement(board_list_sql)) {
 
 	        pstmt.setString(1, m_id);
-	        pstmt.setInt(2, startrow);
-	        pstmt.setInt(3, endrow);
-
+	        
 	        try (ResultSet rs = pstmt.executeQuery()) {
 	            while (rs.next()) {
-	                mypage board = new mypage();
+	                Myboard board = new Myboard(); 
+	                board.getBoard().setInf_num(rs.getInt("inf_num"));
 	                board.getBoard().setInf_subject(rs.getString("inf_subject"));
 	                board.getBoard().setInf_content(rs.getString("inf_content"));
+	                board.getComment().setInf_num(rs.getInt("comment_count")); 
 	                board.getInfoLike().setInf_num(rs.getInt("like_count"));
-	                board.getComment().setInf_num(rs.getInt("comment_count"));
-	               
+	                
 	                boardlist.add(board);
 	            }
 	        } catch (SQLException e) {
@@ -109,6 +110,54 @@ private DataSource ds;
 	        System.out.println("getListCount() 에러" + ex);
 	    }
 	    return boardlist;
+	}
+	//내가 쓴 댓글 조회
+	public List<Mycomm> getCommList(String m_id) {
+		List<Mycomm> commlist = new ArrayList<>();
+		
+		String comm_sql = "select b.m_id,c.m_id, b.inf_subject, b.inf_content, c.comm_content "
+				+ " from infoboard b "
+				+ " join infocomm c on b.inf_num = c.inf_num "
+				+ " where b.m_id = ? ";
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(comm_sql);) {
+			
+			pstmt.setString(1, m_id);
+			
+			try(ResultSet rs=pstmt.executeQuery()){
+				 while (rs.next()) {
+					Mycomm comm = new Mycomm();
+					comm.getBoard().setM_id(rs.getString("m_id"));
+					comm.getComment().setM_id(rs.getString("m_id"));
+					 comm.getBoard().setInf_subject(rs.getString("inf_subject"));
+					 comm.getBoard().setInf_content(rs.getString("inf_content"));
+					 comm.getComment().setComm_content(rs.getString("comm_content"));
+					 
+					 commlist.add(comm);
+				 }
+			}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return commlist;
+	}
+	//내가 좋아요한 게시글 조회
+	public List<Mymark> getMarkList(String m_id) {
+		List<InfoMark> marklist = new ArrayList<>();
+		String mark_sql= "select b.inf_num , b.inf_subject, b.inf_content , b.inf_reg, "
+				+ "    COUNT(DISTINCT c.inf_num) AS comment_count, "
+				+ "    COUNT(DISTINCT k.inf_num) AS like_count "
+				+ "from "
+				+ "    infoboard b "
+				+ "LEFT JOIN "
+				+ "    infocomm c ON b.inf_num = c.inf_num "
+				+ "LEFT JOIN "
+				+ "    infolike k ON b.inf_num = k.inf_num "
+				+ "where b.m_id=? and b.inf_lev=0 "
+				+ "group by b.inf_num, b.inf_subject, b.inf_content, b.inf_reg; ";
+		return null;
 	}
 
 

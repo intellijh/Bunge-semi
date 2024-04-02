@@ -407,6 +407,7 @@ $(function() {
 		});
 	})
 
+
 	function infolikecnt(){
 		$.ajax({
 			url : "InfoLikeCnt.com",
@@ -440,6 +441,7 @@ $(function() {
 })//ready
 
 /*
+
 function commlikecount() {
 	$.ajax ({
 		url : "InfocommLikeCount.com",
