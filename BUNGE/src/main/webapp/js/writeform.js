@@ -35,22 +35,30 @@ $(function() {
 	$(".remove2").click(function() {
 		$("#filevalue2").text('');
 		$("#preview2").attr('src','')
+		$(".input-group2").css('display','none')
 		$(this).css('display', 'none')
+		inputcount--
 	})
 	$(".remove3").click(function() {
 		$("#filevalue3").text('');
 		$("#preview3").attr('src','')
+		$(".input-group3").css('display','none')
 		$(this).css('display', 'none')
+		inputcount--
 	})
 	$(".remove4").click(function() {
 		$("#filevalue4").text('');
 		$("#preview4").attr('src','')
+		$(".input-group4").css('display','none')
 		$(this).css('display', 'none')
+		inputcount--
 	})
 	$(".remove5").click(function() {
 		$("#filevalue5").text('');
 		$("#preview5").attr('src','')
+		$(".input-group5").css('display','none')
 		$(this).css('display', 'none')
+		inputcount--
 	})
 	
 $("form[name=boardform]").submit(function(e){
