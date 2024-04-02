@@ -39,8 +39,9 @@ import info.action.InfoReplyProcessAction;
 import info.action.InfoAddAction;
 import info.action.InfoDeleteAction;
 import info.action.InfoWriteAction;
-import infoboardlike.action.InfoLikeAction;
+import infoboardlike.action.InfoLikeCntAction;
 import infoboardlike.action.InfoLikeAddAction;
+import infoboardlike.action.InfoLikeDeleteAction;
 import infocommlike.action.InfocommLikeAction;
 import infocommlike.action.InfocommLikeCountAction;
 import jakarta.servlet.RequestDispatcher;
@@ -190,13 +191,17 @@ public class FrontController extends HttpServlet {
                 action = new CommentReplyAction();
                 break;
             //게시글 좋아요 카운트
-            case "/InfoLike.com":
-                action = new InfoLikeAction();
+            case "/InfoLikeCnt.com":
+                action = new InfoLikeCntAction();
                 break;
-            // 좋아요 업데이트
+            // 좋아요 추기
             case "/InfoLikeAdd.com":
                 action = new InfoLikeAddAction();
                 break;
+             // 좋아요 삭제
+            case "/InfoLikeDelete.com":
+                action = new InfoLikeDeleteAction();		
+                break;												
             //채팅 페이지 이동
             case "/chat.com":
                 action = new ChatListAction();

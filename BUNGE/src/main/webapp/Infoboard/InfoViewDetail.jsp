@@ -14,7 +14,7 @@
 <style>
  .uploadedfile {width:50px}
 
- 
+ .imglike img {width:30px; height:30px}
 </style>
 </head>
  <body>
@@ -83,7 +83,11 @@
             </a>
           </td>
         </tr>
-        <tr><td><button type="button" id="likeclick">좋아요&nbsp;<b></b></td></tr>
+        <tr> 
+         <td class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button>
+         <span id="likecnt"></span></td>
+                      
+      </tr>
       </table>
       <%-- 게시판 view end --%>
     

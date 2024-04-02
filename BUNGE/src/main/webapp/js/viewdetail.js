@@ -192,6 +192,7 @@ function replyform(num,lev,seq,ref){
 }//function(replyform) end
 
 $(function() {
+	let likecount = 0;
 	
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	
@@ -321,7 +322,6 @@ $(function() {
 		})	
 	})//답글완료 클릭한 경우
 	
-	
 	//답글쓰기 후 취소 버튼을 클릭한 경우
 	$('.comment-area').on('click','.reply-cancel',function(){
 		$(this).parent().parent().parent().remove();
@@ -341,43 +341,6 @@ $(function() {
 		}
 	})//답글쓰기 클릭 후 계속 누르는 것을 방지하기 위한 작업
 	
-		$('#likeclick').click(function(){
-		$.ajax({
-			url : "InfoLikeAdd.com",
-			type : 'post',
-			data : { 
-//				m_id :$('#loginid').val(),
-				inf_num : $("#inf_num").val()
-			},
-			success : function(rdata) {
-				console.log('infolikecnt 성공')
-				$('b').html(rdata);
-				infolikecnt();
-			}, 
-			error : function(){
-				console.log('infolikecnt 실패');
-			}		
-		});
-	})
-	
-	
-	function infolikecnt(){
-		$.ajax({
-			url : "InfoLike.com",
-			type : 'post',
-			data : { 
-				inf_num : $("#inf_num").val()
-			},
-			success : function(rdata) {
-				console.log(rdata);
-				$('b').html(rdata);
-			}, 
-			error : function(){
-				console.log('infolikecnt 실패');
-			}		
-	});
-}
-	
 	//댓글 좋아요 버튼 클릭시(좋아요 추가 또는 좋아요 철회)
 	$('.comment-list').on('click', '.like', function() {
 		console.log('클릭중');
@@ -394,7 +357,6 @@ $(function() {
 			},
 			error : function() {
 				console.log('댓글 좋아요 버튼 실패')
-				
 			}
 		})
 		
@@ -416,14 +378,67 @@ $(function() {
 	//댓글 싫어요 버튼 클릭시
 		
 	})
-
-	})//ready
-
+	infolikecnt();
 	
-	
-	
+	$('#likeclick').click(function(){
+		let url = "";
+		if(likecount == 1) {
+			url = "InfoLikeDelete.com";
+		}else if(likecount == 0) {
+			url = "InfoLikeAdd.com";
+		}
+		$.ajax({
+			url : url,
+			type : 'post',
+			data : { 
+				m_id :$('#loginid').val(),
+				inf_num : $("#inf_num").val()
+			},
+			async : false,
+			success : function(rdata) {
+				if (rdata == 1) 
+				console.log("rdata.add : " + rdata);
+				$('#likecnt').html(rdata);
+				infolikecnt();
+			}, 
+			error : function(){
+				console.log('infolikecnt 실패');
+			}		
+		});
+	})
 
-
+	function infolikecnt(){
+		$.ajax({
+			url : "InfoLikeCnt.com",
+			type : 'post',
+			data : { 
+				m_id :$('#loginid').val(),
+				inf_num : $("#inf_num").val()
+			},
+			dataType : 'json',
+			success : function(rdata) {
+				
+				if (rdata.cnt != -1) {
+				console.log('rdata.cnt2 :'+ rdata.cnt); 
+				likecount = rdata.check;
+				console.log('rdatalike :'+ likecount);
+				$('#likecnt').html(rdata.cnt);
+				}
+				
+				if(rdata.check == 1){
+					console.log('rdata.check :' + rdata.check);
+					$('.imglike img').attr('src',"./image/like_on.png");
+				}else if(rdata.check == 0) {
+					$('.imglike img').attr('src',"./image/like_off.png");
+				}
+				}, 
+			error : function(){
+				console.log('infolikecnt 실패');
+			}		
+	});
+}
+})//ready
+/*
 function commlikecount() {
 	$.ajax ({
 		url : "InfocommLikeCount.com",
@@ -435,11 +450,7 @@ function commlikecount() {
 	})
 }
 
-
-
-	
-
-
+*/
 	/*
 	//댓글 좋아요 카운트
 	function likeCount() {
@@ -458,6 +469,4 @@ function commlikecount() {
 			}
 		})
 	}
-
 	*/
-
