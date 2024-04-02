@@ -423,7 +423,7 @@ $(function() {
 	
 	
 
-
+/*
 function commlikecount() {
 	$.ajax ({
 		url : "InfocommLikeCount.com",
@@ -434,7 +434,7 @@ function commlikecount() {
 		}
 	})
 }
-
+*/
 
 
 	

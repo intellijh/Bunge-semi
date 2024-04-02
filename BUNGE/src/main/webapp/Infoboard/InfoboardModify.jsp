@@ -123,8 +123,7 @@
     <c:if test="${boardfile[2] == null}">
  	  <div class="input-group3">
 	 	  <label>
-	 	    첨부파일
-	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
   		    <img id="preview3" width="50px">
 	 	    <input type="file" name="upfile3" id="upfile3" onchange="readURL(this)">
 	 	  </label>

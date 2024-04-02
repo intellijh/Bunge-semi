@@ -99,6 +99,8 @@ public class BoardDAO {
 					if (pstmt.executeUpdate() == 1) {
 						System.out.println("첨부파일 등록 성공");
 						result = true;
+					} else {
+						continue;
 					}
 				} else {
 					break;
@@ -451,16 +453,11 @@ public class BoardDAO {
 	} //boardfileReset() end
 */
 
-	public boolean boardnofileModify(int inf_num, Boardfile boardfile, String origin) {
+	public boolean boardfileModify(int inf_num, Boardfile boardfile) {
 		int result = -1;
-		String sql = "insert into infoattach " 
-				+ "(infa_num, inf_num, infa_filename, infa_servername) "
-				+ "values(infa_seq.nextval, ?, ?, ?)";
-		
-		String sql2 = "delete infoattach "
-				    + "where inf_num = ? "
-				    + "and infa_filename = ? "
-				    + "and infa_num=(select max(infa_num) from infoattach where infa_filename='0') ";
+		String sql = "insert into infoattach "
+				   + "(infa_num, inf_num, infa_filename, infa_servername) "
+				   + "values(infa_seq.nextval, ?, ?, ?) ";
 		
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -468,102 +465,38 @@ public class BoardDAO {
 			pstmt.setString(2, boardfile.getInfa_filename());
 			pstmt.setString(3, boardfile.getInfa_servername());
 			result = pstmt.executeUpdate();
+			
 			if (result != -1) {
-				System.out.println("원래 없었던 새로운 첨부파일 추가 완료");
+				System.out.println("boardfileModify() 성공 : 파일첨부 성공");
 			}
-			
-			result = -1;
-			
-			try (PreparedStatement pstmt2 = con.prepareStatement(sql2);) {
-				 pstmt2.setInt(1, inf_num);
-				 pstmt2.setString(2, origin);
-			     result = pstmt2.executeUpdate();
-			     if (result != -1) {
-						System.out.println("첨부파일 수정 완료 후 비어있는 행 하나 삭제");
-				 }
-			     
-			     result = -1;
-			     
-			 }
-		} catch (Exception ex) {
-			System.out.println("boardfileModify() 에러 : " + ex);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("boardfileModify() 에러" + e);
 		}
 		return false;
-	} //boardnofileModify() end
-
-
-	public boolean boardfileModify(int inf_num, Boardfile boardfile, String origin) {
-		int result = -1;
-		String sql = "insert into infoattach " 
-				+ "(infa_num, inf_num, infa_filename, infa_servername) "
-				+ "values(infa_seq.nextval, ?, ?, ?)";
-		
-		String sql2 = "delete infoattach "
-				    + "where inf_num = ? "
-				    + "and infa_filename = ? ";
-		
-		try (Connection con = ds.getConnection();
-			 PreparedStatement pstmt = con.prepareStatement(sql);) {
-			pstmt.setInt(1, inf_num);
-			pstmt.setString(2, boardfile.getInfa_filename());
-			pstmt.setString(3, boardfile.getInfa_servername());
-			result = pstmt.executeUpdate();
-			if (result != -1) {
-				System.out.println("원래 없었던 새로운 첨부파일 추가 완료");
-			}
-			
-			result = -1;
-			
-			try (PreparedStatement pstmt2 = con.prepareStatement(sql2);) {
-				 pstmt2.setInt(1, inf_num);
-				 pstmt2.setString(2, origin);
-			     result = pstmt2.executeUpdate();
-			     if (result != -1) {
-						System.out.println("첨부파일 수정 완료 후 원래파일이 존재하던 행 삭제");
-				 }
-			     
-			     result = -1;
-			     
-			 }
-		} catch (Exception ex) {
-			System.out.println("boardfileModify() 에러 : " + ex);
-		}
-		return false;
-	} //boardfileModify() end	
-
-
-	public boolean boardmodifyDelete(int inf_num, String deleteitem) {
+	} //boardfileModify() end
+	
+	public boolean boardmodifyDelete(int inf_num, String origname) {
 		int result = -1;
 		String sql = "delete infoattach "
 				   + "where inf_num = ? "
 				   + "and infa_filename = ? ";
 		
-		String sql2 = "insert into infoattach "
-				    + "(infa_num, inf_num, infa_filename, infa_servername) "
-				    + "values(infa_seq.nextval, ?, '0', '0') ";
-		
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, inf_num);
-			pstmt.setString(2, deleteitem);
+			pstmt.setString(2, origname);
 			result = pstmt.executeUpdate();
 			
-			if (result != -1)
-				System.out.println("기존 첨부파일 삭제");
-			result = -1;
-			
-			try (PreparedStatement pstmt2 = con.prepareStatement(sql2);) {
-				pstmt2.setInt(1, inf_num);
-				result = pstmt2.executeUpdate();
-				
-				if(result != -1)
-					System.out.println("기존 첨부파일 삭제 후 빈 행 하나 추가");
+			if (result != -1) {
+				System.out.println("원래 있던 첨부파일 삭제 완료");
+				return true;
 			}
 			
-			return true;
-				
-		} catch (Exception ex) {
-			System.out.println("boardmodifyDelete() 에러 : " + ex);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("boardmodifyDelete()에러" + e);
 		}
 		return false;
 	} //boardmodifyDelete() end
@@ -616,4 +549,6 @@ public class BoardDAO {
 		}
 		return count;
 	} //commlikecount end
+
+
 }//class end

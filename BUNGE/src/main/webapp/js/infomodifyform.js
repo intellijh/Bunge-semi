@@ -9,13 +9,14 @@ $(document).ready(function() {
 	let changenames = new Array(5)
 	let nochangefiles = new Array(5)
 	for (let i=0; i<5; i++) {
-		console.log($("#filevalue"+(i+1)).text())
-		filenames[i] = $("#filevalue"+(i+1)).text()
+		console.log($("#filename"+(i+1)).text())
+		filenames[i] = $("#filename"+(i+1)).text()
 	}
 	console.log('filenames : ' + filenames)
 	
+	
 	for (let i=1; i<=5; i++) {
-		const html_origin = "<input type='hidden' value='" + $('#filevalue'+i).text() + "' name='originvalue"+i+"'>"
+		const html_origin = "<input type='hidden' value='" + $('#filename'+i).text() + "' name='originvalue"+i+"'>"
 		console.log(html_origin)
 		$("form").append(html_origin);
 	}
@@ -36,20 +37,58 @@ $(document).ready(function() {
 			$inf_content.focus();
 			return false;
 		}
-		
+
+/*		
+	 if (check1 == 0) {
+		 const name = $('#filename1').text()
+		 const html = "<input type='hidden' value='" + name + "' name='inf_file1'>"
+		 console.log(html);
+		 $(this).append(html);
+	 }
+	 
+	 if (check2 == 0) {
+		 const name = $('#filename2').text()
+		 const html = "<input type='hidden' value='" + name + "' name='inf_file2'>"
+		 console.log(html);
+		 $(this).append(html);
+	 }
+	 
+	 if (check3 == 0) {
+		 const name = $('#filename3').text()
+		 const html = "<input type='hidden' value='" + name + "' name='inf_file3'>"
+		 console.log(html);
+		 $(this).append(html);
+	 }
+	 
+	 if (check4 == 0) {
+		 const name = $('#filename4').text()
+		 const html = "<input type='hidden' value='" + name + "' name='inf_file4'>"
+		 console.log(html);
+		 $(this).append(html);
+	 }
+	 
+	 if (check5 == 0) {
+		 const name = $('#filename5').text()
+		 const html = "<input type='hidden' value='" + name + "' name='inf_file5'>"
+		 console.log(html);
+		 $(this).append(html);
+	 }
+*/		
 		
 		
 		
 		//수정 폼에서 최종적으로 첨부된 목록
-			for (let i=1; i<=5; i++) {
-				
-				if ($('#filevalue'+i).text() != '0') {
-					console.log('전송될 filevalue : ' + $('#filevalue'+i).text())
-					const html = "<input type='hidden' value='" + $('#filevalue'+i).text() + "' name='filevalue"+i+"'>"
-					console.log(html)
-					$("form").append(html);
-				}
+		
+		for (let i=1; i<=5; i++) {
+			
+			if ($('#filename'+i).text() != '0') {
+				console.log('전송될 filevalue : ' + $('#filename'+i).text())
+				const html = "<input type='hidden' value='" + $('#filename'+i).text() + "' name='filevalue"+i+"'>"
+				console.log(html)
+				$("form").append(html);
 			}
+		}
+		
 	});//submit end
 	
 	
@@ -129,7 +168,7 @@ $(document).ready(function() {
 
 	
 	$("#upfile1").change(function() {
-		check1++
+		//check1++
 		console.log($(this).val())
 		let thisid = $(this).attr("id")
 		console.log('thisid:' + thisid)
@@ -138,6 +177,7 @@ $(document).ready(function() {
 		$('#preview'+thisid.substr(6,1)).css('display','inline-block')
 		$('#filename'+thisid.substr(6,1)).text(change)
 		$('#remove'+thisid.substr(6,1)).css('display','inline-block')
+		$('.uploadedfile1').css('display','none')
 		console.log('change : '+change);
 		changenames[thisid.substr(6,1)-1] = change
 		console.log('changenames : ' + changenames)
@@ -145,7 +185,7 @@ $(document).ready(function() {
 	})
 	
 	$("#upfile2").change(function() {
-		check2++
+		//check2++
 		console.log($(this).val())
 		let thisid = $(this).attr("id")
 		console.log('thisid:' + thisid)
@@ -154,6 +194,7 @@ $(document).ready(function() {
 		$('#preview'+thisid.substr(6,1)).css('display','inline-block')
 		$('#filename'+thisid.substr(6,1)).text(change)
 		$('#remove'+thisid.substr(6,1)).css('display','inline-block')
+		$('.uploadedfile2').css('display','none')
 		console.log('change : '+change);
 		changenames[thisid.substr(6,1)-1] = change
 		console.log('changenames : ' + changenames)
@@ -161,7 +202,7 @@ $(document).ready(function() {
 	})
 	
 	$("#upfile3").change(function() {
-		check3++
+		//check3++
 		console.log($(this).val())
 		let thisid = $(this).attr("id")
 		console.log('thisid:' + thisid)
@@ -170,6 +211,7 @@ $(document).ready(function() {
 		$('#preview'+thisid.substr(6,1)).css('display','inline-block')
 		$('#filename'+thisid.substr(6,1)).text(change)
 		$('#remove'+thisid.substr(6,1)).css('display','inline-block')
+		$('.uploadedfile3').css('display','none')
 		console.log('change : '+change);
 		changenames[thisid.substr(6,1)-1] = change
 		console.log('changenames : ' + changenames)
@@ -177,7 +219,7 @@ $(document).ready(function() {
 	})
 	
 	$("#upfile4").change(function() {
-		check4++
+		//check4++
 		console.log($(this).val())
 		let thisid = $(this).attr("id")
 		console.log('thisid:' + thisid)
@@ -186,6 +228,7 @@ $(document).ready(function() {
 		$('#preview'+thisid.substr(6,1)).css('display','inline-block')
 		$('#filename'+thisid.substr(6,1)).text(change)
 		$('#remove'+thisid.substr(6,1)).css('display','inline-block')
+		$('.uploadedfile4').css('display','none')
 		console.log('change : '+change);
 		changenames[thisid.substr(6,1)-1] = change
 		console.log('changenames : ' + changenames)
@@ -193,7 +236,7 @@ $(document).ready(function() {
 	})
 	
 	$("#upfile5").change(function() {
-		check5++
+		//check5++
 		console.log($(this).val())
 		let thisid = $(this).attr("id")
 		console.log('thisid:' + thisid)
@@ -202,13 +245,14 @@ $(document).ready(function() {
 		$('#preview'+thisid.substr(6,1)).css('display','inline-block')
 		$('#filename'+thisid.substr(6,1)).text(change)
 		$('#remove'+thisid.substr(6,1)).css('display','inline-block')
+		$('.uploadedfile5').css('display','none')
 		console.log('change : '+change);
 		changenames[thisid.substr(6,1)-1] = change
 		console.log('changenames : ' + changenames)
 		console.log(changenames)
 	})
 
-/*
+
 		for (let i=0; i<5; i++) {
 			if (changenames[i] == null) {
 				nochangefiles[i] = filenames[i]
@@ -218,7 +262,7 @@ $(document).ready(function() {
 			console.log('nochangefiles : ' + nochangefiles);
 			console.log(nochangefiles)
 		}
-*/	
+	
 	
 	
 	$("#postcode").click(function () {
