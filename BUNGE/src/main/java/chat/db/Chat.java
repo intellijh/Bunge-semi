@@ -52,18 +52,18 @@ public class Chat {
     }
 
     public String getOpenDate() {
-        return openDate.substring(0, 16);
+        return openDate;
     }
 
     public void setOpenDate(String openDate) {
-        this.openDate = openDate;
+        this.openDate = openDate.substring(0, 16);
     }
 
     public String getUpdateDate() {
-        return updateDate.substring(0, 16);
+        return updateDate;
     }
 
     public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
+        this.updateDate = updateDate.substring(0, 16);
     }
 }

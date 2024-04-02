@@ -14,7 +14,7 @@
 		font-size:30px;
 		text-align:center;
 	}
-	span {font-size:1.5erm; color:#5d5de2}
+	span {font-size:1.5rem; color:#5d5de2}
 </style>
 <body>
 <div>

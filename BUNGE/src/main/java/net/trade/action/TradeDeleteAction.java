@@ -7,45 +7,48 @@ import net.trade.db.TradeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import javax.naming.NamingException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 
 public class TradeDeleteAction implements Action {
 
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, NamingException {
 
-        ActionForward forward = new ActionForward();
+        int num = Integer.parseInt(request.getParameter("id"));
 
-        try {
-            // 요청에서 거래 ID와 비밀번호 가져오기
-            int tradeID = Integer.parseInt(request.getParameter("tradeID"));
-            String password = request.getParameter("password");
+        TradeDAO dao = new TradeDAO();
+        boolean usercheck = dao.isBoardWriter(num, request.getParameter("password"));
 
-            // TradeDAO를 사용하여 비밀번호 확인 및 거래 삭제
-            TradeDAO tradeDAO = new TradeDAO();
-            if (tradeDAO.passwordCheck(tradeID, password)) {
-                // 비밀번호가 일치하는 경우 해당 거래 삭제
-                tradeDAO.deleteTrade(tradeID);
-                tradeDAO.close();
-
-                // 삭제 완료 메시지 출력 후 이전 페이지로 이동
-                forward.setPath("trade.net"); // 이동할 페이지 지정
-                forward.setRedirect(true); // 리다이렉트 설정
-            } else {
-                // 비밀번호가 일치하지 않는 경우 에러 메시지 출력 후 이전 페이지로 이동
-                tradeDAO.close();
-                // 에러 메시지 출력 및 이전 페이지로 리다이렉트
-                forward.setPath("error.jsp");
-                forward.setRedirect(false);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            // 에러 발생 시 에러 페이지로 이동하도록 설정
-            forward.setPath("error.jsp");
-            forward.setRedirect(false);
+        if (!usercheck) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('비밀번호가 다릅니다');");
+            out.println("history.back();");
+            out.println("</script>");
+            out.close();
+            return null;
         }
 
-        return forward;
+        boolean result = dao.deleteTrade(num);
+
+        if (!result) {
+            System.out.println("게시판 삭제 실패");
+            ActionForward forward = new ActionForward();
+            forward.setRedirect(false);
+            request.setAttribute("message", "데이터를 삭제하지 못했습니다.");
+            forward.setPath("error/error.jsp");
+            return forward;
+        } else {
+            System.out.println("게시판 삭제 성공");
+            // 삭제 성공한 경우, 글 목록 보기 페이지로 리다이렉션
+            response.sendRedirect("trade.net");
+            return null;
+        }
     }
 }

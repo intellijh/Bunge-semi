@@ -23,19 +23,23 @@
 		</div>
 		<div id="image-info">
 			<div id="image-title"><c:out value="${trade.title}" /></div>
+			<span id="image-category"><c:out value="분류 : ${trade.category}" /></span><br>
+			<span id="image-quality"><c:out value="책 상태 : ${trade.quality}" /></span><br>
+			<span id="image-condition"><c:out value="거래 상태 : ${trade.condition}" /></span><br>
+			<span id="image-tradeMethod"><c:out value="선호 거래 방법 : ${trade.tradeMethod}" /></span><br>
 			<span id="image-price"><c:out value="${trade.price}원" /></span><br>
 			<span id="image-author"><c:out value="${trade.sellerID}" /></span>
-			<span id="image-date" style="float:right"><c:out value="${trade.createDate}" /></span>
 			<!-- 수정, 삭제 폼 -->
 			<form method="POST" id="delete-or-update-form">
 				<input type="hidden" name="id" value="<c:out value="${trade.tradeID}" />">
+				<p style="margin-top:30px; border: 1px solid #ccc; padding: 100px; max-width: 1500px;">
+					<c:out value="${trade.description}" />
+				</p>
+				<span id="image-date" style="float:right"><c:out value="${trade.createDate}" /></span>
 				<input type="password" name="password" style="margin-left:0px; margin-top:10px" id="write-password" placeholder="비밀번호">
 				<input type="button" value="수정" id="update-button" class="btn btn-info" onclick="update()">
 				<input type="button" value="삭제" id="delete-button" class="btn btn-danger" onclick="del()">
 			</form>
-			<p style="margin-top:30px; border: 1px solid #ccc; padding: 100px; max-width: 1500px;">
-				<c:out value="${trade.description}" />
-			</p>
 		</div>
 
 	</div>

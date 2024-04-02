@@ -23,7 +23,7 @@
 <br>
 <br>
 <br>
-<input type="hidden" id="loginId" value="${sessionScope.m_id}" name="loginId">
+<input type="hidden" id="loginId" value="${m_id}">
 <div class="container-fluid h-100">
     <div class="row justify-content-center h-100">
         <div class="col-md-4 col-xl-3 chat">

@@ -3,9 +3,7 @@ package common;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import chat.action.ChatCreateAction;
-import chat.action.ChatEnterAction;
-import chat.action.ChatListLoadAction;
+import chat.action.*;
 import comment.action.CommentAddAction;
 import comment.action.CommentDeleteAction;
 import comment.action.CommentListAction;
@@ -40,8 +38,9 @@ import info.action.InfoReplyProcessAction;
 import info.action.InfoAddAction;
 import info.action.InfoDeleteAction;
 import info.action.InfoWriteAction;
-import infoboardlike.action.InfoLikeAction;
+import infoboardlike.action.InfoLikeCntAction;
 import infoboardlike.action.InfoLikeAddAction;
+import infoboardlike.action.InfoLikeDeleteAction;
 import infocommlike.action.InfocommLikeAction;
 import infocommlike.action.InfocommLikeCountAction;
 import jakarta.servlet.RequestDispatcher;
@@ -50,7 +49,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import chat.action.ChatListAction;
 
 import javax.naming.NamingException;
 
@@ -196,13 +194,17 @@ public class FrontController extends HttpServlet {
                 action = new CommentReplyAction();
                 break;
             //게시글 좋아요 카운트
-            case "/InfoLike.com":
-                action = new InfoLikeAction();
+            case "/InfoLikeCnt.com":
+                action = new InfoLikeCntAction();
                 break;
-            // 좋아요 업데이트
+            // 좋아요 추기
             case "/InfoLikeAdd.com":
                 action = new InfoLikeAddAction();
                 break;
+             // 좋아요 삭제
+            case "/InfoLikeDelete.com":
+                action = new InfoLikeDeleteAction();		
+                break;												
             //채팅 페이지 이동
             case "/chat.com":
                 action = new ChatListAction();
@@ -218,6 +220,14 @@ public class FrontController extends HttpServlet {
             //채팅방 생성
             case "/chatCreate.com":
                 action = new ChatCreateAction();
+                break;
+            //보낸 메세지 저장
+            case "/messageStore.com":
+                action = new MessageStoreAciton();
+                break;
+            //저장된 메세지 불러오기
+            case "/messageLoad.com":
+                action = new MessageLoadAction();
                 break;
             //댓글 좋아요 추가
             case "/InfocommLike.com":

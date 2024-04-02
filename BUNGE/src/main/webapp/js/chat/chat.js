@@ -1,6 +1,7 @@
 let selectedChatId = 0;
-let selectedSellerId = null;
-let selectedBuyerId = null;
+let selectedSellerId = "";
+let selectedBuyerId = ""
+let loginId = "";
 
 function getChatList() {
 
@@ -8,15 +9,12 @@ function getChatList() {
     $.ajax({
         type: "post",
         url: "chatLoad.com",
-        data: {"loginId": $("#loginId").val()},
         dataType: "json",
         success: function (rdata) {
             console.log("ajax");
             if (rdata.chatList.length <= 0) {
                 return;
             }
-            const loginId = $("#loginId").val();
-            console.log("loginId = " + loginId);
 
             console.log("0over?");
             let output = ``;
@@ -35,6 +33,7 @@ function getChatList() {
                                     <span class="online_icon"></span>
                                 </div>
                                 <div class="user_info">`;
+                console.log("getChatList() loginId: " + loginId);
                 if (this.sellerId == loginId) {
                     output += `     <span class="buyer">${this.buyerId}</span>
                                     <p>${this.sellerId}</p>
@@ -58,11 +57,11 @@ function getChatList() {
                 const position = document.querySelector(".contacts li:first-child .user_info span").classList;
                 console.log("position: " + position);
                 if (position.contains("seller")) {
-                    selectedBuyerId = $(".contacts li:eq(0) .user_info .seller").text();
-                    selectedSellerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
-                } else {
-                    selectedSellerId = $(".contacts li:eq(0) .user_info .buyer").text();
+                    selectedSellerId = $(".contacts li:eq(0) .user_info .seller").text();
                     selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
+                } else {
+                    selectedBuyerId = $(".contacts li:eq(0) .user_info .buyer").text();
+                    selectedSellerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
                 }
             }
             console.log("stored chatId = " + selectedChatId);
@@ -78,6 +77,7 @@ function getChatList() {
 }
 
 $(document).on('click', '.contacts li', function() {
+
     selectedChatId = $(this).attr("id");
     console.log("this: " + $(this).find("span").text());
 
@@ -99,6 +99,9 @@ $(document).on('click', '.contacts li', function() {
 });
 
 $(function () {
+    loginId = $("#loginId").val();
+    console.log("myId = " + loginId);
+
     $('#action_menu_btn').click(function () {
         $('.action_menu').toggle();
     });

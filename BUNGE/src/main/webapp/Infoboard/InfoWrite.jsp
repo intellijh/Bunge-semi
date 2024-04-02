@@ -15,9 +15,11 @@
 
 	img{width:15px}
 	
-	.input-group1, .input-group2, .input-group3, .input-group4, .input-group5 {display:none}
+	.input-group2, .input-group3, .input-group4, .input-group5 {display:none}
 	
 	input[type=file]{display:none}
+	
+	.remove1, .remove2, .remove3, .remove4, .remove5 {display:none}
  </style>
  </head>
  <body>
@@ -54,45 +56,55 @@
 	 	  <label>
 	 	    첨부파일
 	 	    <img src="image/attach.png" alt="파일첨부">
+  		    <img id="preview1">
 	 	    <input type="file" name="inf_file1" onchange="readURL(this)">
 	 	  </label>
-	 	    <span id="filevalue1"></span>
+	 	    <span class="filename" id="filevalue1"></span>
+ 	 		<img src="image/remove.png" alt="파일삭제" width="10px" class="remove1">
   		</div>
   		
   		<div class="input-group2">
-	 	  <label for="inf_file">
+	 	  <label>
 	 	  첨부파일
 	 	    <img src="image/attach.png" alt="파일첨부">
-	 	    <input type="file" name="inf_file2" onchange="readURL(this)">
-	 	    <span id="filevalue2"></span>
+	 	    <img id="preview2">
+	 	    <input type="file" name="inf_file2"  onchange="readURL(this)">
 	 	  </label>
+	 	    <span class="filename" id="filevalue2"></span>
+	 	    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove2">
   		</div>
   		
   		<div class="input-group3">
-	 	  <label for="inf_file">
+	 	  <label>
 	 	  첨부파일
 	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <img id="preview3">
 	 	    <input type="file" name="inf_file3" onchange="readURL(this)">
-	 	    <span id="filevalue3"></span>
 	 	  </label>
+	 	    <span class="filename" id="filevalue3"></span>
+	 	    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove3">
   		</div>
   		
   		<div class="input-group4">
-	 	  <label for="inf_file">
+	 	  <label>
 	 	  첨부파일
 	 	    <img src="image/attach.png" alt="파일첨부">
-	 	    <input type="file" name="inf_file4" onchange="reaudURL(this)">
-	 	    <span id="filevalue4"></span>
+	 	    <img id="preview4">
+	 	    <input type="file" name="inf_file4" onchange="readURL(this)">
 	 	  </label>
+	 	    <span class="filename" id="filevalue4"></span>
+	 	    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove4">
   		</div>
   		
   		<div class="input-group5">
-	 	  <label for="inf_file">
+	 	  <label>
 	 	  첨부파일
 	 	    <img src="image/attach.png" alt="파일첨부">
-	 	    <input type="file" name="inf_file5" onchange="reaudURL(this)">
-	 	    <span id="filevalue5"></span>
+	 	    <img id="preview5">
+	 	    <input type="file" name="inf_file5" onchange="readURL(this)">
 	 	  </label>
+	 	    <span class="filename" id="filevalue"></span>
+	 	    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove5">
   		</div>
   		
  		

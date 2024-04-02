@@ -1,7 +1,6 @@
 package info.action;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -24,10 +23,9 @@ public class InfoModifyProcessAction implements Action {
 		
 		BoardDAO boarddao = new BoardDAO();
 		Board board = new Board();
-		Boardfile boardfile;
+		Boardfile boardfile = new Boardfile();
 		ActionForward forward = new ActionForward();
 		boolean board_result = false;
-		boolean file_result = false;
 		
 		String saveFolder = "boardupload";
 		int filesize = 10 * 1024 * 1024;
@@ -49,7 +47,6 @@ public class InfoModifyProcessAction implements Action {
 			
 			board_result = boarddao.boardModify(board);
 			
-		//	boarddao.boardfileReset(inf_num);
 			String[] origin = new String[5]; 
 			String[] lastname = new String[5];
 			String deleteitem;
@@ -69,33 +66,54 @@ public class InfoModifyProcessAction implements Action {
 			}
 			
 			for (int i=1; i<=5; i++) {
-				String fileorigin = multi.getOriginalFileName("boardfile"+i);
-				System.out.println("fileorigin : " + multi.getOriginalFileName("boardfile"+i));
-				String fileserver = multi.getFilesystemName("boardfile"+i);
-				System.out.println("fileserver : " + multi.getFilesystemName("boardfile"+i));
-				if (fileorigin != null) {
-					//원래 첨부하지 않은 곳에 새롭게 첨부하는 경우
-					if (origin[i-1].isEmpty()) {
-						origin[i-1] = "0";
-						boardfile = new Boardfile();
-						boardfile.setInfa_filename(fileorigin);
-						boardfile.setInfa_servername(fileserver);
-						file_result = boarddao.boardnofileModify(inf_num, boardfile, origin[i-1]);
-					//원래 첨부파일이 있떤 곳에 새롭게 첨부하는 경우
-					} else {
-						boardfile = new Boardfile();
-						boardfile.setInfa_filename(fileorigin);
-						boardfile.setInfa_servername(fileserver);
-						file_result = boarddao.boardfileModify(inf_num, boardfile, origin[i-1]);
+				String fileorigin = multi.getOriginalFileName("upfile"+i);
+				System.out.println("fileorigin : " + multi.getOriginalFileName("upfile"+i));
+				String fileserver = multi.getFilesystemName("upfile"+i);
+				System.out.println("fileserver : " + multi.getFilesystemName("upfile"+i));
+				if (fileorigin == null) {
+					//원래 첨부한 파일을 삭제한 경우
+					if (!lastname[i-1].equals(origin[i-1])) {
+						if (lastname[i-1].isEmpty()) {
+							deleteitem = origin[i-1];
+							System.out.println("deleteitem : " + deleteitem);
+							boarddao.boardmodifyDelete(inf_num, deleteitem);
+						}
 					}
-					//원래 존재하던 첨부파일을 삭제하는 경우
+					//원래 첨부파일이 있던 곳에 새롭게 첨부하는 경우
 				} else {
-					if (!origin[i-1].equals(lastname[i-1]) && lastname[i-1].isEmpty()) {
+						boardfile.setInfa_filename(fileorigin);
+						boardfile.setInfa_servername(fileserver);
+						boarddao.boardfileModify(inf_num, boardfile);
+						System.out.println("성공");
+					
 						deleteitem = origin[i-1];
-						file_result = boarddao.boardmodifyDelete(inf_num, deleteitem);
-					}
+						System.out.println("deleteitem : "+deleteitem);
+						boarddao.boardmodifyDelete(inf_num, deleteitem);
+							
 				}
 			}
+			
+			
+/*			
+			for (int i=1; i<=5; i++) {
+				String fileorigin = multi.getOriginalFileName("boardfile"+i);
+				System.out.println("fileorigin : " + multi.getOriginalFileName("upfile"+i));
+				String fileserver = multi.getFilesystemName("boardfile"+i);
+				System.out.println("fileserver : " + multi.getFilesystemName("upfile"+i));
+				if (fileorigin == null) {
+					for (int k=1; i<=5; k++) {
+						String origname = multi.getParameter("inf_file"+k);
+						if (origname != null) {
+							origfile_result = boarddao.boardmodifyDelete(inf_num, origname);
+						}
+					}
+				} else {
+					boardfile.setInfa_filename(fileorigin);
+					boardfile.setInfa_servername(fileserver);
+					newfile_result = boarddao.boardfileModify(inf_num, boardfile);
+				}
+			}
+*/					
 			
 			if (board_result) {
 				System.out.println("게시판 수정 완료");
@@ -108,8 +126,7 @@ public class InfoModifyProcessAction implements Action {
 			}
 			
 			return forward;
-			
-	} catch (IOException e) {
+		} catch (IOException e) {
 		e.printStackTrace();
 		forward.setPath("error/error.jsp");
 		request.setAttribute("message", "게시판 업로드 중 실패입니다.");
