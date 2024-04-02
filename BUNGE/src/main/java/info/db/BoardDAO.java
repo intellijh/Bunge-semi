@@ -101,11 +101,7 @@ public class BoardDAO {
 						result = true;
 					}
 				} else {
-					pstmt.setString(1, "0");
-					pstmt.setString(2, "0");
-					if (pstmt.executeUpdate() == 1) {
-						System.out.println("null 첨부파일 등록 성공");
-					}
+					break;
 				}
 			}
 			con.commit();

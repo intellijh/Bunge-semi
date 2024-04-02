@@ -8,10 +8,16 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 <style>
   .container {width:60%}
+  
   h1 {font-size:1.5rem; text-align:center; color:#1a92b9}
+  
   input[type=file] {display:none}
+  
   .attach {display:inline-block;}
+  
   #preview1, #preview2, #preview3, #preview4, #preview5 {display:none}
+  
+  .attachname {display:none}
 </style>
 </head>
 <body>
@@ -57,32 +63,207 @@
       
     <%-- 원문글인 경우에만 파일 첨부 수정 가능하다 --%>
     
-    <c:if test="${board.inf_lev==0}">
-      <div class="form-group">
-        <br>
-        <c:forEach var="a" items="${boardfile}" varStatus="status">
-          <c:if test="${a.infa_filename != '0'}" >
-	          <label class="attach">파일첨부
-	        	<img src="image/down.png" alt="파일첨부" width="10px">
-	        	<img src="boardupload/${a.infa_filename}" width="10px" class="uploadedfile${status.count}">
-	        	<input type="file" id="upfile${status.count}" class="upfile${status.count}" name="boardfile${status.count}" onchange="readURL(this)">
-	        	<img id="preview${status.count}" width="10px">
-	        	<span id="filevalue${status.count}">${a.infa_filename}</span>
-	          </label>
-		        <img src="image/remove.png" alt="파일삭제" width="10px" class="remove${status.count}"><br>
-	      </c:if>
-	      <c:if test="${a.infa_filename == '0'}" >
-	        <label class="attach">파일첨부
-	          <img src="image/down.png" alt="파일첨부" width="10px">
-	          <input type="file" id="upfile${status.count}" class="upfile${status.count}" name="boardfile${status.count}" onchange="readURL(this)">
-	        	<img id="preview${status.count}" width="10px">
-	        	<span id="filevalue${status.count}"></span>
-	        </label>
-	          <img src="image/remove.png" alt="파일삭제" width="10px" class="remove${status.count}"><br>
-	      </c:if>
-        </c:forEach>
+
+    
+<c:if test="${board.inf_lev==0}">
+      <button type="button" id="inputfile-btn">파일추가</button>
+      (파일 첨부는 최대 5개까지 가능합니다...)
+ 	  (x를 누르면 첨부한 파일을 삭제할 수 있습니다...)
+ 	<c:if test="${boardfile[0] == null}">
+ 	  <div class="input-group1">
+	 	  <label>
+	 	    첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
+  		    <img id="preview1" width="50px">
+	 	    <input type="file" name="upfile1" id="upfile1" onchange="readURL(this)">
+	 	  </label>
+	 	    <span class="filename" id="filename1"></span>
+ 	 		<img src="image/remove.png" alt="파일삭제" width="10px" id="remove1" class="remove">
+  		</div>
+  	</c:if>
+    <c:if test="${boardfile[0] != null}">
+      <div class="input-group1">
+          <label>
+            <img src="image/attach.png" alt="파일첨부" width="50px">
+  		    <img id="preview1" width="50px">
+            <input type="file" id="upfile1" class="upfile1" name="upfile1" onchange="readURL(this)">
+            <img src="boardupload/${boardfile[0].infa_filename}" width="50px" class="uploadedfile1">
+            <img id="preview1" width="50px">
+            <span class="filename" id="filename1">${boardfile[0].infa_filename}</span>
+          </label>
+            <img src="image/remove.png" alt="파일삭제" width="10px" id="remove1" class="remove">
+     </div>
+    </c:if>
+    
+    <c:if test="${boardfile[1] == null}">
+ 	  <div class="input-group2">
+	 	  <label>
+	 	    첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
+  		    <img id="preview2" width="50px">
+	 	    <input type="file" name="upfile2" id="upfile2" onchange="readURL(this)">
+	 	  </label>
+	 	    <span class="filename" id="filename2"></span>
+ 	 		<img src="image/remove.png" alt="파일삭제" width="10px" id="remove2" class="remove">
+  		</div>
+  	</c:if>
+    <c:if test="${boardfile[1] != null}">
+      <div class="input-group2">
+          <label>
+            <img src="image/attach.png" alt="파일첨부" width="50px">
+            <input type="file" id="upfile2" class="upfile2" name="upfile2" onchange="readURL(this)">
+            <img src="boardupload/${boardfile[1].infa_filename}" width="50px" class="uploadedfile2">
+            <img id="preview2" width="50px">
+            <span class="filename" id="filename2">${boardfile[1].infa_filename}</span>
+          </label>
+            <img src="image/remove.png" alt="파일삭제" width="10px" id="remove2" class="remove">
+     </div>
+    </c:if>
+    
+    <c:if test="${boardfile[2] == null}">
+ 	  <div class="input-group3">
+	 	  <label>
+	 	    첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+  		    <img id="preview3" width="50px">
+	 	    <input type="file" name="upfile3" id="upfile3" onchange="readURL(this)">
+	 	  </label>
+	 	    <span class="filename" id="filename3"></span>
+ 	 		<img src="image/remove.png" alt="파일삭제" width="10px" id="remove3" class="remove">
+  		</div>
+  	</c:if>
+    <c:if test="${boardfile[2] != null}">
+      <div class="input-group3">
+          <label>
+            <img src="image/attach.png" alt="파일첨부" width="50px">
+            <input type="file" id="upfile3" class="upfile3" name="upfile3" onchange="readURL(this)">
+            <img src="boardupload/${boardfile[2].infa_filename}" width="50px" class="uploadedfile3">
+            <img id="preview3" width="50px">
+            <span class="filename" id="filename3">${boardfile[2].infa_filename}</span>
+          </label>
+            <img src="image/remove.png" alt="파일삭제" width="10px" id="remove3" class="remove">
       </div>
     </c:if>
+    
+    <c:if test="${boardfile[3] == null}">
+ 	  <div class="input-group4">
+	 	  <label>
+	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
+  		    <img id="preview4" width="50px">
+	 	    <input type="file" name="upfile4" id="upfile4" onchange="readURL(this)">
+	 	  </label>
+	 	    <span class="filename" id="filename4"></span>
+ 	 		<img src="image/remove.png" alt="파일삭제" width="10px" id="remove4" class="remove">
+  		</div>
+  	</c:if>
+    <c:if test="${boardfile[3] != null}">
+      <div class="input-group4">
+          <label>
+            <img src="image/attach.png" alt="파일첨부" width="50px">
+            <input type="file" id="upfile4" class="upfile4" name="upfile4" onchange="readURL(this)">
+            <img src="boardupload/${boardfile[3].infa_filename}" width="50px" class="uploadedfile4">
+            <img id="preview4" width="50px">
+            <span class="filename" id="filename4">${boardfile[3].infa_filename}</span>
+          </label>
+            <img src="image/remove.png" alt="파일삭제" width="10px" id="remove4" class="remove">
+      </div>
+    </c:if>
+    
+    <c:if test="${boardfile[4] == null}">
+ 	  <div class="input-group5">
+	 	  <label>
+	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
+  		    <img id="preview5" width="50px">
+	 	    <input type="file" name="upfile5" id="upfile5" onchange="readURL(this)">
+	 	  </label>
+	 	    <span class="filename" id="filename5"></span>
+ 	 		<img src="image/remove.png" alt="파일삭제" width="10px" id="remove5" class="remove">
+  		</div>
+  	</c:if>
+    <c:if test="${boardfile[4] != null}">
+      <div class="input-group5">
+          <label>
+            <img src="image/attach.png" alt="파일첨부" width="50px">
+            <input type="file" id="upfile5" class="upfile5" name="upfile5" onchange="readURL(this)">
+            <img src="boardupload/${boardfile[4].infa_filename}" width="50px" class="uploadedfile5">
+            <img id="preview5" width="50px">
+            <span class="filename" id="filename5">${boardfile[4].infa_filename}</span>
+          </label>
+            <img src="image/remove.png" alt="파일삭제" width="10px" id="remove5" class="remove">
+      </div>
+    </c:if>
+    
+</c:if>
+    
+    
+<%--    
+    <c:if test="${boardfile[0] == null}">
+ 	  <div class="input-group1">
+	 	  <label>
+	 	    첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+  		    <img id="preview1">
+	 	    <input type="file" name="inf_file1" onchange="readURL(this)">
+	 	  </label>
+	 	    <span class="filename" id="filevalue1"></span>
+ 	 		<img src="image/remove.png" alt="파일삭제" width="10px" class="remove1">
+  		</div>
+  	</c:if>
+    <c:if test="${boardfile[0] != null}">
+      <div>첨부한 파일목록 (클릭하면 첨부파일을 수정할 수 있습니다)</div>
+          <label>
+            <input type="file" id="uploadedfile1" class="uploadedfile1" name="uploadedfile1" onchange="readURL(this)">
+            <img src="boardupload/${boardfile[0].infa_filename}" width="50px" class="uploadedfile${status.count}">
+            <img id="preview${status.count}" width="50px">
+          </label>
+    </c:if>
+      	
+      	
+      	<div class="input-group2">
+	 	  <label>
+	 	  첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <img id="preview2">
+	 	    <input type="file" name="inf_file2"  onchange="readURL(this)">
+	 	  </label>
+	 	    <span class="filename" id="filevalue2"></span>
+	 	    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove2">
+  		</div>
+  		
+  		<div class="input-group3">
+	 	  <label>
+	 	  첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <img id="preview3">
+	 	    <input type="file" name="inf_file3" onchange="readURL(this)">
+	 	  </label>
+	 	    <span class="filename" id="filevalue3"></span>
+	 	    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove3">
+  		</div>
+  		
+  		<div class="input-group4">
+	 	  <label>
+	 	  첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <img id="preview4">
+	 	    <input type="file" name="inf_file4" onchange="readURL(this)">
+	 	  </label>
+	 	    <span class="filename" id="filevalue4"></span>
+	 	    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove4">
+  		</div>
+  		
+  		<div class="input-group5">
+	 	  <label>
+	 	  첨부파일
+	 	    <img src="image/attach.png" alt="파일첨부">
+	 	    <img id="preview5">
+	 	    <input type="file" name="inf_file5" onchange="readURL(this)">
+	 	  </label>
+	 	    <span class="filename" id="filevalue5"></span>
+	 	    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove5">
+  		</div>
+    </c:if>
+--%>
     
       <div class="form-group">
         <label for="inf_loc">위치</label>
