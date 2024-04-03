@@ -57,9 +57,9 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    		       + '	  </div>'
 	    		       + '<div class="comment-like">'
 					   + '    <button class="like" id="like" data-comm_num=' + this.comm_num + '>좋아요</button>'
-					   + '    <span class="likecount"></span>'
+					   + '    <span class="likecount1">' + this.like_count + '</span>'
 					   + '	  <button class="hate" id="hate" data-comm_num=' + this.comm_num + '>싫어요</button>'	
-					   + '    <span class="hatecount"></span>'
+					   + '    <span class="hatecount">' + this.hate_count + '</span>'
 					   + '</div>'    
 		      	       + '	  <div class="comment-text-box">'       
 		      		   + '	    <p class="comment-text-view">'         
@@ -342,42 +342,72 @@ $(function() {
 	})//답글쓰기 클릭 후 계속 누르는 것을 방지하기 위한 작업
 	
 	//댓글 좋아요 버튼 클릭시(좋아요 추가 또는 좋아요 철회)
+	
+	let comm_num = $(this).attr("data-comm_num")
+	let loc = $(this).next().text()
+
+	infocommcnt(comm_num)
+	
 	$('.comment-list').on('click', '.like', function() {
-		console.log('클릭중');
-		$.ajax({
-			url : "InfocommLike.com",
-			type : "POST",
-			data : {
-				comm_num : $(this).attr("data-comm_num"),
-				m_id : $("#loginid").val()
-			},
-			success : function () {
-				console.log('댓글 좋아요 데이터 받아 왔다')
-				commlikecount();
-			},
-			error : function() {
-				console.log('댓글 좋아요 버튼 실패')
-			}
-		})
+		let url = "";
 		
-		$.ajax ({
-			url : "InfocommLikeCount.com",
+		console.log('likecount :' +likecount)
+		if(likecount == 1) {
+			url = "InfocommLikeDelete.com";
+		}else if(likecount == 0) {
+			url = "InfocommLikeAdd.com";
+		}
+		
+		console.log(url);
+		console.log($(this).attr("data-comm_num"));
+		console.log($('#loginid').val())
+		
+
+		
+		$.ajax({
+			url :  url,
 			type : "POST",
 			data : {
 				comm_num : $(this).attr("data-comm_num"),
 				m_id : $("#loginid").val()
 			},
 			success : function (rdata) {
-				console.log('댓글 카운트 ajax 성공')
-				if (rdata) {
-					$(this).find('span').html(rdata)
-				}
+					console.log("rdata : " + rdata);
+					loc = infocommcnt(comm_num)
+			},
+			error : function() {
+				console.log('댓글 좋아요 버튼 실패')
 			}
 		})
 		
 	//댓글 싫어요 버튼 클릭시
 		
 	})
+	
+	
+		function infocommcnt(comm_num){
+		$.ajax({
+			url : "InfocommLikeCnt.com",
+			type : 'post',
+			data : { 
+				comm_num : comm_num,
+				m_id : $("#loginid").val()
+			},
+			dataType : 'json',
+			success : function(rdata) {
+					if (rdata.cnt != -1) {
+				console.log('rdata.cnt3 :'+ rdata.cnt);
+				likecount = rdata.check;
+				console.log('rdata like :'+ likecount);
+				return rdata.cnt
+				}
+				}, 
+			error : function(){
+				console.log('infocommlikecnt 실패');
+			}		
+	});
+}
+	
 	infolikecnt();
 	
 	$('#likeclick').click(function(){
@@ -398,7 +428,6 @@ $(function() {
 			success : function(rdata) {
 				if (rdata == 1) 
 				console.log("rdata.add : " + rdata);
-				$('#likecnt').html(rdata); //희원씨 이 부분 코드는 필요 없을 것 같아요. 왜 그럴까요?
 				infolikecnt();
 			}, 
 			error : function(){
@@ -422,7 +451,7 @@ $(function() {
 				if (rdata.cnt != -1) {
 				console.log('rdata.cnt2 :'+ rdata.cnt); 
 				likecount = rdata.check;
-				console.log('rdatalike :'+ likecount);
+				console.log('rdata like :'+ likecount);
 				$('#likecnt').html(rdata.cnt);
 				}
 				
@@ -439,43 +468,3 @@ $(function() {
 	});
 }
 })//ready
-
-/*
-
-function commlikecount() {
-	$.ajax ({
-		url : "InfocommLikeCount.com",
-		type : "POST",
-		data : {
-			comm_num :
-			m_id :
-		}
-	})
-}
-
-*/
-
-
-	
-
-
-
-	/*
-	//댓글 좋아요 카운트
-	function likeCount() {
-		$.ajax ({
-			url : "InfocommLikeCount.com",
-			type : "POST",
-			data : {
-				comm_num : $().attr("data-comm_num"),
-				m_id : $("#loginid").val()
-			},
-			success : function (rdata) {
-				console.log('댓글 카운트 ajax 성공')
-				if (rdata) {
-					$(".likecount").html(rdata);
-				}
-			}
-		})
-	}
-	*/

@@ -68,7 +68,6 @@ function ajax(sdata) {
 						if(content.length >= 20) {
 							content=content.substr(0,20) + "..."
 						}
-						
 						output += "<td><div>" + blank + img
 						output += "  <a href='InfoDetail.com?num=" + item.inf_num + "'>"
 						output += subject.replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -83,6 +82,7 @@ function ajax(sdata) {
 						}
 						output += "<td><div><img class='cover' src='" + item.inf_cover + "'></div></td>'"
 						output += '<td><div>' + '좋아요자리(ajax활용?)' + '</div></td>'
+						output += '<td><div>' + item.infolikecnt + '</div></td>'
 					}) //function(index, item)
 				output += "</tbody>"
 				$('table').append(output)
@@ -127,7 +127,7 @@ function ajax(sdata) {
 
 
 $(function() {
-	go(1);
+	go(1)
 	
 	
 	$("button").click(function(){

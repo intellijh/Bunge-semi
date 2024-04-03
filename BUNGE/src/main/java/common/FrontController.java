@@ -43,8 +43,9 @@ import info.action.InfobooksearchAction;
 import infoboardlike.action.InfoLikeCntAction;
 import infoboardlike.action.InfoLikeAddAction;
 import infoboardlike.action.InfoLikeDeleteAction;
-import infocommlike.action.InfocommLikeAction;
-import infocommlike.action.InfocommLikeCountAction;
+import infocommlike.action.InfocommLikeAddAction;
+import infocommlike.action.InfocommLikeCntAction;
+import infocommlike.action.InfocommLikeDeleteAction;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -232,12 +233,16 @@ public class FrontController extends HttpServlet {
                 action = new MessageLoadAction();
                 break;
             //댓글 좋아요 추가
-            case "/InfocommLike.com":
-            	action = new InfocommLikeAction();
+            case "/InfocommLikeCnt.com":
+            	action = new InfocommLikeCntAction();
             	break;
-            //댓글 좋아요 카운트
-            case "/InfocommLikeCount.com":
-            	action = new InfocommLikeCountAction();
+            //댓글 좋아요 추가
+            case "/InfocommLikeAdd.com":
+            	action = new InfocommLikeAddAction();
+            	break;
+            //댓글 좋아요 삭제
+            case "/InfocommLikeDelete.com":
+            	action = new InfocommLikeDeleteAction();
             	break;
             //첨부파일 저장
             case "/InfoBoardFileDown.com":

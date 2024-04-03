@@ -45,6 +45,7 @@
        <option value="3">3</option>
        <option value="5">5</option>
        <option value="7">7</option>
+       <option value="8">8 </option>
        <option value="10" selected>10</option>
      </select>
    </div>
@@ -66,6 +67,7 @@
   		  <th><div>조회수</div></th>
   		  <th><div>책 표지</div></th>
   		  <th><div>좋아요</div></th>
+  		  <th><div>프로필 이미지</div></th>
   	    </tr>
       </thead>
       <tbody>
@@ -84,7 +86,7 @@
   	   		  </c:forEach>
   	   		  <img src="image/line.gif" style="width:20px">
   	   	    </c:if>
-  	   	      <a href="InfoDetail.com?num=${b.inf_num}">
+  	   	      <a href="InfoDetail.com?num=${b.inf_num}" id="inf_num">
   	   		<c:if test="${b.inf_subject.length()>=20}">
   	   			<c:out value="${b.inf_subject.substring(0,20)}..." />
   	   		</c:if>
@@ -98,6 +100,7 @@
   	   	  <td><div>${b.m_id}</div></td>
   	   	  <td><div>${b.inf_reg}</div></td>
   	   	  <td><div>${b.inf_readcount}</div></td>
+  	   	  <td><div>${b.infolikecnt}</div></td>
   	   	</tr>
   	    </c:forEach>
       </tbody>
