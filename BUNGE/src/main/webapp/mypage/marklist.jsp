@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>즐겨찾기 페이지</title>
+<jsp:include page="/layout/header.jsp" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 </head>
 <body>
 	<!-- tab menu 시작 -->

@@ -4,7 +4,8 @@
 <title>로그인 페이지</title>
 <link href="${pageContext.request.contextPath}/css/login.css" type="text/css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
-
+<jsp:include page="/layout/header.jsp" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 
 <script>
 $(function() {
