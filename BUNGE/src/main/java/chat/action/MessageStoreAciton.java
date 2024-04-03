@@ -25,7 +25,7 @@ public class MessageStoreAciton implements Action {
 
         if (result == 1) {
             PrintWriter out = response.getWriter();
-            out.print("ok");
+            out.print(result);
         }
         return null;
     }

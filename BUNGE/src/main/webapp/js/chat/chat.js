@@ -61,6 +61,9 @@ function getChatList() {
             if (selectedChatId == 0) {
                 $(".contacts li").eq(0).click();
                 console.log("click !!!");
+            } else {
+                $("#" + selectedChatId).click();
+                console.log("getChatList 아이디 0 아닐 때 클릭");
             }
         }
     });
