@@ -11,20 +11,20 @@ import javax.naming.NamingException;
 import common.action.Action;
 import common.action.ActionForward;
 import common.db.MypageDAO;
-import common.db.Mymark;
+import common.db.Mylike;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class mybookmarklistAction implements Action {
+public class mylikelistAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException, NamingException {
 		ActionForward forward = new ActionForward();
 		MypageDAO mypagedao = new MypageDAO();
-		List<Mymark> bookMarklist = new ArrayList<>();
+		List<Mylike> likelist = new ArrayList<>();
 		PrintWriter out = response.getWriter();
 		HttpSession session =request.getSession();
 		
@@ -32,10 +32,10 @@ public class mybookmarklistAction implements Action {
 		
 		if(m_id != null) {
 			
-			bookMarklist = mypagedao.getMarkList(m_id);
-			request.setAttribute("bookMarklist", bookMarklist);
+			likelist = mypagedao.getlikeList(m_id);
+			request.setAttribute("likelist", likelist);
 			forward.setRedirect(false);
-			forward.setPath("mypage/marklist.jsp");
+			forward.setPath("mypage/mylikelist.jsp");
 		}else {
 			response.setContentType("text/html; charset=utf-8");
 			String message = "로그인 후 이용 가능합니다.";

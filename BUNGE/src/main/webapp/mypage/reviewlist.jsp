@@ -15,7 +15,8 @@
 		  <ul class="tab-slider--tabs">
 			<a href="reviewlist.com"><li class="tab-slider--trigger active" rel="tab1"><span>작성글</span></li></a>
 			<a href="mycommlist.com"><li class="tab-slider--trigger"  rel="tab2"><span>작성댓글</span></li></a>
-			<a href="mybookmarklist.com"><li class="tab-slider--trigger"  rel="tab3"><span>즐겨찾기</span></li></a>
+			<a href="mylikelist.com"><li class="tab-slider--trigger"  rel="tab3"><span>즐겨찾기</span></li></a>
+			<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab4"><span>중고거래 찜</span></li></a>
 		  </ul>
 		</div>
 		<div class="tab-slider--container">

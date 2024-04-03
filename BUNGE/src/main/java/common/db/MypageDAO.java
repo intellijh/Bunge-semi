@@ -25,26 +25,36 @@ private DataSource ds;
 		}
 	}
 	//회원정보 조회
-	public MypageDAO mypage_info(String m_id) {
+	public Mypage mypage_info(String m_id) {
 		Mypage m = null;
-		String info_sql = "select * from member  where m_id=?";
-		
+		String info_sql = "select * from member where m_id = ?";
 		try(Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(info_sql);) {
-			pstmt.setString(1, m_id);
 			
+			pstmt.setString(1, m_id);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				if(rs.next()) {
-				
-				}
-			}catch (SQLException e) {
-				e.printStackTrace();
+				m = new Mypage();
+				m.getMember().setM_id(rs.getString("m_id"));
+				m.getMember().setM_pwd(rs.getString("m_pwd"));
+				m.getMember().setM_name(rs.getString("m_name"));
+				m.getMember().setM_nick(rs.getString("m_nick"));
+				m.getMember().setM_gender(rs.getString("m_gender"));
+				m.getMember().setM_zipcode(rs.getString("m_zipcode"));
+				m.getMember().setM_addr1(rs.getString("m_addr1"));
+				m.getMember().setM_addr2(rs.getString("m_addr2"));
+				m.getMember().setM_phone(rs.getString("m_phone"));
+				m.getMember().setM_email(rs.getString("m_email"));
+				m.getMember().setM_profile(rs.getString("m_profile"));
+	
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
 			}
 		}catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
-		return null;
+		return m;
 	}
 	
 	//리스트 조회
@@ -144,9 +154,9 @@ private DataSource ds;
 		return commlist;
 	}
 	//내가 좋아요한 게시글 조회
-	public List<Mymark> getMarkList(String m_id) {
-		List<InfoMark> marklist = new ArrayList<>();
-		String mark_sql= "select b.inf_num , b.inf_subject, b.inf_content , b.inf_reg, "
+	public List<Mylike> getlikeList(String m_id) {
+		List<Mylike> likelist = new ArrayList<>();
+		String like_sql= "select b.inf_num , b.inf_subject, b.inf_content , b.inf_reg, "
 				+ "    COUNT(DISTINCT c.inf_num) AS comment_count, "
 				+ "    COUNT(DISTINCT k.inf_num) AS like_count "
 				+ "from "
@@ -156,9 +166,97 @@ private DataSource ds;
 				+ "LEFT JOIN "
 				+ "    infolike k ON b.inf_num = k.inf_num "
 				+ "where b.m_id=? and b.inf_lev=0 "
-				+ "group by b.inf_num, b.inf_subject, b.inf_content, b.inf_reg; ";
-		return null;
+				+ "group by b.inf_num, b.inf_subject, b.inf_content, b.inf_reg ";
+			
+		try(Connection con =ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(like_sql);) {
+			
+			pstmt.setString(1, m_id);
+			
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					Mylike like = new Mylike();
+					like.getBoard().setInf_num(rs.getInt("inf_num"));
+					like.getBoard().setInf_subject(rs.getString("inf_subject"));
+					like.getBoard().setInf_content(rs.getString("inf_content"));
+					like.getBoard().setInf_reg(rs.getString("inf_reg"));
+					like.getComment().setInf_num(rs.getInt("comment_count"));
+					like.getInfoLike().setInf_num(rs.getInt("like_count"));
+					
+					likelist.add(like);
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return likelist;
 	}
+	//중고거래 좋아요(찜)한 내역 조회
+	public List<Mytrade> gettradeList(String m_id) {
+		List<Mytrade> tradelist = new ArrayList<>();
+		String trade_sql = "select t.tradeid, t.title, t.description, t.price, t.category, t.imageid,t.readcount , k.tradeid "
+				+ "from trade t "
+				+ "join likey k on t.tradeid = k.tradeid "
+				+ "where sellerid=? ";
+	
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(trade_sql);) {
+			
+			pstmt.setString(1, m_id);
+			
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					Mytrade mytrade = new Mytrade();
+					mytrade.getTrade().setTradeID(rs.getInt("tradeid"));
+					mytrade.getTrade().setTitle(rs.getString("title"));
+					mytrade.getTrade().setDescription(rs.getString("description"));
+					mytrade.getTrade().setPrice(rs.getInt("price"));
+					mytrade.getTrade().setCategory(rs.getString("category"));
+					mytrade.getTrade().setImageID(rs.getString("imageid"));
+					mytrade.getTrade().setReadCount(rs.getInt("readcount"));
+					mytrade.getLikey().setTradeid(rs.getInt("tradeid"));
+					tradelist.add(mytrade);
+				}
+				}catch (SQLException e) {
+					e.printStackTrace();
+				}
+			
+			}catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		return tradelist;
+	}
+	public int mypagechange(Mypage m) {
+		int result = 0;
+		String change_sql = "update member "
+						+ "set m_pwd=? , m_nick=?, m_zipcode=?, m_addr1=?, m_addr2=?, "
+						+ "m_phone=?, m_email=?"
+						+ "where m_id=? ";
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(change_sql);) {
+			
+			pstmt.setString(1, m.getMember().getM_name());
+			pstmt.setString(2, m.getMember().getM_nick());
+			pstmt.setString(3, m.getMember().getM_zipcode());
+			pstmt.setString(4, m.getMember().getM_addr1());
+			pstmt.setString(5, m.getMember().getM_addr2());
+			pstmt.setString(6, m.getMember().getM_phone());
+			pstmt.setString(7, m.getMember().getM_email());
+			result=pstmt.executeUpdate();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return result;
+	}
+
+
+	
 
 
 }

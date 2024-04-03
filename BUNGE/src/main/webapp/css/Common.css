@@ -45,7 +45,9 @@ ol,
 li {
   list-style: none;
 }
-
+#wrap {
+	min-width: 1300px;
+}
 input,
 select,
 textarea {
