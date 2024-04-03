@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-    <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
-    <script src= '${pageContext.request.contextPath}/js/pwdreset.js'></script>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 재설정</title>
+<script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
+    <script src= '${pageContext.request.contextPath}/js/pwdreset.js'></script>
+    <jsp:include page="/layout/header.jsp" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
 span {
 	display: inline-block;

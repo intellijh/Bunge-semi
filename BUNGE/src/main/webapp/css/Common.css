@@ -35,3 +35,64 @@ p {
   margin: 0;
   padding: 0;
 }
+img {
+  border: 0;
+}
+
+dl,
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+input,
+select,
+textarea {
+  /* 임시 스타일 */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%
+}
+body {
+  background: #fff;
+  font-family: "NeoRegular";
+
+}
+input,
+select,
+textarea {
+  /* 임시 스타일 */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+a:visited {
+  color: #000;
+}
+
+.button {
+  display: inline-block;
+  min-width: 46px;
+  height: 36px;
+  padding: 0 12px;
+  line-height: 36px;
+  font-size: 13px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: top;
+  background-color: var(--main-color);
+  border: none;
+}
