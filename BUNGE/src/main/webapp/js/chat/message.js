@@ -1,3 +1,47 @@
+function loadMessage() {
+    console.log("loadMessage() Start");
+    $('.msg_card_body').empty();
+    $.ajax({
+        type: "post",
+        url: "messageLoad.com",
+        data: {"chatId": selectedChatId},
+        dataType: "json",
+        success: function (rdata) {
+            console.log(rdata);
+
+            let chat = "";
+            $(rdata).each(function () {
+                if (loginId == this.memberId) {
+                    chat += `
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="msg_cotainer_send">
+                                ${this.content}
+                                <span class="msg_time_send">${this.sendDate.substring(11, 16)}</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    chat += `
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                     class="rounded-circle user_img_msg">
+                            </div>
+                            <div class="msg_cotainer">
+                                ${this.content}
+                                <span class="msg_time">${this.sendDate.substring(11, 16)}</span>
+                            </div>
+                        </div>
+                        `;
+                }
+            });
+            $('.msg_card_body').html(chat);
+        },
+    })
+
+    console.log("loadMessage() End");
+}
+
 $(function(){
 
     const webSocket = new WebSocket('ws://localhost:8088/chat');
@@ -124,54 +168,5 @@ $(function(){
         send();
         $inputMessage.val("");
         console.log("send_btn click");
-    });
-
-    function loadMessage() {
-        console.log("loadMessage() Start");
-        $('.msg_card_body').empty();
-        $.ajax({
-            type: "post",
-            url: "messageLoad.com",
-            data: {"chatId": selectedChatId},
-            dataType: "json",
-            success: function (rdata) {
-                console.log(rdata);
-
-                let chat = "";
-                $(rdata).each(function () {
-                    if (loginId == this.memberId) {
-                        chat += `
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
-                                ${this.content}
-                                <span class="msg_time_send">${this.sendDate.substring(11, 16)}</span>
-                            </div>
-                        </div>
-                    `;
-                    } else {
-                        chat += `
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                                     class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                ${this.content}
-                                <span class="msg_time">${this.sendDate.substring(11, 16)}</span>
-                            </div>
-                        </div>
-                        `;
-                    }
-                });
-                $('.msg_card_body').html(chat);
-            },
-        })
-
-        console.log("loadMessage() End");
-    }
-
-    $(document).on('click', '.contacts li', function () {
-        console.log("loadMessage() 클릭")
-        loadMessage();
     });
 })

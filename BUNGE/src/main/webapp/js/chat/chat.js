@@ -11,12 +11,11 @@ function getChatList() {
         url: "chatLoad.com",
         dataType: "json",
         success: function (rdata) {
-            console.log("ajax");
+
             if (rdata.chatList.length <= 0) {
                 return;
             }
 
-            console.log("0over?");
             let output = ``;
             $(rdata.chatList).each(function () {
                 console.log(this);
@@ -52,24 +51,16 @@ function getChatList() {
             });
             $(".contacts").html(output);
 
-            if (selectedChatId == 0) {
-                selectedChatId = $(".contacts li").eq(0).attr("id");
-                const position = document.querySelector(".contacts li:first-child .user_info span").classList;
-                console.log("position: " + position);
-                if (position.contains("seller")) {
-                    selectedSellerId = $(".contacts li:eq(0) .user_info .seller").text();
-                    selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
-                } else {
-                    selectedBuyerId = $(".contacts li:eq(0) .user_info .buyer").text();
-                    selectedSellerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
-                }
-            }
+            console.log("initial selectedChatId: " + selectedChatId);
+
             console.log("stored chatId = " + selectedChatId);
             console.log("stored sellerId = " + selectedSellerId);
             console.log("stored buyerId = " + selectedBuyerId);
 
-            $(".contacts li").removeClass("active");
-            $("#"+selectedChatId).addClass("active");
+            if (selectedChatId == 0) {
+                $(".contacts li").eq(0).click();
+                console.log("click !!!");
+            }
         }
     });
 
@@ -85,17 +76,20 @@ $(document).on('click', '.contacts li', function() {
     if (position.hasClass("seller")) {
         selectedSellerId = $(this).find(".seller").text();
         selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
-        console.log("click p1" + $(this).find("p").eq(0).text());
+        console.log("click p1: " + $(this).find("p").eq(0).text());
     } else {
         selectedBuyerId = $(this).find(".buyer").text();
         selectedSellerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
-        console.log("click p2" + $(this).find("p").eq(0).text());
+        console.log("click p2: " + $(this).find("p").eq(0).text());
     }
 
     console.log("click chatId = " + selectedChatId);
     console.log("click sellerId = " + selectedSellerId);
     console.log("click buyerId = " + selectedBuyerId);
-    getChatList();
+    $(".contacts li").removeClass("active");
+    $("#"+selectedChatId).addClass("active");
+    loadMessage();
+    // getChatList();
 });
 
 $(function () {
