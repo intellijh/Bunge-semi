@@ -188,7 +188,6 @@ public class BoardDAO {
 					board.setInf_readcount(rs.getInt("INF_READCOUNT"));
 					board.setInf_book(rs.getString("INF_BOOK"));
 					board.setInf_cover(rs.getString("INF_COVER"));
-					board.setCnt(rs.getInt("cnt"));
 					board.setCnt(rs.getInt("comment_cnt"));
 					board.setInfolikecnt(rs.getInt("like_cnt"));					
 
