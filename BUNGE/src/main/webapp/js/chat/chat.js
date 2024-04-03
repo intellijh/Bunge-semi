@@ -91,7 +91,7 @@ $(document).on('click', '.contacts li', function() {
     console.log("click sellerId = " + selectedSellerId);
     console.log("click buyerId = " + selectedBuyerId);
     $(".contacts li").removeClass("active");
-    $("#"+selectedChatId).addClass("active");
+    $(this).addClass("active");
     loadMessage();
     // getChatList();
 });

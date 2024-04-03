@@ -174,16 +174,18 @@ $(function(){
         });
     }
 
-    $inputMessage.keydown(function(key){
-        if(key.keyCode == 13){
+    $inputMessage.keydown(function(event){
+        if (event.key === "Enter") {
             $('.type_msg').focus();
             $('.send_btn').click();
-            return;
+            event.preventDefault();
         }
-        console.log("type_msg keydown");
     });
 
     $('.send_btn').click(function(){
+        if ($inputMessage.val().trim() == "" || $inputMessage.val() == null) {
+            return;
+        }
         send();
         $inputMessage.val("");
         console.log("send_btn click");
