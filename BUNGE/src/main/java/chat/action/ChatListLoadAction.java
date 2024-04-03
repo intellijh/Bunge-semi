@@ -11,6 +11,7 @@ import common.action.ActionForward;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,8 +20,16 @@ public class ChatListLoadAction implements Action {
 
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = (String) request.getSession().getAttribute("m_id");
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("m_id");
         System.out.println(id);
+
+        Long chatId = (Long) session.getAttribute("chatId");
+        if (chatId != null) {
+            if (chatId > 0) {
+                session.setAttribute("chatId", 0L);
+            }
+        }
 
         JsonArray array = new ChatDAO().getChatList(id);
         JsonElement element = new Gson().toJsonTree(array);

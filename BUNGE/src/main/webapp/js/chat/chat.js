@@ -4,13 +4,20 @@ let selectedBuyerId = ""
 let loginId = "";
 
 function getChatList() {
-
     console.log("getList");
+    let sessionChatId = $("#sessionChatId").val();
+    console.log("session chat 데이터: " + sessionChatId);
+    if (sessionChatId == null || sessionChatId == "") {
+        sessionChatId = 0;
+    }
+    console.log("session chat 데이터 0으로: " + sessionChatId);
     $.ajax({
         type: "post",
         url: "chatLoad.com",
+        data: {"chatId": sessionChatId},
         dataType: "json",
         success: function (rdata) {
+            console.log("getChat rdata: " + rdata);
 
             if (rdata.chatList.length <= 0) {
                 console.log("getList length 안");
@@ -57,6 +64,8 @@ function getChatList() {
             console.log("stored chatId = " + selectedChatId);
             console.log("stored sellerId = " + selectedSellerId);
             console.log("stored buyerId = " + selectedBuyerId);
+
+            selectedChatId = sessionChatId;
 
             if (selectedChatId == 0) {
                 $(".contacts li").eq(0).click();
