@@ -102,6 +102,7 @@ function deleteChat() {
         dataType: "json",
         success: function (rdata) {
             if (rdata == 1) {
+                selectedChatId = 0;
                 getChatList();
             }
         }
@@ -111,6 +112,7 @@ function deleteChat() {
 $(document).on("click", ".delete-chat-btn", function () {
     console.log("삭제 클릭");
     deleteChat();
+    $("#action_menu_btn").click();
 });
 $(document).on("click", ".test_btn", function () {
     console.log("테스트 버튼");
