@@ -82,7 +82,7 @@ private DataSource ds;
 			pstmt.setInt(1, inf_num);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
-					x = rs.getInt(1); // DB에 해당 id 있음
+					x = rs.getInt(1);
 				}
 			}
 		} catch (Exception ex) {
@@ -252,13 +252,14 @@ private DataSource ds;
 		return result;
 	} //CommLikeInsert() end
 	
-	public int CommLikeDelete(String m_id, int comm_num) {
+	public int CommLikeDelete(int comm_num, String m_id) {
 		int num = 0;
 		
 		String sql = "delete infocommlike "
-				   + " where comm_num=? and m_id=? ";
+				   + "where comm_num=? "
+				   + "and m_id=? ";
 		 try (Connection con = ds.getConnection();
-				 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			  PreparedStatement pstmt = con.prepareStatement(sql);) {
 			 pstmt.setInt(1, comm_num);
 			 pstmt.setString(2, m_id);
 			 num = pstmt.executeUpdate();
