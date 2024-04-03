@@ -120,4 +120,23 @@ public class ChatDAO {
         }
         return result;
     }
+
+    public int delete(String chatId) {
+
+        int result = 0;
+        String sql =
+                "DELETE chat\n" +
+                "WHERE chat_id = ?";
+
+        try (Connection conn = ds.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, chatId);
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }

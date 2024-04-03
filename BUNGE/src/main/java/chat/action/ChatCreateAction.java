@@ -22,8 +22,16 @@ public class ChatCreateAction implements Action {
         chat.setBuyerId((String) session.getAttribute("m_id"));
         chat.setTrade_id(Long.parseLong(request.getParameter("tradeId")));
 
+        String sellerId = chat.getSellerId();
+        String buyerId = chat.getBuyerId();
+        long tradeId = chat.getTrade_id();
+        System.out.println("sellerId = " + sellerId);
+        System.out.println("buyerId = " + buyerId);
+        System.out.println("tradeId = " + tradeId);
+
         ChatDAO dao = new ChatDAO();
         long chatId = dao.hasChatExist(chat);
+        System.out.println("chatId = " + chatId);
         if (chatId > 0) {
             //채팅방 존재할 때 해당 채팅방 입장 로직 구현 필요
         } else {

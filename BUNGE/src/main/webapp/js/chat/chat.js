@@ -13,6 +13,8 @@ function getChatList() {
         success: function (rdata) {
 
             if (rdata.chatList.length <= 0) {
+                console.log("getList length 안");
+                $(".contacts").empty();
                 return;
             }
 
@@ -47,7 +49,6 @@ function getChatList() {
                                 </div>
                             </div>
                         </li>`;
-                // $("li").addClass("active");
             });
             $(".contacts").html(output);
 
@@ -63,8 +64,6 @@ function getChatList() {
             }
         }
     });
-
-    // setTimeout(getChatList, 1000);
 }
 
 $(document).on('click', '.contacts li', function() {
@@ -76,10 +75,12 @@ $(document).on('click', '.contacts li', function() {
     if (position.hasClass("seller")) {
         selectedSellerId = $(this).find(".seller").text();
         selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
+        $(".chat_top").html(`<span>${selectedSellerId}</span>`);
         console.log("click p1: " + $(this).find("p").eq(0).text());
     } else {
         selectedBuyerId = $(this).find(".buyer").text();
         selectedSellerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
+        $(".chat_top").html(`<span>${selectedBuyerId}</span>`);
         console.log("click p2: " + $(this).find("p").eq(0).text());
     }
 
@@ -92,12 +93,36 @@ $(document).on('click', '.contacts li', function() {
     // getChatList();
 });
 
+function deleteChat() {
+
+    $.ajax({
+        type: "post",
+        url: "chatDelete.com",
+        data: {"chatId": selectedChatId},
+        dataType: "json",
+        success: function (rdata) {
+            if (rdata == 1) {
+                getChatList();
+            }
+        }
+    });
+}
+
+$(document).on("click", ".delete-chat-btn", function () {
+    console.log("삭제 클릭");
+    deleteChat();
+});
+$(document).on("click", ".test_btn", function () {
+    console.log("테스트 버튼");
+    getChatList();
+});
+
 $(function () {
     loginId = $("#loginId").val();
     console.log("myId = " + loginId);
 
     $('#action_menu_btn').click(function () {
-        $('.action_menu').toggle();
+        $(".action_menu").toggle();
     });
     console.log("load");
 
