@@ -47,6 +47,13 @@
       </div>
       
       <div class="form-group">
+        <label for="inf_book">책</label>
+          <input name="inf_book" id="inf_book" type="text" class="form-control" value="${board.inf_book}" size="100px">
+          <input type="button" value="검색" id="booksearch">
+          <img src="${board.inf_cover}" class="inf_cover" id="inf_cover">
+      </div>
+      
+      <div class="form-group">
         <label for="inf_subject">제목</label>
         <input name="inf_subject"
         	   id="inf_subject" type="text" class="from-control"
@@ -121,8 +128,7 @@
     </c:if>
     
     <c:if test="${boardfile[2] == null}">
- 	  <div c
- 	  lass="input-group3">
+ 	  <div class="input-group3">
 	 	  <label>
 	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
   		    <img id="preview3" width="50px">
