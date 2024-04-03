@@ -77,10 +77,12 @@ function ajax(sdata) {
 						output += '<td><div>' + item.m_id + '</div></td>'
 						output += '<td><div>' + item.inf_reg + '</div></td>'
 						output += '<td><div>' + item.inf_readcount + '</div></td>'
-						if (item.inf_readcount != 'undefined') {
-							console.log('item.inf_cover :'+ index + " : " + item.inf_cover)
-						}
+						if (item.inf_cover != undefined) {
+							//console.log('item.inf_cover :'+ index + " : " + item.inf_cover)
 						output += "<td><div><img class='cover' src='" + item.inf_cover + "'></div></td>'"
+						} else {
+						output += "<td><div></div></td>"
+						}
 						output += '<td><div>' + '좋아요자리(ajax활용?)' + '</div></td>'
 						output += '<td><div>' + item.infolikecnt + '</div></td>'
 					}) //function(index, item)
