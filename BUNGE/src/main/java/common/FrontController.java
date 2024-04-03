@@ -24,9 +24,10 @@ import common.login.loginAction;
 import common.login.loginProcessAction;
 import common.login.logoutAction;
 import common.login.pwdresetAction;
-import common.mypage.mybookmarklistAction;
 import common.mypage.mycommlistAction;
+import common.mypage.mylikelistAction;
 import common.mypage.mypageAction;
+import common.mypage.mytradelistAction;
 import common.mypage.reviewlistAction;
 import info.action.InfoDetailAction;
 import info.action.InfoListAction;
@@ -87,6 +88,7 @@ public class FrontController extends HttpServlet {
             case "/logout.com":
                 action = new logoutAction();
                 break;
+                //회원가입 페이지
             case "/join.com":
                 action = new joinAction();
                 break;
@@ -136,8 +138,12 @@ public class FrontController extends HttpServlet {
             	action = new mycommlistAction();
             	break;
             	//즐겨찾기 페이지
-            case "/mybookmarklist.com" :
-            	action = new mybookmarklistAction();
+            case "/mylikelist.com" :
+            	action = new mylikelistAction();
+            	break;
+            	//중고거래 좋아요(찜) 페이지
+            case"/mytradelist.com" :
+            	action = new mytradelistAction();
             	break;
             //게시판에 글 추가
             case "/InfoAdd.com":
