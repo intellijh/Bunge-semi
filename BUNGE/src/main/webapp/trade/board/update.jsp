@@ -18,7 +18,7 @@
         <div id="write-view-title">글 수정하기</div>
         <hr><br>
 
-        <form id="write-form" action="tradeSubmit.net" method="post" enctype="multipart/form-data">
+        <form id="write-form" action="tradeUpdateDo.net" method="post" enctype="multipart/form-data">
             <!-- 거래글 제목 -->
             <input type="text" id="write-title" name="title" value="<c:out value="${trade.title}" />" maxlength="30"><br><br>
 
@@ -56,7 +56,7 @@
                 <option value="택배거래" <c:if test="${'택배거래' eq trade.tradeMethod}">selected</c:if>>택배거래</option>
                 <option value="직거래" <c:if test="${'직거래' eq trade.tradeMethod}">selected</c:if>>직거래</option>
             </select><br><br>
-
+            <input type="hidden" name="id" value="<c:out value="${trade.tradeID}" />">
             <input type="text" id="price" name="price" value="<c:out value="${trade.price}" />" maxlength="30">
 
             <!-- 거래글 내용 -->
@@ -65,12 +65,12 @@
             <!-- 이미지 업로드 -->
             <input type="file" id="write-thumbnail" name="imageID" accept=".jpeg,.jpg,.png" required><br>
             <!-- 이미지 미리보기 -->
-            <img style="width: 140px; height: 200px; margin-top:30px;" id="preview-image" src="${trade.imageID}" alt="썸네일 미리보기"><br>
+            <img style="width: 140px; height: 200px; margin-top:30px;" id="preview-image" src="/trade/board/image/${trade.imageID}" alt="썸네일 미리보기"><br>
             (실제 보여질 이미지 크기입니다)<br><br>
 
             <!-- 비밀번호 입력 -->
             <input type="button" class="btn btn-danger" id="write-cancel" value="취소" onclick="cancel()">
-            <input type="button" class="btn btn-info" id="write-submit" value="업로드" onclick="checkSubmit()">
+            <input type="button" class="btn btn-info" id="write-submit" value="수정하기" onclick="checkSubmit()">
         </form>
     </div>
 </div>

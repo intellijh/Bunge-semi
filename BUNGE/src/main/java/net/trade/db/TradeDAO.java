@@ -119,7 +119,6 @@ public class TradeDAO {
             Trade trade = new Trade();
             trade.setTradeID(rs.getInt("tradeID"));
             trade.setSellerID(rs.getString("sellerID"));
-            // Mariadb의 DATETIME 객체에서 분 단위까지만 substring
             trade.setCreateDate(rs.getTimestamp("createDate"));
             trade.setImageID(rs.getString("imageID"));
             trade.setTitle(rs.getString("title"));

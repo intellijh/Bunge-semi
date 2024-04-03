@@ -39,7 +39,7 @@
 </div>
 <div id="navi-bar">
     <div id="search">
-        <form action="TradeBoardServlet" method="GET">
+        <form action="trade.net" method="GET">
             <select class="form-control" id="search-mode" name="mode">
                 <option>제목</option>
                 <option>내용</option>
@@ -54,7 +54,7 @@
         <div class="post" onclick="location.href='view.net?tradeID=${trade.tradeID}'">
             <div class="post-thumbnail" style="text-align: center;">
                 <!-- 이미지 경로 출력 -->
-                <img src="<c:out value="${trade.imageID}" />" width="140" height="200">
+                <img src="/trade/board/image/<c:out value="${trade.imageID}" />" width="140" height="200">
             </div>
             <div class="post-info">
                 <span id="post-info-title"><c:out value="${trade.title}" /></span>
