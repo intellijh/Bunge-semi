@@ -6,28 +6,29 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import comment.db.CommentDAO;
 import common.action.Action;
 import common.action.ActionForward;
-import info.db.BoardDAO;
+import infoboardlike.db.InfoLikeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class InfocommLikeCountAction implements Action {
+public class InfocommLikeDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException, NamingException {
 		
-			BoardDAO boarddao = new BoardDAO();
+		CommentDAO commentdao = new CommentDAO();
 		
-			int comm_num = Integer.parseInt(request.getParameter("comm_num"));
-			System.out.println("ajax를 통해 온 comm_num : " + comm_num);
-			
-			int commlikecount = boarddao.commlikecount(comm_num);
-			PrintWriter out = response.getWriter();
-			out.print(commlikecount);
+		int comm_num = Integer.parseInt(request.getParameter("comm_num"));
+		String m_id = request.getParameter("m_id");
 		
+		int del = commentdao.CommLikeDelete(m_id, comm_num);
+		
+		PrintWriter out = response.getWriter();
+		out.print(del);
 
 		return null;
 	}

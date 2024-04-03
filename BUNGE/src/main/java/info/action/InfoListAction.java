@@ -12,6 +12,7 @@ import common.action.Action;
 import common.action.ActionForward;
 import info.db.Board;
 import info.db.BoardDAO;
+import infoboardlike.db.InfoLikeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ public class InfoListAction implements Action {
 			throws ServletException, IOException {
 		
 		BoardDAO boarddao = new BoardDAO();
+		
 		List<Board> boardlist = new ArrayList<Board>();
 		
 		//로그인 성공 시 파라미터 page가 없어요. 그래서 초기값이 필요합니다.

@@ -15,7 +15,14 @@ public class Member {
 	private String m_email;
 	private Date m_joindate;
 	private Date m_birthdate;
+	private String m_profile;
 	
+	public String getM_profile() {
+		return m_profile;
+	}
+	public void setM_profile(String m_profile) {
+		this.m_profile = m_profile;
+	}
 	public String getM_id() {
 		return m_id;
 	}
