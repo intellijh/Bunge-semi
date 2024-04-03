@@ -16,6 +16,8 @@ public class Board {
 	private String inf_reg;
 	private int cnt;
 	private InfoLike infolike;
+	private String inf_book;
+	private String inf_cover;
 	
 	public int getInf_num() {
 		return inf_num;
@@ -95,5 +97,18 @@ public class Board {
 	public void setInfolike(InfoLike infolike) {
 		this.infolike = infolike;
 	}
+	public String getInf_book() {
+		return inf_book;
+	}
+	public void setInf_book(String inf_book) {
+		this.inf_book = inf_book;
+	}
+	public String getInf_cover() {
+		return inf_cover;
+	}
+	public void setInf_cover(String inf_cover) {
+		this.inf_cover = inf_cover;
+	}
+	
 }
 

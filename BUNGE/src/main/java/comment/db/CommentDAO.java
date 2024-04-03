@@ -99,9 +99,9 @@ private DataSource ds;
 		}
 		String sql = "select comm_num, infocomm.m_id, comm_content, comm_reg, comm_lev, "
 				   + "		 comm_seq, "
-				   + " 		 comm_ref, memberimg.pof_savename"
-				   + " from  infocomm join memberimg " 
-				   + " on 	 infocomm.m_id = memberimg.m_id "
+				   + " 		 comm_ref, member.m_profile"
+				   + " from  infocomm join member " 
+				   + " on 	 infocomm.m_id = member.m_id "
 				   + " where inf_num = ? "
 				   + " order by comm_ref " + sort + ","
 				   +" 		 comm_seq asc";

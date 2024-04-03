@@ -53,6 +53,8 @@ public class InfoAddAction implements Action {
 			board.setInf_loc(multi.getParameter("inf_loc"));
 			System.out.println("inf_loc :" + multi.getParameter("inf_loc"));
 			board.setInf_reg(multi.getParameter("inf_reg"));
+			board.setInf_book(multi.getParameter("inf_book"));
+			board.setInf_cover(multi.getParameter("inf_cover"));
 
 			success = dao.boardInsert(board);
 			
