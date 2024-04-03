@@ -37,6 +37,8 @@ $(document).ready(function() {
 			$inf_content.focus();
 			return false;
 		}
+		
+	
 
 /*		
 	 if (check1 == 0) {
@@ -90,6 +92,13 @@ $(document).ready(function() {
 		}
 		
 	});//submit end
+	
+	
+	//'검색' 버튼을 눌렀을 때
+	$('#booksearch').click(function() {
+		location.href = "Infobooksearch.com"
+	})
+
 	
 	
 	$("#remove1").click(function() {

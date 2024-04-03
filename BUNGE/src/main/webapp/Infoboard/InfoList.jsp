@@ -67,7 +67,6 @@
   		  <th><div>조회수</div></th>
   		  <th><div>책 표지</div></th>
   		  <th><div>좋아요</div></th>
-  		  <th><div>프로필 이미지</div></th>
   	    </tr>
       </thead>
       <tbody>

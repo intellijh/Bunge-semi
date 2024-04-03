@@ -24,42 +24,8 @@ $(function() {
 	
 	
 	$('#booksearch').click(function() {
-	  //let url = "http://www.aladin.co.kr/ttb/api/ItemSearch.aspx?ttbkey=ttbyyy24941308001"
-	  //		+ "&Query="+ searchword + "&QueryType=Title&MaxResults=10&Cover=Big&start=1&SearchTarget=Book&output=JS&Version=20131101";
 		location.href = "Infobooksearch.com"
 	})
-/*
-		$.ajax ({
-			url : "http://www.aladin.co.kr/ttb/api/ItemSearch.aspx",
-			data : {"ttbkey" : "ttbyyy24941308001",
-				    "Query" : searchword,
-				    "QueryType" : "Title",
-				    "SearchTarget" : "Book",
-				    "start" : "1",
-				    "MaxResults" : "5",
-				    "Sort" : "Title",
-				    "Cover" : "Big",
-				    "output" : "JS",
-				    "Version" : "20131101"},
-			dataType : "json",
-			cache : false,
-			success : function(rdata) {
-			
-			let i=0;
-			$(rdata.item).each(function() {
-				let subject = rdata.item.at(i)
-				$("#searchlist").append("<img class='bookcover' src='"+subject.cover+"'>")
-				$("#searchlist").append("<div>책 제목 : '"+subject.title+"'</div>")
-				$("#searchlist").append("<div>지은이 : '"+subject.author+"'</div>")
-				$("#searchlist").append("<div>카테고리분류 : '"+subject.categoryName+"'</div>")
-				$("#searchlist").append("<div>개요 : '"+subject.description+"'</div>")
-				$("#searchlist").append("<div>출간일 : '"+subject.pubDate+"'</div><br><br>")
-				i++;
-				})
-			} //success end
-		}) //ajax end
-	}) //click end
-*/
 
 	
 	$("input[type=file]").change(function(){

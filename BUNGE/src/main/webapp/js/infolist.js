@@ -83,7 +83,6 @@ function ajax(sdata) {
 						} else {
 						output += "<td><div></div></td>"
 						}
-						output += '<td><div>' + '좋아요자리(ajax활용?)' + '</div></td>'
 						output += '<td><div>' + item.infolikecnt + '</div></td>'
 					}) //function(index, item)
 				output += "</tbody>"

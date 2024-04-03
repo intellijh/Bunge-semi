@@ -235,13 +235,16 @@ public class BoardDAO {
 					board.setInf_subject(rs.getString("INF_SUBJECT"));
 					board.setInf_content(rs.getString("INF_CONTENT"));
 					board.setInf_open(rs.getInt("INF_OPEN"));
-					board.setInf_ref(rs.getInt("INF_REF"));
-					board.setInf_lev(rs.getInt("INF_LEV"));
-					board.setInf_seq(rs.getInt("INF_SEQ"));
+				//	board.setInf_ref(rs.getInt("INF_REF"));
+				//	board.setInf_lev(rs.getInt("INF_LEV"));
+				//	board.setInf_seq(rs.getInt("INF_SEQ"));
 					board.setInf_readcount(rs.getInt("INF_READCOUNT"));
 					board.setInf_loc(rs.getString("INF_LOC"));
 					board.setInf_reg(rs.getString("INF_REG"));
+					board.setInf_book(rs.getString("INF_BOOK"));
+					board.setInf_cover(rs.getString("INF_COVER"));
 				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} 
