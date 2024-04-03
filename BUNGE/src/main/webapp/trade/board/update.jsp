@@ -51,7 +51,7 @@
                 <option value="거래완료" <c:if test="${'거래완료' eq trade.condition}">selected</c:if>>거래완료</option>
             </select><br><br>
 
-            선호 거래방식
+            선호 거래 방법
             <select name="tradeMethod">
                 <option value="택배거래" <c:if test="${'택배거래' eq trade.tradeMethod}">selected</c:if>>택배거래</option>
                 <option value="직거래" <c:if test="${'직거래' eq trade.tradeMethod}">selected</c:if>>직거래</option>
@@ -79,5 +79,5 @@
 <script type="text/javascript" src="../../static/thumbnailPreview.js"></script>
 <script type="text/javascript" src="../../static/jquery.js"></script>
 <script type="text/javascript" src="../../static/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../static/submit.js" charset='utf-8'></script>
+<script type="text/javascript" src="../../static/submit_do.js" charset='utf-8'></script>
 </html>

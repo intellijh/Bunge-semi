@@ -23,7 +23,7 @@
 		</div>
 		<div id="image-info">
 			<div id="image-title"><c:out value="${trade.title}" /></div>
-			<span id="image-category"><c:out value="분류 : ${trade.category}" /></span><br>
+			<span id="image-category"><c:out value="카테고리 : ${trade.category}" /></span><br>
 			<span id="image-quality"><c:out value="책 상태 : ${trade.quality}" /></span><br>
 			<span id="image-condition"><c:out value="거래 상태 : ${trade.condition}" /></span><br>
 			<span id="image-tradeMethod"><c:out value="선호 거래 방법 : ${trade.tradeMethod}" /></span><br>
