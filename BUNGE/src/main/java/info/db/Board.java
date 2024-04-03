@@ -1,8 +1,8 @@
 package info.db;
 
-import infoboardlike.db.InfoLike;
 
 public class Board {
+	
 	private int inf_num;
 	private String m_id;
 	private String inf_subject;
@@ -15,7 +15,7 @@ public class Board {
 	private String inf_loc;
 	private String inf_reg;
 	private int cnt;
-	private InfoLike infolike;
+	private int infolikecnt;
 	
 	public int getInf_num() {
 		return inf_num;
@@ -89,11 +89,11 @@ public class Board {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	public InfoLike getInfolike() {
-		return infolike;
+	public int getInfolikecnt() {
+		return infolikecnt;
 	}
-	public void setInfolike(InfoLike infolike) {
-		this.infolike = infolike;
+	public void setInfolikecnt(int infolikecnt) {
+		this.infolikecnt = infolikecnt;
 	}
 }
-
+ 

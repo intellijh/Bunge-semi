@@ -69,7 +69,7 @@ private DataSource ds;
 			System.out.println("comm_num 불러오는 데 실패 + e");
 		}
 		return comm_num;
-	} //commentsinsertedNum end
+	} //commentsinsertedNum end		
 	
 	public int getListCount(int inf_num) {
 		int x = 0;
@@ -90,22 +90,27 @@ private DataSource ds;
 			System.out.println("getListCount() 에러 : " + ex);
 		}
 		return x;
-	}
+	}//getListCount end	
 
 	public JsonArray getCommentList(int inf_num, int state) {
 		String sort = "asc";
 		if(state == 2) {
 			sort = "desc";
 		}
-		String sql = "select comm_num, infocomm.m_id, comm_content, comm_reg, comm_lev, "
-				   + "		 comm_seq, "
-				   + " 		 comm_ref, memberimg.pof_savename"
-				   + " from  infocomm join memberimg " 
-				   + " on 	 infocomm.m_id = memberimg.m_id "
-				   + " where inf_num = ? "
-				   + " order by comm_ref " + sort + ","
-				   +" 		 comm_seq asc";
-		  
+		String sql = " SELECT ic.comm_num, ic.m_id, ic.comm_content, ic.comm_reg,"
+				+"    ic.comm_lev, ic.comm_seq, ic.comm_ref, m.m_profile,"
+				+"    NVL(clike.like_count, 0) AS like_count,"
+				+"    NVL(chate.hate_count, 0) AS hate_count"
+				+" FROM infocomm ic JOIN member m ON ic.m_id = m.m_id"
+				+"	LEFT JOIN (SELECT comm_num, COUNT(*) AS like_count"
+				+"    	     	FROM infocommlike"
+				+"    	     	GROUP BY comm_num) clike ON ic.comm_num = clike.comm_num"
+				+"		   LEFT JOIN (SELECT comm_num, COUNT(*) AS hate_count"
+				+"    			     FROM infocommhate"
+				+"			     GROUP BY comm_num) chate ON ic.comm_num = chate.comm_num"
+				+" WHERE inf_num = ?"
+				+" ORDER BY comm_ref " + sort + ", comm_seq ASC";
+
 		JsonArray array = new JsonArray();
 		  
 		  try (Connection con = ds.getConnection(); 
@@ -123,7 +128,9 @@ private DataSource ds;
 						object.addProperty("comm_lev", rs.getInt(5));
 						object.addProperty("comm_seq", rs.getInt(6));
 						object.addProperty("comm_ref", rs.getInt(7));
-						object.addProperty("memberfile", rs.getString(8));
+						object.addProperty("m_profile", rs.getString(8));
+						object.addProperty("like_count", rs.getString(9));
+						object.addProperty("hate_count", rs.getString(10));
 						
 						array.add(object);
 					}
@@ -133,7 +140,7 @@ private DataSource ds;
 				System.out.println("getListCount() 에러 : " + ex);
 			}
 			return array;
-		}
+		}//getCommentList end	
 
 	public int commentsUpdate(Comment co) {
 		int result = 0;
@@ -151,7 +158,7 @@ private DataSource ds;
 				e.printStackTrace();
 			}
 			return result;
-		}
+		}//commentsUpdate end
 
 	public int commentsReply(Comment c) {
 		int result = 0;
@@ -179,7 +186,7 @@ private DataSource ds;
 		e.printStackTrace();
 	}
 		return result;
-}
+}//commentsReply end
 
 	public void reply_update(Connection con, int re_ref, int re_seq) throws SQLException{
 		String update_sql = "update infocomm "
@@ -191,7 +198,7 @@ private DataSource ds;
 			pstmt.setInt(2, re_seq);
 			pstmt.executeUpdate();
 		}
-	}
+	}//reply_update end
 
 	public int reply_insert(Connection con, Comment c) throws SQLException{
 		int result = 0;
@@ -207,7 +214,7 @@ private DataSource ds;
 			result = pstmt.executeUpdate();
 	}
 		return result;
-	}
+	}//reply_insert end
 
 	public int commentDelete(int num) {
 		int result = 0;
@@ -224,7 +231,87 @@ private DataSource ds;
 			e.printStackTrace();
 		}
 		return result;
-	}
-}
+	}//commentDelete end
 	
+	public int CommLikeInsert(String m_id, int comm_num) {
+		int result = 0;
+		String sql = "insert into infocommlike (no, m_id, comm_num) "
+				   + "values((select nvl(max(no),0)+1 from infocommlike), ?, ?) ";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setString(1, m_id);
+			pstmt.setInt(2, comm_num);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("CommLikeInsert() 에러" + e);
+		}
+		return result;
+	} //CommLikeInsert() end
+	
+	public int CommLikeDelete(String m_id, int comm_num) {
+		int num = 0;
+		
+		String sql = "delete infocommlike "
+				   + " where comm_num=? and m_id=? ";
+		 try (Connection con = ds.getConnection();
+				 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			 pstmt.setInt(1, comm_num);
+			 pstmt.setString(2, m_id);
+			 num = pstmt.executeUpdate();
+		 } catch (SQLException ex) {
+			 System.out.println("setNoUpdate() 에러 : " + ex);
+		 }
+		 return num; 
+	}//CommLikeDelete()메서드 end
+
+	public int InfocommLikeCheck(int comm_num,String m_id) {
+		int result = 0;
+		String sql = "select count(*) from infocommlike "
+				   + "where comm_num = ? and m_id = ? ";
+				    
+		try (Connection con = ds.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, comm_num);
+			pstmt.setString(2, m_id);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+				result = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getListCount() 에러 : " + ex);
+		}
+		return result;
+  }//InfocommLikeCheck end		
+	
+	public int InfocommLikeCnt(int comm_num) {
+		int result = -1;
+		String sql = "select count(*) from infocommlike where comm_num = ? ";
+				    
+		try (Connection con = ds.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1,  comm_num);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+				result = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getListCount() 에러 : " + ex);
+		}
+		return result;
+  }//getDetail end
+}
 //http://localhost:8088/Board_Ajax/CommentList.bo?comment_board_num=7&state=1

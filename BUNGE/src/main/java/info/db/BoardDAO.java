@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import infoboardlike.db.InfoLike;
+
 
 public class BoardDAO {
 	private DataSource ds;
@@ -138,17 +140,25 @@ public class BoardDAO {
 	}
 
 	public List<Board> getBoardList(int page, int limit) {
-		String board_list_sql = "select * " 
-			    + " from (select rownum rnum, c.*" 
-			    + "         from (select a.*, nvl(cnt,0) cnt " 
-			    + "                 from infoboard a " 
-			    + "                      left outer join (select inf_num, count(*) cnt " 
-			    + "                                         from infocomm " 
-			    + "                                        group by inf_num) b " 
-			    + "                      on a.inf_num = b.inf_num " 
-			    + "               order by inf_ref desc, inf_seq asc) c " 
-			    + "       where rownum <= ?) " 
-			    + " where rnum >= ? and rnum <= ?";
+		String board_list_sql = "SELECT * "
+				+ "FROM"
+				+"    (SELECT rownum AS rnum, c.*,NVL(l.cnt, 0) AS like_cnt"
+				+"    FROM"
+				+"        (SELECT a.*,NVL(b.cnt, 0) AS comment_cnt"
+				+"        FROM infoboard a LEFT OUTER JOIN"
+				+"            (SELECT inf_num, COUNT(*) AS cnt"
+				+"            FROM infocomm"
+				+"            GROUP BY inf_num) b"
+				+"        ON a.inf_num = b.inf_num"
+				+"        ORDER BY inf_ref DESC,"
+				+"                      inf_seq ASC) c"
+				+"    LEFT OUTER JOIN"
+				+"        (SELECT inf_num, COUNT(*) AS cnt"
+				+"        FROM infolike"
+				+"        GROUP BY inf_num) l"
+				+"    ON c.inf_num = l.inf_num"
+				+"    WHERE rownum <= ?) "
+				+ "WHERE rnum >= ? AND rnum <= ?";
 
 		List<Board> list = new ArrayList<Board>();
 		// 한 페이지 당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, ...
@@ -174,7 +184,8 @@ public class BoardDAO {
 					board.setInf_loc(rs.getString("INF_LOC"));
 					board.setInf_reg(rs.getString("INF_REG"));
 					board.setInf_readcount(rs.getInt("INF_READCOUNT"));
-					board.setCnt(rs.getInt("cnt"));
+					board.setCnt(rs.getInt("comment_cnt"));
+					board.setInfolikecnt(rs.getInt("like_cnt"));					
 
 					list.add(board);
 				}
@@ -501,54 +512,7 @@ public class BoardDAO {
 		return false;
 	} //boardmodifyDelete() end
 
-	public boolean commLike(String m_id, int comm_num) {
-		int result = -1;
-		String sql = "insert into infocommlike (no, m_id, comm_num) "
-				   + "values((select nvl(max(no),0)+1 from infocommlike), ?, ?) ";
-		
-		try (Connection con = ds.getConnection();
-			 PreparedStatement pstmt = con.prepareStatement(sql);) {
-			pstmt.setString(1, m_id);
-			pstmt.setInt(2, comm_num);
-			result = pstmt.executeUpdate();
-			
-			if (result != -1) {
-				System.out.println("commLike() 성공 : 데이터 삽입 성공");
-			}
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("commLike() 에러" + e);
-		}
-		return false;
-	} //commLike() end
-
-	public int commlikecount(int comm_num) {
-		int count = -1;
-		String sql = "select count(no) "
-				   + "from infocommlike "
-				   + "where comm_num = ?";
-		
-		try (Connection con = ds.getConnection();
-			 PreparedStatement pstmt = con.prepareStatement(sql);) {
-			pstmt.setInt(1, comm_num);
-			
-			try (ResultSet rs = pstmt.executeQuery();) {
-				if(rs.next()) {
-					count = rs.getInt(1);
-				}
-				
-				if(count != -1)
-					return count;
-			} catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println("commlikecount()에러" + e);
-			}
-		} catch (Exception e) {
-			System.out.println("commlikecount()에러" + e);
-		}
-		return count;
-	} //commlikecount end
-
-
+	
+	
+	
 }//class end
