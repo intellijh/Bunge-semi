@@ -39,10 +39,10 @@ public class BoardDAO {
 				String sql = "INSERT INTO INFOBOARD " 
 							+ "(INF_NUM, M_ID, INF_SUBJECT, INF_CONTENT, INF_REF, "
 							+ " INF_LEV, INF_SEQ, INF_READCOUNT, INF_LOC, "
-							+ " INF_REG, INF_OPEN) " 
+							+ " INF_REG, INF_OPEN, INF_BOOK, INF_COVER) " 
 							+ " values(" + max_sql + " , ?, ?, ?, " + max_sql 
 							+ " 	   , ?, ?, ?, ? "
-							+ "        , sysdate, ?)"; 
+							+ "        , sysdate, ?, ?, ?)"; 
 				
 				
 				String select_sql = "select max(inf_num) "
@@ -60,6 +60,8 @@ public class BoardDAO {
 						pstmt.setInt(6, 0); // READCOUNT
 						pstmt.setString(7, board.getInf_loc()); // LOC
 						pstmt.setInt(8, board.getInf_open());//OPEN
+						pstmt.setString(9, board.getInf_book()); //BOOK
+						pstmt.setString(10, board.getInf_cover()); //COVER URL
 			
 						pstmt.executeUpdate();
 						
@@ -184,6 +186,9 @@ public class BoardDAO {
 					board.setInf_loc(rs.getString("INF_LOC"));
 					board.setInf_reg(rs.getString("INF_REG"));
 					board.setInf_readcount(rs.getInt("INF_READCOUNT"));
+					board.setInf_book(rs.getString("INF_BOOK"));
+					board.setInf_cover(rs.getString("INF_COVER"));
+					board.setCnt(rs.getInt("cnt"));
 					board.setCnt(rs.getInt("comment_cnt"));
 					board.setInfolikecnt(rs.getInt("like_cnt"));					
 

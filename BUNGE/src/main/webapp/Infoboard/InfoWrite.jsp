@@ -15,6 +15,8 @@
 
 	img{width:15px}
 	
+	.inf_cover {width:200px;display:none}
+	
 	.input-group1, .input-group2, .input-group3, .input-group4, .input-group5 {display:none}
 	
 	input[type=file]{display:none}
@@ -27,14 +29,28 @@
   <form action="InfoAdd.com" method="post" enctype="multipart/form-data" name="boardform">
   	<div class="form-group">
   		<label for="m_id">글쓴이</label>
-  		<input name="m_id" id="m_id" type="text" value="${m_id}" class="form-control" placeholder="Enter m_id" readOnly>
+  		<input name="m_id" id="m_id" type="text" value="${m_id}" class="form-control" readOnly>
   		</div>	
   		
   		<div class="form-group">
   		<label for="inf_open">공개설정</label>
   		<input type="radio" name="inf_open" id="inf_open1" value="0" class="radio"><span class="pr_0">공개</span>&nbsp;&nbsp;&nbsp;
   		<input type="radio" name="inf_open" id="inf_open2" value="1" class="radio"><span class="pr_1">비공개</span>
+  		</div>
+  		
+  		
+		<div class="form-group">
+  		<label for="inf_book">책
+	 		<input name="inf_book" id="inf_book" type="text"		 
+	 			   class="form-control" placeholder="'검색' 버튼을 눌러주세요" readOnly
+	 			   value="${booktitle}"
+	 			   size="100px">
+	 		<input type="button" value="검색" id="booksearch">
+	 		<img src="${bookcover}" class="inf_cover" id="inf_cover">
+	 		<input type="hidden" value="${bookcover}" name="inf_cover" id="inf_cover">
+  		</label>
   		</div>	
+  		
 
   		<div class="form-group">
   		<label for="inf_subject">제목</label>

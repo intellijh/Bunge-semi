@@ -39,6 +39,7 @@ import info.action.InfoAddAction;
 import info.action.InfoBoardFileDownAction;
 import info.action.InfoDeleteAction;
 import info.action.InfoWriteAction;
+import info.action.InfobooksearchAction;
 import infoboardlike.action.InfoLikeCntAction;
 import infoboardlike.action.InfoLikeAddAction;
 import infoboardlike.action.InfoLikeDeleteAction;
@@ -247,6 +248,10 @@ public class FrontController extends HttpServlet {
             case "/InfoBoardFileDown.com":
             	action = new InfoBoardFileDownAction();
             	break;
+            case "/Infobooksearch.com":
+            	action = new InfobooksearchAction();
+            	break;
+            //책 검색 결과
 
         } //switch (command)
 

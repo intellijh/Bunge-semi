@@ -59,6 +59,11 @@ function ajax(sdata) {
 							subject=subject.substr(0,20) + "..."
 						}
 						
+				//		let book=item.inf_book
+				//		if(book.length >= 20) {
+				//			book=book.substr(0,20) + "..."
+				//		}
+						
 						let content=item.inf_content
 						if(content.length >= 20) {
 							content=content.substr(0,20) + "..."
@@ -67,13 +72,17 @@ function ajax(sdata) {
 						output += "  <a href='InfoDetail.com?num=" + item.inf_num + "'>"
 						output += subject.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 						       +    '</a>[' + item.cnt + ']</div></td>'
+				//	    output += "<td><div>" + book.replace(/</g, '&lt;').replace(/>/g, '&gt;') + "</div></td>"
 						output += '<td><div>' + content.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div></td>'
 						output += '<td><div>' + item.m_id + '</div></td>'
 						output += '<td><div>' + item.inf_reg + '</div></td>'
 						output += '<td><div>' + item.inf_readcount + '</div></td>'
-						output += '<td><div>' + '책표지자리' + '</div></td>'
+						if (item.inf_readcount != 'undefined') {
+							console.log('item.inf_cover :'+ index + " : " + item.inf_cover)
+						}
+						output += "<td><div><img class='cover' src='" + item.inf_cover + "'></div></td>'"
+						output += '<td><div>' + '좋아요자리(ajax활용?)' + '</div></td>'
 						output += '<td><div>' + item.infolikecnt + '</div></td>'
-						output += '<td><div>' + '프로필자리' + '</div></td>'
 					}) //function(index, item)
 				output += "</tbody>"
 				$('table').append(output)
@@ -108,6 +117,7 @@ function ajax(sdata) {
 				$('.pagination').append(output)
 				
 			} //if(data.listcount) > 0 end
+
 		}, //success end
 		error : function() {
 			console.log('에러')
@@ -118,6 +128,7 @@ function ajax(sdata) {
 
 $(function() {
 	go(1)
+	
 	
 	$("button").click(function(){
 		location.href="InfoWrite.com";

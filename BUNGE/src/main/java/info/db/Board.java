@@ -15,6 +15,8 @@ public class Board {
 	private String inf_loc;
 	private String inf_reg;
 	private int cnt;
+	private String inf_book;
+	private String inf_cover;
 	private int infolikecnt;
 	
 	public int getInf_num() {
@@ -95,5 +97,18 @@ public class Board {
 	public void setInfolikecnt(int infolikecnt) {
 		this.infolikecnt = infolikecnt;
 	}
+	public String getInf_book() {
+		return inf_book;
+	}
+	public void setInf_book(String inf_book) {
+		this.inf_book = inf_book;
+	}
+	public String getInf_cover() {
+		return inf_cover;
+	}
+	public void setInf_cover(String inf_cover) {
+		this.inf_cover = inf_cover;
+	}
+	
 }
  
