@@ -30,7 +30,8 @@ public class ChatDAO {
         String sql = "SELECT *\n" +
                 "FROM chat\n" +
                 "WHERE seller_id = ?\n" +
-                "OR buyer_id = ?";
+                "OR buyer_id = ?\n" +
+                "ORDER BY update_date DESC";
 
         try (Connection conn = ds.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -43,7 +44,7 @@ public class ChatDAO {
                     object.addProperty("chatId", rs.getString("chat_id"));
                     object.addProperty("sellerId", rs.getString("seller_id"));
                     object.addProperty("buyerId", rs.getString("buyer_id"));
-                    object.addProperty("updateDate", rs.getString("update_date"));
+                    object.addProperty("updateDate", rs.getString("update_date").substring(0, 16));
                     array.add(object);
                 }
             }
@@ -118,6 +119,25 @@ public class ChatDAO {
                 }
             }
         }
+        return result;
+    }
+
+    public int delete(String chatId) {
+
+        int result = 0;
+        String sql =
+                "DELETE chat\n" +
+                "WHERE chat_id = ?";
+
+        try (Connection conn = ds.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, chatId);
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return result;
     }
 }

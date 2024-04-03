@@ -4,19 +4,27 @@ let selectedBuyerId = ""
 let loginId = "";
 
 function getChatList() {
-
     console.log("getList");
+    let sessionChatId = $("#sessionChatId").val();
+    console.log("session chat 데이터: " + sessionChatId);
+    if (sessionChatId == null || sessionChatId == "") {
+        sessionChatId = 0;
+    }
+    console.log("session chat 데이터 0으로: " + sessionChatId);
     $.ajax({
         type: "post",
         url: "chatLoad.com",
+        data: {"chatId": sessionChatId},
         dataType: "json",
         success: function (rdata) {
-            console.log("ajax");
+            console.log("getChat rdata: " + rdata);
+
             if (rdata.chatList.length <= 0) {
+                console.log("getList length 안");
+                $(".contacts").empty();
                 return;
             }
 
-            console.log("0over?");
             let output = ``;
             $(rdata.chatList).each(function () {
                 console.log(this);
@@ -48,32 +56,26 @@ function getChatList() {
                                 </div>
                             </div>
                         </li>`;
-                // $("li").addClass("active");
             });
             $(".contacts").html(output);
 
-            if (selectedChatId == 0) {
-                selectedChatId = $(".contacts li").eq(0).attr("id");
-                const position = document.querySelector(".contacts li:first-child .user_info span").classList;
-                console.log("position: " + position);
-                if (position.contains("seller")) {
-                    selectedSellerId = $(".contacts li:eq(0) .user_info .seller").text();
-                    selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
-                } else {
-                    selectedBuyerId = $(".contacts li:eq(0) .user_info .buyer").text();
-                    selectedSellerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
-                }
-            }
+            console.log("initial selectedChatId: " + selectedChatId);
+
             console.log("stored chatId = " + selectedChatId);
             console.log("stored sellerId = " + selectedSellerId);
             console.log("stored buyerId = " + selectedBuyerId);
 
-            $(".contacts li").removeClass("active");
-            $("#"+selectedChatId).addClass("active");
+            selectedChatId = sessionChatId;
+
+            if (selectedChatId == 0) {
+                $(".contacts li").eq(0).click();
+                console.log("click !!!");
+            } else {
+                $("#" + selectedChatId).click();
+                console.log("getChatList 아이디 0 아닐 때 클릭");
+            }
         }
     });
-
-    // setTimeout(getChatList, 1000);
 }
 
 $(document).on('click', '.contacts li', function() {
@@ -85,16 +87,47 @@ $(document).on('click', '.contacts li', function() {
     if (position.hasClass("seller")) {
         selectedSellerId = $(this).find(".seller").text();
         selectedBuyerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
-        console.log("click p1" + $(this).find("p").eq(0).text());
+        $(".chat_top").html(`<span>${selectedSellerId}</span>`);
+        console.log("click p1: " + $(this).find("p").eq(0).text());
     } else {
         selectedBuyerId = $(this).find(".buyer").text();
         selectedSellerId = $(".contacts li:eq(0) .user_info p:eq(0)").text();
-        console.log("click p2" + $(this).find("p").eq(0).text());
+        $(".chat_top").html(`<span>${selectedBuyerId}</span>`);
+        console.log("click p2: " + $(this).find("p").eq(0).text());
     }
 
     console.log("click chatId = " + selectedChatId);
     console.log("click sellerId = " + selectedSellerId);
     console.log("click buyerId = " + selectedBuyerId);
+    $(".contacts li").removeClass("active");
+    $(this).addClass("active");
+    loadMessage();
+    // getChatList();
+});
+
+function deleteChat() {
+
+    $.ajax({
+        type: "post",
+        url: "chatDelete.com",
+        data: {"chatId": selectedChatId},
+        dataType: "json",
+        success: function (rdata) {
+            if (rdata == 1) {
+                selectedChatId = 0;
+                getChatList();
+            }
+        }
+    });
+}
+
+$(document).on("click", ".delete-chat-btn", function () {
+    console.log("삭제 클릭");
+    deleteChat();
+    $("#action_menu_btn").click();
+});
+$(document).on("click", ".test_btn", function () {
+    console.log("테스트 버튼");
     getChatList();
 });
 
@@ -103,7 +136,7 @@ $(function () {
     console.log("myId = " + loginId);
 
     $('#action_menu_btn').click(function () {
-        $('.action_menu').toggle();
+        $(".action_menu").toggle();
     });
     console.log("load");
 

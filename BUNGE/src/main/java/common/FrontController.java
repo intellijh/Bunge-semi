@@ -230,6 +230,10 @@ public class FrontController extends HttpServlet {
             case "/chatCreate.com":
                 action = new ChatCreateAction();
                 break;
+            //채팅방 삭제
+            case "/chatDelete.com":
+                action = new ChatDeleteAction();
+                break;
             //보낸 메세지 저장
             case "/messageStore.com":
                 action = new MessageStoreAciton();

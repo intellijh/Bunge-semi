@@ -34,6 +34,10 @@ public class MessageDao {
             pstmt.setString(2, message.getMemberId());
             pstmt.setString(3, message.getContent());
             result = pstmt.executeUpdate();
+
+            if (result > 0) {
+                updateChatDate(conn, message);
+            }
         } catch (Exception e) {
             System.out.println("insertText() 에러: " + e.getStackTrace()[0]);
         }
@@ -74,5 +78,24 @@ public class MessageDao {
         }
 
         return list;
+    }
+
+    private int updateChatDate(Connection conn, Message message) {
+
+        int result = 0;
+        String sql =
+                "UPDATE chat\n" +
+                "SET update_date = SYSTIMESTAMP\n" +
+                "WHERE chat_id = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setLong(1, message.getChatId());
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }
