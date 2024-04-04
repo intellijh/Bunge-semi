@@ -92,23 +92,19 @@ private DataSource ds;
 		return x;
 	}//getListCount end	
 
-	public JsonArray getCommentList(int inf_num, int state) {
+	public JsonArray getCommentList(int inf_num,int state) {
 		String sort = "asc";
 		if(state == 2) {
 			sort = "desc";
 		}
 
-		String sql = " SELECT ic.comm_num, ic.m_id, ic.comm_content, ic.comm_reg,"
+		String sql =" SELECT ic.comm_num, ic.m_id, ic.comm_content, ic.comm_reg,"
 				+"    ic.comm_lev, ic.comm_seq, ic.comm_ref, m.m_profile,"
-				+"    NVL(clike.like_count, 0) AS like_count,"
-				+"    NVL(chate.hate_count, 0) AS hate_count"
+				+"    NVL(clike.like_count, 0) AS like_count"
 				+" FROM infocomm ic JOIN member m ON ic.m_id = m.m_id"
 				+"	LEFT JOIN (SELECT comm_num, COUNT(*) AS like_count"
 				+"    	     	FROM infocommlike"
 				+"    	     	GROUP BY comm_num) clike ON ic.comm_num = clike.comm_num"
-				+"		   LEFT JOIN (SELECT comm_num, COUNT(*) AS hate_count"
-				+"    			     FROM infocommhate"
-				+"			     GROUP BY comm_num) chate ON ic.comm_num = chate.comm_num"
 				+" WHERE inf_num = ?"
 				+" ORDER BY comm_ref " + sort + ", comm_seq ASC";
 
@@ -132,7 +128,6 @@ private DataSource ds;
 						object.addProperty("comm_ref", rs.getInt(7));
 						object.addProperty("m_profile", rs.getString(8));
 						object.addProperty("like_count", rs.getString(9));
-						object.addProperty("hate_count", rs.getString(10));
 						
 						array.add(object);
 					}
