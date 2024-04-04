@@ -3,10 +3,11 @@
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
+
  
 <html>
 <head>
@@ -18,10 +19,14 @@
  #navbarSupportedContent {
  	margin-right : 50px;
  }
+ 
+ .container-fluid {margin : 0 auto}
+ 
 </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
+ <div class="inner">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.jsp"><img src="${pageContext.request.contextPath}/image/logo.png" alt="logo" width="140" height="30" class="d-inline-block align-text-top"></a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -59,11 +64,12 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">회원정보</a>
                         <a class="dropdown-item" href="#">게시판</a>
-</div>
+					</div>
      	</c:if>
       </ul>
     </div>
   </div>
+ </div>
 </nav>
 </body>
 </html>

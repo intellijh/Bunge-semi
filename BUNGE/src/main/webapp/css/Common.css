@@ -48,6 +48,7 @@ li {
 #wrap {
 	min-width: 1300px;
 }
+nav {margin :0 auto}
 input,
 select,
 textarea {

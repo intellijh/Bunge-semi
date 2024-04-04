@@ -17,6 +17,12 @@ function infocommcnt(comm_num){
 				likecheck = rdata.check;
 				console.log('ajax 성공 후 likecheck : ' + likecheck)
 			}
+			if(rdata.check == 1){
+					console.log('rdata.check :' + rdata.check);
+					$('#clikeimg'+comm_num).attr('src',"./image/like_on.png");
+				}else if(rdata.check == 0) {
+					$('#clikeimg'+comm_num).attr('src',"./image/like_off.png");
+				}
 		}, 
 		error : function(){
 			console.log('infocommlikecnt 실패');
@@ -80,10 +86,8 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	         	       + '		</div>'    
 	    		       + '	  </div>'
 	    		       + '<div class="comment-like">'
-					   + '    <button class="like" id="like" data-comm_num=' + this.comm_num + '>좋아요</button>'
-					   + '    <span id=likecount' + this.comm_num + '>' + this.like_count + '</span>'
-					   + '	  <button class="hate" id="hate" data-comm_num=' + this.comm_num + '>싫어요</button>'	
-					   + '    <span id="hatecount">' + this.hate_count + '</span>'
+					   + '    <button class="like" data-comm_num=' + this.comm_num + '><img class="commlike" src="./image/like_off.png" id="clikeimg' + this.comm_num + '"></button>'
+					   + '    <span id=likecount' + this.comm_num + '>'+this.like_count+'</span>'
 					   + '</div>'    
 		      	       + '	  <div class="comment-text-box">'       
 		      		   + '	    <p class="comment-text-view">'         
@@ -434,6 +438,12 @@ $(function() {
 					let choice = 'likecount' + rdata.this_comm_num
 					console.log(choice)
 					document.getElementById(choice).innerHTML = rdata.cnt
+				}
+				if(rdata.check == 1){
+					console.log('rdata.check :' + rdata.check);
+					$('#clikeimg'+comm_num).attr('src',"./image/like_on.png");
+				}else if(rdata.check == 0) {
+					$('#clikeimg'+comm_num).attr('src',"./image/like_off.png");
 				}
 			}, 
 			error : function(){

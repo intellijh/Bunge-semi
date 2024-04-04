@@ -13,7 +13,10 @@
 <script src="js/viewdetail.js"></script>
 <style>
  .inf_file {width:50px}
-
+ .commlike {width:20px; height:20px;}
+ .comment-like { display: flex; /* Flexbox 레이아웃 사용 */ text-align:center;}
+ .comment-list-item .comment-nick-area img {border:0; margin-right:7px;}
+ #likeclick {width:37px; height:37px;}
 </style>
 </head>
  <body>
