@@ -198,8 +198,10 @@ public class TradeDAO {
             // 쿼리 실행
             int rows = pstmt.executeUpdate();
             // 업데이트가 성공적으로 수행되면 rows 값이 1 이상이 됩니다.
+            System.out.println("업데이트 후" + rows) ;
             if (rows > 0) {
                 result = true;
+                System.out.println("업데이트 성공!");
             }
         } catch (SQLException e) {
             // 예외 처리
@@ -234,6 +236,20 @@ public class TradeDAO {
         }
         return result;
     }
+
+    public void hitReadCount(int tradeID) {
+        int readCount = 0;
+        int rs = 0;
+
+        String sql = "update trade set readcount = (readcount+1) where tradeID =?";
+        try {
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 //    public void insertImagePath(String imagePath) {
 //        String sql = "INSERT INTO trade (imageID) VALUES (?)";

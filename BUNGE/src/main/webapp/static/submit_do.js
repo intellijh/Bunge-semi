@@ -1,6 +1,6 @@
-function checkSubmit(){
+$('#write-form').submit(function (){
 	
-	if($('#write-photo').val() == ''){
+	if($('#write-photo').val() === ''){
 		alert('사진을 업로드해주세요.');
 		return;
 	}
@@ -20,11 +20,12 @@ function checkSubmit(){
 	// 	alert('작성자를 2자 이상 입력해주세요');
 	// 	return;
 	// }
-	
 
-	
-	$('#write-form').submit();
+
+
+
 }
+)
 
 function cancel(){
 	if(confirm('정말 취소하시겠습니까?')){

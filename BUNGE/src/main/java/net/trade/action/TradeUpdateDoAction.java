@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import net.trade.db.Trade;
 import net.trade.db.TradeDAO;
+import java.io.File;
 
 import javax.naming.NamingException;
 import java.io.IOException;
@@ -21,17 +22,19 @@ public class TradeUpdateDoAction implements Action {
 
         ActionForward forward = new ActionForward();
 
-        String realFolder = "/Users/songjaehyeog/Desktop/Bunge/BUNGE/src/main/webapp/trade/board/image";
-
-        // 파일 업로드를 위한 임시 저장 경로
+        String realFolder = "";
         String saveFolder = "image";
+
+        ServletContext sc = request.getServletContext();
+        realFolder = sc.getRealPath(saveFolder);
+        System.out.println("realFolder= " + realFolder);
+        // 파일 업로드를 위한 임시 저장 경로
+
 
         int fileSize = 5 * 1024 * 1024; // 업로드 할 파일의 최대 사이즈 입니다. 5MB
 
         // 실제 저장 경로를 지정합니다.
-        ServletContext sc = request.getServletContext();
-        realFolder = sc.getRealPath(saveFolder);
-        System.out.println("realFolder= " + realFolder);
+
 
         try {
 
@@ -45,19 +48,26 @@ public class TradeUpdateDoAction implements Action {
 
             // 수정된 거래 정보를 받아옴
             Trade trade = new Trade();
-            trade.setTitle(request.getParameter("title"));
-            trade.setCategory(request.getParameter("category"));
-            trade.setQuality(request.getParameter("quality"));
-            trade.setCondition(request.getParameter("condition"));
-            trade.setTradeMethod(request.getParameter("tradeMethod"));
-            trade.setDescription(request.getParameter("desc"));
-            trade.setImageID(request.getParameter("imageID"));
-            String priceParameter = request.getParameter("price");
-            if (priceParameter != null && !priceParameter.isEmpty()) {
-                trade.setPrice(Integer.parseInt(priceParameter));
+
+            trade.setTitle(multi.getParameter("title"));
+            trade.setTradeID(Integer.parseInt(multi.getParameter("id")));
+            trade.setCategory(multi.getParameter("category"));
+            trade.setQuality(multi.getParameter("quality"));
+            trade.setCondition(multi.getParameter("condition"));
+            trade.setTradeMethod(multi.getParameter("tradeMethod"));
+            trade.setDescription(multi.getParameter("desc"));
+            String priceParameter = multi.getParameter("price");
+            trade.setImageID(multi.getParameter("imageID"));
+            trade.setPrice(Integer.parseInt(priceParameter));
+
+            String existingImage = request.getParameter("existingImage");
+
+            if (existingImage == null || existingImage.isEmpty() ) {
+                trade.setImageID(multi.getFilesystemName("imageID"));
             } else {
-                // 가격이 입력되지 않은 경우에 대한 처리
+                trade.setImageID(existingImage);
             }
+
 
 
             // TradeDAO를 통해 거래 정보 업데이트

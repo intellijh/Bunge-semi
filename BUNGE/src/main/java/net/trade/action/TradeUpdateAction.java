@@ -20,8 +20,7 @@ public class TradeUpdateAction implements Action {
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NamingException {
         // 요청으로부터 필요한 파라미터들을 추출합니다.
-        int num = 1;
-                //Integer.parseInt(request.getParameter("id"));
+        int num = Integer.parseInt(request.getParameter("id"));
 
         // TradeDAO 객체를 생성하여 데이터베이스에 업데이트를 요청합니다.
         TradeDAO dao = new TradeDAO();

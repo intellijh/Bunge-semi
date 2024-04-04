@@ -271,3 +271,16 @@ body {
 	float: right;
 	cursor: pointer;
 }
+
+
+.container {
+	text-align: center;
+}
+
+.category-search form {
+	display: inline-block;
+}
+
+.category-search input[type="submit"] {
+	margin: 5px;
+}
