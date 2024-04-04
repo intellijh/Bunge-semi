@@ -27,6 +27,7 @@ import common.login.pwdresetAction;
 import common.mypage.mycommlistAction;
 import common.mypage.mylikelistAction;
 import common.mypage.mypageAction;
+import common.mypage.mypagechangeAction;
 import common.mypage.mytradelistAction;
 import common.mypage.reviewlistAction;
 import info.action.InfoDetailAction;
@@ -130,6 +131,9 @@ public class FrontController extends HttpServlet {
             case "/mypage.com":
                 action = new mypageAction();
                 break;
+            case "/mypagechange.com" :
+            	action = new mypagechangeAction();
+            	break;
                 //리뷰 활동 페이지
             case "/reviewlist.com" :
             	action = new reviewlistAction();

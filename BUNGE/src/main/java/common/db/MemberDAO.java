@@ -117,8 +117,8 @@ public class MemberDAO {
 	public int joininsert(Member m) {
 		int result = 0;
 		String join_sql =  "insert into member "
-									+ "(m_id, m_pwd, m_name, m_nick, m_gender, m_zipcode, m_addr1, m_addr2, m_phone, m_email, m_birthdate) "
-									+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+									+ "(m_id, m_pwd, m_name, m_nick, m_gender, m_zipcode, m_addr1, m_addr2, m_phone, m_email, m_birthdate, m_profile) "
+									+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)";
 		try(Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(join_sql);) {
 			pstmt.setString(1, m.getM_id());

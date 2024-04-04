@@ -2,15 +2,17 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
  
 <html>
 <head>
 <style>
+nav {
+width: 100%;
+}
  .navbar-text {
  	font-size:10px;
  }
@@ -45,10 +47,7 @@
         </c:when>
  	<c:when test="${m_id != null}">
  	<li class="nav-item"><a class="nav-link" href="chat.com">채팅</a></li>
-	    <li class="nav-item"><a class="nav-link" href="mypage.com">마이페이지</a></li>
-	     <li class="nav-item"><a class="nav-link" href="trade.net">중고거래</a></li>
-	      <li class="nav-item"><a class="nav-link" href="reviewlist.com">리뷰활동</a></li>
-	       <li class="nav-item"><a class="nav-link" href="#">프로필사진</a></li>
+	       <li class="nav-item"><a class="nav-link" href="mypage.com">프로필사진</a></li>
 	      <li class="nav-item"><a class="nav-link" href="logout.com">${m_id}님 (로그아웃)</a></li>
  	</c:when>
 </c:choose>
