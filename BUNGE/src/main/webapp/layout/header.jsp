@@ -10,6 +10,9 @@
 <html>
 <head>
 <style>
+nav {
+width: 100%;
+}
  .navbar-text {
  	font-size:10px;
  }
@@ -46,10 +49,7 @@
         </c:when>
  	<c:when test="${m_id != null}">
  	<li class="nav-item"><a class="nav-link" href="chat.com">채팅</a></li>
-	    <li class="nav-item"><a class="nav-link" href="mypage.com">마이페이지</a></li>
-	     <li class="nav-item"><a class="nav-link" href="trade.net">중고거래</a></li>
-	      <li class="nav-item"><a class="nav-link" href="reviewlist.com">리뷰활동</a></li>
-	       <li class="nav-item"><a class="nav-link" href="#">
+	       <li class="nav-item"><a class="nav-link" href="mypage.com">
 	        <img src="${pageContext.request.contextPath}/image/profile.png" alt="bell" width="25" height="25"></a></li>
 	      <li class="nav-item"><a class="nav-link" href="logout.com">${m_id}님 (로그아웃)</a></li>
 	      <li class="nav-item">

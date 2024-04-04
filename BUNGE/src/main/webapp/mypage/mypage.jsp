@@ -16,6 +16,16 @@ input[type=file]{display: none;}
 </head>
 <body>
 <div id="wrap">
+<div class="tab_container">
+		<div class="tab-slider--nav">
+		  <ul class="tab-slider--tabs">
+		   <a href="mypage.com"><li class="tab-slider--trigger"  rel="tab1"><span>마이페이지</span></li></a>
+			<a href="reviewlist.com"><li class="tab-slider--trigger active" rel="tab2"><span>작성글</span></li></a>
+			<a href="mycommlist.com"><li class="tab-slider--trigger"  rel="tab3"><span>작성댓글</span></li></a>
+			<a href="mylikelist.com"><li class="tab-slider--trigger"  rel="tab4"><span>즐겨찾기</span></li></a>
+			<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>중고거래 찜</span></li></a>
+		  </ul>
+		</div>
 <form name="changeform" action="mypagechange.com" method="post" enctype="multipart/form-data">
 	<h3>회원 정보 수정</h3>
 		<hr>
@@ -25,16 +35,11 @@ input[type=file]{display: none;}
 			<img src="image/attach.png" width="10px">
 			<span id="filename">${memberinfo.member.m_profile}</span>
 			<span id="showImage">
-				<c:if test="${empty memberinfo.member.m_profile}">
-					<c:set var="src" value="image/profile.png" />
-				</c:if>
-				<c:if test="${!empty memberinfo.member.m_profile}">
 					<c:set var="src" value='${"memberupload/"}${memberinfo.member.m_profile}'/>
-					<input type="hidden" name="check" value="${memeberinfo.member.m_profile }">
-				</c:if>
+					<input id="check"  type="hidden" name="check"  value="${memeberinfo.member.m_profile }">
 				<img alt="profile" src="${src}" width="20px">
 			</span>
-			 <input type="file" name="memberfile" accept="image/*">
+			 <input type="file" name="m_profile" accept="image/*">
 		</label>
 		</div>
 		
@@ -45,7 +50,7 @@ input[type=file]{display: none;}
 		
 		<div class="m_pwd">
 		<b>비밀번호</b>
-			<input type="password" name="m_pwd" value="${memberinfo.member.m_pwd}">
+			<input type="password" name="m_pwd" maxlength="15"  value="${memberinfo.member.m_pwd}" readonly>
 			<button type="button" id="pwdchange">수정</button>
 			<span id="pwd_message"></span>
 		</div>	
@@ -90,7 +95,7 @@ input[type=file]{display: none;}
 		
 		<div class="m_phone">
 			<b>핸드폰</b>
-			<input type="tel" name="m_phone" value="${memberinfo.member.m_phone}">
+			<input type="tel" name="m_phone" maxlength="11" value="${memberinfo.member.m_phone}">
 			<button type="button" id="phonechange">수정</button>
 			<span id="pho_message"></span>
 		</div>
@@ -108,5 +113,6 @@ input[type=file]{display: none;}
 		</div>
 		</form>
 		</div>
+	</div>
 </body>
 </html>

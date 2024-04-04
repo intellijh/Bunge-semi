@@ -45,8 +45,9 @@ ol,
 li {
   list-style: none;
 }
-#wrap {
-	min-width: 1300px;
+#warp {
+    width: 80%;
+    margin: 0 auto;
 }
 nav {margin :0 auto}
 input,
