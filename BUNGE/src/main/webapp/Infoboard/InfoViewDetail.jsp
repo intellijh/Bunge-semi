@@ -28,12 +28,20 @@
  				<td><div>${boarddata.m_id}</div></td>
  			</tr>
  			<tr>
- 				<td><div>제목</div></td>
- 				<td><c:out value="${boarddata.inf_subject}" /></td>
- 			</tr>
- 			<tr>
  				<td><div>공개설정</div></td>
  				<td><div>${boarddata.inf_open}</div></td>
+ 			</tr>
+ 			<tr>
+ 				<td><div>책</div></td>
+ 				<td><div>${boarddata.inf_book}</div></td>
+ 			</tr>
+ 			<tr>
+ 				<td></td>
+ 				<td><div><img src=${boarddata.inf_cover}></div></td>
+ 			</tr>
+ 			<tr>
+ 				<td><div>제목</div></td>
+ 				<td><c:out value="${boarddata.inf_subject}" /></td>
  			</tr>
  			<tr>
  				<td><div>내용</div></td>
