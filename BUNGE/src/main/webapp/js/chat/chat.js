@@ -56,12 +56,12 @@ function getChatList() {
                 if (this.sellerId == loginId) {
                     output += `     <span class="buyer">${this.buyerId}</span>
 <!--                                    <p>${this.sellerId}</p>-->
-                                    <p>${this.latestContent}</p>
+                                    <p class="info_msg">${this.latestContent}</p>
                                     <p>${this.updateDate}</p>`;
                 } else {
                     output += `     <span class="seller">${this.sellerId}</span>
 <!--                                    <p>${this.buyerId}</p>-->
-                                    <p>${this.latestContent}</p>
+                                    <p class="info_msg">${this.latestContent}</p>
                                     <p>${this.updateDate}</p>`;
                 }
 
