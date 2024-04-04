@@ -76,16 +76,12 @@ CREATE SEQUENCE message_seq
 INSERT INTO chat_message
 VALUES (1, 1, 'A1234', '하이', SYSTIMESTAMP, 'N');
 
+-- 채팅 정보 (최근 메세지 포함) 가져오기
 SELECT c.chat_id, c.seller_id, c.buyer_id, c.update_date, m.content
-FROM chat c,
-     chat_message m
-WHERE seller_id = 'B1234'
-  AND buyer_id = 'A1234'
-  AND trade_id = 1
+FROM chat c
+         JOIN chat_message m ON c.chat_id = m.chat_id
+WHERE (c.seller_id = ? OR c.buyer_id = ?)
   AND m.send_date = (SELECT MAX(send_date)
                      FROM chat_message
-                     WHERE c.chat_id = (SELECT chat_id
-                                        FROM chat
-                                        WHERE seller_id = 'B1234'
-                                          AND buyer_id = 'A1234'
-                                          AND trade_id = 1));
+                     WHERE chat_id = c.chat_id)
+ORDER BY c.update_date DESC;

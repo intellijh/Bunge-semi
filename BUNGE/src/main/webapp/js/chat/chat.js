@@ -55,11 +55,13 @@ function getChatList() {
                 // 채팅 정보 리스트에 출력
                 if (this.sellerId == loginId) {
                     output += `     <span class="buyer">${this.buyerId}</span>
-                                    <p>${this.sellerId}</p>
+<!--                                    <p>${this.sellerId}</p>-->
+                                    <p>${this.latestContent}</p>
                                     <p>${this.updateDate}</p>`;
                 } else {
                     output += `     <span class="seller">${this.sellerId}</span>
-                                    <p>${this.buyerId}</p>
+<!--                                    <p>${this.buyerId}</p>-->
+                                    <p>${this.latestContent}</p>
                                     <p>${this.updateDate}</p>`;
                 }
 

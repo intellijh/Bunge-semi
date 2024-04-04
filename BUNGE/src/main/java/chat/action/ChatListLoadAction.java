@@ -39,17 +39,6 @@ public class ChatListLoadAction implements Action {
         PrintWriter out = response.getWriter();
         out.print(data);
 
-/*
-        JsonArray array = new ChatDAO().getChatList(id);
-        JsonElement element = new Gson().toJsonTree(array);
-        JsonObject object = new JsonObject();
-        object.add("chatList", element);
-
-        PrintWriter out = response.getWriter();
-        out.print(object);
-        System.out.println(object);
-*/
-
         return null;
     }
 }

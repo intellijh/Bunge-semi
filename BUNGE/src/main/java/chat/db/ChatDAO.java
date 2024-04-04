@@ -30,11 +30,14 @@ public class ChatDAO {
 
         List<Chat> list = new ArrayList<>();
         String sql =
-                "SELECT c.chat_id, c.seller_id, c.buyer_id, c.update_date\n" +
+                "SELECT c.chat_id, c.seller_id, c.buyer_id, c.update_date, m.content\n" +
                 "FROM chat c\n" +
-                "WHERE seller_id = ?\n" +
-                "OR buyer_id = ?\n" +
-                "ORDER BY update_date DESC";
+                "         JOIN chat_message m ON c.chat_id = m.chat_id\n" +
+                "WHERE (c.seller_id = ? OR c.buyer_id = ?)\n" +
+                "  AND m.send_date = (SELECT MAX(send_date)\n" +
+                "                     FROM chat_message\n" +
+                "                     WHERE chat_id = c.chat_id)\n" +
+                "ORDER BY c.update_date DESC";
 
         try (Connection conn = ds.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -48,6 +51,7 @@ public class ChatDAO {
                     chat.setSellerId(rs.getString("seller_id"));
                     chat.setBuyerId(rs.getString("buyer_id"));
                     chat.setUpdateDate(rs.getString("update_date").substring(0, 16));
+                    chat.setLatestContent(rs.getString("content"));
                     list.add(chat);
                 }
             }
