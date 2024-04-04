@@ -110,7 +110,7 @@ function deleteChat() {
     $.ajax({
         type: "post",
         url: "chatDelete.com",
-        data: {"chatId": selectedChatId},
+        data: {"chatId": selectedChatId, "sellerId": selectedSellerId},
         dataType: "json",
         success: function (rdata) {
             if (rdata == 1) {
@@ -119,6 +119,8 @@ function deleteChat() {
             }
         }
     });
+
+    // webSocket.send()
 }
 
 $(document).on("click", ".delete-chat-btn", function () {

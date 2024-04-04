@@ -19,7 +19,6 @@ public class ChatCreateAction implements Action {
 
         HttpSession session = request.getSession();
         String loginId = (String) session.getAttribute("m_id");
-
         if (loginId == null) {
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out = response.getWriter();
@@ -31,14 +30,25 @@ public class ChatCreateAction implements Action {
             return null;
         }
 
+        String sellerId = request.getParameter("sellerId");
+        if (sellerId.equals(loginId)) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("   alert('본인과 대화할 수 없습니다.');");
+            out.println("   history.back();");
+            out.println("</script>");
+            out.close();
+            return null;
+        }
+
         Chat chat = new Chat();
         chat.setSellerId(request.getParameter("sellerId"));
         chat.setBuyerId(loginId);
         chat.setTrade_id(Long.parseLong(request.getParameter("tradeId")));
 
-        String sellerId = chat.getSellerId();
-        String buyerId = chat.getBuyerId();
         long tradeId = chat.getTrade_id();
+        String buyerId = chat.getBuyerId();
         System.out.println("sellerId = " + sellerId);
         System.out.println("buyerId = " + buyerId);
         System.out.println("tradeId = " + tradeId);

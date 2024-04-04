@@ -122,17 +122,27 @@ public class ChatDAO {
         return result;
     }
 
-    public int delete(String chatId) {
+    public int delete(Long chatId, String loginId, String sellerId) {
 
         int result = 0;
-        String sql =
-                "DELETE chat\n" +
-                "WHERE chat_id = ?";
+
+        String sql;
+        if (loginId.equals(sellerId)) {
+            sql =
+                    "UPDATE chat\n" +
+                    "SET seller_id = NULL\n" +
+                    "WHERE chat_id = ?";
+        } else {
+            sql =
+                    "UPDATE chat\n" +
+                    "SET buyer_id = NULL\n" +
+                    "WHERE chat_id = ?";
+        }
 
         try (Connection conn = ds.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, chatId);
+            pstmt.setLong(1, chatId);
             result = pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

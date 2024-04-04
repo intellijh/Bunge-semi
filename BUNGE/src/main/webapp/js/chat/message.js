@@ -1,3 +1,5 @@
+let webSocket = "";
+
 function loadMessage() {
     console.log("loadMessage() Start");
     $('.msg_card_body').empty();
@@ -44,7 +46,7 @@ function loadMessage() {
 
 $(function(){
 
-    const webSocket = new WebSocket('ws://localhost:8088/chat');
+    webSocket = new WebSocket('ws://localhost:8088/chat');
     const $inputMessage = $(".type_msg");
 
     webSocket.onerror = function(e){
