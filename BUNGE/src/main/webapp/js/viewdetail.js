@@ -16,13 +16,23 @@ function infocommcnt(comm_num){
 				console.log('좋아요 여부 :'+ rdata.check);
 				likecheck = rdata.check;
 				console.log('ajax 성공 후 likecheck : ' + likecheck)
+				
+				let choice = 'likecount' + rdata.this_comm_num
+					console.log(choice)
+					document.getElementById(choice).innerHTML = rdata.cnt
 			}
+			if(rdata.check == 1){
+					console.log('rdata.check :' + rdata.check);
+					$('#clikeimg'+comm_num).attr('src',"./image/like_on.png");
+				}else if(rdata.check == 0) {
+					$('#clikeimg'+comm_num).attr('src',"./image/like_off.png");
+				}
 		}, 
 		error : function(){
 			console.log('infocommlikecnt 실패');
 		}		
 	}); // ajax end
-} //function infocommcnt end
+} //function infocommcnt end			
 
 function getList(state){//현재 선택한 댓글 정렬방식을 저장합니다. 1=>등록순, 2=>최신순
 	    console.log(state)
@@ -31,7 +41,9 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    $.ajax({
 			url : "CommentList.com",
 			type:"post",
-			data: {inf_num : $("#inf_num").val(), state:state},
+			data: {inf_num : $("#inf_num").val(), 
+				   state:state,
+				   },
 			dataType : "json",
 			success : function(rdata){
 				$('#count').text(rdata.listcount).css('font-family','arial,sans-serif')
@@ -80,10 +92,8 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	         	       + '		</div>'    
 	    		       + '	  </div>'
 	    		       + '<div class="comment-like">'
-					   + '    <button class="like" id="like" data-comm_num=' + this.comm_num + '>좋아요</button>'
-					   + '    <span id=likecount' + this.comm_num + '>' + this.like_count + '</span>'
-					   + '	  <button class="hate" id="hate" data-comm_num=' + this.comm_num + '>싫어요</button>'	
-					   + '    <span id="hatecount">' + this.hate_count + '</span>'
+					   + '    <button class="like" data-comm_num=' + this.comm_num + '><img class="commlike" src="./image/like_off.png" id="clikeimg' + this.comm_num + '"></button>'
+					   + '    <span id=likecount' + this.comm_num + '>'+this.like_count+'</span>'
 					   + '</div>'    
 		      	       + '	  <div class="comment-text-box">'       
 		      		   + '	    <p class="comment-text-view">'         
@@ -120,9 +130,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						   + '</li>'	
 						   
 				 infocommcnt(this.comm_num)
-				 
 				})//each end
-				
 				$('.comment-list').html(output);
 			} else { //댓글 1개가 있는 상태에서 삭제하는 경우 갯수는 0이라 if문을 수행하지 않고 이곳으로 옵니다
 					 //이곳에서 아래의 두 영역을 없앱니다.
@@ -369,8 +377,6 @@ $(function() {
 	})//답글쓰기 클릭 후 계속 누르는 것을 방지하기 위한 작업
 	
 	
-	
-	
 	//댓글 좋아요 버튼 클릭시(좋아요 추가 또는 좋아요 철회)
 	$('.comment-list').on('click', '.like', function() {
 		console.log($(this).attr("data-comm_num"));
@@ -414,7 +420,7 @@ $(function() {
 		
 	 })  // clike end
 	
-	
+/*	
 	function infocommcnt(comm_num){
 		$.ajax({
 			url : "InfocommLikeCnt.com",
@@ -428,20 +434,27 @@ $(function() {
 				if (rdata.cnt != -1) {
 					console.log('총 좋아요 수 :'+ rdata.cnt);
 					console.log('좋아요 여부 :'+ rdata.check);
+					
 					likecheck = rdata.check;
 					console.log('ajax 성공 후 likecheck : ' + likecheck)
 					console.log('담는 아이디어 : ' + rdata.this_comm_num)
+					
 					let choice = 'likecount' + rdata.this_comm_num
 					console.log(choice)
 					document.getElementById(choice).innerHTML = rdata.cnt
+				}
+				if(rdata.check == 1){
+					console.log('rdata.check :' + rdata.check);
+					$('#clikeimg'+comm_num).attr('src',"./image/like_on.png");
+				}else if(rdata.check == 0) {
+					$('#clikeimg'+comm_num).attr('src',"./image/like_off.png");
 				}
 			}, 
 			error : function(){
 				console.log('infocommlikecnt 실패');
 			}		
 		}); // ajax end
-    } //function infocommcnt end
-	
+    } //function infocommcnt end		*/
 	
 	
 	//게시글 좋아요 부분
