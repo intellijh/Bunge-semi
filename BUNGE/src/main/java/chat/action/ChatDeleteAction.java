@@ -18,10 +18,12 @@ public class ChatDeleteAction implements Action {
 
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, NamingException {
-        String chatId = request.getParameter("chatId");
+        Long chatId = Long.valueOf(request.getParameter("chatId"));
         System.out.println("ChatDeleteAction chatId = " + chatId);
-        int result = new ChatDAO().delete(chatId);
+        String loginId = (String) request.getSession().getAttribute("m_id");
+        String sellerId = (String) request.getParameter("sellerId");
 
+        int result = new ChatDAO().delete(chatId, loginId, sellerId);
         if (result == 0) {
             ActionForward forward = new ActionForward();
             System.out.println("채팅 삭제 실패");
@@ -30,11 +32,8 @@ public class ChatDeleteAction implements Action {
             return forward;
         }
 
-//        JsonObject data = new JsonObject();
-//        data.addProperty("result", true);
         PrintWriter out = response.getWriter();
         out.print(result);
-
         return null;
     }
 }

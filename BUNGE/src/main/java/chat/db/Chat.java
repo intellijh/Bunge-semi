@@ -10,6 +10,7 @@ public class Chat {
     private long trade_id;
     private String openDate;
     private String updateDate;
+    private String latestContent;
 
     public Chat() {
     }
@@ -65,5 +66,13 @@ public class Chat {
 
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate.substring(0, 16);
+    }
+
+    public String getLatestContent() {
+        return latestContent;
+    }
+
+    public void setLatestContent(String latestContent) {
+        this.latestContent = latestContent;
     }
 }

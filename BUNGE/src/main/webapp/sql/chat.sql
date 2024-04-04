@@ -56,8 +56,8 @@ VALUES (4, 'C1234', 'A1234', 1, SYSDATE, null);
 SELECT *
 FROM chat
 WHERE seller_id = 'B1234'
-AND buyer_id = 'A1234'
-AND trade_id = 1;
+  AND buyer_id = 'A1234'
+  AND trade_id = 1;
 
 -- 채팅 id max값 추출
 SELECT MAX(NVL(chat_id, 0)) + 1
@@ -74,7 +74,14 @@ CREATE SEQUENCE message_seq
 
 -- 채팅 메세지 삽입
 INSERT INTO chat_message
-VALUES(1, 1, 'A1234', '하이', SYSTIMESTAMP, 'N');
+VALUES (1, 1, 'A1234', '하이', SYSTIMESTAMP, 'N');
 
-SELECT *
-FROM chat_message;
+-- 채팅 정보 (최근 메세지 포함) 가져오기
+SELECT c.chat_id, c.seller_id, c.buyer_id, c.update_date, m.content
+FROM chat c
+         JOIN chat_message m ON c.chat_id = m.chat_id
+WHERE (c.seller_id = ? OR c.buyer_id = ?)
+  AND m.send_date = (SELECT MAX(send_date)
+                     FROM chat_message
+                     WHERE chat_id = c.chat_id)
+ORDER BY c.update_date DESC;
