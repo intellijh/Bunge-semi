@@ -2,6 +2,10 @@ package infocommlike.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import comment.db.CommentDAO;
 import common.action.Action;
@@ -26,6 +30,8 @@ public class InfocommLikeCntAction implements Action {
 		
 		int cnt = commentdao.InfocommLikeCnt(comm_num);
 		int check = commentdao.InfocommLikeCheck(comm_num,m_id);
+		
+		
 		System.out.println("cnt : " + cnt);
 		System.out.println("check : " + check);
 		

@@ -98,7 +98,7 @@ private DataSource ds;
 			sort = "desc";
 		}
 
-		String sql =" SELECT ic.comm_num, ic.m_id, ic.comm_content, ic.comm_reg,"
+		String sql = " SELECT ic.comm_num, ic.m_id, ic.comm_content, ic.comm_reg,"
 				+"    ic.comm_lev, ic.comm_seq, ic.comm_ref, m.m_profile,"
 				+"    NVL(clike.like_count, 0) AS like_count"
 				+" FROM infocomm ic JOIN member m ON ic.m_id = m.m_id"
@@ -107,6 +107,8 @@ private DataSource ds;
 				+"    	     	GROUP BY comm_num) clike ON ic.comm_num = clike.comm_num"
 				+" WHERE inf_num = ?"
 				+" ORDER BY comm_ref " + sort + ", comm_seq ASC";
+
+
 
 
 		JsonArray array = new JsonArray();
