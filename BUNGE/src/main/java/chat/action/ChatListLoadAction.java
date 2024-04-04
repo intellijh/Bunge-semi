@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 public class ChatListLoadAction implements Action {
 
@@ -31,6 +32,14 @@ public class ChatListLoadAction implements Action {
             }
         }
 
+        List<Chat> list = new ChatDAO().getChatList(id);
+        String data = new Gson().toJson(list);
+        System.out.println("chatListLoadData = " + data);
+
+        PrintWriter out = response.getWriter();
+        out.print(data);
+
+/*
         JsonArray array = new ChatDAO().getChatList(id);
         JsonElement element = new Gson().toJsonTree(array);
         JsonObject object = new JsonObject();
@@ -39,6 +48,7 @@ public class ChatListLoadAction implements Action {
         PrintWriter out = response.getWriter();
         out.print(object);
         System.out.println(object);
+*/
 
         return null;
     }

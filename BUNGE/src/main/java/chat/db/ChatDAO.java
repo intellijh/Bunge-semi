@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChatDAO {
 
@@ -24,11 +26,12 @@ public class ChatDAO {
         }
     }
 
-    public JsonArray getChatList(String id) {
+    public List<Chat> getChatList(String id) {
 
-        JsonArray array = new JsonArray();
-        String sql = "SELECT *\n" +
-                "FROM chat\n" +
+        List<Chat> list = new ArrayList<>();
+        String sql =
+                "SELECT c.chat_id, c.seller_id, c.buyer_id, c.update_date\n" +
+                "FROM chat c\n" +
                 "WHERE seller_id = ?\n" +
                 "OR buyer_id = ?\n" +
                 "ORDER BY update_date DESC";
@@ -40,18 +43,18 @@ public class ChatDAO {
             pstmt.setString(2, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    JsonObject object = new JsonObject();
-                    object.addProperty("chatId", rs.getString("chat_id"));
-                    object.addProperty("sellerId", rs.getString("seller_id"));
-                    object.addProperty("buyerId", rs.getString("buyer_id"));
-                    object.addProperty("updateDate", rs.getString("update_date").substring(0, 16));
-                    array.add(object);
+                    Chat chat = new Chat();
+                    chat.setChatId(Long.parseLong(rs.getString("chat_id")));
+                    chat.setSellerId(rs.getString("seller_id"));
+                    chat.setBuyerId(rs.getString("buyer_id"));
+                    chat.setUpdateDate(rs.getString("update_date").substring(0, 16));
+                    list.add(chat);
                 }
             }
         } catch (Exception e) {
             System.out.println("getChatList() 에러 : " + e.getStackTrace()[0]);
         }
-        return array;
+        return list;
     }
 
     public long hasChatExist(Chat chat) {

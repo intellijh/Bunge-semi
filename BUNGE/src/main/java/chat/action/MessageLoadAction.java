@@ -29,12 +29,11 @@ public class MessageLoadAction implements Action {
             return forward;
         }
 
-        System.out.println("테스트");
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        System.out.println("json = " + json);
+        String data = gson.toJson(list);
+        System.out.println("messageLoadData = " + data);
         PrintWriter out = response.getWriter();
-        out.print(json);
+        out.print(data);
 
         return null;
     }

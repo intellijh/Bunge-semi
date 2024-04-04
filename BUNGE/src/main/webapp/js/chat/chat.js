@@ -7,6 +7,8 @@ function getChatList() {
     console.log("getList");
     let sessionChatId = $("#sessionChatId").val();
     console.log("session chat 데이터: " + sessionChatId);
+    
+    // 세션으로 넘겨준 chatId 있는 지 확인
     if (sessionChatId == null || sessionChatId == "") {
         sessionChatId = 0;
     }
@@ -19,14 +21,14 @@ function getChatList() {
         success: function (rdata) {
             console.log("getChat rdata: " + rdata);
 
-            if (rdata.chatList.length <= 0) {
+            if (rdata.length <= 0) {
                 console.log("getList length 안");
                 $(".contacts").empty();
                 return;
             }
 
             let output = ``;
-            $(rdata.chatList).each(function () {
+            $(rdata).each(function () {
                 console.log(this);
                 console.log(this.sellerId);
                 console.log(this.buyerId);
@@ -43,12 +45,14 @@ function getChatList() {
                                 <div class="user_info">`;
                 console.log("getChatList() loginId: " + loginId);
 
+                // 상대방이 채팅방 나간 사용자인지 확인
                 if (this.sellerId == null || this.sellerId == "") {
                     this.sellerId = "알 수 없는 사용자";
                 } else if (this.buyerId == null || this.buyerId == "") {
                     this.buyerId = "알 수 없는 사용자";
                 }
 
+                // 채팅 정보 리스트에 출력
                 if (this.sellerId == loginId) {
                     output += `     <span class="buyer">${this.buyerId}</span>
                                     <p>${this.sellerId}</p>
@@ -72,8 +76,8 @@ function getChatList() {
             console.log("stored sellerId = " + selectedSellerId);
             console.log("stored buyerId = " + selectedBuyerId);
 
+            // 세션으로 넘겨준 chatId 없으면 최상단 채팅 선택
             selectedChatId = sessionChatId;
-
             if (selectedChatId == 0) {
                 $(".contacts li").eq(0).click();
                 console.log("click !!!");
