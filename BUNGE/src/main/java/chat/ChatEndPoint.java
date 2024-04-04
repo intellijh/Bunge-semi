@@ -9,6 +9,8 @@ import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -50,9 +52,9 @@ public class ChatEndPoint {
 
             try {
                 for (Session client : clients) {
-                    LocalTime time = LocalTime.now();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-                    String nowTime = time.format(formatter);
+                    LocalDateTime dateTime = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    String nowDateTime = dateTime.format(formatter);
 
                     JsonObject data = new JsonObject();
                     data.addProperty("sender", loginID);
@@ -60,7 +62,7 @@ public class ChatEndPoint {
                     data.addProperty("sellerId", sellerId);
                     data.addProperty("buyerId", buyerId);
                     data.addProperty("msg", msg);
-                    data.addProperty("time", nowTime);
+                    data.addProperty("time", nowDateTime);
 
                     JsonArray arr = new JsonArray();
                     arr.add(data);

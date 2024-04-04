@@ -34,7 +34,7 @@ function loadMessage() {
                                 <span class="msg_time">${this.sendDate.substring(11, 16)}</span>
                             </div>
                         </div>
-                        `;
+                    `;
                 }
             });
             $('.msg_card_body').html(chat);
@@ -84,9 +84,41 @@ $(function(){
         $('#chat-container').append($chat);*/
 
         console.log("onMessage chatId: " + chatId);
-        console.log("onMessage sellerId: " + chatData[0].sellerId);
-        console.log("onMessage buyerId: " + chatData[0].buyerId);
+        console.log("onMessage sellerId: " + sellerId);
+        console.log("onMessage buyerId: " + buyerId);
 
+        // 자기한테 온 메세지인지 확인
+        if (sellerId != loginId && buyerId != loginId) {
+            return;
+        }
+
+        $("#" + chatId).find("p:eq(0)").text(msg);
+        $("#" + chatId).find("p:eq(1)").text(time.substring(0, 16));
+
+        console.log("return문 넘김");
+
+        if (chatId != selectedChatId) {
+            return;
+        }
+
+        const $chat = $(`
+                    <div class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                 class="rounded-circle user_img_msg">
+                        </div>
+                        <div class="msg_cotainer">
+                            ${msg}
+                            <span class="msg_time">${time.substring(0, 10)}</span>
+                        </div>
+                    </div>
+        `);
+        $('.msg_card_body').append($chat);
+
+        // $('.msg_card_body').scrollTop($('.msg_card_body')[0].scrollHeight+20);
+
+/*
+        // 자기한테 온 메세지인지 확인
         if (chatData[0].sellerId == loginId || chatData[0].buyerId == loginId) {
 
             $("#" + chatData[0].chatId).find("p:eq(0)").text(msg);
@@ -118,6 +150,7 @@ $(function(){
         $('.msg_card_body').append($chat);
 
         // $('.msg_card_body').scrollTop($('.msg_card_body')[0].scrollHeight+20);
+*/
     }
 
     function onOpen(e){

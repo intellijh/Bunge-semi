@@ -163,6 +163,9 @@ body, html {
 
 .info_msg {
     font-size: 15px !important;
+    overflow: hidden;
+    max-width: 230px;
+    text-overflow: ellipsis;
 }
 
 .msg_cotainer {
