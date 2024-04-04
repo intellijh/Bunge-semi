@@ -39,61 +39,81 @@ public class mypagechangeAction implements Action {
 			ServletContext sc = request.getServletContext();
 			realFolder = sc.getRealPath(saveFolder);
 			System.out.println("realFoder=[" + realFolder);
-			try {
-				MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8" ,
-						new DefaultFileRenamePolicy());
-				
-				String m_pwd = multi.getParameter("m_pwd");
-				String m_nick = multi.getParameter("m_nick");
-				String m_zipcode = multi.getParameter("m_zipcode");
-				String m_addr1 = multi.getParameter("m_addr1");
-				String m_addr2 = multi.getParameter("m_addr2");
-				String m_phone = multi.getParameter("m_phone");
-				String m_email = multi.getParameter("m_email");
-				String check = multi.getParameter("check");
-				
-				Mypage m = new Mypage();
-				
-				if (multi.getFilesystemName("m_profile") == null) {
-					m.getMember().setM_profile(check);
-				} else {
-					m.getMember().setM_profile(multi.getFilesystemName("m_profile"));
-				}
-				
-				m.getMember().setM_pwd(m_pwd);	m.getMember().setM_nick(m_nick);
-				m.getMember().setM_zipcode(m_zipcode);	m.getMember().setM_addr1(m_addr1);
-				m.getMember().setM_addr2(m_addr2);		m.getMember().setM_phone(m_phone);
-				m.getMember().setM_email(m_email);
-				m.getMember().setM_id(m_id);
-				
+			
+				try {
+					MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8" ,
+							new DefaultFileRenamePolicy());
+					
+					String m_pwd = multi.getParameter("m_pwd");
+					String m_nick = multi.getParameter("m_nick");
+					String m_zipcode = multi.getParameter("m_zipcode");
+					String m_addr1 = multi.getParameter("m_addr1");
+					String m_addr2 = multi.getParameter("m_addr2");
+					String m_phone = multi.getParameter("m_phone");
+					String m_email = multi.getParameter("m_email");
+					String m_profile = multi.getParameter("m_profile");
+					
+					Mypage m = new Mypage();
+					
+					if (multi.getFilesystemName("m_profile") == null) {
+						m.getMember().setM_profile(m_profile);
+					} else {
+						m.getMember().setM_profile(multi.getFilesystemName("m_profile"));
+					}
+					
+					m.getMember().setM_pwd(m_pwd);	m.getMember().setM_nick(m_nick);
+					m.getMember().setM_zipcode(m_zipcode);	m.getMember().setM_addr1(m_addr1);
+					m.getMember().setM_addr2(m_addr2);		m.getMember().setM_phone(m_phone);
+					m.getMember().setM_email(m_email);
+					m.getMember().setM_id(m_id);
+					
 
-				
-				MypageDAO mdao = new MypageDAO();
-				Boolean result = mdao.mypagechange(m);
-				
-				System.out.println(result);
-				
-				response.setContentType("text/html; charset=utf-8");
-				
-				out.println("<script>");
-				if(result == true) {
-					out.println("alert('수정되었습니다.');");
-					out.println("location.href='mypage.com'");	
-				}else {
-					out.println("alert('회원 정보 수정에 실패했습니다.')");
-					out.println("history.back()");
-				}
-				out.println("</script>");
-				out.close();
+					
+					MypageDAO mdao = new MypageDAO();
+					Boolean result = mdao.mypagechange(m);
+					
+					System.out.println(result);
+					
+					response.setContentType("text/html; charset=utf-8");
+					
+					out.println("<script>");
+					if(result == true) {
+						out.println("alert('수정되었습니다.');");
+						out.println("location.href='mypage.com'");	
+					}else {
+						out.println("alert('회원 정보 수정에 실패했습니다.')");
+						out.println("history.back()");
+					}
+					out.println("</script>");
+					out.close();
 
- 			}catch (IOException ex) {
- 				ex.printStackTrace();
- 				forward.setPath("error/error.jsp");
- 				request.setAttribute("message", "프로필 사진 업로드 실패입니다.");
- 				forward.setRedirect(false);
- 				return forward;
- 				}//catch end
+		 			} catch (IOException ex) {
+		 				ex.printStackTrace();
+		 				forward.setPath("error/error.jsp");
+		 				request.setAttribute("message", "프로필 사진 업로드 실패입니다.");
+		 				forward.setRedirect(false);
+		 				return forward;
+		 			}//catch end
+//			else {
+//				String m_pwd = request.getParameter("m_pwd");
+//				String m_nick = request.getParameter("m_nick");
+//				String m_zipcode = request.getParameter("m_zipcode");
+//				String m_addr1 = request.getParameter("m_addr1");
+//				String m_addr2 = request.getParameter("m_addr2");
+//				String m_phone = request.getParameter("m_phone");
+//				String m_email = request.getParameter("m_email");
+//				String m_profile = request.getParameter("m_profile");
+//			}
 		}//if m_id end
+//		else {
+//			response.setContentType("text/html; charset=utf-8");
+//			String message = "로그인 후 이용 가능합니다.";
+//			out.print("<script>");
+//			out.print("alert('" + message + "');");
+//			out.print("location.href='login.com';");
+//			out.print("</script>");
+//			out.close();
+//		}
 		return null;
-	}
+	} 
 }

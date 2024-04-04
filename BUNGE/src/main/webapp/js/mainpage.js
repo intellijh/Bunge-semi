@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $("#myCarousel").carousel({interval: 100, pause: "hover"});
+  $("#myCarousel").carousel({interval: 3000 , pause: "hover"});
         
   // Enable Carousel Indicators
   $(".item1").click(function(){
