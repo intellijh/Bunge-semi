@@ -3,28 +3,15 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<title>메인 페이지</title>
-</head>
-<body>
 <jsp:include page="/layout/header.jsp" />
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="${pageContext.request.contextPath}/js/mainpage.js"></script>
-  <style>
-  /* Make the image fully responsive */
+<title>메인 페이지</title>
+<script src="${pageContext.request.contextPath}/js/mainpage.js"></script>
+<style>
   .carousel-inner img {
-    width: 33%;
-    height: 50%;
+    width: 32.99%;
+    height: 40%;
   }
   </style>
-</head>
 <body>
 
 <div class="container mt-3">
@@ -41,19 +28,19 @@
   <!-- The slideshow -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="${pageContext.request.contextPath}/image/sample4.jpg" alt="Los Angeles" width="300" height="500">
-      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago" width="300" height="500">
-      <img src="${pageContext.request.contextPath}/image/sample8.png" alt="Los Angeles" width="300" height="500">
+      <img src="${pageContext.request.contextPath}/image/sample4.jpg" alt="Los Angeles">
+      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
+      <img src="${pageContext.request.contextPath}/image/sample8.png" alt="Los Angeles">
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath}/image/sample6.png" alt="Los Angeles" width="300" height="500">
-      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago" width="300" height="500">
-      <img src="${pageContext.request.contextPath}/image/sample8.png" alt="Los Angeles" width="300" height="500">
+      <img src="${pageContext.request.contextPath}/image/sample6.png" alt="Los Angeles">
+      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
+      <img src="${pageContext.request.contextPath}/image/sample8.png" alt="Los Angeles">
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath}/image/sample9.png" alt="Los Angeles" width="300" height="500">
-      <img src="${pageContext.request.contextPath}/image/sample5.png" alt="Los Angeles" width="300" height="500">
-      <img src="${pageContext.request.contextPath}/image/sample6.png" alt="Chicago" width="300" height="500">
+      <img src="${pageContext.request.contextPath}/image/sample9.png" alt="Los Angeles">
+      <img src="${pageContext.request.contextPath}/image/sample5.png" alt="Los Angeles">
+      <img src="${pageContext.request.contextPath}/image/sample6.png" alt="Chicago">
     </div>
   </div>
   
@@ -67,9 +54,6 @@
 </div>
 
 </div>
-
-</body>
-</html>
 
 </body>
 </html>
