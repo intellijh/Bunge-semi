@@ -70,18 +70,6 @@ $(function(){
         const buyerId = chatData[0].buyerId;
         const msg = chatData[0].msg;
         let time = chatData[0].time
-  /*      const date = new Date();
-        var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-
-        if(chatMsg.substring(0,6) == 'server'){
-            var $chat = $("<div class='chat notice'>" + chatMsg[0].msg + "</div>");
-            $('#chat-container').append($chat);
-        }else{
-            var $chat = $("<div class='chat-box'><div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
-            $('#chat-container').append($chat);
-        }
-        var $chat = $("<div class='chat-box'><div class='chat'>" + chatMsg[0].msg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
-        $('#chat-container').append($chat);*/
 
         console.log("onMessage chatId: " + chatId);
         console.log("onMessage sellerId: " + sellerId);
@@ -109,48 +97,13 @@ $(function(){
                         </div>
                         <div class="msg_cotainer">
                             ${msg}
-                            <span class="msg_time">${time.substring(0, 10)}</span>
+                            <span class="msg_time">${time.substring(10, 16)}</span>
                         </div>
                     </div>
         `);
         $('.msg_card_body').append($chat);
 
-        // $('.msg_card_body').scrollTop($('.msg_card_body')[0].scrollHeight+20);
-
-/*
-        // 자기한테 온 메세지인지 확인
-        if (chatData[0].sellerId == loginId || chatData[0].buyerId == loginId) {
-
-            $("#" + chatData[0].chatId).find("p:eq(0)").text(msg);
-            $("#" + chatData[0].chatId).find("p:eq(1)").text(time);
-        }
-        if (chatId != selectedChatId) {
-            console.log("selectedChatId: " + selectedChatId);
-            return;
-        }
-        if (chatData[0].sellerId != selectedSellerId || chatData[0].buyerId != selectedBuyerId) {
-            console.log("selectedSellerId: " + selectedSellerId);
-            console.log("selectedBuyerId: " + selectedBuyerId);
-            return;
-        }
-        console.log("return문 넘김");
-
-        const $chat = $(`
-                    <div class="d-flex justify-content-start mb-4">
-                        <div class="img_cont_msg">
-                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                                 class="rounded-circle user_img_msg">
-                        </div>
-                        <div class="msg_cotainer">
-                            ${msg}
-                            <span class="msg_time">${time}</span>
-                        </div>
-                    </div>
-        `);
-        $('.msg_card_body').append($chat);
-
-        // $('.msg_card_body').scrollTop($('.msg_card_body')[0].scrollHeight+20);
-*/
+        $('.msg_card_body').scrollTop($('.msg_card_body')[0].scrollHeight+20);
     }
 
     function onOpen(e){
@@ -191,7 +144,7 @@ $(function(){
             selectedBuyerId + "|split|" + chatMsg;
         webSocket.send(chatData);
         $inputMessage.val("");
-        // $('.msg_card_body').scrollTop($('.msg_card_body')[0].scro\llHeight+20);
+        $('.msg_card_body').scrollTop($('.msg_card_body')[0].scrollHeight+20);
 
         $.ajax({
             type: "post",
