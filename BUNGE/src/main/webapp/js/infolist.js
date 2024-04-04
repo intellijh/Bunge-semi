@@ -69,7 +69,7 @@ function ajax(sdata) {
 							content=content.substr(0,20) + "..."
 						}
 						output += "<td><div>" + blank + img
-						output += "  <a href='InfoDetail.com?num=" + item.inf_num + "'>"
+						output += "  <a href='InfoDetail.com?inf_num=" + item.inf_num + "'>"
 						output += subject.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 						       +    '</a>[' + item.cnt + ']</div></td>'
 				//	    output += "<td><div>" + book.replace(/</g, '&lt;').replace(/>/g, '&gt;') + "</div></td>"

@@ -45,7 +45,7 @@
 	 			   class="form-control" placeholder="'검색' 버튼을 눌러주세요" readOnly
 	 			   value="${booktitle}"
 	 			   size="100px">
-	 		<input type="button" value="검색" id="booksearch">
+          	<button type="button"><a href="Infobooksearch.com?state=write">검색</a></button>
 	 		<img src="${bookcover}" class="inf_cover" id="inf_cover">
 	 		<input type="hidden" value="${bookcover}" name="inf_cover" id="inf_cover">
   		</label>

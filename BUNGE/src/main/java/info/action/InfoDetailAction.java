@@ -24,7 +24,7 @@ public class InfoDetailAction implements Action {
 		BoardDAO boarddao = new BoardDAO();
 	
 		// 글 번호 파라미터 값을 num변수에 저장합니다.
-		int inf_num = Integer.parseInt(request.getParameter("num"));
+		int inf_num = Integer.parseInt(request.getParameter("inf_num"));
 		System.out.println("inf_num : " + inf_num);
 		
 		//특정 주소로부터의 이동을 확인하는데 사용할 수 있는 정보는 요청 헤더인 "Referer"에 있습니다.

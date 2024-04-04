@@ -10,9 +10,6 @@
 <html>
 <head>
 <style>
-nav {
-width: 100%;
-}
  .navbar-text {
  	font-size:10px;
  }

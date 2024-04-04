@@ -94,13 +94,6 @@ $(document).ready(function() {
 	});//submit end
 	
 	
-	//'검색' 버튼을 눌렀을 때
-	$('#booksearch').click(function() {
-		location.href = "Infobooksearch.com"
-	})
-
-	
-	
 	$("#remove1").click(function() {
 		$("#filename1").text('');
 		$(".uploadedfile1").attr('src','');
@@ -341,15 +334,19 @@ function firstdisplaynone() {
 	return first;
 }
 
-	function readURL(input) {
-		console.log((input.id).substr(6,1))
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				document.getElementById('preview'+(input.id).substr(6,1)).src = e.target.result;
-			}
-			reader.readAsDataURL(input.files[0]);
-		} else {
-			document.getElementById('preview'+(input.id).substr(6,1)).src = "";
+function cancle () {
+	location.href = "InfoDetail.com?name=" + $('#inf_num').val()
+}
+
+function readURL(input) {
+	console.log((input.id).substr(6,1))
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById('preview'+(input.id).substr(6,1)).src = e.target.result;
 		}
+		reader.readAsDataURL(input.files[0]);
+	} else {
+		document.getElementById('preview'+(input.id).substr(6,1)).src = "";
 	}
+}

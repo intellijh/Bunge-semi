@@ -6,9 +6,9 @@
 <title>상세페이지</title>
 <link rel="stylesheet" href="css/view.css" type="text/css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <%@ include file="/layout/header.jsp" %>
 <script src="js/viewdetail.js"></script>
 <style>
@@ -31,12 +31,20 @@
  				<td><div>${boarddata.m_id}</div></td>
  			</tr>
  			<tr>
- 				<td><div>제목</div></td>
- 				<td><c:out value="${boarddata.inf_subject}" /></td>
- 			</tr>
- 			<tr>
  				<td><div>공개설정</div></td>
  				<td><div>${boarddata.inf_open}</div></td>
+ 			</tr>
+ 			<tr>
+ 				<td><div>책</div></td>
+ 				<td><div>${boarddata.inf_book}</div></td>
+ 			</tr>
+ 			<tr>
+ 				<td></td>
+ 				<td><div><img src="${boarddata.inf_cover}"></div></td>
+ 			</tr>
+ 			<tr>
+ 				<td><div>제목</div></td>
+ 				<td><c:out value="${boarddata.inf_subject}" /></td>
  			</tr>
  			<tr>
  				<td><div>내용</div></td>
@@ -68,7 +76,7 @@
         <tr>
           <td colspan="3" class="center">
             <c:if test="${boarddata.m_id == m_id || m_id == 'admin' }">
-              <a href="InfoModify.com?num=${boarddata.inf_num}">
+              <a href="InfoModify.com?inf_num=${boarddata.inf_num}">
                 <button class="btn btn-info">수정</button>
               </a>
               <%-- href의 주소를 #으로 설정한다. --%>
