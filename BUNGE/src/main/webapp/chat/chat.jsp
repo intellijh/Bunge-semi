@@ -2,8 +2,7 @@
 <html>
 <head>
     <title>Chat</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -55,8 +54,8 @@
                             <span class="online_icon"></span>
                         </div>
                         <div class="user_info chat_top">
-<%--                            <span>Chat with Khalid</span>--%>
-<%--                            <p>1767 Messages</p>--%>
+                            <%--                            <span>Chat with Khalid</span>--%>
+                            <%--                            <p>1767 Messages</p>--%>
                         </div>
                     </div>
                     <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
@@ -77,7 +76,8 @@
                         <div class="input-group-append">
                             <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
                         </div>
-                        <textarea name="" class="form-control type_msg" placeholder="Type your message..." maxlength="200"></textarea>
+                        <textarea name="" class="form-control type_msg" placeholder="Type your message..."
+                                  maxlength="200"></textarea>
                         <div class="input-group-append">
                             <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
                         </div>
