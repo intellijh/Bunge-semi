@@ -19,16 +19,16 @@
  #navbarSupportedContent {
  	margin-right : 50px;
  }
- 
+ .container-fluid {width:1100px}
  .inner {margin : 0 auto}
  
- .navbar-brand {padding-right:100px} 
+ .navbar-brand {right:210px} 
  
  .nav-item:nth-child(1) {padding-right:30px}
  .nav-item:nth-child(2) {padding: 0px 30px}
  .nav-item:nth-child(3) {padding: 0px 30px}
  .nav-item:nth-child(5) {padding-right: 5px}
- ul>li:net-child(6){padding: 0}
+  ul>li:net-child(6)	{padding: 0}
  .nav-link:nth-child(6) {padding: 0} 
  .nav-item:nth-child(7) {font-size:13px; padding: 0; line-height:28px}
  .nav-item:nth-child(8) {font-size:13px; padding: 0; line-height:28px}
