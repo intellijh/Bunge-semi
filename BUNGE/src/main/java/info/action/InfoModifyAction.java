@@ -21,10 +21,10 @@ public class InfoModifyAction implements Action {
 		ActionForward forward = new ActionForward();
 		BoardDAO boarddao = new BoardDAO();
 		
-		int num = Integer.parseInt(request.getParameter("num"));
+		int inf_num = Integer.parseInt(request.getParameter("inf_num"));
 		
-		Board board = boarddao.getDetail(num);
-		ArrayList<Boardfile> boardfile = boarddao.getDetailAttach(num);
+		Board board = boarddao.getDetail(inf_num);
+		ArrayList<Boardfile> boardfile = boarddao.getDetailAttach(inf_num);
 		
 		if (board == null) {
 			System.out.println("(수정)상세보기 실패");

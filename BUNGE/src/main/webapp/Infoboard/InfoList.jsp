@@ -85,7 +85,7 @@
   	   		  </c:forEach>
   	   		  <img src="image/line.gif" style="width:20px">
   	   	    </c:if>
-  	   	      <a href="InfoDetail.com?num=${b.inf_num}" id="inf_num">
+  	   	      <a href="InfoDetail.com?inf_num=${b.inf_num}" id="inf_num">
   	   		<c:if test="${b.inf_subject.length()>=20}">
   	   			<c:out value="${b.inf_subject.substring(0,20)}..." />
   	   		</c:if>

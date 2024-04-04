@@ -24,7 +24,7 @@
   <%-- 게시판 수정 --%>
   <div class="container">
     <form action="InfoModifyProcess.com" method="post" name="modifyform" enctype="multipart/form-data">
-      <input type="hidden" name="inf_num" value="${board.inf_num}">
+      <input type="hidden" name="inf_num" value="${board.inf_num}" id="inf_num">
       <h1>MVC 게시판 - 수정</h1>
       <div class="form-group">
         <label for="m_id">글쓴이</label>
@@ -48,9 +48,19 @@
       
       <div class="form-group">
         <label for="inf_book">책</label>
-          <input name="inf_book" id="inf_book" type="text" class="form-control" value="${board.inf_book}" size="100px">
-          <input type="button" value="검색" id="booksearch">
+      <c:if test="${param.bookcover == null && param.booktitle == null}"> 
+          <button type="button"><a href="Infobooksearch.com?state=modify&num=${board.inf_num}">검색</a></button>
+          <input name="inf_book" id="inf_book" type="text" class="form-control" value="${board.inf_book}" size="100px" readOnly>
           <img src="${board.inf_cover}" class="inf_cover" id="inf_cover">
+          <input type="hidden" name="inf_cover" value="${board.inf_cover}"> 
+      </c:if>
+      <c:if test="${param.bookcover != null && param.booktitle != null}"> 
+        <label for="inf_book">책</label>
+          <button type="button"><a href="Infobooksearch.com?state=modify&num=${board.inf_num}">검색</a></button>
+          <input name="inf_book" id="inf_book" type="text" class="form-control" value="${param.booktitle}" size="100px" readOnly>
+          <img src="${param.bookcover}" class="inf_cover" id="inf_cover">
+          <input type="hidden" name="inf_cover" value="${param.bookcover}"> 
+      </c:if>
       </div>
       
       <div class="form-group">
@@ -279,7 +289,7 @@
       
       <div class="form-group">
         <button type=submit class="btn btn-primary">수정</button>
-        <button type=reset class="btn btn-danger" onClick="history.go(-1)">취소</button>
+        <button type=reset class="btn btn-danger" onClick="cancel()">취소</button>
       </div>
         
     </form>

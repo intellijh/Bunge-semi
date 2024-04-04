@@ -37,7 +37,7 @@
  			</tr>
  			<tr>
  				<td></td>
- 				<td><div><img src=${boarddata.inf_cover}></div></td>
+ 				<td><div><img src="${boarddata.inf_cover}"></div></td>
  			</tr>
  			<tr>
  				<td><div>제목</div></td>
@@ -73,7 +73,7 @@
         <tr>
           <td colspan="3" class="center">
             <c:if test="${boarddata.m_id == m_id || m_id == 'admin' }">
-              <a href="InfoModify.com?num=${boarddata.inf_num}">
+              <a href="InfoModify.com?inf_num=${boarddata.inf_num}">
                 <button class="btn btn-info">수정</button>
               </a>
               <%-- href의 주소를 #으로 설정한다. --%>

@@ -32,6 +32,7 @@ public class InfoModifyProcessAction implements Action {
 		ServletContext sc = request.getServletContext();
 		String realFolder = sc.getRealPath(saveFolder);
 		
+		
 		try {
 			MultipartRequest multi =
 			new MultipartRequest(request, realFolder, filesize, "utf-8",
@@ -44,6 +45,8 @@ public class InfoModifyProcessAction implements Action {
 			board.setInf_content(multi.getParameter("inf_content"));
 			board.setInf_open(Integer.parseInt(multi.getParameter("inf_open")));
 			board.setInf_loc(multi.getParameter("inf_loc"));
+			board.setInf_book(multi.getParameter("inf_book"));
+			board.setInf_cover(multi.getParameter("inf_cover"));
 			
 			board_result = boarddao.boardModify(board);
 			
@@ -118,7 +121,7 @@ public class InfoModifyProcessAction implements Action {
 			if (board_result) {
 				System.out.println("게시판 수정 완료");
 				forward.setRedirect(true);
-				forward.setPath("InfoDetail.com?num=" + board.getInf_num());
+				forward.setPath("InfoDetail.com?inf_num=" + board.getInf_num());
 			} else {
 				System.out.println("게시판 수정 실패");
 				forward.setRedirect(false);

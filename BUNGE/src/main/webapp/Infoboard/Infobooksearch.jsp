@@ -7,6 +7,7 @@
 <script src ="js/infobook.js"></script>
 </head>
 <body>
-
+<input type="hidden" name="state" value="${param.state}" id="state">
+<input type="hidden" name="inf_num" value="${param.num}" id="inf_num">
 </body>
 </html>

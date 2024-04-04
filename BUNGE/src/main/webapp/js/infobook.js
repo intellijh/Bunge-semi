@@ -22,7 +22,8 @@ $(function () {
 		let i=0;
 		$(rdata.item).each(function() {
 			let subject = rdata.item.at(i)
-			let output = "<form action='InfoWrite.com' method='post'>"
+			if ($('#state').val() == 'modify') {
+			let output = "<form action='InfoModify.com' method='post'>"
 					   + "  <button type='submit'>선택하기</button>"
 				       + "  <img class='bookcover' src='"+subject.cover+"'>"
 				       + "    <input type='hidden' name='bookcover' value='"+subject.cover+"' "
@@ -31,10 +32,26 @@ $(function () {
 				       + "  <div>지은이 : '"+subject.author+"'</div>"
 				       + "  <div>카테고리분류 : '"+subject.categoryName+"'</div>"
 				       + "  <div>출간일 : '"+subject.pubDate+"'</div><br><br>"
+				       + "  <input type='hidden' name='inf_num' value='" + $('#inf_num').val() + "'>"
 					   + "</form>"
 			$('body').append(output)
 			i++
-			})
+			} else if ($('#state').val() == 'write') {
+	let output = "<form action='InfoWrite.com' method='post'>"
+			   + "  <button type='submit'>선택하기</button>"
+		       + "  <img class='bookcover' src='"+subject.cover+"'>"
+		       + "    <input type='hidden' name='bookcover' value='"+subject.cover+"' "
+		       + "  <div>책 제목 : '"+subject.title+"'</div>"
+		       + "    <input type='hidden' name='booktitle' value='"+subject.title+"' "
+		       + "  <div>지은이 : '"+subject.author+"'</div>"
+		       + "  <div>카테고리분류 : '"+subject.categoryName+"'</div>"
+		       + "  <div>출간일 : '"+subject.pubDate+"'</div><br><br>"
+			   + "</form>"
+			$('body').append(output)
+			i++
+			}
+		}) // each end
+		
 		} //success end
 	}) //ajax end
 }) //ready end
