@@ -229,23 +229,30 @@ private DataSource ds;
 			}
 		return tradelist;
 	}
-	public int mypagechange(Mypage m) {
-		int result = 0;
+	//회원 정보 수정
+	public boolean mypagechange(Mypage m) {
+		boolean result = false;
 		String change_sql = "update member "
 						+ "set m_pwd=? , m_nick=?, m_zipcode=?, m_addr1=?, m_addr2=?, "
-						+ "m_phone=?, m_email=?"
+						+ "m_phone=?, m_email=?, m_profile=? "
 						+ "where m_id=? ";
 		try(Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(change_sql);) {
 			
-			pstmt.setString(1, m.getMember().getM_name());
+			pstmt.setString(1, m.getMember().getM_pwd());
 			pstmt.setString(2, m.getMember().getM_nick());
 			pstmt.setString(3, m.getMember().getM_zipcode());
 			pstmt.setString(4, m.getMember().getM_addr1());
 			pstmt.setString(5, m.getMember().getM_addr2());
 			pstmt.setString(6, m.getMember().getM_phone());
 			pstmt.setString(7, m.getMember().getM_email());
-			result=pstmt.executeUpdate();
+			pstmt.setString(8, m.getMember().getM_profile());
+			pstmt.setString(9, m.getMember().getM_id());
+			int change=pstmt.executeUpdate();
+			
+			if(change > 0) {
+				result = true;
+			}
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -254,9 +261,4 @@ private DataSource ds;
 		}
 		return result;
 	}
-
-
-	
-
-
 }

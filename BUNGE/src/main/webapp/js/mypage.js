@@ -6,10 +6,124 @@ $(function() {
 		history.back();
 	});
 	
-	//비밀번호 수정 버튼
+		//비밀번호 수정 버튼
 	$('#pwdchange').click(function(){
-		$('input[name=m_pwd]').val('');
+		$('input[name=m_pwd]').val('').prop("readonly", false);
 	});
+	//비밀번호 수정 방지
+	$('form[name=changeform]').on('submit',function(e){
+		const pwd = $($("input[name=m_pwd]")).val().trim();
+		if(pwd== "") {
+			e.preventDefault();
+			$("#pwd_message").css('color','red').html("비밀번호 : 비밀번호를 입력하세요.");
+			return false;
+		}
+	});
+	//pwd 유효성 검사
+	$("input[name=m_pwd").on('keyup',
+	function(){
+		const patternpwd =/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+		const pwd = $(this).val().trim();
+		
+		if(pwd == "") {
+			$("#pwd_message").css('color' , ' red').html("비밀번호 : 비밀번호를 입력하세요.");
+			($("input[name=m_pwd]")).focus();
+			 return false;
+			
+		} else if (!patternpwd.test(pwd)) {
+			$("#pwd_message").css('color', 'red').html("비밀번호:8~16자의 영문 대/소문자, 특수문자를 사용해 주세요.(/제외) ");
+			 return false;
+		}else {
+			$("#pwd_message").css('color', 'green').html("비밀번호:안전 합니다.");
+			return true;
+		}
+	});//pwd 유효성 검사	end
+	
+	//nick 유효성 검사 
+$("input[name=m_nick]").on('keyup' ,
+	function(){
+		const patternick = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/;
+		const nick = $(this).val().trim();
+		if(nick == "") {
+			$("#nick_message").css('color', 'red').html("닉네임 : 닉네임은 필수 입니다.");
+			return false;
+		}else if(!patternick.test(nick)){
+			$("#nick_message").css('color', 'red').html("닉네임: 닉네임은 한글, 영문, 숫자만 가능하며 2-10자리 가능합니다.");
+			 return false;
+		}//nick 유효성 end
+		
+		$.ajax ({
+				type : "post" ,
+				url : "nickcheck.com" ,
+				data : {"m_nick" : nick} ,
+				success : function(nick) {
+					if (nick == '-1') {
+						$("#nick_message").css('color', 'green').text("닉네임 : 사용 가능한 닉네임입니다.");
+						
+					}else {
+						$("#nick_message").css('color', 'red').text("닉네임 : 사용할수 없는 닉네임 입니다. 다른 닉네임를 입력해주세요.");
+					}
+				}
+		}); //ajaxnick end
+	});//nick keyup end
+	
+	//우편 번호 유효성 검사
+$("input[name=m_addr2]").on('keyup',
+	function(){
+		const addr2 = $(this).val();
+		if(addr2 == "") {
+			$("#addr2_message").css('color','red').text("상세주소 : 주소를 입력해주세요.");
+			return false;
+		} else {
+			$("#addr2_message").css('color', 'green').text("상세주소 : 주소가 입력되었습니다.")
+		}
+});
+
+//전화번호 유효성 검사
+$("input[name=m_phone]").on('keyup' ,
+	function(){
+		const phone = $(this).val().trim();
+		const patterpho = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+			if(phone == "") {
+				$("#pho_message").css('color', 'red').text("전화번호 : 전화번호는 필수 입니다.");
+			return false;
+			} else if(!patterpho.test(phone)) {
+				$("#pho_message").css('color', 'red').text("전화번호 :  전화번호 형식에 맞지 않습니다.");
+				return false;
+			}else {
+				$("#pho_message").css('color', 'green').text("전화번호 : 전화번호를 알맞게 입력되었습니다.");
+				return true;
+			}
+	});//전화번호 유효성 검사 end
+	
+//이메일 유효성 검사 
+$("input[name=m_email]").on('keyup', 
+	function(){
+		const email= $(this).val().trim();
+		const patteremail =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+		if(email == "") {
+			$("#email_message").css('color', 'red').text("이메일 : 이메일은 필수 입니다.");
+			return false;
+		} else if(!patteremail.test(email)) {
+			$("#email_message").css('color', 'red').text("이메일 : 이메일 형식에 올바르지 않습니다.");
+			return false;
+		}
+		
+		$.ajax ({
+			type : "post" ,
+				url : "emailcheck.com" ,
+				data : {"m_email" : email} ,
+				success : function(emck) {
+					if (emck == '-1') {
+				$("#email_message").css('color', 'green').text("이메일 : 사용 가능한 이메일 입니다.");				
+				}else {
+			$("#email_message").css('color','red').text("이메일 : 사용할 수 없는 이메일입니다. 다른 이메일을 입력해주세요.");
+			}
+		}	
+		});
+	});//이메일 유효성 검사 end
+
 	
 	//닉네임 수정 버튼
 	$('#nickchange').click(function(){
@@ -90,5 +204,12 @@ $(function() {
 			$(this).val('');
 			$('input[name=check]').val('');
 		}
+		
 	}); //change()
-})
+	
+	let nochange = $('#filename').text()
+	console.log(nochange)
+	
+	$('form').append("<input type='hidden' name='check' value='" + nochange +"'>");
+	
+})//ready end
