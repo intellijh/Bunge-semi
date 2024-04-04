@@ -26,6 +26,7 @@ public class CommentListAction implements Action {
 		int inf_num = Integer.parseInt(request.getParameter("inf_num"));
 		System.out.println(inf_num);
 		int state = Integer.parseInt(request.getParameter("state"));
+//		String m_id = request.getParameter("inf_num");
 		
 		int listcount = dao.getListCount(inf_num);
 		
