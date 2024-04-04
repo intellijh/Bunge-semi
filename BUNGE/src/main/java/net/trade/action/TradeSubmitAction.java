@@ -22,17 +22,19 @@ public class TradeSubmitAction implements Action {
         ActionForward forward = new ActionForward();
 
         // 이미지 저장 경로 설정
-        String realFolder = "$page";
-
-        // 파일 업로드를 위한 임시 저장 경로
+        String realFolder = "";
         String saveFolder = "image";
 
-        int fileSize = 5 * 1024 * 1024; // 업로드 할 파일의 최대 사이즈 입니다. 5MB
-
-        // 실제 저장 경로를 지정합니다.
         ServletContext sc = request.getServletContext();
         realFolder = sc.getRealPath(saveFolder);
         System.out.println("realFolder= " + realFolder);
+
+        // 파일 업로드를 위한 임시 저장 경로
+
+
+        int fileSize = 5 * 1024 * 1024; // 업로드 할 파일의 최대 사이즈 입니다. 5MB
+
+
 
         try {
             // 거래 정보 조회
@@ -55,17 +57,19 @@ public class TradeSubmitAction implements Action {
             trade.setPrice(Integer.parseInt(multi.getParameter("price")));
             trade.setImageID(multi.getFilesystemName("imageID"));
 
+
             // 거래 정보 DB에 저장
             TradeDAO tradeDAO = new TradeDAO();
-            tradeDAO.insertTrade(trade);
-            tradeDAO.close();
+            int tradeID = tradeDAO.insertTrade(trade);
 
             // 조회된 거래 정보를 request에 설정
             request.setAttribute("trade", trade);
 
+
             // 거래 정보 보기 페이지로 이동
-            forward.setPath("trade/board/view.jsp");
-            forward.setRedirect(false);
+            forward.setRedirect(true);
+            forward.setPath("view.net?tradeID=" + tradeID);
+            tradeDAO.close();
         } catch (Exception e) {
             e.printStackTrace();
             // 에러 발생 시 에러 페이지로 이동하도록 설정

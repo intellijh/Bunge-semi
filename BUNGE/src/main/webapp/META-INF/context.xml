@@ -9,7 +9,8 @@
    factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
    url="jdbc:oracle:thin:@175.192.130.123:1521:xe"
    />
-   
+    <Resources allowLinking="true" />
+
 </Context>
  <!-- 
  context.xml 파일은 단일 Tomcat 웹 응용 프로그램에 대한

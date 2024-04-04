@@ -16,7 +16,7 @@
 <div id="content-view">
 	<div id="content-view-inner">
 		<div id="image-wrap">
-			<img src="<c:out value="/trade/board/image/${trade.imageID}" />" width="280" height="400">
+			<img src="${pageContext.request.contextPath}/image/<c:out value="${trade.imageID}" />" width="280" height="400">
 			<input type="button" value="채팅하기" id="chat-button" class="btn btn-light" onclick="">
 			<input type="button" value="좋아요" id="like-button" class="btn btn-light" onclick="">
 

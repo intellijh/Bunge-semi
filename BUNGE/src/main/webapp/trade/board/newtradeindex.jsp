@@ -20,6 +20,10 @@
         }
     }
 
+    String category = request.getParameter("category");
+    ArrayList<Trade> categoryList = null;
+
+
     tradeDAO.close();
 %>
 
@@ -49,12 +53,39 @@
         </form>
     </div>
 </div>
+
+<hr>
+
+<div id="category-click">
+    <div class="container"> <!-- 컨테이너 추가 -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="category-search">
+                    <form action="trade.net" method="GET">
+                        <input id="category-button1" class="btn btn-light" type="submit" value="철학">
+                        <input id="category-button2" class="btn btn-light" type="submit" value="종교">
+                        <input id="category-button3" class="btn btn-light" type="submit" value="사회과학">
+                        <input id="category-button4" class="btn btn-light" type="submit" value="자연과학">
+                        <input id="category-button5" class="btn btn-light" type="submit" value="기술과학">
+                        <input id="category-button6" class="btn btn-light" type="submit" value="예술">
+                        <input id="category-button7" class="btn btn-light" type="submit" value="언어">
+                        <input id="category-button8" class="btn btn-light" type="submit" value="문학">
+                        <input id="category-button9" class="btn btn-light" type="submit" value="역사">
+                        <input id="category-button10" class="btn btn-light" type="submit" value="IT">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
 <div id="content">
     <c:forEach var="trade" items="${tradeList}">
         <div class="post" onclick="location.href='view.net?tradeID=${trade.tradeID}'">
             <div class="post-thumbnail" style="text-align: center;">
                 <!-- 이미지 경로 출력 -->
-                <img src="/trade/board/image/<c:out value="${trade.imageID}" />" width="140" height="200">
+                <img src="${pageContext.request.contextPath}/image/<c:out value="${trade.imageID}" />" width="140" height="200">
             </div>
             <div class="post-info">
                 <span id="post-info-title"><c:out value="${trade.title}" /></span>

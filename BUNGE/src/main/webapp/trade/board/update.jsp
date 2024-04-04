@@ -63,14 +63,17 @@
             <textarea id="write-desc" name="desc" maxlength="1000"><c:out value="${trade.description}" /></textarea><br><br>
 
             <!-- 이미지 업로드 -->
-            <input type="file" id="write-thumbnail" name="imageID" accept=".jpeg,.jpg,.png" required><br>
+            <input type="file" id="write-thumbnail" name="imageID" accept=".jpeg,.jpg,.png">
+            <c:if test="${empty trade.imageID}">
+                <input type="hidden" name="existingImage" value="${trade.imageID}">
+            </c:if><br>
             <!-- 이미지 미리보기 -->
-            <img style="width: 140px; height: 200px; margin-top:30px;" id="preview-image" src="/trade/board/image/${trade.imageID}" alt="썸네일 미리보기"><br>
+            <img style="width: 140px; height: 200px; margin-top:30px;" id="preview-image" src="${pageContext.request.contextPath}/image/${trade.imageID}" alt="썸네일 미리보기"><br>
             (실제 보여질 이미지 크기입니다)<br><br>
 
             <!-- 비밀번호 입력 -->
             <input type="button" class="btn btn-danger" id="write-cancel" value="취소" onclick="cancel()">
-            <input type="button" class="btn btn-info" id="write-submit" value="수정하기" onclick="checkSubmit()">
+            <input type="submit" class="btn btn-info" id="write-submit" value="수정하기">
         </form>
     </div>
 </div>

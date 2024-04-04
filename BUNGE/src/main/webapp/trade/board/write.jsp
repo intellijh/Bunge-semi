@@ -60,7 +60,7 @@
 			<textarea id="write-desc" name="desc" placeholder="거래글 내용(1000자 이내)" maxlength="1000"></textarea><br><br>
 
 			<!-- 이미지 업로드 -->
-			<input type="file" id="write-thumbnail" name="imageID" accept=".jpeg,.jpg,.png" enctype="multipart/form-data" required><br>
+			<input type="file" id="write-thumbnail" name="imageID" accept=".jpeg,.jpg,.png" required><br>
 			<!-- 이미지 미리보기 -->
 			<img style="width: 140px; height: 200px; margin-top:30px;" id="preview-image" src="static/thumbnailPreview.png" alt="썸네일 미리보기"><br>
 			(실제 보여질 이미지 크기입니다)<br><br>
