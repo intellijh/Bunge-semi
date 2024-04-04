@@ -87,7 +87,6 @@
         </div>
     </div>
 </div>
-<button class="test_btn">ㅎㅇ</button>
 <jsp:include page="${pageContext.request.contextPath}/layout/footer.jsp"/>
 </body>
 </html>

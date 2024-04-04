@@ -42,6 +42,13 @@ function getChatList() {
                                 </div>
                                 <div class="user_info">`;
                 console.log("getChatList() loginId: " + loginId);
+
+                if (this.sellerId == null || this.sellerId == "") {
+                    this.sellerId = "알 수 없는 사용자";
+                } else if (this.buyerId == null || this.buyerId == "") {
+                    this.buyerId = "알 수 없는 사용자";
+                }
+
                 if (this.sellerId == loginId) {
                     output += `     <span class="buyer">${this.buyerId}</span>
                                     <p>${this.sellerId}</p>
@@ -127,10 +134,6 @@ $(document).on("click", ".delete-chat-btn", function () {
     console.log("삭제 클릭");
     deleteChat();
     $("#action_menu_btn").click();
-});
-$(document).on("click", ".test_btn", function () {
-    console.log("테스트 버튼");
-    getChatList();
 });
 
 $(function () {
