@@ -6,7 +6,9 @@ function infocommcnt(comm_num){
 		type : 'post',
 		data : { 
 			comm_num : comm_num,
-			m_id : $("#loginid").val()
+			m_id : $("#loginid").val(),
+			inf_num : $("#inf_num").val(), 
+			state:state
 		},
 		dataType : 'json',
 		async : false,
@@ -43,6 +45,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 			type:"post",
 			data: {inf_num : $("#inf_num").val(), 
 				   state:state,
+				   m_id: $("#loginid").val()
 				   },
 			dataType : "json",
 			success : function(rdata){
@@ -128,9 +131,11 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 					
 					output += '</div>'
 						   + '</li>'	
-						   
+						 
 				 infocommcnt(this.comm_num)
 				})//each end
+				
+				
 				$('.comment-list').html(output);
 			} else { //댓글 1개가 있는 상태에서 삭제하는 경우 갯수는 0이라 if문을 수행하지 않고 이곳으로 옵니다
 					 //이곳에서 아래의 두 영역을 없앱니다.

@@ -20,20 +20,20 @@ public class CommentListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		CommentDAO dao = new CommentDAO();
+		CommentDAO commentdao = new CommentDAO();
 		  
 		//{"comment_board_num" : $("#comment_board_num").val(),state:state}, //state값이 1=>등록순, 2=> 최신순
 		int inf_num = Integer.parseInt(request.getParameter("inf_num"));
 		System.out.println(inf_num);
 		int state = Integer.parseInt(request.getParameter("state"));
-//		String m_id = request.getParameter("inf_num");
+		String m_id = request.getParameter("m_id");
 		
-		int listcount = dao.getListCount(inf_num);
+		int listcount = commentdao.getListCount(inf_num);
 		
 		JsonObject object = new JsonObject();
 		object.addProperty("listcount", listcount);
 		
-		JsonArray jarray = dao.getCommentList(inf_num,state);
+		JsonArray jarray = commentdao.getCommentList(inf_num,state,m_id);
 		JsonElement je = new Gson().toJsonTree(jarray);
 		object.add("commentlist", je);
 		

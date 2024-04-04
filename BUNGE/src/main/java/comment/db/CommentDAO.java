@@ -92,24 +92,26 @@ private DataSource ds;
 		return x;
 	}//getListCount end	
 
-	public JsonArray getCommentList(int inf_num,int state) {
+	public JsonArray getCommentList(int inf_num,int state,String m_id) {
 		String sort = "asc";
 		if(state == 2) {
 			sort = "desc";
 		}
 
-		String sql = " SELECT ic.comm_num, ic.m_id, ic.comm_content, ic.comm_reg,"
+		String sql = "SELECT " 
+				+"    ic.comm_num, ic.m_id, ic.comm_content, ic.comm_reg,"
 				+"    ic.comm_lev, ic.comm_seq, ic.comm_ref, m.m_profile,"
-				+"    NVL(clike.like_count, 0) AS like_count"
-				+" FROM infocomm ic JOIN member m ON ic.m_id = m.m_id"
-				+"	LEFT JOIN (SELECT comm_num, COUNT(*) AS like_count"
-				+"    	     	FROM infocommlike"
-				+"    	     	GROUP BY comm_num) clike ON ic.comm_num = clike.comm_num"
-				+" WHERE inf_num = ?"
+				+"    NVL(clike.like_count, 0) AS like_count, cl.like_check"
+				+" FROM infocomm ic "
+				+" JOIN member m ON ic.m_id = m.m_id"
+				+" LEFT JOIN (SELECT comm_num, COUNT(*) AS like_count"
+				+"     FROM infocommlike"
+				+"     GROUP BY comm_num) clike ON ic.comm_num = clike.comm_num"
+				+" LEFT JOIN (SELECT comm_num, COUNT(*) AS like_check"
+				+"     FROM infocommlike"
+				+"     GROUP BY comm_num) cl ON ic.comm_num = cl.comm_num"
+				+" WHERE inf_num = ? AND m.m_id = ?"
 				+" ORDER BY comm_ref " + sort + ", comm_seq ASC";
-
-
-
 
 		JsonArray array = new JsonArray();
 		  
@@ -117,6 +119,7 @@ private DataSource ds;
 					PreparedStatement pstmt = con.prepareStatement(sql);) {
 			  
 			  pstmt.setInt(1, inf_num);
+			  pstmt.setString(2, m_id);
 				
 			  try (ResultSet rs = pstmt.executeQuery()) {
 					while (rs.next()) {
@@ -129,7 +132,8 @@ private DataSource ds;
 						object.addProperty("comm_seq", rs.getInt(6));
 						object.addProperty("comm_ref", rs.getInt(7));
 						object.addProperty("m_profile", rs.getString(8));
-						object.addProperty("like_count", rs.getString(9));
+						object.addProperty("like_count", rs.getInt(9));
+						object.addProperty("like_check", rs.getInt(10));
 						
 						array.add(object);
 					}
