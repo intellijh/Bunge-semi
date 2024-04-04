@@ -26,12 +26,13 @@ public class CommentListAction implements Action {
 		int inf_num = Integer.parseInt(request.getParameter("inf_num"));
 		System.out.println(inf_num);
 		int state = Integer.parseInt(request.getParameter("state"));
+		
 		int listcount = dao.getListCount(inf_num);
 		
 		JsonObject object = new JsonObject();
 		object.addProperty("listcount", listcount);
 		
-		JsonArray jarray = dao.getCommentList(inf_num, state);
+		JsonArray jarray = dao.getCommentList(inf_num,state);
 		JsonElement je = new Gson().toJsonTree(jarray);
 		object.add("commentlist", je);
 		
@@ -41,5 +42,4 @@ public class CommentListAction implements Action {
 		System.out.println(object.toString());
 		return null;
 	}
-	
 }

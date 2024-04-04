@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src = "http://code.jquery.com/jquery-latest.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
  
 <html>
 <head>
@@ -20,7 +18,7 @@
  	margin-right : 50px;
  }
  
- .container-fluid {margin : 0 auto}
+ .inner {margin : 0 auto}
  
 </style>
 </head>
@@ -40,9 +38,7 @@
         <li class="nav-item">
           <a class="nav-link" href="trade.net">거래게시판</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">알림</a>
-        </li>
+        
         <c:choose>
         <c:when test="${m_id ==null }">
         <li class="nav-item"><a class="nav-link" href="login.com">로그인</a></li>
@@ -53,8 +49,12 @@
 	    <li class="nav-item"><a class="nav-link" href="mypage.com">마이페이지</a></li>
 	     <li class="nav-item"><a class="nav-link" href="trade.net">중고거래</a></li>
 	      <li class="nav-item"><a class="nav-link" href="reviewlist.com">리뷰활동</a></li>
-	       <li class="nav-item"><a class="nav-link" href="#">프로필사진</a></li>
+	       <li class="nav-item"><a class="nav-link" href="#">
+	        <img src="${pageContext.request.contextPath}/image/profile.png" alt="bell" width="25" height="25"></a></li>
 	      <li class="nav-item"><a class="nav-link" href="logout.com">${m_id}님 (로그아웃)</a></li>
+	      <li class="nav-item">
+          <a class="nav-link" href="#"><img src="${pageContext.request.contextPath}/image/bell.png" alt="bell" width="25" height="25"></a>
+        </li>
  	</c:when>
 </c:choose>
        <c:if test="${m_id == 'admin'}">
