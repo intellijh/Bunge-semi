@@ -14,14 +14,11 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat.css">
     <script src="${pageContext.request.contextPath}/js/chat/chat.js"></script>
     <script src="${pageContext.request.contextPath}/js/chat/message.js"></script>
-    <title>채팅 : 번지</title>+
+    <title>채팅 : 번지</title>
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/layout/header.jsp"/>
-<br>
-<br>
-<br>
-<br>
+
 <input type="hidden" id="loginId" value="${m_id}">
 <input type="hidden" id="sessionChatId" value="${chatId}">
 <div class="container-fluid h-100">
@@ -49,7 +46,7 @@
                 <div class="card-header msg_head">
                     <div class="d-flex bd-highlight">
                         <div class="img_cont">
-                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                            <img src="image/profile.png"
                                  class="rounded-circle user_img">
                             <span class="online_icon"></span>
                         </div>
@@ -87,6 +84,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="${pageContext.request.contextPath}/layout/footer.jsp"/>
+
 </body>
 </html>

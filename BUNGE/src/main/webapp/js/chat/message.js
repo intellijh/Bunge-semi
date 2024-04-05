@@ -1,6 +1,7 @@
 let webSocket = "";
 
 function loadMessage() {
+
     console.log("loadMessage() Start");
     $(".msg_card_body").empty();
     $.ajax({
@@ -26,7 +27,7 @@ function loadMessage() {
                     chat += `
                         <div class="d-flex justify-content-start mb-4">
                             <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                <img src="image/profile.png"
                                      class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
@@ -65,11 +66,10 @@ $(function(){
     function onMessage(e){
 
         console.log("메세지 왔다");
+        console.log(e.data);
         // 스크롤 위치
         const scrollPosition = $(".msg_card_body").prop("scrollTop");
-        const scrollHeight = $(".msg_card_body").prop("scrollHeight")
-        const clientHeight = $(".msg_card_body").prop("clientHeight")
-        const maxScroll = scrollHeight - clientHeight;
+        const scrollHeight = $(".msg_card_body").prop("scrollHeight") - $(".msg_card_body").prop("clientHeight");
 
         // 채팅 데이터
         const chatData = JSON.parse(e.data);
@@ -89,17 +89,14 @@ $(function(){
         }
 
         // 채팅 목록 메세지 날짜 업데이트
-
-        // $(".contacts").prepend();
-
         $("#" + chatId).find("p:eq(0)").text(msg);
         $("#" + chatId).find("p:eq(1)").text(time.substring(0, 16));
+
+        // 리스트 최상단으로 채팅 이동
         console.log(document.getElementById(chatId).outerHTML);
         const updateChatHtml = document.getElementById(chatId).outerHTML;
         $("#" + chatId).remove();
         $(".contacts").prepend(updateChatHtml);
-
-        console.log("return문 넘김");
 
         // 선택한 채팅방만 채팅방 화면에 메세지 업데이트
         if (chatId != selectedChatId) {
@@ -121,7 +118,7 @@ $(function(){
         $(".msg_card_body").append($chat);
 
         // 메세지 수신 시 사용자의 스크롤 위치가 최하단일때만 자동 스크롤 적용
-        if (scrollPosition == maxScroll) {
+        if (scrollPosition == scrollHeight) {
             $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight);
         }
     }

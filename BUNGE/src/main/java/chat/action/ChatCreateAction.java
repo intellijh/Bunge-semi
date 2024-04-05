@@ -49,13 +49,13 @@ public class ChatCreateAction implements Action {
 
         long tradeId = chat.getTrade_id();
         String buyerId = chat.getBuyerId();
-        System.out.println("sellerId = " + sellerId);
-        System.out.println("buyerId = " + buyerId);
-        System.out.println("tradeId = " + tradeId);
+        System.out.println("create sellerId = " + sellerId);
+        System.out.println("create buyerId = " + buyerId);
+        System.out.println("create tradeId = " + tradeId);
 
         ChatDAO dao = new ChatDAO();
         long chatId = dao.hasChatExist(chat);
-        System.out.println("chatId = " + chatId);
+        System.out.println("create chatId = " + chatId);
         chatId = (chatId == 0) ? dao.createChat(chat) : chatId;
 
         chat.setChatId(chatId);

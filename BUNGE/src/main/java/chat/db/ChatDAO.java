@@ -29,6 +29,7 @@ public class ChatDAO {
     public List<Chat> getChatList(String id) {
 
         List<Chat> list = new ArrayList<>();
+/*
         String sql =
                 "SELECT c.chat_id, c.seller_id, c.buyer_id, c.update_date, m.content\n" +
                 "FROM chat c\n" +
@@ -38,12 +39,28 @@ public class ChatDAO {
                 "                     FROM chat_message\n" +
                 "                     WHERE chat_id = c.chat_id)\n" +
                 "ORDER BY c.update_date DESC";
+*/
+        String sql =
+                "WITH b AS (SELECT c.chat_id,\n" +
+                "                  c.seller_id,\n" +
+                "                  c.buyer_id,\n" +
+                "                  c.update_date,\n" +
+                "                  m.send_date,\n" +
+                "                  CASE WHEN m.chat_id IS NULL THEN NULL ELSE m.content END AS content\n" +
+                "           FROM chat c\n" +
+                "                    LEFT JOIN chat_message m ON c.chat_id = m.chat_id\n" +
+                "           WHERE ? IN (c.seller_id, c.BUYER_ID))\n" +
+                "SELECT *\n" +
+                "FROM b\n" +
+                "WHERE (send_date, chat_id) IN (SELECT MAX(b.send_date), chat_id\n" +
+                "                               FROM b\n" +
+                "                               GROUP BY chat_id)\n" +
+                "   or content is null";
 
         try (Connection conn = ds.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, id);
-            pstmt.setString(2, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     Chat chat = new Chat();
@@ -51,7 +68,11 @@ public class ChatDAO {
                     chat.setSellerId(rs.getString("seller_id"));
                     chat.setBuyerId(rs.getString("buyer_id"));
                     chat.setUpdateDate(rs.getString("update_date").substring(0, 16));
-                    chat.setLatestContent(rs.getString("content"));
+                    if (rs.getString("content") == null) {
+                        chat.setLatestContent(" ");
+                    } else {
+                        chat.setLatestContent(rs.getString("content"));
+                    }
                     list.add(chat);
                 }
             }

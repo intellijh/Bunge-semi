@@ -26,6 +26,7 @@ public class ChatListLoadAction implements Action {
         System.out.println(id);
 
         Long chatId = (Long) session.getAttribute("chatId");
+        System.out.println("ListLoadAction chatId = " + chatId);
         if (chatId != null) {
             if (chatId > 0) {
                 session.setAttribute("chatId", 0L);
