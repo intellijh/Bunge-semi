@@ -5,10 +5,9 @@ function infocommcnt(comm_num){
 		url : "InfocommLikeCnt.com",
 		type : 'post',
 		data : { 
+			inf_num : $("#inf_num").val(), 
 			comm_num : comm_num,
 			m_id : $("#loginid").val(),
-			inf_num : $("#inf_num").val(), 
-			state:state
 		},
 		dataType : 'json',
 		async : false,
@@ -19,9 +18,7 @@ function infocommcnt(comm_num){
 				likecheck = rdata.check;
 				console.log('ajax 성공 후 likecheck : ' + likecheck)
 				
-				let choice = 'likecount' + rdata.this_comm_num
-					console.log(choice)
-					document.getElementById(choice).innerHTML = rdata.cnt
+				$('#likecount' + comm_num).html(rdata.cnt)
 			}
 			if(rdata.check == 1){
 					console.log('rdata.check :' + rdata.check);
@@ -84,6 +81,11 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						src = 'memberupload/' + profile;
 					}
 					
+					let likesrc = "./image/like_off.png";
+					if(this.like_check==1){
+						likesrc = "./image/like_on.png";
+					}
+					
 				output += '<li id="' + this.comm_num + '" class="comment-list-item' + comment_reply + '">   '
 	     		   	   + '	<div class="comment-nick-area">' 
 	      			   + '    <img src="' + src + '" alt="프로필 사진" width="36" height="36">'    
@@ -95,7 +97,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	         	       + '		</div>'    
 	    		       + '	  </div>'
 	    		       + '<div class="comment-like">'
-					   + '    <button class="like" data-comm_num=' + this.comm_num + '><img class="commlike" src="./image/like_off.png" id="clikeimg' + this.comm_num + '"></button>'
+					   + '    <button class="like" data-comm_num=' + this.comm_num + '><img class="commlike" src='+likesrc+' id="clikeimg' + this.comm_num + '"></button>'
 					   + '    <span id=likecount' + this.comm_num + '>'+this.like_count+'</span>'
 					   + '</div>'    
 		      	       + '	  <div class="comment-text-box">'       
@@ -132,7 +134,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 					output += '</div>'
 						   + '</li>'	
 						 
-				 infocommcnt(this.comm_num)
+//				 infocommcnt(this.comm_num,option)
 				})//each end
 				
 				
@@ -390,13 +392,10 @@ $(function() {
 		let comm_num = $(this).attr("data-comm_num");
 		let url = "";
 		
-		console.log('ajax 전 likecheck :' + likecheck)
-		infocommcnt(comm_num)
-		console.log('ajax 후 likecheck :' + likecheck)
-		
-		if(likecheck == 1) {
+		let src = $(this).find(".commlike").attr('src');
+		if(src.indexOf("on") != -1){
 			url = "InfocommLikeDelete.com";
-		}else if(likecheck == 0) {
+		}else {
 			url = "InfocommLikeAdd.com";
 		}
 		
@@ -414,6 +413,7 @@ $(function() {
 					console.log("더하기 / 삭제 성공 rdata : " + rdata);
 					//location.reload()
 					infocommcnt(comm_num)
+//					getList(option);
 				}
 			},
 			error : function() {
