@@ -8,23 +8,56 @@
 <script src="js/infolist.js"></script>
 <%@ include file="/layout/header.jsp" %>
 <style>
-  .container {
-  	max-width : 1440px;
-  }
+ 	.container {
+ 		max-width : 1140px;
+  	}
   
-  h1{font-size:1.5em; text-align:center; color:#1a92b9}
+  	h1{
+  		font-size:1.5em; text-align:center; color:#1a92b9
+  	}
   
-  label{font-weight:bold}
+  	label{
+  		font-weight:bold
+  	}
   
-  #upfile{display:none}
+ 	#upfile{
+ 		display:none
+ 	}
   
-  .gray {color:gray}
+    .gray {
+    	color:gray
+    }
   
-  .container {
-  	margin-left : 50px;
-  	margin-right : 50px;
-  }
+  	.container {
+  		margin-left :0;
+  	}
   
+	.cover {
+		width : 100px; height : 130px 
+	}
+	
+	#viewcount {
+ 		width : auto;
+ 		margin-bottom : 2em;
+ 		display : inline-block
+ 	}
+ 
+ 	.rows {
+ 		text-align : right;
+ 	}
+ 	
+ 	#head { 
+ 		width : 1140px; 
+ 		height :300px;
+ 		margin : 0 auto;
+ 		background-color : #BCE55C;
+ 		text-align : center;
+ 	}
+ 	
+ 	#head th {
+ 		line-height : 0
+ 	}
+ 	
   
    body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:8%}
    body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:50%}
@@ -37,26 +70,10 @@
 <div class="container">
  <%-- 게시글이 있는 경우 --%>
  <c:if test="${listcount > 0}">
- 
-   <div class="rows">
-     <span>줄보기</span>
-     <select class="form-control" id="viewcount">
-       <option value="1">1</option>
-       <option value="3">3</option>
-       <option value="5">5</option>
-       <option value="7">7</option>
-       <option value="8">8 </option>
-       <option value="10" selected>10</option>
-     </select>
-   </div>
-   
-    <table class="table table-striped">
+    <table class="table">
       <thead>
-  	    <tr>
-  		  <th colspan="3">MVC 게시판 - List</th>
-  		  <th colspan="2">
-  			<span>글 개수 : ${listcount}</span>
-  		  </th>
+    	<tr id="head">
+      		<th colspan="8">Shring</th>
   	    </tr>
   	    <tr>
   		  <th><div>번호</div></th>
