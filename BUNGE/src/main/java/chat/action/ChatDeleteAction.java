@@ -21,7 +21,9 @@ public class ChatDeleteAction implements Action {
         Long chatId = Long.valueOf(request.getParameter("chatId"));
         System.out.println("ChatDeleteAction chatId = " + chatId);
         String loginId = (String) request.getSession().getAttribute("m_id");
-        String sellerId = (String) request.getParameter("sellerId");
+        String sellerId = request.getParameter("sellerId");
+        System.out.println("loginId = " + loginId);
+        System.out.println("sellerId = " + sellerId);
 
         int result = new ChatDAO().delete(chatId, loginId, sellerId);
         if (result == 0) {
