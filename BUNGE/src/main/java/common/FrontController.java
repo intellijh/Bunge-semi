@@ -54,6 +54,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import mainpage.action.MainPopularBookAciton;
 
 import javax.naming.NamingException;
 
@@ -262,10 +263,15 @@ public class FrontController extends HttpServlet {
             case "/InfoBoardFileDown.com":
             	action = new InfoBoardFileDownAction();
             	break;
+            //책 검색 결과
             case "/Infobooksearch.com":
             	action = new InfobooksearchAction();
             	break;
-            //책 검색 결과
+            //가장 인기 있는 책
+            case "/MainPopularBook.com":
+            	action = new MainPopularBookAciton();
+            	break;
+            
 
         } //switch (command)
 

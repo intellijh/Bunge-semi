@@ -11,9 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
-
-import infoboardlike.db.InfoLike;
 
 
 public class BoardDAO {
@@ -522,6 +521,35 @@ public class BoardDAO {
 	} //boardmodifyDelete() end
 
 	
+	public ArrayList<JsonObject> getpopularBook() {
+		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
+		String sql = "select inf_book, inf_cover, count(*) "
+				   + "from infoboard "
+				   + "where inf_book != 'null' "
+				   + "group by inf_book, inf_cover";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			 try (ResultSet rs = pstmt.executeQuery();) {
+				 while (rs.next()) {
+					JsonObject object = new JsonObject();
+
+					 object.addProperty("inf_book", rs.getString("inf_book"));
+					 object.addProperty("inf_cover", rs.getString("inf_cover"));
+					 object.addProperty("count", rs.getInt("count(*)"));
+					 
+					 list.add(object);
+				 } 
+			 } catch (SQLException ex) {
+				 ex.printStackTrace();
+				 System.out.println("getpopularBook() 에러 : " + ex);
+			 }
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("getpopularBook() 에러 : " + e);
+		}
+		return list;
+	} //getpopularBook() end
 	
 	
 }//class end

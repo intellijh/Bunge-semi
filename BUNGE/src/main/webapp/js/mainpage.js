@@ -19,4 +19,18 @@ $(document).ready(function(){
   $(".carousel-control-next").click(function(){
     $("#myCarousel").carousel("next");
   });
-});
+  
+  
+  //인기 있는 책
+  $.ajax ({
+	  url : "MainPopularBook.com",
+	  type : 'post',
+	  dataType : 'json',
+	  success : function(rdata) {
+		  $(rdata.popularbooklist).each(function (index, item) {
+			  $('#popularbookcover' + index).attr('src', item.inf_cover)
+			  $('#popularcount' + index).text('태그된 횟수 : ' + item.count)
+		  })
+	  }
+  })
+}); //ready end

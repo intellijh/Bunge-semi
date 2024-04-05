@@ -1,6 +1,7 @@
 let option = 1; // 선택한 등록순과 최신순을 수정, 삭제,추가 후에도 유지되도록 하기 위한 변수로 사용합니다.
 
-function infocommcnt(comm_num){
+function infocommcnt(comm_num, option){
+	console.log('option : ' + option)
 	$.ajax({
 		url : "InfocommLikeCnt.com",
 		type : 'post',
@@ -8,27 +9,26 @@ function infocommcnt(comm_num){
 			comm_num : comm_num,
 			m_id : $("#loginid").val(),
 			inf_num : $("#inf_num").val(), 
-			state:state
+			state : option
 		},
 		dataType : 'json',
-		async : false,
 		success : function(rdata) {
-			if (rdata.cnt != -1) {
+			if (rdata.cnt != -1 && rdata.check == 1) {
 				console.log('총 좋아요 수 :'+ rdata.cnt);
 				console.log('좋아요 여부 :'+ rdata.check);
 				likecheck = rdata.check;
 				console.log('ajax 성공 후 likecheck : ' + likecheck)
 				
-				let choice = 'likecount' + rdata.this_comm_num
-					console.log(choice)
-					document.getElementById(choice).innerHTML = rdata.cnt
+				console.log('아이디 선택 : ' + '#likecount' + rdata.this_comm_num)
+				
+				console.log('rdata.check :' + rdata.check);
+				$("#likecount"+comm_num).html(rdata.cnt)
+				$('#clikeimg'+comm_num).attr('src',"./image/like_on.png")
+			} else if(rdata.cnt != -1 && rdata.check == 0) {
+				likecheck = rdata.check
+				$("#likecount"+comm_num).html(rdata.cnt)
+				$('#clikeimg'+comm_num).attr('src',"./image/like_off.png");
 			}
-			if(rdata.check == 1){
-					console.log('rdata.check :' + rdata.check);
-					$('#clikeimg'+comm_num).attr('src',"./image/like_on.png");
-				}else if(rdata.check == 0) {
-					$('#clikeimg'+comm_num).attr('src',"./image/like_off.png");
-				}
 		}, 
 		error : function(){
 			console.log('infocommlikecnt 실패');
@@ -96,7 +96,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    		       + '	  </div>'
 	    		       + '<div class="comment-like">'
 					   + '    <button class="like" data-comm_num=' + this.comm_num + '><img class="commlike" src="./image/like_off.png" id="clikeimg' + this.comm_num + '"></button>'
-					   + '    <span id=likecount' + this.comm_num + '>'+this.like_count+'</span>'
+					   + '    <span id=likecount' + this.comm_num + '>' + this.like_count + '</span>'
 					   + '</div>'    
 		      	       + '	  <div class="comment-text-box">'       
 		      		   + '	    <p class="comment-text-view">'         
@@ -132,7 +132,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 					output += '</div>'
 						   + '</li>'	
 						 
-				 infocommcnt(this.comm_num)
+				 infocommcnt(this.comm_num, state)
 				})//each end
 				
 				
@@ -231,8 +231,7 @@ function replyform(num,lev,seq,ref){
 }//function(replyform) end
 
 $(function() {
-	
-	let likecheck = 0;
+	let likecheck = 0
 	
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	
@@ -391,7 +390,7 @@ $(function() {
 		let url = "";
 		
 		console.log('ajax 전 likecheck :' + likecheck)
-		infocommcnt(comm_num)
+		infocommcnt(comm_num, option)
 		console.log('ajax 후 likecheck :' + likecheck)
 		
 		if(likecheck == 1) {
@@ -406,14 +405,15 @@ $(function() {
 			url :  url,
 			type : "POST",
 			data : {
-				comm_num : $(this).attr("data-comm_num"),
+				comm_num : comm_num,
 				m_id : $("#loginid").val()
 			},
 			success : function (rdata) {
 				if (rdata == 1) {
 					console.log("더하기 / 삭제 성공 rdata : " + rdata);
 					//location.reload()
-					infocommcnt(comm_num)
+					infocommcnt(comm_num, option)
+					
 				}
 			},
 			error : function() {

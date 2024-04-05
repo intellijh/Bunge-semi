@@ -30,6 +30,8 @@ public class InfocommLikeCntAction implements Action {
 		
 		int inf_num = Integer.parseInt(request.getParameter("inf_num"));
 		int state = Integer.parseInt(request.getParameter("state"));
+		System.out.println("inf_num : " + inf_num);
+		System.out.println("state : " + state);
 		
 		
 		int cnt = commentdao.InfocommLikeCnt(comm_num);

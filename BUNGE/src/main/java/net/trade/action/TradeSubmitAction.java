@@ -68,7 +68,7 @@ public class TradeSubmitAction implements Action {
 
             // 거래 정보 보기 페이지로 이동
             forward.setRedirect(true);
-            forward.setPath("view.net?tradeID=" + tradeID);
+            forward.setPath("view.net?tradeID=" + tradeID + "&m_id=");
             tradeDAO.close();
         } catch (Exception e) {
             e.printStackTrace();

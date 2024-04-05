@@ -92,7 +92,7 @@ private DataSource ds;
 		return x;
 	}//getListCount end	
 
-	public JsonArray getCommentList(int inf_num,int state,String m_id) {
+	public JsonArray getCommentList(int inf_num, int state, String m_id) {
 		String sort = "asc";
 		if(state == 2) {
 			sort = "desc";
