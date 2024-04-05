@@ -151,9 +151,12 @@ body {
 	height: 50px;
 }
 #post-info-title{
-	font-weight:bold;
-	font-size: 30px;
+	font-family: "Black Han Sans", sans-serif;
+	font-weight: 400;
+	font-size: 25px;
+	font-style: normal;
 }
+
 
 .thumbnail {
 	background-color: gray;

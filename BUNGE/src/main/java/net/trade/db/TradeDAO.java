@@ -71,16 +71,34 @@ public class TradeDAO {
             trade.setCondition(rs.getString("condition"));
             trade.setQuality(rs.getString("quality"));
             trade.setTradeMethod(rs.getString("tradeMethod"));
+            int readCount = (rs.getInt("readcount"));
+            trade.setReadCount(readCount);
+            readCount++;
+            countUpdate(readCount,tradeID);
 
             return trade;
         } else {
             return null;
         }
     }
-//
-//    // 목록 출력을 위한 SELECT
+
+    public int countUpdate(int readCount, int tradeID) {
+        String sql = "update trade set readcount = ? where tradeID = ?";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,readCount);
+            pstmt.setInt(2,tradeID);
+            return pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    // 목록 출력을 위한 SELECT
     public ArrayList<Trade> getTradeList() throws SQLException{
-        String sql = "SELECT imageID,title,sellerID,createDate,tradeID,price,category,quality,condition from trade order by tradeID desc";
+        String sql = "SELECT imageID,title,sellerID,createDate,tradeID,price,category,quality,condition,readCount from trade order by tradeID desc";
 
         pstmt = conn.prepareStatement(sql);
         rs = pstmt.executeQuery();
@@ -98,6 +116,7 @@ public class TradeDAO {
             trade.setCategory(rs.getString("category"));
             trade.setQuality(rs.getString("quality"));
             trade.setCondition(rs.getString("condition"));
+            trade.setReadCount(rs.getInt("readCount"));
 
 
             list.add(trade);
@@ -122,6 +141,60 @@ public class TradeDAO {
             trade.setCreateDate(rs.getTimestamp("createDate"));
             trade.setImageID(rs.getString("imageID"));
             trade.setTitle(rs.getString("title"));
+
+            list.add(trade);
+        }
+
+        return list;
+    }
+
+    // 카테고리별 거래 목록을 가져오는 메서드
+    public ArrayList<Trade> getTradeListByCategory(String category) throws SQLException {
+        String sql = "SELECT imageID, title, sellerID, createDate, tradeID, price, category, quality, condition FROM trade WHERE category = ?";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, category);
+        rs = pstmt.executeQuery();
+
+        ArrayList<Trade> list = new ArrayList<>();
+
+        while (rs.next()) {
+            Trade trade = new Trade();
+            trade.setTradeID(rs.getInt("tradeID"));
+            trade.setSellerID(rs.getString("sellerID"));
+            trade.setCreateDate(rs.getTimestamp("createDate"));
+            trade.setImageID(rs.getString("imageID"));
+            trade.setTitle(rs.getString("title"));
+            trade.setPrice(rs.getInt("price"));
+            trade.setCategory(rs.getString("category"));
+            trade.setQuality(rs.getString("quality"));
+            trade.setCondition(rs.getString("condition"));
+
+            list.add(trade);
+        }
+
+        return list;
+    }
+
+
+    public ArrayList<Trade> searchTradeByCategory(String category) throws SQLException {
+        String sql = "SELECT imageID, title, sellerID, createDate, tradeID, price, category, quality, condition FROM trade WHERE category = ?";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, category);
+        rs = pstmt.executeQuery();
+
+        ArrayList<Trade> list = new ArrayList<>();
+
+        while (rs.next()) {
+            Trade trade = new Trade();
+            trade.setTradeID(rs.getInt("tradeID"));
+            trade.setSellerID(rs.getString("sellerID"));
+            trade.setCreateDate(rs.getTimestamp("createDate"));
+            trade.setImageID(rs.getString("imageID"));
+            trade.setTitle(rs.getString("title"));
+            trade.setPrice(rs.getInt("price"));
+            trade.setCategory(rs.getString("category"));
+            trade.setQuality(rs.getString("quality"));
+            trade.setCondition(rs.getString("condition"));
 
             list.add(trade);
         }

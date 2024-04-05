@@ -5,6 +5,13 @@
 <%
     request.setCharacterEncoding("utf-8");
 
+    String m_id = (String) session.getAttribute("m_id"); // 세션에서 m_id 값 가져오기
+
+    if (m_id == null ) {
+        // 세션에 m_id가 존재하지 않으면 로그인 페이지로 이동
+        response.sendRedirect("login.com");
+    }
+
     TradeDAO tradeDAO = new TradeDAO();
     ArrayList<Trade> tradeList = null;
 
@@ -20,12 +27,13 @@
         }
     }
 
-    String category = request.getParameter("category");
-    ArrayList<Trade> categoryList = null;
 
 
-    tradeDAO.close();
 %>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+</style>
 
 <!DOCTYPE html>
 <html>
@@ -56,28 +64,33 @@
 
 <hr>
 
-<div id="category-click">
-    <div class="container"> <!-- 컨테이너 추가 -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="category-search">
-                    <form action="trade.net" method="GET">
-                        <input id="category-button1" class="btn btn-light" type="submit" value="철학">
-                        <input id="category-button2" class="btn btn-light" type="submit" value="종교">
-                        <input id="category-button3" class="btn btn-light" type="submit" value="사회과학">
-                        <input id="category-button4" class="btn btn-light" type="submit" value="자연과학">
-                        <input id="category-button5" class="btn btn-light" type="submit" value="기술과학">
-                        <input id="category-button6" class="btn btn-light" type="submit" value="예술">
-                        <input id="category-button7" class="btn btn-light" type="submit" value="언어">
-                        <input id="category-button8" class="btn btn-light" type="submit" value="문학">
-                        <input id="category-button9" class="btn btn-light" type="submit" value="역사">
-                        <input id="category-button10" class="btn btn-light" type="submit" value="IT">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+    $(function() {
+        $("button").on('click',function() {
+            // 버튼 클릭 시 그 버튼의 value를 var kind로 가져오기
+            var kind = (this).val();
+
+            $.ajax({
+                url : './tradeCategory.net', // 상기 주소로
+                type : "post", // 포스트 방식으로 전송함
+                cache : false,
+                headers: {"cache-control": "no-cache", "pragma": "no-cache"},
+                data : {"kind" : kind}, // kind를 kind로 명명해서 보냄
+                success : function(data) {
+                    console.log(data);
+
+                    $('body').html(data); // 성공 시 body 부분에 data라는 html 문장 다 적용
+
+                },
+                error : function(data) {
+                    alert('error');
+                }
+            })
+        })
+    })
+
+</script>
+
 <hr>
 
 <div id="content">
@@ -90,34 +103,21 @@
             <div class="post-info">
                 <span id="post-info-title"><c:out value="${trade.title}" /></span>
                 <br>
-                <span id="post-info-price"><c:out value="${trade.price}원" /></span><br>
-                <span id="post-info-author"><c:out value="${trade.sellerID}" /></span>
+                <span id="post-info-price"><c:out value="${trade.price}원" /></span>
+                <span id="post-info-author" style="float:right"><c:out value="${trade.sellerID}" /></span><br>
+                <span id="post-info-readcount"><c:out value="조회수 : ${trade.readCount}" /></span>
                 <span id="post-info-date" style="float:right"><c:out value="${trade.createDate}" /></span>
             </div>
         </div>
     </c:forEach>
 </div>
 
-<div id="pagination">
-    <c:if test="${totalPages > 1}">
-        <ul class="pagination">
-            <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                <a class="page-link" href="trade.net?page=1">처음</a>
-            </li>
-            <c:forEach var="i" begin="1" end="${totalPages}">
-                <li class="page-item ${currentPage == i ? 'active' : ''}">
-                    <a class="page-link" href="trade.net?page=${i}">${i}</a>
-                </li>
-            </c:forEach>
-            <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                <a class="page-link" href="trade.net?page=${totalPages}">끝</a>
-            </li>
-        </ul>
-    </c:if>
-</div>
+
 
 <div id="under-bar">중고 거래 게시판</div>
 </body>
 <script type="text/javascript" src="../../static/jquery.js"></script>
 <script type="text/javascript" src="../../static/bootstrap.min.js"></script>
+
+</script>
 </html>
