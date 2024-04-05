@@ -64,7 +64,7 @@
 
             <!-- 이미지 업로드 -->
             <input type="file" id="write-thumbnail" name="imageID" accept=".jpeg,.jpg,.png">
-            <c:if test="${empty trade.imageID}">
+            <c:if test="${!empty trade.imageID}">
                 <input type="hidden" name="existingImage" value="${trade.imageID}">
             </c:if><br>
             <!-- 이미지 미리보기 -->

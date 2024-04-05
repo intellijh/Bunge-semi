@@ -5,12 +5,13 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import common.action.Action;
 import common.action.ActionForward;
 import jakarta.servlet.ServletContext;
-import net.trade.db.Trade;
-import net.trade.db.TradeDAO;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import net.trade.db.Trade;
+import net.trade.db.TradeDAO;
+
 import java.io.IOException;
 
 public class TradeSubmitAction implements Action {
@@ -18,6 +19,10 @@ public class TradeSubmitAction implements Action {
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+
+        HttpSession session = request.getSession();
+        String m_id = (String) session.getAttribute("m_id");
 
         ActionForward forward = new ActionForward();
 
@@ -56,6 +61,7 @@ public class TradeSubmitAction implements Action {
             trade.setPassword(multi.getParameter("password"));
             trade.setPrice(Integer.parseInt(multi.getParameter("price")));
             trade.setImageID(multi.getFilesystemName("imageID"));
+            trade.setSellerID(multi.getParameter("m_id"));
 
 
             // 거래 정보 DB에 저장

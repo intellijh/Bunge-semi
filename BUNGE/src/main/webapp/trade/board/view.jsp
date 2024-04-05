@@ -17,7 +17,11 @@
 	<div id="content-view-inner">
 		<div id="image-wrap">
 			<img src="${pageContext.request.contextPath}/image/<c:out value="${trade.imageID}" />" width="280" height="400">
-			<input type="button" value="채팅하기" id="chat-button" class="btn btn-light" onclick="">
+			<form method="post" action="chatCreate.com">
+				<input type="hidden" name="tradeId" value="<c:out value="${trade.tradeID}" />">
+				<input type="hidden" name="sellerId" value="<c:out value="${trade.sellerID}" />">
+				<button type="submit">채팅하기</button>
+			</form>
 			<input type="button" value="좋아요" id="like-button" class="btn btn-light" onclick="">
 
 		</div>
@@ -28,7 +32,9 @@
 			<span id="image-condition"><c:out value="거래 상태 : ${trade.condition}" /></span><br>
 			<span id="image-tradeMethod"><c:out value="선호 거래 방법 : ${trade.tradeMethod}" /></span><br>
 			<span id="image-price"><c:out value="${trade.price}원" /></span><br>
-			<span id="image-author"><c:out value="${trade.sellerID}" /></span>
+			<span id="image-author"><c:out value="${trade.sellerID}" /></span><br>
+			<span id="image-readCount"><c:out value="조회수 : ${trade.readCount}" /></span>
+
 			<!-- 수정, 삭제 폼 -->
 			<form method="POST" id="delete-or-update-form">
 				<input type="hidden" name="id" value="<c:out value="${trade.tradeID}" />">
@@ -40,6 +46,7 @@
 				<input type="button" value="수정" id="update-button" class="btn btn-info" onclick="update()">
 				<input type="button" value="삭제" id="delete-button" class="btn btn-danger" onclick="del()">
 			</form>
+
 		</div>
 
 	</div>

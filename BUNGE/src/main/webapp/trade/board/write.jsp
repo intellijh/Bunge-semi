@@ -22,6 +22,10 @@
 			<!-- 거래글 제목 -->
 			<input type="text" id="write-title" name="title" placeholder="거래글 제목(30자 이내)" maxlength="30"><br><br>
 
+			<input name="m_id" id="m_id" type="text" value="${m_id}" class="form-control" readOnly>
+
+			<br>
+
 			<!-- 드롭다운 리스트들 -->
 			카테고리
 			<select name="category">
@@ -67,8 +71,11 @@
 
 			<!-- 비밀번호 입력 -->
 			<input type="password" id="write-password" name="password" placeholder="비밀번호" maxlength="20">
+
+			<!-- 세션에서 가져온 id 값 전달 -->
 			<input type="button" class="btn btn-danger" id="write-cancel" value="취소" onclick="cancel()">
 			<input type="button" class="btn btn-info" id="write-submit" value="업로드" onclick="checkSubmit()">
+
 		</form>
 	</div>
 </div>

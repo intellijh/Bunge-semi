@@ -60,12 +60,12 @@ public class TradeUpdateDoAction implements Action {
             trade.setImageID(multi.getParameter("imageID"));
             trade.setPrice(Integer.parseInt(priceParameter));
 
-            String existingImage = request.getParameter("existingImage");
+            String existingImage = multi.getParameter("existingImage");
 
-            if (existingImage == null || existingImage.isEmpty() ) {
-                trade.setImageID(multi.getFilesystemName("imageID"));
-            } else {
+            if (existingImage != null) {
                 trade.setImageID(existingImage);
+            } else {
+                trade.setImageID(multi.getFilesystemName("imageID"));
             }
 
 
