@@ -7,6 +7,27 @@
 <title>즐겨찾기 페이지</title>
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
+<style>
+.tab_container{
+    position: relative;
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+}
+.tab-slider--tabs{
+	font-size:12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.tab-slider--tabs li {
+    text-align: center;
+    width: 140px;
+    margin: 5px;
+    padding-top: 5px;
+}
+</style>
 </head>
 <body>
 	<!-- tab menu 시작 -->
@@ -16,8 +37,8 @@
 		   <a href="mypage.com"><li class="tab-slider--trigger"  rel="tab1"><span>마이페이지</span></li></a>
 			<a href="reviewlist.com"><li class="tab-slider--trigger active" rel="tab2"><span>작성글</span></li></a>
 			<a href="mycommlist.com"><li class="tab-slider--trigger"  rel="tab3"><span>작성댓글</span></li></a>
-			<a href="mylikelist.com"><li class="tab-slider--trigger"  rel="tab4"><span>즐겨찾기</span></li></a>
-			<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>중고거래 찜</span></li></a>
+			<a href="mylikelist.com"><li class="tab-slider--trigger"  rel="tab4"><span>좋아요한 리뷰</span></li></a>
+			<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>좋아요한 거래상품</span></li></a>
 		  </ul>
 		</div>
 		<div class="tab-slider--container">
