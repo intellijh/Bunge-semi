@@ -16,11 +16,13 @@
             line-height: 28px;
         }
 
+        .navbar.navbar-expand-lg {justify-content: space-between;}
+
         .inner {
-            margin: 0;
             display: flex; /* Changed to flex to align items horizontally */
             justify-content: space-between; /* Added to evenly distribute items horizontally */
             align-items: center; /* Added to vertically center items */
+            width: 100%; /* Added to ensure inner takes full width */
         }
 
         .nav-item {
@@ -41,7 +43,16 @@
         .navbar-light .navbar-nav .nav-link {
             color: rgba(0, 0, 0, 1);
         }
-        .nav-item:nth-child(7),.nav-item:nth-child(8) {}
+        
+        .nav-item:nth-child(1),.nav-item:nth-child(2),.nav-item:nth-child(3) {
+        	padding-left : 3rem; padding-right : 2rem
+        }
+        
+        .nav-item:nth-child(7),.nav-item:nth-child(8) {
+        	font-size : 13px
+        }
+        
+        
     </style>
 </head>
 <body>
@@ -51,23 +62,22 @@
         <a class="navbar-brand" href="index.jsp"><img src="${pageContext.request.contextPath}/image/logo.png"
                                                        alt="logo"
                                                        width="140" height="30" class="d-inline-block align-text-top"></a>
-        <!-- Links -->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+        <ul class="navbar-nav ml-auto"> <!-- Add ml-auto class to move items to the right -->
+         <li class="nav-item">
+               <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+           </li>  
+         <li class="nav-item">
+                <a class="nav-link" href="trade.net">거래게시판</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="InfoList.com">정보공유게시판</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="trade.net">거래게시판</a>
-            </li>
+            </li>   
             <li class="nav-item">
                 <a class="nav-link" href="chat.com">
                     <img src="${pageContext.request.contextPath}/image/chat.png" alt="chat" width="22" height="22">
                 </a>
             </li>
-            <li class="nav-item">
+             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <img src="${pageContext.request.contextPath}/image/bell.png" alt="bell" width="22" height="22">
                 </a>
@@ -89,7 +99,7 @@
                 </c:when>
                 <c:when test="${m_id != null}">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="mypage.com" id="navbardrop" data-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
                             <img src="${pageContext.request.contextPath}/image/profile.png" alt="profile" width="25"
                                  height="25">
                         </a>
@@ -117,4 +127,3 @@
     </div>
 </nav>
 </body>
-</html>
