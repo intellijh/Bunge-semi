@@ -38,7 +38,7 @@ function loadMessage() {
                 }
             });
             $(".msg_card_body").html(chat);
-            $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight+20);
+            $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight);
         },
     })
 
@@ -64,6 +64,10 @@ $(function(){
 
     function onMessage(e){
         console.log("메세지 왔다");
+        const scrollPosition = $(".msg_card_body").prop("scrollTop");
+        const scrollHeight = $(".msg_card_body").prop("scrollHeight")
+        const clientHeight = $(".msg_card_body").prop("clientHeight")
+        const maxScroll = scrollHeight - clientHeight;
 
         const chatData = JSON.parse(e.data);
         const chatId = chatData[0].chatId;
@@ -103,7 +107,10 @@ $(function(){
                     </div>
         `);
         $(".msg_card_body").append($chat);
-        $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight+20);
+
+        if (scrollPosition == maxScroll) {
+            $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight);
+        }
     }
 
     function onOpen(e){
@@ -144,7 +151,7 @@ $(function(){
             selectedBuyerId + "|split|" + chatMsg;
         webSocket.send(chatData);
         $inputMessage.val("");
-        $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight+20);
+        $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight);
 
         $.ajax({
             type: "post",
