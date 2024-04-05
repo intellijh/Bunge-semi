@@ -1,7 +1,6 @@
 let option = 1; // 선택한 등록순과 최신순을 수정, 삭제,추가 후에도 유지되도록 하기 위한 변수로 사용합니다.
 
-function infocommcnt(comm_num, option){
-	console.log('option : ' + option)
+function infocommcnt(comm_num){
 	$.ajax({
 		url : "InfocommLikeCnt.com",
 		type : 'post',
@@ -226,7 +225,6 @@ function replyform(num,lev,seq,ref){
 }//function(replyform) end
 
 $(function() {
-	let likecheck = 0
 	
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	
@@ -406,7 +404,7 @@ $(function() {
 					console.log("더하기 / 삭제 성공 rdata : " + rdata);
 					//location.reload()
 					infocommcnt(comm_num)
-//					getList(option);
+					getList(option);
 
 				}
 			},

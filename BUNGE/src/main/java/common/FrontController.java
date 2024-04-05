@@ -55,6 +55,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mainpage.action.MainPopularBookAciton;
+import mainpage.action.MainPopularCommAction;
 
 import javax.naming.NamingException;
 
@@ -271,7 +272,10 @@ public class FrontController extends HttpServlet {
             case "/MainPopularBook.com":
             	action = new MainPopularBookAciton();
             	break;
-            
+            //가장 인기 있는 댓글
+            case "/MainPopularComm.com":
+            	action = new MainPopularCommAction();
+            	break;
 
         } //switch (command)
 

@@ -33,4 +33,22 @@ $(document).ready(function(){
 		  })
 	  }
   })
+  
+  //인기 댓글
+  $.ajax ({
+	  url : "MainPopularComm.com",
+	  type : 'post',
+	  dataType : 'json',
+	  success : function(rdata) {
+		  $(rdata.popularcommlist).each(function(index, item) {
+			  $('#commcount' + index).text(item.count)
+			  if (this.content.length > 40) {
+				  $('#commcontent' + index).text(this.content.substr(0,40) + '...')
+			  } else {
+				  $('#commcontent' + index).text(this.content)
+			  }
+		  })
+	  }
+	  
+  })
 }); //ready end
