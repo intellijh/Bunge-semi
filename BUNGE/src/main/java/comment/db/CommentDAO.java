@@ -101,16 +101,16 @@ private DataSource ds;
 		String sql = "SELECT " 
 				+"    ic.comm_num, ic.m_id, ic.comm_content, ic.comm_reg,"
 				+"    ic.comm_lev, ic.comm_seq, ic.comm_ref, m.m_profile,"
-				+"    NVL(clike.like_count, 0) AS like_count, cl.like_check"
+				+"    NVL(clike.like_count, 0) AS like_count, NVL(cl.like_check,0) AS like_check"
 				+" FROM infocomm ic "
 				+" JOIN member m ON ic.m_id = m.m_id"
 				+" LEFT JOIN (SELECT comm_num, COUNT(*) AS like_count"
 				+"     FROM infocommlike"
 				+"     GROUP BY comm_num) clike ON ic.comm_num = clike.comm_num"
-				+" LEFT JOIN (SELECT comm_num, COUNT(*) AS like_check"
-				+"     FROM infocommlike"
-				+"     GROUP BY comm_num) cl ON ic.comm_num = cl.comm_num"
-				+" WHERE inf_num = ? AND m.m_id = ?"
+				+" LEFT JOIN (SELECT comm_num,m_id ,COUNT(*) AS like_check"
+				+"     FROM infocommlike where m_id= ?"
+				+"     GROUP BY comm_num,m_id) cl ON ic.comm_num = cl.comm_num"
+				+" WHERE inf_num = ?"
 				+" ORDER BY comm_ref " + sort + ", comm_seq ASC";
 
 		JsonArray array = new JsonArray();
@@ -118,8 +118,8 @@ private DataSource ds;
 		  try (Connection con = ds.getConnection(); 
 					PreparedStatement pstmt = con.prepareStatement(sql);) {
 			  
-			  pstmt.setInt(1, inf_num);
-			  pstmt.setString(2, m_id);
+			  pstmt.setString(1, m_id);
+			  pstmt.setInt(2, inf_num);
 				
 			  try (ResultSet rs = pstmt.executeQuery()) {
 					while (rs.next()) {
@@ -143,7 +143,9 @@ private DataSource ds;
 				System.out.println("getListCount() 에러 : " + ex);
 			}
 			return array;
-		}//getCommentList end	
+		}//getCommentList end
+	
+	
 
 	public int commentsUpdate(Comment co) {
 		int result = 0;
