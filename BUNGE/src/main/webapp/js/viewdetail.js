@@ -10,14 +10,22 @@ function infocommcnt(comm_num){
 			m_id : $("#loginid").val(),
 		},
 		dataType : 'json',
+		async : false,
 		success : function(rdata) {
-			if (rdata.cnt != -1 && rdata.check == 1) {
+			if (rdata.cnt != -1) {
 				console.log('총 좋아요 수 :'+ rdata.cnt);
 				console.log('좋아요 여부 :'+ rdata.check);
 				likecheck = rdata.check;
 				console.log('ajax 성공 후 likecheck : ' + likecheck)
+				
 				$('#likecount' + comm_num).html(rdata.cnt)
 			}
+			if(rdata.check == 1){
+					console.log('rdata.check :' + rdata.check);
+					$('#clikeimg'+comm_num).attr('src',"./image/like_on.png");
+				}else if(rdata.check == 0) {
+					$('#clikeimg'+comm_num).attr('src',"./image/like_off.png");
+				}
 		}, 
 		error : function(){
 			console.log('infocommlikecnt 실패');
@@ -226,6 +234,8 @@ function replyform(num,lev,seq,ref){
 
 $(function() {
 	
+	let likecheck = 0;
+	
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	
 	$('.comment-area').on('keyup','.comment-write-area-text', function() {
@@ -384,7 +394,6 @@ $(function() {
 		
 		let src = $(this).find(".commlike").attr('src');
 		if(src.indexOf("on") != -1){
-
 			url = "InfocommLikeDelete.com";
 		}else {
 			url = "InfocommLikeAdd.com";
@@ -396,7 +405,7 @@ $(function() {
 			url :  url,
 			type : "POST",
 			data : {
-				comm_num : comm_num,
+				comm_num : $(this).attr("data-comm_num"),
 				m_id : $("#loginid").val()
 			},
 			success : function (rdata) {
@@ -404,6 +413,7 @@ $(function() {
 					console.log("더하기 / 삭제 성공 rdata : " + rdata);
 					//location.reload()
 					infocommcnt(comm_num)
+
 					getList(option);
 
 				}

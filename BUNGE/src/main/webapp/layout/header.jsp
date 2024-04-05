@@ -16,7 +16,11 @@
             line-height: 28px;
         }
 
-        .navbar.navbar-expand-lg {justify-content: space-between;}
+		.navbar {padding : 0 2rem}	
+		
+        .navbar.navbar-expand-lg {
+        	justify-content: space-between;
+        }
 
         .inner {
             display: flex; /* Changed to flex to align items horizontally */
@@ -44,15 +48,17 @@
             color: rgba(0, 0, 0, 1);
         }
         
-        .nav-item:nth-child(1),.nav-item:nth-child(2),.nav-item:nth-child(3) {
+        .nav-item:nth-child(1),.nav-item:nth-child(2) {
         	padding-left : 3rem; padding-right : 2rem
+        }
+        
+        .nav-item:nth-child(3) {
+        padding-left : 3rem; padding-right : 8rem
         }
         
         .nav-item:nth-child(7),.nav-item:nth-child(8) {
         	font-size : 13px
         }
-        
-        
     </style>
 </head>
 <body>
@@ -66,12 +72,13 @@
          <li class="nav-item">
                <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
            </li>  
-         <li class="nav-item">
+           <li class="nav-item">
+                <a class="nav-link" href="InfoList.com">정보공유게시판</a>
+            </li>  
+           <li class="nav-item">
                 <a class="nav-link" href="trade.net">거래게시판</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="InfoList.com">정보공유게시판</a>
-            </li>   
+             
             <li class="nav-item">
                 <a class="nav-link" href="chat.com">
                     <img src="${pageContext.request.contextPath}/image/chat.png" alt="chat" width="22" height="22">
