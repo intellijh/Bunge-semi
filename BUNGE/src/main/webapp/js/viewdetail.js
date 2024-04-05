@@ -1,6 +1,7 @@
 let option = 1; // 선택한 등록순과 최신순을 수정, 삭제,추가 후에도 유지되도록 하기 위한 변수로 사용합니다.
 
-function infocommcnt(comm_num){
+function infocommcnt(comm_num, option){
+	console.log('option : ' + option)
 	$.ajax({
 		url : "InfocommLikeCnt.com",
 		type : 'post',
@@ -10,22 +11,14 @@ function infocommcnt(comm_num){
 			m_id : $("#loginid").val(),
 		},
 		dataType : 'json',
-		async : false,
 		success : function(rdata) {
-			if (rdata.cnt != -1) {
+			if (rdata.cnt != -1 && rdata.check == 1) {
 				console.log('총 좋아요 수 :'+ rdata.cnt);
 				console.log('좋아요 여부 :'+ rdata.check);
 				likecheck = rdata.check;
 				console.log('ajax 성공 후 likecheck : ' + likecheck)
-				
 				$('#likecount' + comm_num).html(rdata.cnt)
 			}
-			if(rdata.check == 1){
-					console.log('rdata.check :' + rdata.check);
-					$('#clikeimg'+comm_num).attr('src',"./image/like_on.png");
-				}else if(rdata.check == 0) {
-					$('#clikeimg'+comm_num).attr('src',"./image/like_off.png");
-				}
 		}, 
 		error : function(){
 			console.log('infocommlikecnt 실패');
@@ -233,8 +226,7 @@ function replyform(num,lev,seq,ref){
 }//function(replyform) end
 
 $(function() {
-	
-	let likecheck = 0;
+	let likecheck = 0
 	
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	
@@ -394,6 +386,7 @@ $(function() {
 		
 		let src = $(this).find(".commlike").attr('src');
 		if(src.indexOf("on") != -1){
+
 			url = "InfocommLikeDelete.com";
 		}else {
 			url = "InfocommLikeAdd.com";
@@ -405,7 +398,7 @@ $(function() {
 			url :  url,
 			type : "POST",
 			data : {
-				comm_num : $(this).attr("data-comm_num"),
+				comm_num : comm_num,
 				m_id : $("#loginid").val()
 			},
 			success : function (rdata) {
@@ -414,6 +407,7 @@ $(function() {
 					//location.reload()
 					infocommcnt(comm_num)
 //					getList(option);
+
 				}
 			},
 			error : function() {
