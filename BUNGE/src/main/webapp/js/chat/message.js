@@ -2,7 +2,7 @@ let webSocket = "";
 
 function loadMessage() {
     console.log("loadMessage() Start");
-    $('.msg_card_body').empty();
+    $(".msg_card_body").empty();
     $.ajax({
         type: "post",
         url: "messageLoad.com",
@@ -37,7 +37,8 @@ function loadMessage() {
                     `;
                 }
             });
-            $('.msg_card_body').html(chat);
+            $(".msg_card_body").html(chat);
+            $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight+20);
         },
     })
 
@@ -101,9 +102,8 @@ $(function(){
                         </div>
                     </div>
         `);
-        $('.msg_card_body').append($chat);
-
-        $('.msg_card_body').scrollTop($('.msg_card_body')[0].scrollHeight+20);
+        $(".msg_card_body").append($chat);
+        $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight+20);
     }
 
     function onOpen(e){
@@ -138,13 +138,13 @@ $(function(){
                         </div>
                     </div>
         `);
-        $('.msg_card_body').append($chat);
+        $(".msg_card_body").append($chat);
 
         const chatData = selectedChatId + "|split|" + selectedSellerId + "|split|" +
             selectedBuyerId + "|split|" + chatMsg;
         webSocket.send(chatData);
         $inputMessage.val("");
-        $('.msg_card_body').scrollTop($('.msg_card_body')[0].scrollHeight+20);
+        $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight+20);
 
         $.ajax({
             type: "post",
