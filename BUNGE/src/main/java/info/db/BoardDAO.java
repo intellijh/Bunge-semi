@@ -522,11 +522,13 @@ public class BoardDAO {
 
 	
 	public ArrayList<JsonObject> getpopularBook() {
-		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
 		String sql = "select inf_book, inf_cover, count(*) "
 				   + "from infoboard "
 				   + "where inf_book != 'null' "
-				   + "group by inf_book, inf_cover";
+				   + "group by inf_book, inf_cover "
+				   + "order by count(*) desc";
+		
+		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
 		
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -550,6 +552,39 @@ public class BoardDAO {
 		}
 		return list;
 	} //getpopularBook() end
+
+
+	public ArrayList<JsonObject> getpopularComm() {
+		String sql = "select count(*), a.comm_num, b.comm_content "
+				   + "from infocommlike a, infocomm b "
+				   + "where a.comm_num = b.comm_num "
+				   + "group by a.comm_num, b.comm_content "
+				   + "order by count(*) desc, comm_num desc ";
+		
+		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			try (ResultSet rs = pstmt.executeQuery();) {
+				while (rs.next()) {
+					JsonObject object = new JsonObject();
+					
+					object.addProperty("count", rs.getInt("count(*)"));
+					object.addProperty("content", rs.getString("comm_content"));
+					
+					list.add(object);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("getpopularComm() 에러 : " + e);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getpopularComm() 에러 : " + ex);
+		}
+		
+		return list;
+	}
 	
 	
 }//class end

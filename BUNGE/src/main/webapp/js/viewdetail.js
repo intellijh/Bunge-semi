@@ -413,7 +413,9 @@ $(function() {
 					console.log("더하기 / 삭제 성공 rdata : " + rdata);
 					//location.reload()
 					infocommcnt(comm_num)
-//					getList(option);
+
+					getList(option);
+
 				}
 			},
 			error : function() {
