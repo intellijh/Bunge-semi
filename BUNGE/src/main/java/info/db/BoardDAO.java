@@ -526,7 +526,8 @@ public class BoardDAO {
 		String sql = "select inf_book, inf_cover, count(*) "
 				   + "from infoboard "
 				   + "where inf_book != 'null' "
-				   + "group by inf_book, inf_cover";
+				   + "group by inf_book, inf_cover "
+				   + "order by count(*) desc";
 		
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) {

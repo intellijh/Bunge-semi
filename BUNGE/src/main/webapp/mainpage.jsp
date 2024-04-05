@@ -40,17 +40,19 @@
 
 <%-- 3번 영역 --%>
   .tagcount {
-    width : auto;
+    width : 80px;
   	padding-bottom : 10px;
   	font-size : 10px;
   }
   
   .popularcover {
-    width : 100px;
+    width : 80 px;
+    height : 80px;
+    padding : 10px;
   }
   
   .mb-0 {
-    width : 100px;
+    width : 80px;
     display : inline-block;
   }
   
@@ -61,6 +63,12 @@
   body > main > div > aside > div:nth-child(1) > h4 {
     border-bottom : 1px solid #dee2e6 !important;
   }
+  
+  .popularbookarea {
+    display : flex;
+    padding : 10px;
+  }
+  
 <%-- 3번 영역 --%>
 
 
@@ -180,13 +188,16 @@
     </div><!-- /.blog-main -->
 <%-- 인기 있는 책 영역 --%>
     <aside class="col-md-4 blog-sidebar">
-      <div class="p-4 mb-3 bg-light rounded">
-        <h4 class="font-italic">인기 있는 책</h4>
+      <h4 class="font-italic">인기 있는 책</h4>
+      <div class="p-4 mb-3 bg-light rounded popularbookarea">
         <div class="mb-0"><img class="popularcover" id="popularbookcover0" src="">
           <div id="popularcount0" class="tagcount"></div>
         </div>
         <div class="mb-0"><img class="popularcover" id="popularbookcover1" src="">
           <div id="popularcount1" class="tagcount"></div>
+        </div>
+        <div class="mb-0"><img class="popularcover" id="popularbookcover2" src="">
+          <div id="popularcount2" class="tagcount"></div>
         </div>
       </div>
 <%-- 인기 있는 책 영역 --%>
