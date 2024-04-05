@@ -84,6 +84,8 @@ private DataSource ds;
 	    		+"     b.inf_num, "	
 	    		+ "    b.inf_subject, "
 	    		+ "    b.inf_content, "
+	    		+ "	 b.inf_book, "
+	    		+ "	 b.inf_cover, "
 	    		+ "    COUNT(DISTINCT c.inf_num) AS comment_count, "
 	    		+ "    COUNT(DISTINCT k.inf_num) AS like_count "
 	    		+ "FROM "
@@ -94,7 +96,7 @@ private DataSource ds;
 	    		+ "    infolike k ON b.inf_num = k.inf_num "
 	    		+ "WHERE "
 	    		+ "    b.m_id = ? AND b.inf_lev = 0 "
-	    		+ "group by  b.inf_num, b.inf_subject, b.inf_content";
+	    		+ "group by  b.inf_num, b.inf_subject, b.inf_content, b.inf_book, b.inf_cover";
 
 	    try (Connection con = ds.getConnection();
 	         PreparedStatement pstmt = con.prepareStatement(board_list_sql)) {
@@ -109,6 +111,8 @@ private DataSource ds;
 	                board.getBoard().setInf_content(rs.getString("inf_content"));
 	                board.getComment().setInf_num(rs.getInt("comment_count")); 
 	                board.getInfoLike().setInf_num(rs.getInt("like_count"));
+	                board.getBoard().setInf_book(rs.getString("inf_book"));
+	                board.getBoard().setInf_cover(rs.getString("inf_cover"));
 	                
 	                boardlist.add(board);
 	            }
@@ -156,7 +160,7 @@ private DataSource ds;
 	//내가 좋아요한 게시글 조회
 	public List<Mylike> getlikeList(String m_id) {
 		List<Mylike> likelist = new ArrayList<>();
-		String like_sql= "select b.inf_num , b.inf_subject, b.inf_content , b.inf_reg, "
+		String like_sql= "select b.inf_num , b.inf_subject, b.inf_content , b.inf_reg, b.inf_book, b.inf_cover, "
 				+ "    COUNT(DISTINCT c.inf_num) AS comment_count, "
 				+ "    COUNT(DISTINCT k.inf_num) AS like_count "
 				+ "from "
@@ -166,7 +170,7 @@ private DataSource ds;
 				+ "LEFT JOIN "
 				+ "    infolike k ON b.inf_num = k.inf_num "
 				+ "where b.m_id=? and b.inf_lev=0 "
-				+ "group by b.inf_num, b.inf_subject, b.inf_content, b.inf_reg ";
+				+ "group by b.inf_num, b.inf_subject, b.inf_content, b.inf_reg, b.inf_book, b.inf_cover ";
 			
 		try(Connection con =ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(like_sql);) {
@@ -182,6 +186,8 @@ private DataSource ds;
 					like.getBoard().setInf_reg(rs.getString("inf_reg"));
 					like.getComment().setInf_num(rs.getInt("comment_count"));
 					like.getInfoLike().setInf_num(rs.getInt("like_count"));
+					like.getBoard().setInf_book(rs.getString("inf_book"));
+					like.getBoard().setInf_cover(rs.getString("inf_cover"));
 					
 					likelist.add(like);
 				}
