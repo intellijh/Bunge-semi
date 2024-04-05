@@ -63,12 +63,15 @@ $(function(){
     };
 
     function onMessage(e){
+
         console.log("메세지 왔다");
+        // 스크롤 위치
         const scrollPosition = $(".msg_card_body").prop("scrollTop");
         const scrollHeight = $(".msg_card_body").prop("scrollHeight")
         const clientHeight = $(".msg_card_body").prop("clientHeight")
         const maxScroll = scrollHeight - clientHeight;
 
+        // 채팅 데이터
         const chatData = JSON.parse(e.data);
         const chatId = chatData[0].chatId;
         const sellerId = chatData[0].sellerId;
@@ -85,11 +88,20 @@ $(function(){
             return;
         }
 
+        // 채팅 목록 메세지 날짜 업데이트
+
+        // $(".contacts").prepend();
+
         $("#" + chatId).find("p:eq(0)").text(msg);
         $("#" + chatId).find("p:eq(1)").text(time.substring(0, 16));
+        console.log(document.getElementById(chatId).outerHTML);
+        const updateChatHtml = document.getElementById(chatId).outerHTML;
+        $("#" + chatId).remove();
+        $(".contacts").prepend(updateChatHtml);
 
         console.log("return문 넘김");
 
+        // 선택한 채팅방만 채팅방 화면에 메세지 업데이트
         if (chatId != selectedChatId) {
             return;
         }
@@ -108,6 +120,7 @@ $(function(){
         `);
         $(".msg_card_body").append($chat);
 
+        // 메세지 수신 시 사용자의 스크롤 위치가 최하단일때만 자동 스크롤 적용
         if (scrollPosition == maxScroll) {
             $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight);
         }
