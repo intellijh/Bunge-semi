@@ -29,8 +29,8 @@ public class InfocommLikeCntAction implements Action {
 		System.out.println("comm_num : " + comm_num);
 		
 		int inf_num = Integer.parseInt(request.getParameter("inf_num"));
-		int state = Integer.parseInt(request.getParameter("state"));
-		
+		System.out.println("inf_num : " + inf_num);
+ 		
 		
 		int cnt = commentdao.InfocommLikeCnt(comm_num);
 		int check = commentdao.InfocommLikeCheck(comm_num,m_id);
@@ -44,9 +44,6 @@ public class InfocommLikeCntAction implements Action {
 		object.addProperty("check", check);
 		object.addProperty("this_comm_num", comm_num);
 		
-		JsonArray jarray = commentdao.getCommentList(inf_num,state,m_id);
-		JsonElement je = new Gson().toJsonTree(jarray);
-		object.add("commentlist", je);
 		
 		response.setContentType("application/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
