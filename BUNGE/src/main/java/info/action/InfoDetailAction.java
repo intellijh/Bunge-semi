@@ -1,7 +1,6 @@
 package info.action;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import common.action.Action;
@@ -9,18 +8,15 @@ import common.action.ActionForward;
 import info.db.Board;
 import info.db.BoardDAO;
 import info.db.Boardfile;
-import infoboardlike.db.InfoLike;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 public class InfoDetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		BoardDAO boarddao = new BoardDAO();
 	
 		// 글 번호 파라미터 값을 num변수에 저장합니다.

@@ -24,8 +24,8 @@ $(function () {
 			let subject = rdata.item.at(i)
 			if ($('#state').val() == 'modify') {
 			let output = "<form action='InfoModify.com' method='post'>"
-					   + "  <button type='submit'>선택하기</button>"
-				       + "  <img class='bookcover' src='"+subject.cover+"'>"
+					   + "  <button type='submit'>선택하기</button><br>"
+				       + "  <img class='bookcover' src='"+subject.cover+"'><br>"
 				       + "    <input type='hidden' name='bookcover' value='"+subject.cover+"' "
 				       + "  <div>책 제목 : '"+subject.title+"'</div>"
 				       + "    <input type='hidden' name='booktitle' value='"+subject.title+"' "
@@ -38,8 +38,8 @@ $(function () {
 			i++
 			} else if ($('#state').val() == 'write') {
 	let output = "<form action='InfoWrite.com' method='post'>"
-			   + "  <button type='submit'>선택하기</button>"
-		       + "  <img class='bookcover' src='"+subject.cover+"'>"
+			   + "  <button type='submit'>선택하기</button><br>"
+		       + "  <img class='bookcover' src='"+subject.cover+"'><br>"
 		       + "    <input type='hidden' name='bookcover' value='"+subject.cover+"' "
 		       + "  <div>책 제목 : '"+subject.title+"'</div>"
 		       + "    <input type='hidden' name='booktitle' value='"+subject.title+"' "

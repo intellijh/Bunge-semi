@@ -1,9 +1,4 @@
 $(document).ready(function() {
-	let check1 = 0
-	let check2 = 0
-	let check3 = 0
-	let check4 = 0
-	let check5 = 0
 	
 	let filenames = new Array(5)
 	let changenames = new Array(5)
@@ -264,7 +259,12 @@ $(document).ready(function() {
 			console.log('nochangefiles : ' + nochangefiles);
 			console.log(nochangefiles)
 		}
-	
+
+
+$("#cancel").click(function() {
+	console.log($('#inf_num').val())
+	location.href = "InfoDetail.com?inf_num=" + $('#inf_num').val()
+})	
 	
 	
 	$("#postcode").click(function () {
@@ -303,6 +303,9 @@ $(document).ready(function() {
                 $("#inf_loc").val(fullRoadAddr);
             }
         }).open();
+ 
+
+        
 	} //Postcode() end
  }) //$("#postcode").click end
 })// ready end
@@ -334,9 +337,7 @@ function firstdisplaynone() {
 	return first;
 }
 
-function cancle () {
-	location.href = "InfoDetail.com?name=" + $('#inf_num').val()
-}
+
 
 function readURL(input) {
 	console.log((input.id).substr(6,1))
