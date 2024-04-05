@@ -11,13 +11,13 @@
 <head>
     <style>
         body {
-            width: 1200px;
+            width: 1140px;
             margin: 0 auto;
             line-height: 28px;
         }
 
         .inner {
-            margin: 0 auto;
+            margin: 0;
             display: flex; /* Changed to flex to align items horizontally */
             justify-content: space-between; /* Added to evenly distribute items horizontally */
             align-items: center; /* Added to vertically center items */
@@ -41,6 +41,7 @@
         .navbar-light .navbar-nav .nav-link {
             color: rgba(0, 0, 0, 1);
         }
+        .nav-item:nth-child(7),.nav-item:nth-child(8) {}
     </style>
 </head>
 <body>
@@ -50,7 +51,6 @@
         <a class="navbar-brand" href="index.jsp"><img src="${pageContext.request.contextPath}/image/logo.png"
                                                        alt="logo"
                                                        width="140" height="30" class="d-inline-block align-text-top"></a>
-
         <!-- Links -->
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -72,8 +72,6 @@
                     <img src="${pageContext.request.contextPath}/image/bell.png" alt="bell" width="22" height="22">
                 </a>
             </li>
-
-
             <c:choose>
                 <c:when test="${m_id ==null }">
                     <li class="nav-item">
