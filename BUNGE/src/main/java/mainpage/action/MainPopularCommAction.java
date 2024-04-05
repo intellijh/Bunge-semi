@@ -17,26 +17,26 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class MainPopularBookAciton implements Action {
+public class MainPopularCommAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException, NamingException {
 		
+		BoardDAO boarddao = new BoardDAO();
+		JsonObject object = new JsonObject();
+		ArrayList<JsonObject> popularcommlist = new ArrayList<JsonObject>();
 		
-			BoardDAO boarddao = new BoardDAO();
-			JsonObject object = new JsonObject();
-			ArrayList<JsonObject> popularbooklist = new ArrayList<JsonObject>();
-			
-			popularbooklist = boarddao.getpopularBook();
-			
-			JsonElement je = new Gson().toJsonTree(popularbooklist);
-			object.add("popularbooklist", je);
-			
-			response.setContentType("application/json;charset=utf-8");
-			response.getWriter().print(object);
-		//	System.out.println("popularbooklist : "+ object.toString());
-			
+		popularcommlist = boarddao.getpopularComm();
+		
+		JsonElement je = new Gson().toJsonTree(popularcommlist);
+		object.add("popularcommlist", je);
+		
+		response.setContentType("application/json;chatset=utf-8");
+		response.getWriter().print(object);
+		System.out.println("popularcommlist : "+ object.toString());
+
 		return null;
 	}
+
 }

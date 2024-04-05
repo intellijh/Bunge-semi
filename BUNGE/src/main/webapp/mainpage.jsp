@@ -38,7 +38,7 @@
     top : 30px
   }
 
-<%-- 3번 영역 --%>
+<%-- 인기 책 영역 --%>
   .tagcount {
     width : 80px;
   	padding-bottom : 10px;
@@ -46,8 +46,8 @@
   }
   
   .popularcover {
-    width : 80 px;
-    height : 80px;
+    width : 90px;
+    height : 120px;
     padding : 10px;
   }
   
@@ -66,11 +66,30 @@
   
   .popularbookarea {
     display : flex;
-    padding : 10px;
+    padding : 10px !important;
+    justify-content: space-around;
   }
   
-<%-- 3번 영역 --%>
+<%-- 인기 책 영역 끝 --%>
 
+<%-- 인기 댓글 영역 --%>
+  .popularcommarea {
+    display : inline-block !important;
+  }
+  
+  .popularcommcount {
+    display : inline-block;
+  }
+  
+  .popularcommcontent {
+    display : inline-block;
+  }
+  
+  .commheart {
+  	width : 15px;
+  	height : 15px;
+  }
+<%-- 인기 댓글 영역 끝 --%>
 
 </style>
 <body>
@@ -188,7 +207,7 @@
     </div><!-- /.blog-main -->
 <%-- 인기 있는 책 영역 --%>
     <aside class="col-md-4 blog-sidebar">
-      <h4 class="font-italic">인기 있는 책</h4>
+      <h4 class="font-italic">인기 책</h4>
       <div class="p-4 mb-3 bg-light rounded popularbookarea">
         <div class="mb-0"><img class="popularcover" id="popularbookcover0" src="">
           <div id="popularcount0" class="tagcount"></div>
@@ -201,34 +220,68 @@
         </div>
       </div>
 <%-- 인기 있는 책 영역 --%>
-      
+ 
+<%-- 좋아요best 댓글 --%>      
+      <h4 class="font-italic">인기 댓글</h4>
       <div class="p-4 mb-3 bg-light rounded">
-        <h4 class="font-italic">가장 좋아요 많이 받은 댓글 sample2</h4>
-        <p class="mb-0">Saw you downtown singing the Blues. Watch you circle the drain. Why don't you let me stop by? Heavy is the head that <em>wears the crown</em>. Yes, we make angels cry, raining down on earth from up above.</p>
+        <div class="popularcommarea">
+          <div class="popularcommcount">
+            <img src="./image/like_on.png" class="commheart">
+            <span id="commcount0"></span>
+          </div>
+          <div class="popularcommcontent">
+            <span id="commcontent0"></span>
+          </div>
+          
+          <br>
+          
+           <div class="popularcommcount">
+            <img src="./image/like_on.png" class="commheart">
+            <span id="commcount1"></span>
+          </div>
+          <div class="popularcommcontent">
+            <span id="commcontent1"></span>
+          </div>
+          
+          <br>
+          
+           <div class="popularcommcount">
+            <img src="./image/like_on.png" class="commheart">
+            <span id="commcount2"></span>
+          </div>
+          <div class="popularcommcontent">
+            <span id="commcontent2"></span>
+          </div>
+          
+          <br>
+          
+          <div class="popularcommcount">
+            <img src="./image/like_on.png" class="commheart">
+            <span id="commcount3"></span>
+          </div>
+          <div class="popularcommcontent">
+            <span id="commcontent3"></span>
+          </div>
+          
+          <br>
+          
+          <div class="popularcommcount">
+            <img src="./image/like_on.png" class="commheart">
+            <span id="commcount4"></span>
+          </div>
+          <div class="popularcommcontent">
+            <span id="commcontent4"></span>
+          </div>
+        </div>
       </div>
+<%-- 좋아요best 댓글 --%>   
       
       <div class="p-4 mb-3 bg-light rounded">
         <h4 class="font-italic">채팅 영역</h4>
         <p class="mb-0">Saw you downtown singing the Blues. Watch you circle the drain. Why don't you let me stop by? Heavy is the head that <em>wears the crown</em>. Yes, we make angels cry, raining down on earth from up above.</p>
       </div>
       
-      <div class="p-4 mb-3 bg-light rounded">
-        <h4 class="font-italic">가장 좋아요 많이 받은 댓글 sample1</h4>
-        <ol class="list-unstyled mb-0">
-          <li><a href="#">March 2014</a></li>
-          <li><a href="#">February 2014</a></li>
-          <li><a href="#">January 2014</a></li>
-          <li><a href="#">December 2013</a></li>
-          <li><a href="#">November 2013</a></li>
-          <li><a href="#">October 2013</a></li>
-          <li><a href="#">September 2013</a></li>
-          <li><a href="#">August 2013</a></li>
-          <li><a href="#">July 2013</a></li>
-          <li><a href="#">June 2013</a></li>
-          <li><a href="#">May 2013</a></li>
-          <li><a href="#">April 2013</a></li>
-        </ol>
-      </div>
+
     </aside><!-- /.blog-sidebar -->
   </div><!-- /.row -->
 </main><!-- /.container -->
