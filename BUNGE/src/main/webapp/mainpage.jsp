@@ -7,6 +7,9 @@
 <title>메인 페이지</title>
 <script src="${pageContext.request.contextPath}/js/mainpage.js"></script>
 <style>
+  body {
+    font-family : emoji;
+  }
   .carousel-inner img {
     width: 19.5%;
     height: 300px;
@@ -18,7 +21,6 @@
   
   .p-3 {
     padding: 1rem!important;
-    background-color: floralwhite;
   }
 
 
@@ -36,14 +38,11 @@
     top : 30px
   }
 
-<%--  
-  body > main > div > aside > div:nth-child(1) {
-    text-align : center;
-  }
---%>  
+<%-- 3번 영역 --%>
   .tagcount {
     width : auto;
   	padding-bottom : 10px;
+  	font-size : 10px;
   }
   
   .popularcover {
@@ -55,7 +54,14 @@
     display : inline-block;
   }
   
-
+  .bg-light {
+  	border : 1px solid #dee2e6 !important;
+  }
+  
+  body > main > div > aside > div:nth-child(1) > h4 {
+    border-bottom : 1px solid #dee2e6 !important;
+  }
+<%-- 3번 영역 --%>
 
 
 </style>
@@ -172,17 +178,18 @@
       
 
     </div><!-- /.blog-main -->
-
+<%-- 인기 있는 책 영역 --%>
     <aside class="col-md-4 blog-sidebar">
       <div class="p-4 mb-3 bg-light rounded">
         <h4 class="font-italic">인기 있는 책</h4>
-        <p class="mb-0"><img class="popularcover" id="popularbookcover0" src="">
+        <div class="mb-0"><img class="popularcover" id="popularbookcover0" src="">
           <div id="popularcount0" class="tagcount"></div>
-        </p>
-        <p class="mb-0"><img class="popularcover" id="popularbookcover1" src="">
+        </div>
+        <div class="mb-0"><img class="popularcover" id="popularbookcover1" src="">
           <div id="popularcount1" class="tagcount"></div>
-        </p>
+        </div>
       </div>
+<%-- 인기 있는 책 영역 --%>
       
       <div class="p-4 mb-3 bg-light rounded">
         <h4 class="font-italic">가장 좋아요 많이 받은 댓글 sample2</h4>

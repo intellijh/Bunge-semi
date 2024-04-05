@@ -288,12 +288,11 @@
       </div>
       
       <div class="form-group">
-        <button type=submit class="btn btn-primary">수정</button>
-        <button type=reset class="btn btn-danger" onClick="cancel()">취소</button>
+        <button type="submit" class="btn btn-primary">수정</button>
+        <button type="button" class="btn btn-danger" id="cancel">취소</button>
       </div>
         
     </form>
   </div><%-- class="container" end --%>
-<%@ include file="/layout/footer.jsp" %>
 </body>
 </html>
