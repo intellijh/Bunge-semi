@@ -29,7 +29,7 @@ $(document).ready(function(){
 	  success : function(rdata) {
 		  $(rdata.popularbooklist).each(function (index, item) {
 			  $('#popularbookcover' + index).attr('src', item.inf_cover)
-			  $('#popularcount' + index).text('태그된 횟수 : ' + item.count)
+			  $('#popularcount' + index).text('#책마니관심도' + item.count)
 		  })
 	  }
   })
@@ -51,4 +51,22 @@ $(document).ready(function(){
 	  }
 	  
   })
+  
+  $.ajax ({
+	  url : "MainPopularPost.com",
+	  type : 'post',
+	  dataType : 'json',
+	  success : function(rdata) {
+		  $(rdata.popularpostlist).each(function(index, item) {
+			  $('#postsubject'+index).html("<a href='InfoDetail.com?inf_num="+item.inf_num+"'>"+item.inf_subject+"</a>")
+			  $('#postreg'+index).text(item.inf_reg)
+			  $('#postcontent'+index).text(item.inf_content)
+			  $('#postlikecnt'+index).text(item.postlikecnt)
+			  $('#postcommcnt'+index).text(item.postcommcnt)
+			  $('#postreg'+index).text(item.inf_reg)
+			  $('#postimg'+index).attr('src', item.inf_cover)
+		  })
+	  }
+  })
+  //인기 게시글
 }); //ready end

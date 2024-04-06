@@ -10,11 +10,7 @@
   body {
     font-family : emoji;
   }
-  .carousel-inner img {
-    width: 19.5%;
-    height: 300px;
-  }
-
+  
   .mt-3 {
     margin-top : 0 !important
   }
@@ -22,8 +18,23 @@
   .p-3 {
     padding: 1rem!important;
   }
+  
+  body > main {
+    position : relative;
+    top : 30px
+  }
 
 
+<%-- 슬라이드 영역 시작 --%>  
+  .slide {
+    width : 1110px;
+  }
+  
+  .carousel-inner img {
+    width: 19.5%;
+    height: 300px;
+  }
+  
   #myCarousel {
   	height : 300px;
   }
@@ -31,24 +42,35 @@
   #myCarousel > div {
   	height : 100%;
   }
-  
-  
-  body > main {
-    position : relative;
-    top : 30px
+<%-- 슬라이드 영역 끝--%>  
+
+<%-- 인기 게시글 영역 시작 --%>
+  .popularpost1 {
+  	margin-bottom : 20px
   }
+  
+  h4 {
+  	display : inline-block
+  }
+  
+  .popularpost2 {
+    border-radius: 4px;
+  }
+<%-- 인기 게시글 영역 끝 --%>
+
+
+
 
 <%-- 인기 책 영역 --%>
   .tagcount {
     width : 80px;
-  	padding-bottom : 10px;
   	font-size : 10px;
   }
   
   .popularcover {
-    width : 90px;
+    width : auto;
     height : 120px;
-    padding : 10px;
+    
   }
   
   .mb-0 {
@@ -70,6 +92,10 @@
     justify-content: space-around;
   }
   
+  .blog-sidebar {
+    padding-left : 5px;
+  }
+  
 <%-- 인기 책 영역 끝 --%>
 
 <%-- 인기 댓글 영역 --%>
@@ -89,12 +115,16 @@
   	width : 15px;
   	height : 15px;
   }
+  
+  p-4 {
+    padding: 0.5rem !important;
+  }
 <%-- 인기 댓글 영역 끝 --%>
 
 </style>
 <body>
 <%-- 슬라이드 이미지 --%>
-	<div class="container mt-3">
+	<div class="container mt-3 slide">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 	
 	  <!-- Indicators -->
@@ -147,65 +177,71 @@
   <div class="row">
     <div class="col-md-8 blog-main">
     
-<%-- Best Sharing1(이미지 오른쪽) 시작 --%>
-	<div class="container mt-3">
-	  <div class="media border p-3">
-	    <div class="media-body">
-	      <h4>John Doe <small><i>2024/03/02</i></small></h4>
-	      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-	      <p>좋아요</p>
-	      <p>댓글 수</p>       
+<%--인기 게시글1(이미지 오른쪽) 시작 --%>
+	<div class="container mt-3 popularpost1">
+	  <h4 class="font-italic">인기 게시글</h4>
+	  <div class="media border p-3 popularpost2">
+	    <div class="media-body popularpost3">
+	      <h4 id="postsubject0">inf_subject</h4>
+	      <span id="postreg0">inf_reg</span>       
+	      <p id="postcontent0">inf_content</p>
+	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt0" class="postlikecnt"></span>
+	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt0" class="postcommcnt"></span>
 	    </div>
-	    <img src="https://image.aladin.co.kr/product/29125/5/cover/8965965047_1.jpg" alt="John Doe" class="ml-3 mt-3 rounded-circle" style="width:60px;">
+	    <img id="postimg0" src="" style="width:60px;">
 	  </div>
 	</div>
-<%-- Best Sharing1 끝 --%>
+<%-- 인기 게시글1(이미지 오른쪽) 끝 --%>
 
-<%-- Best Sharing3(이미지 오른쪽) 시작 --%>
-	<div class="container mt-3">
-	  <div class="media border p-3">
-	    <div class="media-body">
-	      <h4>John Doe <small><i>2024/03/02</i></small></h4>
-	      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-	      <p>좋아요</p>
-	      <p>댓글 수</p>       
+<%--인기 게시글2(이미지 오른쪽) 시작 --%>
+	<div class="container mt-3 popularpost1">
+	  <div class="media border p-3 popularpost2">
+	    <div class="media-body popularpost3">
+	      <h4 id="postsubject1">inf_subject</h4>
+	      <span id="postreg1">inf_reg</span>       
+	      <p id="postcontent1">inf_content</p>
+	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt1" class="postlikecnt"></span>
+	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt1" class="postcommcnt"></span>
 	    </div>
-	    <img src="https://image.aladin.co.kr/product/29125/5/cover/8965965047_1.jpg" alt="John Doe" class="ml-3 mt-3 rounded-circle" style="width:60px;">
+	    <img id="postimg1" src="" style="width:60px;">
 	  </div>
 	</div>
-<%-- Best Sharing3 끝 --%>
+<%-- 인기 게시글2(이미지 오른쪽) 끝 --%>
 
-<%-- Best Sharing3(이미지 오른쪽) 시작 --%>
-	<div class="container mt-3">
-	  <div class="media border p-3">
-	    <div class="media-body">
-	      <h4>John Doe <small><i>2024/03/02</i></small></h4>
-	      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-	      <p>좋아요</p>
-	      <p>댓글 수</p>       
+<%--인기 게시글3(이미지 오른쪽) 시작 --%>
+	<div class="container mt-3 popularpost1">
+	  <div class="media border p-3 popularpost2">
+	    <div class="media-body popularpost3">
+	      <h4 id="postsubject2">inf_subject</h4>
+	      <span id="postreg2">inf_reg</span>       
+	      <p id="postcontent2">inf_content</p>
+	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt2" class="postlikecnt"></span>
+	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt2" class="postcommcnt"></span>
 	    </div>
-	    <img src="https://image.aladin.co.kr/product/29125/5/cover/8965965047_1.jpg" alt="John Doe" class="ml-3 mt-3 rounded-circle" style="width:60px;">
+	    <img id="postimg2" src="" style="width:60px;">
 	  </div>
 	</div>
-<%-- Best Sharing3 끝 --%>
+<%-- 인기 게시글3(이미지 오른쪽) 끝 --%>
 
-<%-- Best Sharing3(이미지 오른쪽) 시작 --%>
-	<div class="container mt-3">
-	  <div class="media border p-3">
-	    <div class="media-body">
-	      <h4>John Doe <small><i>2024/03/02</i></small></h4>
-	      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-	      <p>좋아요</p>
-	      <p>댓글 수</p>       
+<%--인기 게시글4(이미지 오른쪽) 시작 --%>
+	<div class="container mt-3 popularpost1">
+	  <div class="media border p-3 popularpost2">
+	    <div class="media-body popularpost3">
+	      <h4 id="postsubject3">inf_subject</h4>
+	      <span id="postreg3">inf_reg</span>       
+	      <p id="postcontent3">inf_content</p>
+	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt3" class="postlikecnt"></span>
+	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt3" class="postcommcnt"></span>
 	    </div>
-	    <img src="https://image.aladin.co.kr/product/29125/5/cover/8965965047_1.jpg" alt="John Doe" class="ml-3 mt-3 rounded-circle" style="width:60px;">
+	    <img id="postimg3" src="" style="width:60px;">
 	  </div>
 	</div>
-<%-- Best Sharing3 끝 --%>
+<%-- 인기 게시글3(이미지 오른쪽) 끝 --%>
+
       
 
     </div><!-- /.blog-main -->
-<%-- 인기 있는 책 영역 --%>
+<%-- 인기 있는 책 영역 시작 --%>
     <aside class="col-md-4 blog-sidebar">
       <h4 class="font-italic">인기 책</h4>
       <div class="p-4 mb-3 bg-light rounded popularbookarea">
@@ -219,7 +255,7 @@
           <div id="popularcount2" class="tagcount"></div>
         </div>
       </div>
-<%-- 인기 있는 책 영역 --%>
+<%-- 인기 있는 책 영역 끝 --%>
  
 <%-- 좋아요best 댓글 --%>      
       <h4 class="font-italic">인기 댓글</h4>
@@ -275,12 +311,6 @@
         </div>
       </div>
 <%-- 좋아요best 댓글 --%>   
-      
-      <div class="p-4 mb-3 bg-light rounded">
-        <h4 class="font-italic">채팅 영역</h4>
-        <p class="mb-0">Saw you downtown singing the Blues. Watch you circle the drain. Why don't you let me stop by? Heavy is the head that <em>wears the crown</em>. Yes, we make angels cry, raining down on earth from up above.</p>
-      </div>
-      
 
     </aside><!-- /.blog-sidebar -->
   </div><!-- /.row -->
