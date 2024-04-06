@@ -22,13 +22,13 @@ public class MainPopularPostAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException, NamingException {
-		
+
 		BoardDAO boarddao = new BoardDAO();
 		JsonObject object = new JsonObject();
 		ArrayList<JsonObject> popularpostlist = new ArrayList<JsonObject>();
-		
+
 		popularpostlist = boarddao.getpopularPost();
-		
+
 		JsonElement je = new Gson().toJsonTree(popularpostlist);
 		object.add("popularpostlist", je);
 		

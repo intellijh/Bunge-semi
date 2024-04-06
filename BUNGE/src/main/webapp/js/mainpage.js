@@ -52,6 +52,7 @@ $(document).ready(function(){
 	  
   })
   
+  //인기 게시글
   $.ajax ({
 	  url : "MainPopularPost.com",
 	  type : 'post',
@@ -66,7 +67,6 @@ $(document).ready(function(){
 			  $('#postreg'+index).text(item.inf_reg)
 			  $('#postimg'+index).attr('src', item.inf_cover)
 		  })
-	  }
+	  },
   })
-  //인기 게시글
 }); //ready end

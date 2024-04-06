@@ -278,8 +278,10 @@ public class FrontController extends HttpServlet {
             case "/MainPopularComm.com":
             	action = new MainPopularCommAction();
             	break;
+            //인기 게시글
             case "/MainPopularPost.com":
             	action = new MainPopularPostAction();
+            	break;
             //헤더 프로필
             case "/HeaderProfile.com":
             	action = new HeaderProfileAciton();
