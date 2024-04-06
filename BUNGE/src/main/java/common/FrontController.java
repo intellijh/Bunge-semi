@@ -57,6 +57,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mainpage.action.MainPopularBookAciton;
 import mainpage.action.MainPopularCommAction;
+import mainpage.action.MainPopularPostAction;
 
 import javax.naming.NamingException;
 
@@ -277,6 +278,8 @@ public class FrontController extends HttpServlet {
             case "/MainPopularComm.com":
             	action = new MainPopularCommAction();
             	break;
+            case "/MainPopularPost.com":
+            	action = new MainPopularPostAction();
             //헤더 프로필
             case "/HeaderProfile.com":
             	action = new HeaderProfileAciton();

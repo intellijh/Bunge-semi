@@ -584,4 +584,73 @@ public class BoardDAO {
 		
 		return list;
 	}
+
+
+	public ArrayList<JsonObject> getpopularPost() {
+		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
+		String sql = "SELECT C.*, COUNT(infolike.inf_num) AS total_likes "
+				   + "		FROM ( "
+				   + "			   SELECT a.inf_num, "
+				   + "				      a.m_id, "
+				   + "				      a.inf_subject, "
+				   + "			          a.inf_content, "
+				   + "				      a.inf_readcount, "
+				   + "				      a.inf_reg, "
+			       + "	   	              a.inf_book, "
+				   + "		              a.inf_cover, "
+				   + "	   	              COUNT(b.inf_num) as commcnt "
+				   + "			    FROM infoboard a "
+				   + "			    JOIN infocomm b ON a.inf_num = b.inf_num "
+				   + "				GROUP BY a.inf_num, "
+				   + "			             a.m_id, "
+				   + "			             a.inf_subject, "
+				   + "			             a.inf_content, "
+				   + "			             a.inf_readcount, " 
+				   + "				         a.inf_reg, "
+				   + "			             a.inf_book, "
+				   + "			             a.inf_cover "
+				   + "			) C "
+				   + "			LEFT JOIN infolike ON C.inf_num = infolike.inf_num "
+				   + "			GROUP BY C.inf_num, " 
+				   + "			         C.m_id, "
+				   + "			         C.inf_subject, "
+				   + "			         C.inf_content, "
+				   + "			         C.inf_readcount, "
+				   + "			         C.inf_reg, "
+				   + "			         C.inf_book, "
+				   + "			         C.inf_cover, "
+				   + "			         C.commcnt "
+				   + "			ORDER BY TOTAL_LIKES desc, COMMCNT desc";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			try (ResultSet rs = pstmt.executeQuery();) {
+				while (rs.next()) {
+					JsonObject object = new JsonObject();
+					
+					object.addProperty("inf_num", rs.getString("inf_num"));
+					object.addProperty("m_id", rs.getString("m_id"));
+					object.addProperty("inf_subject", rs.getString("inf_subject"));
+					object.addProperty("inf_content", rs.getString("inf_content"));
+					object.addProperty("inf_readcount", rs.getInt("inf_readcount"));
+					object.addProperty("inf_reg", rs.getString("inf_reg"));
+					object.addProperty("inf_book", rs.getString("inf_book"));
+					object.addProperty("inf_cover", rs.getString("inf_cover"));
+					object.addProperty("postcommcnt", rs.getInt("commcnt"));
+					object.addProperty("postlikecnt", rs.getInt("total_likes"));
+					
+					list.add(object);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("getpopularPost() 에러 : " + e);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getpopularPost() 에러 : " + ex);
+		}
+		
+		return list;
+	}
+	
 }//class end
