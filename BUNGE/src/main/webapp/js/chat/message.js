@@ -60,9 +60,124 @@ $(function(){
     };
 
     webSocket.onmessage = function(e){
+
+        console.log("메세지 왔다");
+        console.log(e.data);
+
+        // 채팅 데이터
+        const chatData = JSON.parse(e.data);
+        const chatId = chatData[0].chatId;
+        const sellerId = chatData[0].sellerId;
+        const buyerId = chatData[0].buyerId;
+        const msg = chatData[0].msg;
+        let time = chatData[0].time
+
+        console.log("onMessage chatId: " + chatId);
+        console.log("onMessage sellerId: " + sellerId);
+        console.log("onMessage buyerId: " + buyerId);
+        console.log("onMessage msg: " + msg);
+
+        // 자기한테 온 메세지인지 확인
+        if (sellerId != loginId && buyerId != loginId) {
+            return;
+        }
+
+        if (!$("#" + chatId).length) {
+            let output = "";
+            output +=
+                `<li id=${chatId} style="cursor: pointer">
+                            <div class="d-flex bd-highlight">
+                                <div class="img_cont">
+                                    <img src="image/profile.png"
+                                         class="rounded-circle user_img">
+                                    <span class="online_icon"></span>
+                                </div>
+                                <div class="user_info">`;
+
+            // 채팅 정보 리스트에 출력
+            if (this.sellerId == loginId) {
+                output += `     <span class="buyer">${buyerId}</span>
+                                    <p class="info_msg">${msg}</p>
+                                    <p>${time}</p>`;
+            } else {
+                output += `     <span class="seller">${sellerId}</span>
+                                    <p class="info_msg">${this.msg}</p>
+                                    <p>${time}</p>`;
+            }
+            output += `
+                                </div>
+                            </div>
+                        </li>`;
+            $(".contacts").append(output);
+            console.log("chatId length");
+        }
+        console.log("chatId length end");
+
+        // 채팅 목록 메세지 날짜 업데이트
+        if (msg == " ") {
+            $("#" + chatId).find(".user_info span").text("알 수 없는 사용자");
+        }
+        $("#" + chatId).find("p:eq(0)").text(msg);
+        $("#" + chatId).find("p:eq(1)").text(time.substring(0, 16));
+
+        // 리스트 최상단으로 채팅 이동
+        console.log(document.getElementById(chatId).outerHTML);
+        const updateChatHtml = document.getElementById(chatId).outerHTML;
+        $("#" + chatId).remove();
+        $(".contacts").prepend(updateChatHtml);
+
+        // 선택한 채팅방만 채팅방 화면에 메세지 업데이트
+        if (chatId != selectedChatId) {
+            return;
+        }
+
+        if (msg == " ") {
+            deleteMessage(e);
+            return;
+        }
+
         onMessage(e);
     };
 
+    function onMessage(e){
+
+        const chatData = JSON.parse(e.data);
+        const msg = chatData[0].msg;
+        let time = chatData[0].time
+
+        // 스크롤 위치
+        const scrollPosition = $(".msg_card_body").prop("scrollTop");
+        const scrollHeight = $(".msg_card_body").prop("scrollHeight") - $(".msg_card_body").prop("clientHeight");
+
+        const $chat = $(`
+                    <div class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                            <img src="image/profile.png"
+                                 class="rounded-circle user_img_msg">
+                        </div>
+                        <div class="msg_cotainer">
+                            ${msg}
+                            <span class="msg_time">${time.substring(10, 16)}</span>
+                        </div>
+                    </div>
+        `);
+        $(".msg_card_body").append($chat);
+
+        // 메세지 수신 시 사용자의 스크롤 위치가 최하단일때만 자동 스크롤 적용
+        if (scrollPosition == scrollHeight) {
+            $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight);
+        }
+    }
+
+    function deleteMessage(e) {
+        $(".user_info.chat_top").find("span").text("알 수 없는 사용자");
+        $(".delete_msg").remove();
+        $(".msg_card_body").after("<div class='delete_msg'>상대방이 채팅을 삭제했습니다</div>");
+        $(".type_msg").val("");
+        $(".type_msg").prop("readonly", true);
+    }
+
+/*
     function onMessage(e){
 
         console.log("메세지 왔다");
@@ -122,6 +237,7 @@ $(function(){
             $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight);
         }
     }
+*/
 
     function onOpen(e){
         console.log("오픈 확인용: ");

@@ -55,7 +55,8 @@ public class ChatDAO {
                 "WHERE (send_date, chat_id) IN (SELECT MAX(b.send_date), chat_id\n" +
                 "                               FROM b\n" +
                 "                               GROUP BY chat_id)\n" +
-                "   or content is null";
+                "   or content is null\n" +
+                "ORDER BY update_date DESC";
 
         try (Connection conn = ds.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
