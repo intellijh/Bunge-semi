@@ -6,6 +6,11 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
 <jsp:include page="/layout/header.jsp" />
 <style>
+body {
+    width: 1140px;
+    margin: 0 auto;
+    line-height: 28px;
+}  
 .login{
     position:relative;
     top: 150px;;

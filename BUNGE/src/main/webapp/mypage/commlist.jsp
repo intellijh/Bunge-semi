@@ -9,21 +9,25 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
 body {
-            width: 1140px;
-            margin: 0 auto;
-            line-height: 28px;
-        }
+     width: 1140px;
+     margin: 0 auto;
+     line-height: 28px;
+}
 .tab_container{
     position: relative;
-    width: 800px;
-    height: 400px;
-    margin: 0 auto;
-}
-.tab-slider--tabs{
-	font-size:12px;
     display: flex;
+    margin: 0 auto;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
+    padding-top: 40px;
+}
+.left_bar {
+	width: 180px;
+    height: 600px;
+} 
+.tab-slider--tabs{
+	position: relative;
+    left: 50px;
     padding-bottom: 20px;
 }
 .tab-slider--tabs li {
@@ -32,11 +36,34 @@ body {
     margin: 5px;
     padding-top: 5px;
 }
+.tab-slider--container {
+    position: relative;
+    left: 90px;
+}
+.commtitle {
+	border-bottom: 1px solid rgba(212, 216, 229, .5);
+    width: 1140px;
+    position: relative;
+    top : 20px;
+    padding-bottom: 30px;
+}
+.commtitle h3 {
+	position: relative;
+    left: 90px;
+}
+.user_comm {
+	width: 850px;
+    height: 300px;
+}
 </style>
 </head>
 <body>
 	<!-- tab menu 시작 -->
+	<div class="commtitle">
+	<h3>내가 쓴 댓글 조회</h3>
+	</div>
 	<div class="tab_container">
+	<div class="left_bar">
 		<div class="tab-slider--nav">
 		  <ul class="tab-slider--tabs">     
 		   <a href="mypage.com"><li class="tab-slider--trigger"  rel="tab1"><span>마이페이지</span></li></a>
@@ -45,6 +72,7 @@ body {
 			<a href="mylikelist.com"><li class="tab-slider--trigger"  rel="tab4"><span>좋아요한 리뷰</span></li></a>
 			<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>좋아요한 거래상품</span></li></a>
 		  </ul>
+		  </div>
 		</div>
 		<div class="tab-slider--container">
 		  <!-- tab2 시작 -->
