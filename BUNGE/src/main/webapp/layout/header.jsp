@@ -6,27 +6,30 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="js/header.js"></script>
 <html>
 <head>
     <style>
-        body {
-            width: 1140px;
-            margin: 0 auto;
-            line-height: 28px;
-        }
-
-		.navbar {padding : 0 2rem}	
+    	li {
+    			
+    	}
+    
+		.navbar {
+			padding : 0 2rem
+		}	
 		
         .navbar.navbar-expand-lg {
         	justify-content: space-between;
         }
 
         .inner {
+        	line-height: 28px;
+        	margin : 0 auto;
+            width: 1140px;
             display: flex; /* Changed to flex to align items horizontally */
             justify-content: space-between; /* Added to evenly distribute items horizontally */
             align-items: center; /* Added to vertically center items */
-            width: 100%; /* Added to ensure inner takes full width */
+            height : 65px;
         }
 
         .nav-item {
@@ -37,7 +40,7 @@
 
         .nav-link {
             /* Added padding to nav links to create space between them */
-            padding: 10px 15px;
+            padding: 0;
         }
 
         .bg-light {
@@ -62,6 +65,7 @@
     </style>
 </head>
 <body>
+<input type="hidden" id="loginid" value="${m_id}" name="loginid">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="inner">
         <!-- Brand -->
@@ -80,12 +84,12 @@
             </li>
              
             <li class="nav-item">
-                <a class="nav-link" href="chat.com">
+                <a href="chat.com">
                     <img src="${pageContext.request.contextPath}/image/chat.png" alt="chat" width="22" height="22">
                 </a>
             </li>
              <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a  href="#">
                     <img src="${pageContext.request.contextPath}/image/bell.png" alt="bell" width="22" height="22">
                 </a>
             </li>
@@ -93,8 +97,8 @@
                 <c:when test="${m_id ==null }">
                     <li class="nav-item">
                         <a class="nav-link" href="mypage.com">
-                            <img src="${pageContext.request.contextPath}/image/profile.png" alt="profile" width="25"
-                                 height="25">
+                            <img src="${pageContext.request.contextPath}/image/profile.png" alt="profile" width="22"
+                                 height="22">
                         </a>
                     </li>
                     <li class="nav-item">
@@ -106,14 +110,14 @@
                 </c:when>
                 <c:when test="${m_id != null}">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
-                            <img src="${pageContext.request.contextPath}/image/profile.png" alt="profile" width="25"
+                        <a class="dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+                            <img id="headerprofile" src="${pageContext.request.contextPath}/image/profile.png" alt="profile" width="25"
                                  height="25">
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="mypage.com">마이페이지</a>
-                            <a class="dropdown-item" href="mytradelist">중고거래</a>
-                            <a class="dropdown-item" href="reviewlist">활동</a>
+                            <a class="dropdown-item" href="mytradelist.com">중고거래</a>
+                            <a class="dropdown-item" href="reviewlist.com">활동</a>
                         </div>
                     </li>
                     <li class="nav-item">
