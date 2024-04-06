@@ -8,7 +8,7 @@
 <script src="${pageContext.request.contextPath}/js/mainpage.js"></script>
 <style>
   body {
-    font-family : emoji;
+    font-family : 나눔고딕;
   }
   
   .mt-3 {
@@ -45,16 +45,76 @@
 <%-- 슬라이드 영역 끝--%>  
 
 <%-- 인기 게시글 영역 시작 --%>
+
+.profile {
+  border-radius : 50%;
+}
+
+.profilearea {
+  display : inline-block;
+}
+
+.m_idarea {
+  display : inline-block;
+}
+
   .popularpost1 {
   	margin-bottom : 20px
   }
   
   h4 {
-  	display : inline-block
+    font-size : 17px;
   }
   
   .popularpost2 {
     border-radius: 4px;
+    width : 700px;
+    height : 160px;
+  }
+  
+
+  
+  .popularpost6 {
+    display : inline-block;
+  }
+  
+.booksubject {
+    font-size: 8px;
+    padding-left: 2px;
+    position: relative;
+    top: 4px;
+
+}
+  
+.postcontent {
+    padding-left: 1px;
+    font-size: 13px;
+    position: relative;
+    top: 15px;
+}
+
+.popularpost4 {
+    position: relative;
+    top: 17px;
+}
+  
+.popularpost5 {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.postlikecnt, .postcommcnt {
+  font-size : 10px;
+}
+  
+  .inf_reg {
+    font-size : 8px;
+  }
+  
+  .postsubject {
+  	position : relative;
+  	top : 10px;
+  	font-weight : bolder;
   }
 <%-- 인기 게시글 영역 끝 --%>
 
@@ -88,7 +148,6 @@
   
   .popularbookarea {
     display : flex;
-    padding : 10px !important;
     justify-content: space-around;
   }
   
@@ -116,9 +175,18 @@
   	height : 15px;
   }
   
-  p-4 {
-    padding: 0.5rem !important;
-  }
+.p-4 {
+    padding: 0.5em !important;
+}
+
+.commid {
+  font-size : 10px
+}
+
+.commreg {
+  font-size : 8px
+}
+
 <%-- 인기 댓글 영역 끝 --%>
 
 </style>
@@ -182,13 +250,26 @@
 	  <h4 class="font-italic">인기 게시글</h4>
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
-	      <h4 id="postsubject0">inf_subject</h4>
-	      <span id="postreg0">inf_reg</span>       
-	      <p id="postcontent0">inf_content</p>
-	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt0" class="postlikecnt"></span>
-	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt0" class="postcommcnt"></span>
+	      <div class="profilearea">
+	        <img class="profile" id="m_profile0" width="32px" height="32px" >
+	      </div>
+	      <div class="m_idarea">
+	      	<span id="m_id0">m_id</span>
+		    <span class="inf_reg" id="postreg0">inf_reg</span>
+	      </div>
+	      <h4 class="postsubject" id="postsubject0">inf_subject</h4>
+	      <div id="postbook0" class="booksubject">inf_book</div>       
+	      <div id="postcontent0" class="postcontent">inf_content</div>
+	      <div class="popularpost4">
+	        <div class="popularpost5">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt0" class="postlikecnt"></span>
+	        </div>
+	        <div class="popularpost6">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt0" class="postcommcnt"></span>
+	        </div>
+	      </div>
 	    </div>
-	    <img id="postimg0" src="" style="width:60px;">
+	    <img id="postimg0" src="" style="width:80px;">
 	  </div>
 	</div>
 <%-- 인기 게시글1(이미지 오른쪽) 끝 --%>
@@ -197,13 +278,26 @@
 	<div class="container mt-3 popularpost1">
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
-	      <h4 id="postsubject1">inf_subject</h4>
-	      <span id="postreg1">inf_reg</span>       
-	      <p id="postcontent1">inf_content</p>
-	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt1" class="postlikecnt"></span>
-	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt1" class="postcommcnt"></span>
+	      <div class="profilearea">
+	        <img class="profile" id="m_profile1" width="32px" height="32px" >
+	      </div>
+	      <div class="m_idarea">
+	      	<span id="m_id1">m_id</span>
+		    <span class="inf_reg" id="postreg1">inf_reg</span>
+	      </div>
+	      <h4 class="postsubject" id="postsubject1">inf_subject</h4>
+	      <div id="postbook1" class="booksubject"></div>       
+	      <div id="postcontent1" class="postcontent">inf_content</div>
+	      <div class="popularpost4">
+	        <div class="popularpost5">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt1" class="postlikecnt"></span>
+	        </div>
+	        <div class="popularpost6">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt1" class="postcommcnt"></span>
+	        </div>
+	      </div>
 	    </div>
-	    <img id="postimg1" src="" style="width:60px;">
+	    <img id="postimg1" src="" style="width:80px;">
 	  </div>
 	</div>
 <%-- 인기 게시글2(이미지 오른쪽) 끝 --%>
@@ -212,13 +306,26 @@
 	<div class="container mt-3 popularpost1">
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
-	      <h4 id="postsubject2">inf_subject</h4>
-	      <span id="postreg2">inf_reg</span>       
-	      <p id="postcontent2">inf_content</p>
-	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt2" class="postlikecnt"></span>
-	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt2" class="postcommcnt"></span>
+	      <div class="profilearea">
+	        <img class="profile" id="m_profile2" width="32px" height="32px" >
+	      </div>
+	      <div class="m_idarea">
+	      	<span id="m_id2">m_id</span>
+		    <span class="inf_reg" id="postreg2">inf_reg</span>
+	      </div>
+	      <h4 class="postsubject" id="postsubject2">inf_subject</h4>
+	      <div id="postbook2" class="booksubject"></div>       
+	      <div id="postcontent2" class="postcontent">inf_content</div>
+	      <div class="popularpost4">
+	        <div class="popularpost5">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt2" class="postlikecnt"></span>
+	        </div>
+	        <div class="popularpost6">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt2" class="postcommcnt"></span>
+	        </div>
+	      </div>
 	    </div>
-	    <img id="postimg2" src="" style="width:60px;">
+	    <img id="postimg2" src="" style="width:80px;">
 	  </div>
 	</div>
 <%-- 인기 게시글3(이미지 오른쪽) 끝 --%>
@@ -227,16 +334,132 @@
 	<div class="container mt-3 popularpost1">
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
-	      <h4 id="postsubject3">inf_subject</h4>
-	      <span id="postreg3">inf_reg</span>       
-	      <p id="postcontent3">inf_content</p>
-	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt3" class="postlikecnt"></span>
-	      <img style="width:15px;height:15px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt3" class="postcommcnt"></span>
+	      <div class="profilearea">
+	        <img class="profile" id="m_profile3" width="32px" height="32px" >
+	      </div>
+	      <div class="m_idarea">
+	      	<span id="m_id3">m_id</span>
+		    <span class="inf_reg" id="postreg3">inf_reg</span>
+	      </div>
+	      <h4 class="postsubject" id="postsubject3">inf_subject</h4>
+	      <div id="postbook3" class="booksubject"></div>       
+	      <div id="postcontent3" class="postcontent">inf_content</div>
+	      <div class="popularpost4">
+	        <div class="popularpost5">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt3" class="postlikecnt"></span>
+	        </div>
+	        <div class="popularpost6">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt3" class="postcommcnt"></span>
+	        </div>
+	      </div>
 	    </div>
-	    <img id="postimg3" src="" style="width:60px;">
+	    <img id="postimg3" src="" style="width:80px;">
 	  </div>
 	</div>
 <%-- 인기 게시글3(이미지 오른쪽) 끝 --%>
+	<div class="container mt-3 popularpost1">
+	  <div class="media border p-3 popularpost2">
+	    <div class="media-body popularpost3">
+	      <div class="profilearea">
+	        <img class="profile" id="m_profile4" width="32px" height="32px" >
+	      </div>
+	      <div class="m_idarea">
+	      	<span id="m_id4">m_id</span>
+		    <span class="inf_reg" id="postreg4">inf_reg</span>
+	      </div>
+	      <h4 class="postsubject" id="postsubject4">inf_subject</h4>
+	      <div id="postbook4" class="booksubject"></div>       
+	      <div id="postcontent4" class="postcontent">inf_content</div>
+	      <div class="popularpost4">
+	        <div class="popularpost5">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt4" class="postlikecnt"></span>
+	        </div>
+	        <div class="popularpost6">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt4" class="postcommcnt"></span>
+	        </div>
+	      </div>
+	    </div>
+	    <img id="postimg4" src="" style="width:80px;">
+	  </div>
+	</div>
+	
+	<div class="container mt-3 popularpost1">
+	  <div class="media border p-3 popularpost2">
+	    <div class="media-body popularpost3">
+	      <div class="profilearea">
+	        <img class="profile" id="m_profile5" width="32px" height="32px" >
+	      </div>
+	      <div class="m_idarea">
+	      	<span id="m_id5">m_id</span>
+		    <span class="inf_reg" id="postreg5">inf_reg</span>
+	      </div>
+	      <h4 class="postsubject" id="postsubject5">inf_subject</h4>
+	      <div id="postbook5" class="booksubject"></div>       
+	      <div id="postcontent5" class="postcontent">inf_content</div>
+	      <div class="popularpost4">
+	        <div class="popularpost5">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt5" class="postlikecnt"></span>
+	        </div>
+	        <div class="popularpost6">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt5" class="postcommcnt"></span>
+	        </div>
+	      </div>
+	    </div>
+	    <img id="postimg5" src="" style="width:80px;">
+	  </div>
+	</div>
+
+	<div class="container mt-3 popularpost1">
+	  <div class="media border p-3 popularpost2">
+	    <div class="media-body popularpost3">
+	      <div class="profilearea">
+	        <img class="profile" id="m_profile6" width="32px" height="32px" >
+	      </div>
+	      <div class="m_idarea">
+	      	<span id="m_id6">m_id</span>
+		    <span class="inf_reg" id="postreg6">inf_reg</span>
+	      </div>
+	      <h4 class="postsubject" id="postsubject6">inf_subject</h4>
+	      <div id="postbook6" class="booksubject"></div>       
+	      <div id="postcontent6" class="postcontent">inf_content</div>
+	      <div class="popularpost4">
+	        <div class="popularpost5">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt6" class="postlikecnt"></span>
+	        </div>
+	        <div class="popularpost6">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt6" class="postcommcnt"></span>
+	        </div>
+	      </div>
+	    </div>
+	    <img id="postimg6" src="" style="width:80px;">
+	  </div>
+	</div>
+
+	<div class="container mt-3 popularpost1">
+	  <div class="media border p-3 popularpost2">
+	    <div class="media-body popularpost3">
+	      <div class="profilearea">
+	        <img class="profile" id="m_profile7" width="32px" height="32px" >
+	      </div>
+	      <div class="m_idarea">
+	      	<span id="m_id7">m_id</span>
+		    <span class="inf_reg" id="postreg7">inf_reg</span>
+	      </div>
+	      <h4 class="postsubject" id="postsubject7">inf_subject</h4>
+	      <div id="postbook7" class="booksubject"></div>       
+	      <div id="postcontent7" class="postcontent">inf_content</div>
+	      <div class="popularpost4">
+	        <div class="popularpost5">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt7" class="postlikecnt"></span>
+	        </div>
+	        <div class="popularpost6">
+	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt7" class="postcommcnt"></span>
+	        </div>
+	      </div>
+	    </div>
+	    <img id="postimg7" src="" style="width:80px;">
+	  </div>
+	</div>
 
       
 
@@ -257,60 +480,70 @@
       </div>
 <%-- 인기 있는 책 영역 끝 --%>
  
-<%-- 좋아요best 댓글 --%>      
+<%-- 인기 댓글 시작 --%>      
       <h4 class="font-italic">인기 댓글</h4>
       <div class="p-4 mb-3 bg-light rounded">
         <div class="popularcommarea">
           <div class="popularcommcount">
             <img src="./image/like_on.png" class="commheart">
-            <span id="commcount0"></span>
+            <span id="commcount0">commcount</span>
           </div>
           <div class="popularcommcontent">
-            <span id="commcontent0"></span>
-          </div>
-          
-          <br>
-          
-           <div class="popularcommcount">
-            <img src="./image/like_on.png" class="commheart">
-            <span id="commcount1"></span>
-          </div>
-          <div class="popularcommcontent">
-            <span id="commcontent1"></span>
-          </div>
-          
-          <br>
-          
-           <div class="popularcommcount">
-            <img src="./image/like_on.png" class="commheart">
-            <span id="commcount2"></span>
-          </div>
-          <div class="popularcommcontent">
-            <span id="commcontent2"></span>
+            <span id="commcontent0">comm_content</span>
+            <span id="comm_m_id0" class="commid">comm_m_id</span>
+            <span id="commreg0" class="commreg">comm_reg</span>
           </div>
           
           <br>
           
           <div class="popularcommcount">
             <img src="./image/like_on.png" class="commheart">
-            <span id="commcount3"></span>
+            <span id="commcount1">commcount</span>
           </div>
           <div class="popularcommcontent">
-            <span id="commcontent3"></span>
+            <span id="commcontent1">comm_content</span>
+            <span id="comm_m_id1" class="commid">comm_m_id</span>
+            <span id="commreg1" class="commreg">comm_reg</span>
           </div>
           
           <br>
           
           <div class="popularcommcount">
             <img src="./image/like_on.png" class="commheart">
-            <span id="commcount4"></span>
+            <span id="commcount2">commcount</span>
           </div>
           <div class="popularcommcontent">
-            <span id="commcontent4"></span>
+            <span id="commcontent2">comm_content</span>
+            <span id="comm_m_id2" class="commid">comm_m_id</span>
+            <span id="commreg2" class="commreg">comm_reg</span>
+          </div>
+          
+          <br>
+          
+          <div class="popularcommcount">
+            <img src="./image/like_on.png" class="commheart">
+            <span id="commcount3">commcount</span>
+          </div>
+          <div class="popularcommcontent">
+            <span id="commcontent3">comm_content</span>
+            <span id="comm_m_id3" class="commid">comm_m_id</span>
+            <span id="commreg3" class="commreg">comm_reg</span>
+          </div>
+          
+          <br>
+          
+          <div class="popularcommcount">
+            <img src="./image/like_on.png" class="commheart">
+            <span id="commcount4">commcount</span>
+          </div>
+          <div class="popularcommcontent">
+            <span id="commcontent4">comm_content</span>
+            <span id="comm_m_id4" class="commid">comm_m_id</span>
+            <span id="commreg4" class="commreg">comm_reg</span>
           </div>
         </div>
       </div>
-<%-- 좋아요best 댓글 --%>   
+<%-- 인기 댓글 끝 --%>   
 
     </aside><!-- /.blog-sidebar -->
   </div><!-- /.row -->

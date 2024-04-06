@@ -47,6 +47,8 @@ $(document).ready(function(){
 			  } else {
 				  $('#commcontent' + index).text(this.content)
 			  }
+			  $('#comm_m_id' + index).text(this.m_id)
+			  $('#commreg' + index).text(this.reg)
 		  })
 	  }
 	  
@@ -59,9 +61,18 @@ $(document).ready(function(){
 	  dataType : 'json',
 	  success : function(rdata) {
 		  $(rdata.popularpostlist).each(function(index, item) {
+			  $('#m_profile'+index).attr('src', './memberupload/'+item.m_profile)
+			  $('#m_id'+index).text(this.m_id)
 			  $('#postsubject'+index).html("<a href='InfoDetail.com?inf_num="+item.inf_num+"'>"+item.inf_subject+"</a>")
 			  $('#postreg'+index).text(item.inf_reg)
-			  $('#postcontent'+index).text(item.inf_content)
+			  $('#postbook'+index).text(item.inf_book)
+			  
+			  //console.log(item.inf_content.length)
+			  if (item.inf_content.length > 80) {
+				  $('#postcontent'+index).text(item.inf_content.substr(0,80) + '...')
+			  } else {
+				  $('#postcontent'+index).text(item.inf_content)
+			  }
 			  $('#postlikecnt'+index).text(item.postlikecnt)
 			  $('#postcommcnt'+index).text(item.postcommcnt)
 			  $('#postreg'+index).text(item.inf_reg)

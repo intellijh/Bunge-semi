@@ -13,9 +13,7 @@
 	
 	label{font-weight:bold}
 
-	img{width:15px}
-	
-	.inf_cover {width:200px;display:none}
+	.inf_cover {display:none}
 	
 	.input-group1, .input-group2, .input-group3, .input-group4, .input-group5 {display:none}
 	
@@ -46,7 +44,7 @@
 	 			   value="${booktitle}"
 	 			   size="100px">
           	<button type="button"><a href="Infobooksearch.com?state=write">검색</a></button>
-	 		<img src="${bookcover}" class="inf_cover" id="inf_cover">
+	 		<img src="${bookcover}" class="inf_cover" id="inf_cover" width="300px" height="400px">
 	 		<input type="hidden" value="${bookcover}" name="inf_cover" id="inf_cover">
   		</label>
   		</div>	

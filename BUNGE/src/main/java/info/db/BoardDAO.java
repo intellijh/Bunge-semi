@@ -554,10 +554,10 @@ public class BoardDAO {
 	} //getpopularBook() end
 
 	public ArrayList<JsonObject> getpopularComm() {
-		String sql = "select count(*), a.comm_num, b.comm_content "
+		String sql = "select count(*), a.comm_num, b.comm_content, b.m_id, b.comm_reg "
 				   + "from infocommlike a, infocomm b "
 				   + "where a.comm_num = b.comm_num "
-				   + "group by a.comm_num, b.comm_content "
+				   + "group by a.comm_num, b.comm_content, b.m_id, b.comm_reg "
 				   + "order by count(*) desc, comm_num desc ";
 		
 		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
@@ -570,6 +570,8 @@ public class BoardDAO {
 					
 					object.addProperty("count", rs.getInt("count(*)"));
 					object.addProperty("content", rs.getString("comm_content"));
+					object.addProperty("m_id", rs.getString("m_id"));
+					object.addProperty("reg", rs.getString("comm_reg"));;
 					
 					list.add(object);
 				}
@@ -588,39 +590,42 @@ public class BoardDAO {
 
 	public ArrayList<JsonObject> getpopularPost() {
 		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
-		String sql = "SELECT C.*, COUNT(infolike.inf_num) AS total_likes "
-				   + "		FROM ( "
-				   + "			   SELECT a.inf_num, "
-				   + "				      a.m_id, "
-				   + "				      a.inf_subject, "
-				   + "			          a.inf_content, "
-				   + "				      a.inf_readcount, "
-				   + "				      a.inf_reg, "
-			       + "	   	              a.inf_book, "
-				   + "		              a.inf_cover, "
-				   + "	   	              COUNT(b.inf_num) as commcnt "
-				   + "			    FROM infoboard a "
-				   + "			    JOIN infocomm b ON a.inf_num = b.inf_num "
-				   + "				GROUP BY a.inf_num, "
-				   + "			             a.m_id, "
-				   + "			             a.inf_subject, "
-				   + "			             a.inf_content, "
-				   + "			             a.inf_readcount, " 
-				   + "				         a.inf_reg, "
-				   + "			             a.inf_book, "
-				   + "			             a.inf_cover "
-				   + "			) C "
-				   + "			LEFT JOIN infolike ON C.inf_num = infolike.inf_num "
-				   + "			GROUP BY C.inf_num, " 
-				   + "			         C.m_id, "
-				   + "			         C.inf_subject, "
-				   + "			         C.inf_content, "
-				   + "			         C.inf_readcount, "
-				   + "			         C.inf_reg, "
-				   + "			         C.inf_book, "
-				   + "			         C.inf_cover, "
-				   + "			         C.commcnt "
-				   + "			ORDER BY TOTAL_LIKES desc, COMMCNT desc";
+		String sql = 
+			"	SELECT C.*, COUNT(infolike.inf_num) AS total_likes, M.m_profile "
+		+	"	FROM ( "
+		+	"	      SELECT a.inf_num, " 
+		+	"	             a.m_id, " 
+		+	"	             a.inf_subject, " 
+		+	"	             a.inf_content, " 
+		+	"	             a.inf_readcount, "
+		+	"	             a.inf_reg, " 
+		+	"	             a.inf_book, " 
+		+	"	             a.inf_cover, "
+		+	"	             COUNT(b.inf_num) as commcnt " 
+		+	"	        FROM infoboard a " 
+		+	"	        JOIN infocomm b ON a.inf_num = b.inf_num "
+		+	"	        GROUP BY a.inf_num, " 
+		+	"	                 a.m_id, "
+		+	"	                 a.inf_subject, "
+		+	"	                 a.inf_content, "
+		+	"	                 a.inf_readcount, " 
+		+	"	                 a.inf_reg, " 
+		+	"	                 a.inf_book, " 
+		+	"	                 a.inf_cover " 
+		+	"	      ) C " 
+		+	"	LEFT JOIN infolike ON C.inf_num = infolike.inf_num " 
+		+	"	LEFT JOIN member M ON C.m_id = M.m_id "
+		+	"	GROUP BY C.inf_num, " 
+		+	"	         C.m_id, " 
+		+	"	         C.inf_subject, " 
+		+	"	         C.inf_content, " 
+		+	"	         C.inf_readcount, " 
+		+	"	         C.inf_reg, " 
+		+	"	         C.inf_book, " 
+		+	"	         C.inf_cover, " 
+		+	"	         C.commcnt, "
+		+	"	         M.m_profile "
+		+	"	ORDER BY TOTAL_LIKES desc, COMMCNT desc";
 
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -638,6 +643,7 @@ public class BoardDAO {
 					object.addProperty("inf_cover", rs.getString("inf_cover"));
 					object.addProperty("postcommcnt", rs.getInt("commcnt"));
 					object.addProperty("postlikecnt", rs.getInt("total_likes"));
+					object.addProperty("m_profile", rs.getString("m_profile"));
 
 					list.add(object);
 				}
