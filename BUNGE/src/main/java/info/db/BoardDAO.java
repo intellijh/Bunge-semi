@@ -553,7 +553,6 @@ public class BoardDAO {
 		return list;
 	} //getpopularBook() end
 
-
 	public ArrayList<JsonObject> getpopularComm() {
 		String sql = "select count(*), a.comm_num, b.comm_content "
 				   + "from infocommlike a, infocomm b "
@@ -585,6 +584,4 @@ public class BoardDAO {
 		
 		return list;
 	}
-	
-	
 }//class end

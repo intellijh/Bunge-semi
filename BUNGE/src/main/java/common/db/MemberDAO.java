@@ -234,5 +234,27 @@ public class MemberDAO {
 		return result;
 	}
 	
-	}
+	public String getProfile(String m_id) {
+		String prof = null;
+		String sql = "select m_profile  "
+				   + " from member "
+				   + "where m_id = ? ";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+				pstmt.setString(1, m_id);
+				try(ResultSet rs = pstmt.executeQuery();){
+				if (rs.next())
+					prof = rs.getString(1);
+				}
+			 } catch (SQLException ex) {
+				 ex.printStackTrace();
+				 System.out.println("getpopularBook() 에러 : " + ex);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("getpopularBook() 에러 : " + e);
+		}
+		return prof;
+	} //getpopularBook() end
+}
 

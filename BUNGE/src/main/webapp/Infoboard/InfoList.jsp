@@ -10,6 +10,8 @@
 <style>
  	.container {
  		max-width : 1140px;
+ 		margin : 0 auto;
+ 		padding : 0;
   	}
   
   	h1{
@@ -28,10 +30,6 @@
     	color:gray
     }
   
-  	.container {
-  		margin-left :0;
-  	}
-  
 	.cover {
 		width : 100px; height : 130px 
 	}
@@ -46,8 +44,8 @@
  		text-align : right;
  	}
  	
- 	#head { 
- 		width : 1140px; 
+ 	#yeoback { 
+ 		width : 100%; 
  		height :300px;
  		margin : 0 auto;
  		background-color : #BCE55C;
@@ -55,9 +53,11 @@
  	}
  	
  	#head th {
- 		line-height : 0
  	}
  	
+ 	b { 
+ 		line-height: 70px
+ 	}
   
    body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:8%}
    body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:50%}
@@ -67,14 +67,17 @@
 </style>
 </head>
 <body>
+<div id="yeoback">
+ <b>Sharing</b><br><br><br>
+ 독후감과 나의 일상을 공유해봐요.<br><br><br>
+ 책의 내용이 좋았다면, 책을 읽은 장소가 좋았다면 우리 함께 공유해요!
+ </div>
 <div class="container">
  <%-- 게시글이 있는 경우 --%>
  <c:if test="${listcount > 0}">
+ 
     <table class="table">
       <thead>
-    	<tr id="head">
-      		<th colspan="8">Shring</th>
-  	    </tr>
   	    <tr>
   		  <th><div>번호</div></th>
   		  <th><div>제목</div></th>

@@ -30,6 +30,7 @@ import common.mypage.mypageAction;
 import common.mypage.mypagechangeAction;
 import common.mypage.mytradelistAction;
 import common.mypage.reviewlistAction;
+import header.action.HeaderProfileAciton;
 import info.action.InfoDetailAction;
 import info.action.InfoListAction;
 import info.action.InfoModifyAction;
@@ -275,6 +276,10 @@ public class FrontController extends HttpServlet {
             //가장 인기 있는 댓글
             case "/MainPopularComm.com":
             	action = new MainPopularCommAction();
+            	break;
+            //헤더 프로필
+            case "/HeaderProfile.com":
+            	action = new HeaderProfileAciton();
             	break;
 
         } //switch (command)
