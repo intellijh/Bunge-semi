@@ -119,16 +119,18 @@ $(document).on('click', '.contacts li', function() {
     // 채팅 메세지 로드
     loadMessage();
 
-    // $(".delete_msg").remove();
-    //
-    // if ($(this).find("span").text() == "알 수 없는 사용자") {
-    //     $(".msg_card_body").after("<div class='delete_msg'>상대방이 채팅을 삭제했습니다</div>");
-    //     const scrollPosition = $(".msg_card_body").prop("scrollTop");
-    //     const scrollHeight = $(".msg_card_body").prop("scrollHeight") - $(".msg_card_body").prop("clientHeight");
-    //     if (scrollPosition == scrollHeight) {
-    //         $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight);
-    //     }
-    // }
+    $(".delete_msg").remove();
+    $(".type_msg").prop("readonly", false);
+
+    if ($(this).find("span").text() == "알 수 없는 사용자") {
+        $(".msg_card_body").after("<div class='delete_msg'>상대방이 채팅을 삭제했습니다</div>");
+        const scrollPosition = $(".msg_card_body").prop("scrollTop");
+        const scrollHeight = $(".msg_card_body").prop("scrollHeight") - $(".msg_card_body").prop("clientHeight");
+        if (scrollPosition == scrollHeight) {
+            $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight);
+        }
+        $(".type_msg").prop("readonly", true);
+    }
 });
 
 function deleteChat() {
@@ -141,11 +143,13 @@ function deleteChat() {
         dataType: "json",
         success: function (rdata) {
             if (rdata == 1) {
+                const deleteData = selectedChatId + "|split|" + selectedSellerId + "|split|" +
+                    selectedBuyerId + "|split|" + "|delete|";
+                console.log("deleteData: " + deleteData);
+                webSocket.send(deleteData);
                 selectedChatId = 0;
                 getChatList();
             }
-
-            // webSocket.send("|delete|" + selectedChatId);
         }
     });
 }
