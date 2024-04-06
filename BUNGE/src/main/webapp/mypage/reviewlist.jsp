@@ -19,7 +19,7 @@ body {
     margin: 0 auto;
     flex-direction: row;
     justify-content: space-evenly;
-    padding-top: 60px;
+    padding-top: 40px;
 }
 .left_bar {
 	width: 180px;
@@ -36,6 +36,10 @@ body {
     margin: 5px;
     padding-top: 5px;
 }
+.tab-slider--container {
+    position: relative;
+    left: 20px;
+}
 .reveiwtitle {
  	border-bottom: 1px solid rgba(212, 216, 229, .5);
     width: 1140px;
@@ -43,9 +47,47 @@ body {
     top : 20px;
     padding-bottom: 30px;
 }
-
-
+.reveiwtitle h3 {
+	position: relative;
+    left: 90px;
+	
+}
 .user_board {
+	width: 850px;
+	height: 300px;
+	border-bottom: 1px solid rgba(220, 227, 233, .8);
+}
+.tab_box :last-child {
+	border-bottom: none;
+} 
+.board {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-top: 22px;
+}
+.board-img {
+	height: 160px;
+}
+.board-img img {
+	width: 200px;
+	height: 250px;
+}
+.board_inf_subject_title {
+	padding-bottom:10px;
+}
+.board_inf_contet_text {
+    width: 600px;
+    height: 110px;
+    text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+.like_comm_box {
+	display: flex;
+    flex-direction: row;
 }
 </style>
 </head>
@@ -77,12 +119,11 @@ body {
 				  <p>작성된 글이 없습니다.</p>
 				</c:when>
 				<c:when test="${!empty boardlist}">
-				  <c:forEach var="b" items="${boardlist}" >
+				  <c:forEach var="b" items="${boardlist}" >		  	
 				  <div class="user_board">
 					<div class="board-section">	  
 					<div class="board">                                     
-					  <div class="board_box">게시글 박스 제목이랑 내용    
-					  <p>작성글 보기</p>                   
+					  <div class="board_box">
 						<div class="board_subject">
 							<h3 class="board_inf_subject_title">제목 : ${b.board.inf_subject}</h3>
 						</div>
@@ -90,33 +131,29 @@ body {
 							<p class="board_inf_contet_text">내용 : ${b.board.inf_content}</p>
 						  </div>
 					</div>   
-
 						  <div class="board-img">
-						  		책 제목 : ${b.board.inf_book}
 						  		<div class="img">
 						  		<img  src="${b.board.inf_cover}">
 						  		</div>
 						  </div>
-						  
-
-						  <div class="like_comm_box">좋아요, 댓글 박스
-							<div class="inf_like_num">내가 쓴 글 좋아요 갯수
+					   </div>
+					   <div class="like_comm_box">
+							<div class="inf_like_num">
 								<div>
 									<img src="${pageContext.request.contextPath}/image/like_on.png" alt="Like Icon">${b.infoLike.inf_num}
 								</div>
 							</div>
-							<div class="inf_comm_num">내가 쓴 글 댓글 갯수
+							<div class="inf_comm_num">
 								<div><img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg">${b.comment.inf_num}</div>
 							</div>
 						  </div>
-					   </div>
 					</div>
 				  </div>
 				  </c:forEach>
 				</c:when>
 			  </c:choose>
 			  <!-- 글 종료 -->
-			</div>	                  
+			</div>		         
 		  </div>
 		  <!-- tab1 종료 -->
 		</div>
