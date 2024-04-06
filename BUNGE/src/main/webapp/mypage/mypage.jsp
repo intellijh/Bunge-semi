@@ -11,17 +11,27 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath}/js/mypage.js"></script>
 <style>
+ body {
+            width: 1140px;
+            margin: 0 auto;
+            line-height: 28px;
+        }
+
 .tab_container{
     position: relative;
-    width: 800px;
-    height: 400px;
-    margin: 0 auto;
-}
-.tab-slider--tabs{
-	font-size:12px;
     display: flex;
+    margin: 0 auto;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
+    padding-top: 60px;
+}
+.left_bar {
+	width: 180px;
+    height: 600px;
+} 
+.tab-slider--tabs{
+    position: relative;
+    left: 50px;
     padding-bottom: 20px;
 }
 .tab-slider--tabs li {
@@ -29,14 +39,28 @@
     width: 140px;
     margin: 5px;
     padding-top: 5px;
+
 }
 .membertitle {
-    padding-bottom: 10px;
+   border-bottom: 1px solid rgba(212, 216, 229, .5);
+    width: 1140px;
+    position: relative;
+    top : 20px;
+    padding-bottom: 30px;
 }
-
+.membertitle h3 {
+    position: relative;
+    width: 1040px;
+    left: 182px;
+}
 .m_profile {
     position: relative;
-    left: 350px;
+    left: 60px;
+}
+label{
+	margin: 0;
+	padding-bottom: 20px;
+	
 }
 .chanagech {
     border: none;
@@ -44,23 +68,23 @@
 .chanagech img {
     width: 20px;
     position: absolute;
-    top: 70px;
-    left: 65px;
+    top: 110px;
+    left: 100px;
     display: block;
     background-color: transparent;
 }
 .profilech {
-    width: 100px;
-    height: 100px;
+    width: 140px;
+    height: 140px;
 }
 .profilech img {
-    width: 90px;
-    height: 90px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
 }
 .my {
     position: relative;
-    left: 200px;
+    left: 90px;
     width: 400px;
     height: 60px;
 }
@@ -218,28 +242,22 @@
 	text-align:  center;
 }
 .form-group {
-	padding: 23px;
+	padding: 12px;
+}
+.form-contorl {
+width: 250px;
+
 }
 </style>
 </head>
 <body>
-<div id="wrap">
-<div class="tab_container">
-		<div class="tab-slider--nav">
-		  <ul class="tab-slider--tabs">
-		   <a href="mypage.com"><li class="tab-slider--trigger"  rel="tab1"><span>마이페이지</span></li></a>
-			<a href="reviewlist.com"><li class="tab-slider--trigger active" rel="tab2"><span>작성글</span></li></a>
-			<a href="mycommlist.com"><li class="tab-slider--trigger"  rel="tab3"><span>작성댓글</span></li></a>
-			<a href="mylikelist.com"><li class="tab-slider--trigger"  rel="tab4"><span>좋아요한 리뷰</span></li></a>
-			<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>좋아요한 거래상품</span></li></a>
-		  </ul>
-		</div>
-
-	 <div class="membertitle">
+<div id="warp">
+<div class="membertitle">
       <h3>회원 정보 수정</h3>
     </div>	
-		<hr>
-		<div class="m_profile">
+<div class="tab_container">
+<div class="left_bar">
+<div class="m_profile">
 		<label>
 			<span id="showImage">
 					<c:set var="src" value='${"memberupload/"}${memberinfo.member.m_profile}'/>
@@ -248,7 +266,7 @@
 						<img alt="profile" src="${src}" >
 					</div>
 			</span>
-		 	<button type="button" class="chanagech" data-toggle="modal" data-target="#filemodal"><img src="${pageContext.request.contextPath}/image/cogwheel_icon.png" width="50px"></button> 
+		 	<button type="button" class="chanagech" data-toggle="modal" data-target="#filemodal"><img src="${pageContext.request.contextPath}/image/cogwheel_icon.png"></button> 
 		</label>
 		</div>
 		
@@ -282,8 +300,17 @@
       </div>
     </div>
     <%-- 프로필 변경 modal 끝 --%>
-		
-		
+		<div class="tab-slider--nav">
+		  <ul class="tab-slider--tabs">
+		   <a href="mypage.com"><li class="tab-slider--trigger"  rel="tab1"><span>마이페이지</span></li></a>
+			<a href="reviewlist.com"><li class="tab-slider--trigger active" rel="tab2"><span>작성글</span></li></a>
+			<a href="mycommlist.com"><li class="tab-slider--trigger"  rel="tab3"><span>작성댓글</span></li></a>
+			<a href="mylikelist.com"><li class="tab-slider--trigger"  rel="tab4"><span>좋아요한 리뷰</span></li></a>
+			<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>좋아요한 거래상품</span></li></a>
+		  </ul>
+		</div>
+</div>
+<div class="member">
 		<div class="my m_id">
 			<b>아이디</b>
 			<input type="text" name="m_id" value="${memberinfo.member.m_id}" readonly>
@@ -513,7 +540,7 @@
       </div>
     </div>
     <%-- 핸드폰 변경 modal 끝 --%>
-		
+		</div>
 </div>
 </div>
 </body>
