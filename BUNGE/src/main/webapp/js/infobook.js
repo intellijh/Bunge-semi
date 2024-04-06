@@ -25,7 +25,7 @@ $(function () {
 			if ($('#state').val() == 'modify') {
 			let output = "<form action='InfoModify.com' method='post'>"
 					   + "  <button type='submit'>선택하기</button><br>"
-				       + "  <img class='bookcover' src='"+subject.cover+"'><br>"
+				       + "  <img width='300px' height='400px' class='bookcover' src='"+subject.cover+"'><br>"
 				       + "    <input type='hidden' name='bookcover' value='"+subject.cover+"' "
 				       + "  <div>책 제목 : '"+subject.title+"'</div>"
 				       + "    <input type='hidden' name='booktitle' value='"+subject.title+"' "
@@ -39,7 +39,7 @@ $(function () {
 			} else if ($('#state').val() == 'write') {
 	let output = "<form action='InfoWrite.com' method='post'>"
 			   + "  <button type='submit'>선택하기</button><br>"
-		       + "  <img class='bookcover' src='"+subject.cover+"'><br>"
+		       + "  <img width='300px' height='400px' class='bookcover' src='"+subject.cover+"'><br>"
 		       + "    <input type='hidden' name='bookcover' value='"+subject.cover+"' "
 		       + "  <div>책 제목 : '"+subject.title+"'</div>"
 		       + "    <input type='hidden' name='booktitle' value='"+subject.title+"' "
