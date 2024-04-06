@@ -621,13 +621,13 @@ public class BoardDAO {
 				   + "			         C.inf_cover, "
 				   + "			         C.commcnt "
 				   + "			ORDER BY TOTAL_LIKES desc, COMMCNT desc";
-		
+
 		try (Connection con = ds.getConnection();
 			 PreparedStatement pstmt = con.prepareStatement(sql);) {
 			try (ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
 					JsonObject object = new JsonObject();
-					
+
 					object.addProperty("inf_num", rs.getString("inf_num"));
 					object.addProperty("m_id", rs.getString("m_id"));
 					object.addProperty("inf_subject", rs.getString("inf_subject"));
@@ -638,7 +638,7 @@ public class BoardDAO {
 					object.addProperty("inf_cover", rs.getString("inf_cover"));
 					object.addProperty("postcommcnt", rs.getInt("commcnt"));
 					object.addProperty("postlikecnt", rs.getInt("total_likes"));
-					
+
 					list.add(object);
 				}
 			} catch (SQLException e) {
@@ -649,7 +649,7 @@ public class BoardDAO {
 			ex.printStackTrace();
 			System.out.println("getpopularPost() 에러 : " + ex);
 		}
-		
+
 		return list;
 	}
 	
