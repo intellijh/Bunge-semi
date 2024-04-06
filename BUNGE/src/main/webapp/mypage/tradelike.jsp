@@ -8,6 +8,11 @@
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
+body {
+            width: 1140px;
+            margin: 0 auto;
+            line-height: 28px;
+        }
 .tab_container{
     position: relative;
     width: 800px;
