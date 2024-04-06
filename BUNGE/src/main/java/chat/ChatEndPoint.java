@@ -45,6 +45,10 @@ public class ChatEndPoint {
         System.out.println("msgArray[1] = " + sellerId);
         System.out.println("msgArray[2] = " + buyerId);
         System.out.println("msgArray[3] = " + msg);
+        if (msg.equals("|delete|")) {
+            msg = " ";
+        }
+        System.out.println("after delete msg = " + msg);
 
         synchronized(clients) {
             String loginID = (String) hSession.getAttribute("m_id");
