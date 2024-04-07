@@ -46,7 +46,6 @@
 </head>
 <body>
 <div id="upper-bar">
-    <a href="trade.net" id="title">거래 게시판</a>
     <a href="tradeWrite.net"><img src="../../static/upload_icon.png" id="button-write" height="43px"/></a>
 </div>
 <div id="navi-bar">
@@ -62,7 +61,12 @@
     </div>
 </div>
 
-<hr>
+<div id="categoryandcolor">
+    Trade<br>
+    당신의 이웃들과 책을 거래해보아요!
+
+
+</div>
 
 <script>
     $(function() {
