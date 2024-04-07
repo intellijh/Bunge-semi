@@ -219,7 +219,10 @@ public class BoardDAO {
 	public Board getDetail(int num) {
 		Board board = null;
 		
-		String sql = "select * from infoboard where inf_NUM = ?";
+		String sql = "select infoboard.*, member.m_profile "
+				   + "from infoboard "
+				   + "join member on infoboard.m_id = member.m_id "
+				   + "where infoboard.inf_NUM = ?";
 				    
 		try (Connection con = ds.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -242,6 +245,7 @@ public class BoardDAO {
 					board.setInf_reg(rs.getString("INF_REG"));
 					board.setInf_book(rs.getString("INF_BOOK"));
 					board.setInf_cover(rs.getString("INF_COVER"));
+					board.setM_profile(rs.getString("M_PROFILE"));
 				}
 				
 			} catch (SQLException e) {

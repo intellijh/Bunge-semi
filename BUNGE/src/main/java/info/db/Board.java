@@ -18,6 +18,7 @@ public class Board {
 	private String inf_book;
 	private String inf_cover;
 	private int infolikecnt;
+	private String m_profile;
 	
 	public int getInf_num() {
 		return inf_num;
@@ -109,6 +110,11 @@ public class Board {
 	public void setInf_cover(String inf_cover) {
 		this.inf_cover = inf_cover;
 	}
-	
+	public String getM_profile() {
+		return m_profile;
+	}
+	public void setM_profile(String m_profile) {
+		this.m_profile = m_profile;
+	}
 }
  
