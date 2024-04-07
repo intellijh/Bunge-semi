@@ -42,9 +42,16 @@
   #myCarousel > div {
   	height : 100%;
   }
+  
+.slidebackground {
+    background: #BCE55C;
+}
 <%-- 슬라이드 영역 끝--%>  
 
 <%-- 인기 게시글 영역 시작 --%>
+.border {
+    border: 1px solid #bce55c!important;
+}
 
 .profile {
   border-radius : 50%;
@@ -138,9 +145,9 @@
     display : inline-block;
   }
   
-  .bg-light {
-  	border : 1px solid #dee2e6 !important;
-  }
+.bg-light {
+    border: 1px solid #BCE55C !important;
+}
   
   body > main > div > aside > div:nth-child(1) > h4 {
     border-bottom : 1px solid #dee2e6 !important;
@@ -164,6 +171,7 @@
   
   .popularcommcount {
     display : inline-block;
+    padding-right : 20px;
   }
   
   .popularcommcontent {
@@ -187,11 +195,32 @@
   font-size : 8px
 }
 
+.comm_profile {
+  border-radius : 50%;
+}
+
 <%-- 인기 댓글 영역 끝 --%>
 
+<%-- 더보기 시작 --%>
+.btn-block {
+    display: block;
+    width: 63.5%;
+    margin: 0 auto;
+    position: relative;
+    top: 10px;
+    right: 189px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #BCE55C;
+    border-color: #BCE55C;
+}
+<%-- 더보기 끝 --%>
 </style>
 <body>
 <%-- 슬라이드 이미지 --%>
+<div class="slidebackground">
 	<div class="container mt-3 slide">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 	
@@ -236,6 +265,7 @@
 	  </a>
 	</div>
 	</div>
+</div>
 <%-- 슬라이드 이미지 끝 --%>
 
 
@@ -490,6 +520,7 @@
           </div>
           <div class="popularcommcontent">
             <span id="commcontent0">comm_content</span>
+            <img id="comm_m_profile0" width="15px" height="15px" class="comm_profile">
             <span id="comm_m_id0" class="commid">comm_m_id</span>
             <span id="commreg0" class="commreg">comm_reg</span>
           </div>
@@ -502,6 +533,7 @@
           </div>
           <div class="popularcommcontent">
             <span id="commcontent1">comm_content</span>
+            <img id="comm_m_profile1" width="15px" height="15px" class="comm_profile">
             <span id="comm_m_id1" class="commid">comm_m_id</span>
             <span id="commreg1" class="commreg">comm_reg</span>
           </div>
@@ -514,6 +546,7 @@
           </div>
           <div class="popularcommcontent">
             <span id="commcontent2">comm_content</span>
+            <img id="comm_m_profile2" width="15px" height="15px" class="comm_profile">
             <span id="comm_m_id2" class="commid">comm_m_id</span>
             <span id="commreg2" class="commreg">comm_reg</span>
           </div>
@@ -526,6 +559,7 @@
           </div>
           <div class="popularcommcontent">
             <span id="commcontent3">comm_content</span>
+            <img id="comm_m_profile3" width="15px" height="15px" class="comm_profile">
             <span id="comm_m_id3" class="commid">comm_m_id</span>
             <span id="commreg3" class="commreg">comm_reg</span>
           </div>
@@ -538,6 +572,7 @@
           </div>
           <div class="popularcommcontent">
             <span id="commcontent4">comm_content</span>
+            <img id="comm_m_profile4" width="15px" height="15px" class="comm_profile">
             <span id="comm_m_id4" class="commid">comm_m_id</span>
             <span id="commreg4" class="commreg">comm_reg</span>
           </div>
@@ -547,6 +582,7 @@
 
     </aside><!-- /.blog-sidebar -->
   </div><!-- /.row -->
+<button type="button" class="btn btn-success btn-block" id="morelist">더보기</button>
 </main><!-- /.container -->
 
 

@@ -41,11 +41,13 @@ $(document).ready(function(){
 	  dataType : 'json',
 	  success : function(rdata) {
 		  $(rdata.popularcommlist).each(function(index, item) {
+			  console.log(this.content.length)
 			  $('#commcount' + index).text(item.count)
-			  if (this.content.length > 40) {
-				  $('#commcontent' + index).text(this.content.substr(0,40) + '...')
+			  $('#comm_m_profile' + index).attr('src', './memberupload/' + item.m_profile)
+			  if (this.content.length > 11) {
+				  $('#commcontent' + index).html("<a href='InfoDetail.com?inf_num="+item.inf_num+"'>"+this.content.substr(0,10) + '...' + "</a>")
 			  } else {
-				  $('#commcontent' + index).text(this.content)
+				  $('#commcontent' + index).html("<a href='InfoDetail.com?inf_num="+item.inf_num+"'>"+this.content + "</a>")
 			  }
 			  $('#comm_m_id' + index).text(this.m_id)
 			  $('#commreg' + index).text(this.reg)
@@ -79,5 +81,9 @@ $(document).ready(function(){
 			  $('#postimg'+index).attr('src', item.inf_cover)
 		  })
 	  },
+  })
+  
+  $('#morelist').click(function() {
+	  location.href = "InfoList.com"
   })
 }); //ready end

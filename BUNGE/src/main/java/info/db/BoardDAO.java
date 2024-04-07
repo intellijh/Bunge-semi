@@ -554,11 +554,13 @@ public class BoardDAO {
 	} //getpopularBook() end
 
 	public ArrayList<JsonObject> getpopularComm() {
-		String sql = "select count(*), a.comm_num, b.comm_content, b.m_id, b.comm_reg "
-				   + "from infocommlike a, infocomm b "
-				   + "where a.comm_num = b.comm_num "
-				   + "group by a.comm_num, b.comm_content, b.m_id, b.comm_reg "
-				   + "order by count(*) desc, comm_num desc ";
+		String sql = "SELECT C.*, m_profile "
+				   + "FROM (select count(*), a.comm_num, b.comm_content, b.m_id, b.comm_reg, b.inf_num "
+				   + "      from infocommlike a, infocomm b " 
+				   + "      where a.comm_num = b.comm_num " 
+				   + "	    group by a.comm_num, b.comm_content, b.m_id, b.comm_reg, b.inf_num " 
+				   + "		order by count(*) desc, comm_num desc) C "
+				   + "JOIN member on c.m_id = member.m_id ";
 		
 		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
 		
@@ -572,6 +574,8 @@ public class BoardDAO {
 					object.addProperty("content", rs.getString("comm_content"));
 					object.addProperty("m_id", rs.getString("m_id"));
 					object.addProperty("reg", rs.getString("comm_reg"));;
+					object.addProperty("m_profile", rs.getString("m_profile"));	
+					object.addProperty("inf_num", rs.getString("inf_num"));
 					
 					list.add(object);
 				}
