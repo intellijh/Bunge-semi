@@ -50,7 +50,6 @@ body {
 .reveiwtitle h3 {
 	position: relative;
     left: 90px;
-	
 }
 .user_board {
 	width: 850px;
@@ -66,10 +65,10 @@ body {
     flex-direction: row;
     padding-top: 22px;
 }
-.board-img {
+.board_img {
 	height: 160px;
 }
-.board-img img {
+.board_img img {
 	width: 200px;
 	height: 250px;
 }
@@ -92,7 +91,7 @@ body {
 </style>
 </head>
 <body>
-<div id=warp>
+<div id="warp">
 <!-- tab menu 시작 -->
 	<div class="reveiwtitle">
 	<h3>작성글 조회</h3>
@@ -131,7 +130,7 @@ body {
 							<p class="board_inf_contet_text">내용 : ${b.board.inf_content}</p>
 						  </div>
 					</div>   
-						  <div class="board-img">
+						  <div class="board_img">
 						  		<div class="img">
 						  		<img  src="${b.board.inf_cover}">
 						  		</div>
@@ -144,7 +143,9 @@ body {
 								</div>
 							</div>
 							<div class="inf_comm_num">
-								<div><img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg">${b.comment.inf_num}</div>
+								<div>
+									<img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg">${b.comment.inf_num}
+								</div>
 							</div>
 						  </div>
 					</div>

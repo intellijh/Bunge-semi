@@ -11,12 +11,17 @@
 <script src= '${pageContext.request.contextPath}/js/join.js'></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 <style>
-.joininsert {
+ body {
+    width: 1140px;
+    margin: 0 auto;
+    line-height: 28px;
+}
+.member {
  position:relative;
     width: 800px;
     height: 400px;
     margin: 0 auto;
-}    
+}
 .join {
     position: relative;
     left: 200px;
@@ -32,28 +37,88 @@
 }
 
 .jointitle {
-	padding-top: 50px;
+   border-bottom: 1px solid rgba(212, 216, 229, .5);
+    width: 1140px;
+    position: relative;
+    top : 20px;
+    padding-bottom: 30px;
 }
-hr {
-	padding-bottom: 10px;
+
+.jointitle h2{
+	position: relative;
+    width: 1040px;
+    left: 182px;
 }
-.m_id {
-	
+.member {
+padding-top : 38px
 }
 .m_id b {
 	padding-right: 16px;
+}
+.m_name b {
+    padding-right: 30px;
+}
+.m_nick b {
+    padding-right: 16px;
+}
+.m_gender {
+    height: 40px;
+}
+.m_gender input{
+  width: 15px;
+}
+.m_gender span {
+    padding: 5px;
+}
+.m_gender b {
+    padding-right: 30px;
+}
+.m_zipcode input {
+    width: 80px;
+}
+.m_addr1, .m_addr2 , .m_phone , .m_email{
+    width: 500px;
+}
+.m_addr1 input, .m_addr2 input, .m_phone input  {
+    width: 380px;
+}
+.m_addr1 b {
+    padding-right: 30px;
+}
+.m_phone b{
+    padding-right: 16px;
+}
+.m_email input {
+    width: 358px;
+}
+.clearfix {
+ 	position: relative;
+    left: 220px;
+    padding-top: 15px;
+}
+.submitbtn {
+	background-color: D0ED8D;
+    width: 140px;
+    height: 40px;
+    border: solid 1px rgba(212, 216, 229, .5);
+    border-radius: 4px;
+}
+.cancelbtn {
+	background-color: D0ED8D;
+    width: 140px;
+    height: 40px;
+    border: solid 1px rgba(212, 216, 229, .5);
+    border-radius: 4px;
 }
 </style>
 </head>
 <body>
 <div id="warp">
 	<form name="joinform" action="joinProcess.com" method="post">
-	<div class="joininsert">
-	
 	<div class="jointitle">
 	<h2>회원가입</h2>
 	</div>
-	<hr>
+	<div class="member">
 	<div class="join m_id">
 			<b>아이디</b>
 			<input type="text" name="m_id"  placeholder="아이디 입력 (5~15자)"  min="5" maxlength="15" required>
