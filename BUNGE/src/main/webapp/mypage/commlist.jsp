@@ -18,7 +18,7 @@ body {
     display: flex;
     margin: 0 auto;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     padding-top: 40px;
 }
 .left_bar {
@@ -53,7 +53,7 @@ body {
 }
 .user_comm {
 	width: 850px;
-    height: 300px;
+    height: 200px;
 }
 </style>
 </head>
