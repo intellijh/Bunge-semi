@@ -7,11 +7,11 @@
 
 </style>
 <head>
-	<jsp:include page="../../layout/header.jsp" />
+	<jsp:include page="${pageContext.request.contextPath}/layout/header.jsp" />
 	<meta charset="UTF-8">
 	<title>거래글 열람</title>
-	<link rel="stylesheet" href="../../static/bootstrap.min.css">
-	<link rel="stylesheet" href="../../static/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/style.css">
 </head>
 <body>
 <div id="upper-bar">
@@ -56,7 +56,7 @@
 </div>
 <div id="under-bar">중고 거래 게시판</div>
 </body>
-<script type="text/javascript" src="../../static/jquery.js"></script>
-<script type="text/javascript" src="../../static/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../static/deleteOrUpdate.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/deleteOrUpdate.js"></script>
 </html>
