@@ -3,11 +3,16 @@
 <html>
 <head>
 <title>수정 페이지</title>
-<%@ include file="/layout/header.jsp" %>
-<script src="js/infomodifyform.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
+<jsp:include page="/layout/header.jsp" />
+<script src="js/infomodifyform.js"></script>
 <style>
-  .container {width:60%}
+.nav-item {
+
+}
+  .container{
+    width:60%
+  }
   
   h1 {font-size:1.5rem; text-align:center; color:#1a92b9}
   
@@ -18,6 +23,55 @@
   #preview1, #preview2, #preview3, #preview4, #preview5 {display:none}
   
   .attachname {display:none}
+  
+  .input-group1, .input-group2, .input-group3, .input-group4, .input-group5 {display:none}
+  
+.badge-success {
+  color:white;
+  border:1px solid white;
+  border-bottom-width:6px;
+}
+
+.searchbtn {
+  color:white;
+}
+
+.searchbtn:visited {
+  color: white;
+}
+
+label {
+  font-weight:bold;
+}
+
+.infoitem {
+  margin-bottom:5px;
+  margin-right:5px;
+}
+
+.postbookinfoarea {
+    font-size: 13px;
+    display: inline-block;
+    position: absolute;
+    top: 256px;
+    width: 44%;
+}
+
+.infloc {
+  margin-top:10px;
+}
+
+.subjectarea {
+  width:100%;
+}
+
+.locarea {
+  width: 84.77%;
+}
+
+#inf_book {
+  margin-bottom:20px;
+}
 </style>
 </head>
 <body>
@@ -25,7 +79,6 @@
   <div class="container">
     <form action="InfoModifyProcess.com" method="post" name="modifyform" enctype="multipart/form-data">
       <input type="hidden" name="inf_num" value="${board.inf_num}" id="inf_num">
-      <h1>MVC 게시판 - 수정</h1>
       <div class="form-group">
         <label for="m_id">글쓴이</label>
         <input type="text" class="from-control"
@@ -47,27 +100,43 @@
       </div>
       
       <div class="form-group">
+      <c:if test="${board.inf_book != null && param.booktitle == null}"> 
         <label for="inf_book">책</label>
-      <c:if test="${param.bookcover == null && param.booktitle == null}"> 
-          <button type="button"><a href="Infobooksearch.com?state=modify&num=${board.inf_num}">검색</a></button>
+          <button type="button" class="badge badge-success"><a class="searchbtn" href="Infobooksearch.com?state=modify&inf_num=${board.inf_num}">검색</a></button>
           <input name="inf_book" id="inf_book" type="text" class="form-control" value="${board.inf_book}" size="100px" readOnly>
           <img src="${board.inf_cover}" class="inf_cover" id="inf_cover">
-          <input type="hidden" name="inf_cover" value="${board.inf_cover}"> 
+          <input type="hidden" name="inf_cover" value="${board.inf_cover}">
+          <div class="postbookinfoarea">
+		      <span class="badge badge-success infoitem">책제목</span><span class="postbooktitle">${board.inf_book}</span><br>
+		      <span class="badge badge-success infoitem">지은이</span><span>${board.inf_author}</span><br>
+		        <input type="hidden" name="inf_author" value="${board.inf_author}">
+		      <span class="badge badge-success infoitem">카테고리</span><span>${board.inf_category}</span><br>
+		        <input type="hidden" name="inf_category" value="${board.inf_category}">
+		      <span class="badge badge-success infoitem">출간일</span><span class="postbookpubdate">${board.inf_pubdate}</span>
+		        <input type="hidden" name="inf_pubdate" value="${board.inf_pubdate}">
+	      </div>
       </c:if>
-      <c:if test="${param.bookcover != null && param.booktitle != null}"> 
+      <c:if test="${param.bookcover != null}"> 
         <label for="inf_book">책</label>
-          <button type="button"><a href="Infobooksearch.com?state=modify&num=${board.inf_num}">검색</a></button>
+          <button type="button" class="badge badge-success searchbtn"><a class="searchbtn" href="Infobooksearch.com?state=modify&inf_num=${board.inf_num}">검색</a></button>
           <input name="inf_book" id="inf_book" type="text" class="form-control" value="${param.booktitle}" size="100px" readOnly>
           <img src="${param.bookcover}" class="inf_cover" id="inf_cover">
-          <input type="hidden" name="inf_cover" value="${param.bookcover}"> 
+          <input type="hidden" name="inf_cover" value="${param.bookcover}">
+           <div class="postbookinfoarea">
+		      <span class="badge badge-success infoitem">책제목</span><span class="postbooktitle">${param.bookcover}</span><br>
+		      <span class="badge badge-success infoitem">지은이</span><span>${param.bookauthor}</span><br>
+		        <input type="hidden" name="inf_author" value="${param.bookauthor}">
+		      <span class="badge badge-success infoitem">카테고리</span><span>${param.bookcategoryname}</span><br>
+		        <input type="hidden" name="inf_category" value="${param.bookcategoryname}">
+		      <span class="badge badge-success infoitem">출간일</span><span class="postbookpubdate">${param.bookpubdate}</span>
+		        <input type="hidden" name="inf_pubdate" value="${param.bookpubdate}">
+	      </div> 
       </c:if>
       </div>
       
       <div class="form-group">
         <label for="inf_subject">제목</label>
-        <input name="inf_subject"
-        	   id="inf_subject" type="text" class="from-control"
-        	   value="${board.inf_subject}">
+        <input name="inf_subject" id="inf_subject" type="text" class="from-control subjectarea" value="${board.inf_subject}">
       </div>
       
       <div class="form-group">
@@ -83,14 +152,11 @@
 
     
 <c:if test="${board.inf_lev==0}">
-      <button type="button" id="inputfile-btn">파일추가</button>
-      (파일 첨부는 최대 5개까지 가능합니다...)
- 	  (x를 누르면 첨부한 파일을 삭제할 수 있습니다...)
+      <button type="button" id="inputfile-btn" class="badge badge-success" data-toggle="tooltip" title="5개까지 첨부할 수 있어요">파일추가</button>
  	<c:if test="${boardfile[0] == null}">
  	  <div class="input-group1">
 	 	  <label>
-	 	    첨부파일
-	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
+	 	    <img src="image/attach.png" alt="파일첨부" width="30px">
   		    <img id="preview1" width="50px">
 	 	    <input type="file" name="upfile1" id="upfile1" onchange="readURL(this)">
 	 	  </label>
@@ -101,7 +167,7 @@
     <c:if test="${boardfile[0] != null}">
       <div class="input-group1">
           <label>
-            <img src="image/attach.png" alt="파일첨부" width="50px">
+            <img src="image/attach.png" alt="파일첨부" width="30px">
   		    <img id="preview1" width="50px">
             <input type="file" id="upfile1" class="upfile1" name="upfile1" onchange="readURL(this)">
             <img src="boardupload/${boardfile[0].infa_filename}" width="50px" class="uploadedfile1">
@@ -115,8 +181,7 @@
     <c:if test="${boardfile[1] == null}">
  	  <div class="input-group2">
 	 	  <label>
-	 	    첨부파일
-	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
+	 	    <img src="image/attach.png" alt="파일첨부" width="30px">
   		    <img id="preview2" width="50px">
 	 	    <input type="file" name="upfile2" id="upfile2" onchange="readURL(this)">
 	 	  </label>
@@ -127,7 +192,7 @@
     <c:if test="${boardfile[1] != null}">
       <div class="input-group2">
           <label>
-            <img src="image/attach.png" alt="파일첨부" width="50px">
+            <img src="image/attach.png" alt="파일첨부" width="30px">
             <input type="file" id="upfile2" class="upfile2" name="upfile2" onchange="readURL(this)">
             <img src="boardupload/${boardfile[1].infa_filename}" width="50px" class="uploadedfile2">
             <img id="preview2" width="50px">
@@ -140,7 +205,7 @@
     <c:if test="${boardfile[2] == null}">
  	  <div class="input-group3">
 	 	  <label>
-	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
+	 	    <img src="image/attach.png" alt="파일첨부" width="30px">
   		    <img id="preview3" width="50px">
 	 	    <input type="file" name="upfile3" id="upfile3" onchange="readURL(this)">
 	 	  </label>
@@ -151,7 +216,7 @@
     <c:if test="${boardfile[2] != null}">
       <div class="input-group3">
           <label>
-            <img src="image/attach.png" alt="파일첨부" width="50px">
+            <img src="image/attach.png" alt="파일첨부" width="30px">
             <input type="file" id="upfile3" class="upfile3" name="upfile3" onchange="readURL(this)">
             <img src="boardupload/${boardfile[2].infa_filename}" width="50px" class="uploadedfile3">
             <img id="preview3" width="50px">
@@ -164,7 +229,7 @@
     <c:if test="${boardfile[3] == null}">
  	  <div class="input-group4">
 	 	  <label>
-	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
+	 	    <img src="image/attach.png" alt="파일첨부" width="30px">
   		    <img id="preview4" width="50px">
 	 	    <input type="file" name="upfile4" id="upfile4" onchange="readURL(this)">
 	 	  </label>
@@ -175,7 +240,7 @@
     <c:if test="${boardfile[3] != null}">
       <div class="input-group4">
           <label>
-            <img src="image/attach.png" alt="파일첨부" width="50px">
+            <img src="image/attach.png" alt="파일첨부" width="30px">
             <input type="file" id="upfile4" class="upfile4" name="upfile4" onchange="readURL(this)">
             <img src="boardupload/${boardfile[3].infa_filename}" width="50px" class="uploadedfile4">
             <img id="preview4" width="50px">
@@ -188,7 +253,7 @@
     <c:if test="${boardfile[4] == null}">
  	  <div class="input-group5">
 	 	  <label>
-	 	    <img src="image/attach.png" alt="파일첨부" width="50px">
+	 	    <img src="image/attach.png" alt="파일첨부" width="30px">
   		    <img id="preview5" width="50px">
 	 	    <input type="file" name="upfile5" id="upfile5" onchange="readURL(this)">
 	 	  </label>
@@ -199,7 +264,7 @@
     <c:if test="${boardfile[4] != null}">
       <div class="input-group5">
           <label>
-            <img src="image/attach.png" alt="파일첨부" width="50px">
+            <img src="image/attach.png" alt="파일첨부" width="30px">
             <input type="file" id="upfile5" class="upfile5" name="upfile5" onchange="readURL(this)">
             <img src="boardupload/${boardfile[4].infa_filename}" width="50px" class="uploadedfile5">
             <img id="preview5" width="50px">
@@ -283,11 +348,11 @@
     
       <div class="form-group">
         <label for="inf_loc">위치</label>
-        <input type="text" size="50" name="inf_loc" id="inf_loc" value="${board.inf_loc}">
+        <input type="text" size="50" name="inf_loc" id="inf_loc" class="locarea" value="${board.inf_loc}">
         <input type="button" value="위치수정" id="postcode">
       </div>
       
-      <div class="form-group">
+      <div class="form-group infloc">
         <button type="submit" class="btn btn-primary">수정</button>
         <button type="button" class="btn btn-danger" id="cancel">취소</button>
       </div>

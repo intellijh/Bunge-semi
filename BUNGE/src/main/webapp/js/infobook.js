@@ -1,6 +1,9 @@
 $(function () {
 	
 	let searchword = prompt('책 제목을 입력하세요')
+	if (searchword == null) {
+		history.back();
+	}
 	console.log('searchword : ' + searchword)
 	
 	$.ajax ({

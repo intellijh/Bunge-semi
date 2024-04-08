@@ -30,7 +30,12 @@ $(document).ready(function() {
 			$(this).val($(this).val().substr(0,999))
 			$("#writecount").text(length + '/1000');
 		}
-	})	
+	})
+	
+	//첨부파일 툴팁부분
+	$(document).ready(function(){
+	  $('[data-toggle="tooltip"]').tooltip();
+	});
 		
 	//submit 버튼 클릭할 때 이벤트 부분
 	$("form[name=modifyform]").submit(function() {

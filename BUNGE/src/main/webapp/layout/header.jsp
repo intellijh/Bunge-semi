@@ -42,6 +42,11 @@
             padding: 0;
             margin: 0;
         }
+        
+        .navimg {
+          padding-top:20px;
+          padding-bottom:20px;
+        }
 
         .nav-link {
             /* Added padding to nav links to create space between them */
@@ -89,44 +94,44 @@
                                                        alt="logo"
                                                        width="140" height="30" class="d-inline-block align-text-top"></a>
         <ul class="navbar-nav ml-auto" id="menu"> <!-- Add ml-auto class to move items to the right -->
-         <li class="nav-item">
+         <li class="nav-item navimg">
                <a class="nav-link" aria-current="page" href="index.jsp">Home</a>
            </li>  
-           <li class="nav-item">
+           <li class="nav-item navimg">
                 <a class="nav-link" href="InfoList.com">정보공유게시판</a>
             </li>  
-           <li class="nav-item">
+           <li class="nav-item navimg">
                 <a class="nav-link" href="trade.net">거래게시판</a>
             </li>
            </ul>
             <ul class="navbar-nav ml-auto">
             <c:choose>
                 <c:when test="${m_id ==null }">
-					<li class="nav-item">
+					<li class="nav-item navimg">
               		  <a href="login.com">
                   		  <img src="${pageContext.request.contextPath}/image/chat.png" alt="chat" width="22" height="22">
                		 </a>
            			 </li>                
-                    <li class="nav-item">
+                    <li class="nav-item navimg">
                         <a href="login.com">
                             <img src="${pageContext.request.contextPath}/image/profile.png" class="headerpf" alt="profile" width="22"
                                  height="22">
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item navimg">
                         <a class="nav-link" href="login.com">로그인</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item navimg">
                         <a class="nav-link" href="join.com">회원가입</a>
                     </li>
                 </c:when>
                 <c:when test="${m_id != null}">
-                <li class="nav-item">
+                <li class="nav-item navimg">
               		  <a href="chat.com">
                   		  <img src="${pageContext.request.contextPath}/image/chat.png" alt="chat" width="22" height="22">
                		 </a>
            			 </li> 
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown navimg">
                         <a class="dropdown-toggle" id="navbardrop" data-toggle="dropdown">
                             <img id="headerprofile" class="headerpf" src="${pageContext.request.contextPath}/image/profile.png" alt="profile" width="25"
                                  height="25">
@@ -137,7 +142,7 @@
                             <a class="dropdown-item" href="reviewlist.com">활동</a>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item navimg">
                         <a class="nav-link" href="logout.com">${m_id}님 (로그아웃)</a>
                     </li>
                 </c:when>

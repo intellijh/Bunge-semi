@@ -1,5 +1,4 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <html>
 <head>
@@ -17,7 +16,8 @@
   }
   
  .inf_file {
- 	width:50px
+ 	width:20px;
+ 	height:30px;
  }
  
  .commlike {
@@ -105,13 +105,16 @@ pre {
 
 .postloc {
   font-weight : bolder;
+  margin-bottom:30px;
 }
 
 .postbookinfoarea {
     font-size: 13px;
     display: inline-block;
     position: absolute;
-    left:200px;
+    top: 120px;
+    width: 75%;
+    margin-left: 10px;
 }
 
 .postprofilearea {
@@ -125,6 +128,26 @@ pre {
   margin-right:5px;
 }
 
+.postbookcover {
+  margin-bottom:30px;
+}
+
+#likeclick {
+    width: 25px;
+    height: 25px;
+}
+
+#likecnt {
+  margin-right:30px;
+}
+
+.uploadfilearea {
+  margin-bottom:10px;
+}
+
+.cntarea {
+  margin-top:50px;
+}
 <%-- "내용" 부분 끝 --%>
 
 <%-- 댓글 부분 시작 --%>
@@ -150,6 +173,9 @@ pre {
     outline: 0;
 }
 
+.comment-write {
+  margin-top:10px;
+}
 <%-- 댓글 부분 끝 --%>
 
 
@@ -189,7 +215,7 @@ pre {
 	  </div>
 	  
 	  <div class="postcontentarea">
-	      <img src="${boarddata.inf_cover}" width="200px" height="300px">
+	      <img src="${boarddata.inf_cover}" width="200px" height="300px" class="postbookcover">
 	      <div class="postbookinfoarea">
 		      <span class="badge badge-success infoitem">책제목</span><span class="postbooktitle">${boarddata.inf_book}</span><br>
 		      <span class="badge badge-success infoitem">지은이</span><span>${boarddata.inf_author}</span><br>
@@ -200,24 +226,24 @@ pre {
 	    <div class="postloc">From ... ${boarddata.inf_loc}</div>
 	    
 	    <c:if test="${boarddata.inf_lev==0}">
-          <tr>
-            <td><div>첨부파일</div></td>
               <c:forEach var="a" items="${boardfile}" varStatus="status">
                 <c:if test="${a.infa_filename != null}">
-		          <td><img src="image/down.png" width="10px">
-		            <a href="InfoBoardFileDown.com?filename=${a.infa_filename}">${a.infa_filename}</a>
-		            <img src="boardupload/${a.infa_servername}" class="inf_file" id="inf_file${status.count}">
-		          </td>
+	            <div class="uploadfilearea">
+		          <img src="image/down.png" width="10px">
+		          <a href="InfoBoardFileDown.com?filename=${a.infa_filename}">${a.infa_filename}</a>
+		          <img src="boardupload/${a.infa_servername}" class="inf_file" id="inf_file${status.count}">
 		        </c:if>
-		        <c:if test="${a.infa_filename == null}">
-		        </c:if>
+  		          <c:if test="${a.infa_filename == null}">
+		          </c:if>
+			    </div>
               </c:forEach>
-          </tr>
         </c:if>	
 	    
-	    <div class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button></div>
-        <span id="likecnt"></span>
-	    
+	    <div class="cntarea">
+		  <span class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button></span>
+	      <span id="likecnt"></span>
+	      <img src="./image/book.png" width="25px" height="25px"><span>${boarddata.inf_readcount}</span>
+	    </div>
 	  </div>
 	</div> <%-- col-xl end --%>
 

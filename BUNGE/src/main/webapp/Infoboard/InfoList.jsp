@@ -98,6 +98,10 @@
     	border-color: #BCE55C; /* 테두리 색상을 파란색으로 설정 */
 	}
 	
+	.title, .content {
+	  text-align:justify!important;
+	}
+	
 </style>
 </head>
 <body>
