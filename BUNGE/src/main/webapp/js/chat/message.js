@@ -295,11 +295,15 @@ $(function(){
         });
     }
 
-    $inputMessage.keydown(function(event){
-        if (event.key === "Enter") {
-            $('.type_msg').focus();
-            $('.send_btn').click();
-            event.preventDefault();
+    $inputMessage.keydown(function (e) {
+        console.log(e.key);
+        if (e.key === "Enter") {
+            if (e.key !== "Process") {
+
+                $('.type_msg').focus();
+                $('.send_btn').click();
+                e.preventDefault();
+            }
         }
     });
 
