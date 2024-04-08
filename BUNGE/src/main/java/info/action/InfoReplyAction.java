@@ -19,10 +19,10 @@ public class InfoReplyAction implements Action {
 		BoardDAO boarddao = new BoardDAO();
 		
 		//파라미터로 전달받은 수정할 글 번호를 num 변수에 저장합니다.
-		int num = Integer.parseInt(request.getParameter("num"));
+		int inf_num = Integer.parseInt(request.getParameter("inf_num"));
 		
 		//글 내용을 불러와서 boarddata 객체에 저장합니다.
-		Board boarddata = boarddao.getDetail(num);
+		Board boarddata = boarddao.getDetail(inf_num);
 		
 		//글 내용을 불러오기 실패한 경우입니다.
 		if (boarddata == null) {

@@ -46,7 +46,7 @@ public class InfoReplyProcessAction implements Action {
 			 System.out.println("result= " + result);
 			 
 			 //답변 글 내용을 확인하기 위해 글 내용 보기 페이지를 경로로 설정합니다.
-			 forward.setPath("InfoDetail.com?num=" + result);
+			 forward.setPath("InfoDetail.com?inf_num=" + result);
 		 }
 		 return forward;
 	}
