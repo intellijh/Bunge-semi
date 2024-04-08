@@ -94,13 +94,60 @@
     background-color: #ffffff;
     opacity: 1;
 }
+
+pre {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    overflow: auto;
+    white-space: break-spaces;
+    font-family: 나눔고딕;
+    position: relative;
+    top: 20px;
+}
+
+
+.postcontentarea {
+    position: relative;
+    top: 50px;
+}
+
+.postloc {
+  position : relative;
+  top : 40px;
+  font-weight : bolder;
+}
+
+.postbookinfoarea {
+  font-size:8px;
+  display : inline-block;
+}
+
 <%-- "내용" 부분 끝 --%>
 
 <%-- 댓글 부분 시작 --%>
 .comment-area {
     position: relative;
     border-top: 1px solid #BCE55C;
-    top: 900px;
+    top: 1000px;
+    width : 858px;
+    margin : 0 auto;
+}
+
+.comment-write .comment-write-area-text {
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: block;
+    width: 100%;
+    min-height: 40px;
+    padding-right: 1px;
+    border: 0;
+    font-size: 13px;
+    -webkit-appearance: none;
+    resize: none;
+    box-sizing: border-box;
+    background: transparent;
+    color: #000000;
+    outline: 0;
 }
 <%-- 댓글 부분 끝 --%>
 
@@ -131,17 +178,23 @@
 		  </c:if>
 		  </div>
 		</div>
+		
 	  <div class="postprofilearea">
 	    <img src="memberupload/${boarddata.m_profile}" width="30px" height="30px" class="postprofile">
 	    <span class="postuserid">${boarddata.m_id}</span>
 	    <span class="postreg">${boarddata.inf_reg}</span>
 	  </div>
+	  
 	  <div class="postcontentarea">
-	    <img src="${boarddata.inf_cover}" width="150px" height="200px">
-	    <div class="postbooktitle">${boarddata.inf_book}</div>
-	    <div class="postopen">${boarddata.inf_open}</div>
-	    <div class="postcontent">${boarddata.inf_content}</div>
-	    <div class="postloc">${boarddata.inf_loc}</div>
+	      <img src="${boarddata.inf_cover}" width="200px" height="300px">
+	      <div class="postbookinfoarea">
+		      <div class="postbooktitle">${boarddata.inf_book}</div>
+		      <div class="postbookauthor">${boarddata.inf_author}</div>
+		      <div class="postbookcategory">${boarddata.inf_category}</div>
+		      <div class="postbookpubdate">${boarddata.inf_pubdate}</div>
+	      </div>
+	    <pre class="postcontent">${boarddata.inf_content}</pre>
+	    <div class="postloc">From ... ${boarddata.inf_loc}</div>
 	    
 	  </div>
 	</div>

@@ -72,8 +72,8 @@
       
       <div class="form-group">
         <label for="inf_content">내용</label>
-        <textarea name="inf_content" id="inf_content"
-        	   	  class="form-control" rows="10">${board.inf_content}</textarea>
+        <span id="writecount" class="comment-write-area-count">0/1000</span>
+        <textarea name="inf_content" id="inf_content" class="form-control" rows="10">${board.inf_content}</textarea>
       </div>
       
       <%-- 장소 추가 --%>
