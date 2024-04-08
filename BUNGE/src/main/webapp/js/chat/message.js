@@ -48,7 +48,7 @@ function loadMessage() {
 
 $(function(){
 
-    webSocket = new WebSocket('ws://localhost:8088/chat');
+    webSocket = new WebSocket('ws://localhost:8088/BUNGE/chat');
     const $inputMessage = $(".type_msg");
 
     webSocket.onerror = function(e){

@@ -130,10 +130,15 @@ function ajax(sdata) {
 $(function() {
 	go(1)
 	
-	
-	$("button").click(function(){
-		location.href="InfoWrite.com";
-	})
+  $("#newwritebutton").click(function(){
+	if ($('#loginid').val() != "") {
+	  location.href="InfoWrite.com";
+	} else {
+		alert('로그인 후 글쓰기 할 수 있습니다')
+		location.href = "login.com"
+	}
+  })
+
 	
 	$("#viewcount").change(function() {
 		go(1);

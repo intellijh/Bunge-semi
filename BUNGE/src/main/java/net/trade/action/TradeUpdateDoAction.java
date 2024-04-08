@@ -77,7 +77,7 @@ public class TradeUpdateDoAction implements Action {
 
             // 수정이 성공하면 리스트 페이지로 리다이렉트
             forward.setRedirect(true);
-            forward.setPath("/trade.net");
+            forward.setPath("trade.net");
         } catch (Exception e) {
             e.printStackTrace();
             // 에러 발생 시 에러 페이지로 이동하도록 설정
