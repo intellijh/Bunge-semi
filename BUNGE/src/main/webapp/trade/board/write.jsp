@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="../../layout/header.jsp" />
+	<jsp:include page="${pageContext.request.contextPath}/layout/header.jsp" />
 	<meta charset="UTF-8">
 	<title>거래글 업로드</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/bootstrap.min.css">
@@ -57,7 +57,7 @@
 				<option value="택배거래">택배거래</option>
 				<option value="직거래">직거래</option>
 			</select><br><br>
-			<input type="text" id="price" name="price" placeholder="가격을 입력하세요" maxlength="20">
+			<input type="number" id="price" name="price" placeholder="가격을 입력하세요" maxlength="20" >
 
 			<!-- 거래글 내용 -->
 			<textarea id="write-desc" name="desc" placeholder="거래글 내용(1000자 이내)" maxlength="1000"></textarea><br><br>
@@ -74,6 +74,8 @@
 			<!-- 세션에서 가져온 id 값 전달 -->
 			<input type="button" class="btn btn-danger" id="write-cancel" value="취소" onclick="cancel()">
 			<input type="button" class="btn btn-info" id="write-submit" value="업로드" onclick="checkSubmit()">
+
+
 
 		</form>
 	</div>

@@ -26,21 +26,18 @@ public class TradeBoardAction implements Action {
         ArrayList<Trade> tradeList = null;
         String keyword = request.getParameter("keyword");
         String mode = request.getParameter("mode"); // 검색 모드 가져오기
-        String category = request.getParameter("category");
 
         try {
             // 키워드가 없는 경우 모든 거래 조회
-            if (keyword == null && category == null) {
+            if (keyword == null ) {
                 tradeList = tradeDAO.getTradeList();
-            } else if (category == null){
+            } else {
                 // 키워드 존재 시 검색결과 조회
                 if (mode != null && mode.equals("제목")) {
                     tradeList = tradeDAO.searchTradeByTitle(keyword);
                 } else if (mode != null && mode.equals("내용")) {
                     tradeList = tradeDAO.searchTradeByDesc(keyword);
                 }
-            } else if (category != null){
-                tradeList = tradeDAO.searchTradeByCategory(category);
             }
 
             // DAO 연결 종료

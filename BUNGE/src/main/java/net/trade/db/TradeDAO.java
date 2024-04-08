@@ -178,7 +178,7 @@ public class TradeDAO {
 
 
     public ArrayList<Trade> searchTradeByCategory(String category) throws SQLException, NamingException {
-        String sql = "SELECT imageID, title, sellerID, createDate, tradeID, price, category, quality, condition FROM trade WHERE category = ?";
+        String sql = "SELECT imageID, title, sellerID, createDate, tradeID, price, category, quality, condition FROM trade WHERE category = ? order by tradeID desc";
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, category);
         rs = pstmt.executeQuery();
