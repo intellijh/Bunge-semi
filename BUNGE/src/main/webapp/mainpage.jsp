@@ -189,7 +189,7 @@
 }
 
 .commid {
-  font-size : 10px
+    font-size: 9px;
 }
 
 .commreg {
@@ -198,6 +198,11 @@
 
 .comm_profile {
   border-radius : 50%;
+}
+
+.commcontent {
+  font-size : 10px;
+  padding-right : 5px;
 }
 
 <%-- 인기 댓글 영역 끝 --%>
@@ -520,7 +525,7 @@
             <span id="commcount0">commcount</span>
           </div>
           <div class="popularcommcontent">
-            <span id="commcontent0">comm_content</span>
+            <span id="commcontent0" class="commcontent">comm_content</span>
             <img id="comm_m_profile0" width="15px" height="15px" class="comm_profile">
             <span id="comm_m_id0" class="commid">comm_m_id</span>
             <span id="commreg0" class="commreg">comm_reg</span>
@@ -533,7 +538,7 @@
             <span id="commcount1">commcount</span>
           </div>
           <div class="popularcommcontent">
-            <span id="commcontent1">comm_content</span>
+            <span id="commcontent1" class="commcontent">comm_content</span>
             <img id="comm_m_profile1" width="15px" height="15px" class="comm_profile">
             <span id="comm_m_id1" class="commid">comm_m_id</span>
             <span id="commreg1" class="commreg">comm_reg</span>
@@ -546,7 +551,7 @@
             <span id="commcount2">commcount</span>
           </div>
           <div class="popularcommcontent">
-            <span id="commcontent2">comm_content</span>
+            <span id="commcontent2" class="commcontent">comm_content</span>
             <img id="comm_m_profile2" width="15px" height="15px" class="comm_profile">
             <span id="comm_m_id2" class="commid">comm_m_id</span>
             <span id="commreg2" class="commreg">comm_reg</span>
@@ -559,7 +564,7 @@
             <span id="commcount3">commcount</span>
           </div>
           <div class="popularcommcontent">
-            <span id="commcontent3">comm_content</span>
+            <span id="commcontent3" class="commcontent">comm_content</span>
             <img id="comm_m_profile3" width="15px" height="15px" class="comm_profile">
             <span id="comm_m_id3" class="commid">comm_m_id</span>
             <span id="commreg3" class="commreg">comm_reg</span>
@@ -572,7 +577,7 @@
             <span id="commcount4">commcount</span>
           </div>
           <div class="popularcommcontent">
-            <span id="commcontent4">comm_content</span>
+            <span id="commcontent4" class="commcontent">comm_content</span>
             <img id="comm_m_profile4" width="15px" height="15px" class="comm_profile">
             <span id="comm_m_id4" class="commid">comm_m_id</span>
             <span id="commreg4" class="commreg">comm_reg</span>

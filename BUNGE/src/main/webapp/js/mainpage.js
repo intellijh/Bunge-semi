@@ -44,8 +44,8 @@ $(document).ready(function(){
 			  console.log(this.content.length)
 			  $('#commcount' + index).text(item.count)
 			  $('#comm_m_profile' + index).attr('src', './memberupload/' + item.m_profile)
-			  if (this.content.length > 11) {
-				  $('#commcontent' + index).html("<a href='InfoDetail.com?inf_num="+item.inf_num+"'>"+this.content.substr(0,10) + '...' + "</a>")
+			  if (this.content.length > 16) {
+				  $('#commcontent' + index).html("<a href='InfoDetail.com?inf_num="+item.inf_num+"'>"+this.content.substr(0,15) + '...' + "</a>")
 			  } else {
 				  $('#commcontent' + index).html("<a href='InfoDetail.com?inf_num="+item.inf_num+"'>"+this.content + "</a>")
 			  }
@@ -70,8 +70,8 @@ $(document).ready(function(){
 			  $('#postbook'+index).text(item.inf_book)
 			  
 			  //console.log(item.inf_content.length)
-			  if (item.inf_content.length > 80) {
-				  $('#postcontent'+index).text(item.inf_content.substr(0,80) + '...')
+			  if (item.inf_content.length > 60) {
+				  $('#postcontent'+index).text(item.inf_content.substr(0,59) + '...')
 			  } else {
 				  $('#postcontent'+index).text(item.inf_content)
 			  }

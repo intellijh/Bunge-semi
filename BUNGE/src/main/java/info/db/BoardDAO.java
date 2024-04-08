@@ -38,10 +38,12 @@ public class BoardDAO {
 				String sql = "INSERT INTO INFOBOARD " 
 							+ "(INF_NUM, M_ID, INF_SUBJECT, INF_CONTENT, INF_REF, "
 							+ " INF_LEV, INF_SEQ, INF_READCOUNT, INF_LOC, "
-							+ " INF_REG, INF_OPEN, INF_BOOK, INF_COVER) " 
+							+ " INF_REG, INF_OPEN, INF_BOOK, INF_COVER, "
+							+ " INF_AUTHOR, INF_CATEGORY, INF_PUBDATE) " 
 							+ " values(" + max_sql + " , ?, ?, ?, " + max_sql 
 							+ " 	   , ?, ?, ?, ? "
-							+ "        , sysdate, ?, ?, ?)"; 
+							+ "        , sysdate, ?, ?, ? "
+							+ "        , ?, ?, ?)"; 
 				
 				
 				String select_sql = "select max(inf_num) "
@@ -61,6 +63,9 @@ public class BoardDAO {
 						pstmt.setInt(8, board.getInf_open());//OPEN
 						pstmt.setString(9, board.getInf_book()); //BOOK
 						pstmt.setString(10, board.getInf_cover()); //COVER URL
+						pstmt.setString(11, board.getInf_author());
+						pstmt.setString(12, board.getInf_category());
+						pstmt.setString(13, board.getInf_pubdate());
 			
 						pstmt.executeUpdate();
 						
@@ -219,7 +224,10 @@ public class BoardDAO {
 	public Board getDetail(int num) {
 		Board board = null;
 		
-		String sql = "select * from infoboard where inf_NUM = ?";
+		String sql = "select infoboard.*, member.m_profile "
+				   + "from infoboard "
+				   + "join member on infoboard.m_id = member.m_id "
+				   + "where infoboard.inf_NUM = ?";
 				    
 		try (Connection con = ds.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -242,6 +250,10 @@ public class BoardDAO {
 					board.setInf_reg(rs.getString("INF_REG"));
 					board.setInf_book(rs.getString("INF_BOOK"));
 					board.setInf_cover(rs.getString("INF_COVER"));
+					board.setM_profile(rs.getString("M_PROFILE"));
+					board.setInf_author(rs.getString("INF_AUTHOR"));
+					board.setInf_category(rs.getString("INF_CATEGORY"));
+					board.setInf_pubdate(rs.getString("INF_PUBDATE"));
 				}
 				
 			} catch (SQLException e) {

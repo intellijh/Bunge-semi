@@ -15,7 +15,22 @@ $(document).ready(function() {
 		console.log(html_origin)
 		$("form").append(html_origin);
 	}
+	
+	//글자수 카운트
+	$("#writecount").text($("#inf_content").val().length + '/1000')
+		console.log($("#inf_content").val())
+	
+	$("#inf_content").on('keyup', function() {
+		const length = $(this).val().length;
+		$("#writecount").text(length + '/1000');
+		console.log($("#inf_content").val())
 		
+		if (length > 1000) {
+			alert('1000자까지만 입력할 수 있습니다...')
+			$(this).val($(this).val().substr(0,999))
+			$("#writecount").text(length + '/1000');
+		}
+	})	
 		
 	//submit 버튼 클릭할 때 이벤트 부분
 	$("form[name=modifyform]").submit(function() {
@@ -32,7 +47,6 @@ $(document).ready(function() {
 			$inf_content.focus();
 			return false;
 		}
-		
 	
 
 /*		
