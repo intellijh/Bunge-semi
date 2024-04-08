@@ -46,7 +46,7 @@ public class joinProcessAction implements Action {
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
 			request.setAttribute("mesage","회원가입 실패입니다.");
-			forward.setPath("error/error.jsp");
+			forward.setPath("member/joinForm.jsp");
 			return forward;
 		}
 		

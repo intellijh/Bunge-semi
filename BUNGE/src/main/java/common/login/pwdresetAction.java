@@ -24,6 +24,7 @@ public class pwdresetAction implements Action {
 
 	    String find_m_id = (String) session.getAttribute("find_m_id"); 
 	    String m_pwd = request.getParameter("m_pwd");
+	    String m_pwd_check = request.getParameter("m_pwd_check");
 
 	    Member m = new Member();
 	    m.setM_id(find_m_id);
@@ -35,23 +36,25 @@ public class pwdresetAction implements Action {
 	    System.out.println("id="+find_m_id);
 		System.out.println("password="+m_pwd);
 		
-	    response.setContentType("text/html; charset=utf-8");
-	    if(result == true) {
-	        // 비밀번호가 성공적으로 변경되었을 때
-			forward.setRedirect(false);
-			session.removeAttribute("find_m_id");
-			out.println("<script>");
-			out.println("alert('비밀번호 수정이 성공했습니다.');");
-			out.println("location.href='login.com';");
-			out.println("</script>");
-
+		if(m_pwd == "" || m_pwd.equals(m_pwd_check)) {
+			response.setContentType("text/html; charset=utf-8");	 
+		    if(result == true) {
+		        // 비밀번호가 성공적으로 변경되었을 때
+				forward.setRedirect(false);
+				session.removeAttribute("find_m_id");
+				out.println("<script>");
+				out.println("alert('비밀번호 수정이 성공했습니다.');");
+				out.println("location.href='login.com';");
+				out.println("</script>");
+		    	
 	    }else {
 	    	out.println("<script>");
 			out.println("alert('비밀번호 수정이 실패했습니다.');");
 			out.println("history.back()");
 			out.println("</script>");
 			out.close();
-	    }	    
+	    }	
+		}
 	    return null;
 	}
 }

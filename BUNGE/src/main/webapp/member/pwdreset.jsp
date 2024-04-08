@@ -36,6 +36,9 @@
 .pwd input, .pwdcheck input {
 	width: 250px;
 }
+.message {
+	font-size: 12px;
+}
 .submit {
 	padding-top:15px;
     position: relative;
@@ -59,12 +62,16 @@
 	<div class="pwd">
 	<b>비밀번호</b>
 		<input type="password" name="m_pwd" placeholder="비밀번호 입력"  maxlength="15">
+		<div class="message">
 		<span id="pwd_message"></span>
+		</div>
 		</div>
 		<div class="pwdcheck">
 		<b>비밀번호 확인</b>
 		<input type="password" name="m_pwd_check" placeholder="비밀번호 재입력"  maxlength="15">
+		<div class="message">
 		<span id="pwd_check_message"></span>
+		</div>
 		</div>
 		<div class="submit btn">
 			<button type="submit" class="submitbtn">비밀번호 재설정 완료</button>
