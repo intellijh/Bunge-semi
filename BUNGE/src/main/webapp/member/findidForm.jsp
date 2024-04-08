@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>아이디 찾기 페이지</title>
 <jsp:include page="/layout/header.jsp" />
+<script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
 
@@ -17,8 +18,7 @@
     margin: 0 auto;
 }
 .findid h2 {
-    padding-bottom: 15px;
-    border-bottom: 1px solid  rgba(212, 216, 229, .5);;
+    padding-bottom: 20px;
 }
 .find_name{
 	position: relative;
@@ -34,6 +34,7 @@
     margin: 10px auto;
 }
 .clearfix {
+	padding-top:15px;
     position: relative;
     left: 67px;
 }
@@ -52,6 +53,13 @@
     border-radius: 4px;
 }
 </style>
+<script>
+$(function(){
+	$(".cancelbtn").click(function () {
+	location.href = "login.com";
+	});
+});
+</script>
 </head>
 <body>
 <div id="warp">

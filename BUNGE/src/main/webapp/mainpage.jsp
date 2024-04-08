@@ -5,6 +5,7 @@
 <html>
 <jsp:include page="/layout/header.jsp" />
 <title>메인 페이지</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <script src="${pageContext.request.contextPath}/js/mainpage.js"></script>
 <style>
   body {
