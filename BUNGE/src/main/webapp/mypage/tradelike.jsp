@@ -8,7 +8,11 @@
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
-
+.mytrade {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
 .tab_container{
     position: relative;
     display: flex;
@@ -37,7 +41,7 @@
     left: 20px;
 }
 .tab_box {
-width: 300px;
+width: 850px;
 }
 .tradetitle {
  	border-bottom: 1px solid rgba(212, 216, 229, .5);
@@ -54,6 +58,7 @@ width: 300px;
 </head>
 <body>
 <div id="warp">
+<div class="mytrade">
 	<!-- tab menu 시작 -->
 	<div class="tradetitle">
 		<h3>좋아요한 중고거래 물품</h3>
@@ -96,14 +101,10 @@ width: 300px;
 							<p class="trade_inf_contet_text">즐겨찾기 쓴 글 내용 : ${t.trade.description}</p>	
 						</div>
 					</div>   
-
 						  <div class="trade_board_img">${t.trade.iamgeid}</div>
-
-						  <div class="infomark_like_comm_box">
-						  
+						  <div class="infomark_like_comm_box">		  
 							<div class="infomark_inf_comm_num">
 								<div>
-								
 								</div>
 							</div>
 						  </div>
@@ -121,6 +122,7 @@ width: 300px;
 		</div>
 	  </div>
 	<!-- 내가 쓴 글/댓글 영역 끝 -->
+	</div>
 	</div>
 </body>
 </html>

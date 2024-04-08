@@ -61,7 +61,7 @@ padding-top : 38px
     padding-right: 16px;
 }
 .m_gender {
-    height: 40px;
+    height: 50px;
 }
 .m_gender input{
   width: 15px;
@@ -96,7 +96,7 @@ padding-top : 38px
     padding-top: 15px;
 }
 .submitbtn {
-	background-color: D0ED8D;
+	background-color: #D0ED8D;
     width: 140px;
     height: 40px;
     border: solid 1px rgba(212, 216, 229, .5);
@@ -129,9 +129,10 @@ padding-top : 38px
 		<div class="join m_pwd">
 			<b>비밀번호</b>
 			<input type="password" name="m_pwd" placeholder="비밀번호 입력"  maxlength="15">
+			<div class="message">
 			<span id="pwd_message"></span>
+			</div>
 		</div>
-		
 		<div class="join m_name">
 			<b>이름</b>
 			<input type="text" name="m_name" placeholder="이름을 입력" maxlength="5" required>
@@ -178,9 +179,10 @@ padding-top : 38px
 		<div class="join m_addr2">
 			<b>상세주소</b>
 			<input type="text" size="200" name="m_addr2" required>
+			<div class="message">
 			<span id="addr2_message"></span>
 		</div>
-		
+		</div>
 		<div class="join m_phone">
 			<b>핸드폰</b>
 				<input type="tel" name="m_phone" maxlength="11" placeholder="핸드폰번호 입력('-' 제외 11자리 입력)"  
