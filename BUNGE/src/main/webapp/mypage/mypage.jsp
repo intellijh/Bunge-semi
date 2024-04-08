@@ -12,10 +12,10 @@
 <script src="${pageContext.request.contextPath}/js/mypage.js"></script>
 <style>
  body {
-            width: 1140px;
-            margin: 0 auto;
-            line-height: 28px;
-        }
+    width: 1140px;
+    margin: 0 auto;
+    line-height: 28px;
+}
 
 .tab_container{
     position: relative;
@@ -175,7 +175,7 @@ label{
     padding-right: 30px;
 }
 .m_addr2 input{
-    width: 200px;
+    width: 250px;
 }
 .m_addr2_btn {
     position: absolute;

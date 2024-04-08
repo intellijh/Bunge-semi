@@ -11,7 +11,6 @@
 </head>
 <body>
 <div id="upper-bar">
-	<a href="trade.net" id="title">거래 게시판</a>
 </div>
 <div id="content-view">
 	<div id="content-view-inner">

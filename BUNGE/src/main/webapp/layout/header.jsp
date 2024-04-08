@@ -10,10 +10,6 @@
 <html>
 <head>
     <style>
-    	li {
-    			
-    	}
-    
 		.navbar {
 			padding : 0 2rem
 		}	
@@ -58,10 +54,23 @@
         .nav-item:nth-child(3) {
         padding-left : 3rem; padding-right : 8rem
         }
+         
+        .nav-item:nth-child(4) {
+        padding : 0px 10px 5px 0px
+        }
+        
+        .nav-item:nth-child(5){
+        padding-right : 10px
+        }
         
         .nav-item:nth-child(7),.nav-item:nth-child(8) {
         	font-size : 13px
         }
+        
+        .headerpf {
+        	border-radius : 50px
+        }
+        
     </style>
 </head>
 <body>
@@ -96,8 +105,8 @@
             <c:choose>
                 <c:when test="${m_id ==null }">
                     <li class="nav-item">
-                        <a class="nav-link" href="mypage.com">
-                            <img src="${pageContext.request.contextPath}/image/profile.png" alt="profile" width="22"
+                        <a href="mypage.com">
+                            <img src="${pageContext.request.contextPath}/image/profile.png" class="headerpf" alt="profile" width="22"
                                  height="22">
                         </a>
                     </li>
@@ -111,7 +120,7 @@
                 <c:when test="${m_id != null}">
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" id="navbardrop" data-toggle="dropdown">
-                            <img id="headerprofile" src="${pageContext.request.contextPath}/image/profile.png" alt="profile" width="25"
+                            <img id="headerprofile" class="headerpf" src="${pageContext.request.contextPath}/image/profile.png" alt="profile" width="25"
                                  height="25">
                         </a>
                         <div class="dropdown-menu">
