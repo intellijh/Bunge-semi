@@ -22,11 +22,11 @@
 
 <html>
 <head>
-    <jsp:include page="${pageContext.request.contextPath}/layout/header.jsp" />
+    <jsp:include page="../../layout/header.jsp" />
     <meta charset="UTF-8">
     <title>Trade Board</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style.css">
+    <link rel="stylesheet" href="./static/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/style.css">
     <script>
         $(document).ready(function() {
             $(".category").click(function() {
@@ -68,7 +68,7 @@
 
 
 <div id="upper-bar">
-    <a href="tradeWrite.net"><img src="${pageContext.request.contextPath}/static/upload_icon.png" id="button-write" height="43px"/></a>
+    <a href="tradeWrite.net"><img src="./static/upload_icon.png" id="button-write" height="43px"/></a>
 </div>
 <div id="navi-bar">
     <div id="search">
@@ -110,7 +110,7 @@
         <div class="post" onclick="location.href='view.net?tradeID=${trade.tradeID}'">
             <div class="post-thumbnail" style="text-align: center;">
                 <!-- 이미지 경로 출력 -->
-                <img src="${pageContext.request.contextPath}/image/<c:out value="${trade.imageID}" />" width="140" height="200">
+                <img src="./image/<c:out value="${trade.imageID}" />" width="140" height="200">
             </div>
             <div class="post-info">
                 <span id="post-info-title"><c:out value="${trade.title}" /></span>
@@ -129,8 +129,8 @@
 <div id="under-bar">중고 거래 게시판</div>
 
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/bootstrap.min.js"></script>
+<script type="text/javascript" src="./static/jquery.js"></script>
+<script type="text/javascript" src="./static/bootstrap.min.js"></script>
 
 </script>
 </html>

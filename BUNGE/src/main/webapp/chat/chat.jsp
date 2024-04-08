@@ -11,13 +11,13 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat.css">
-    <script src="${pageContext.request.contextPath}/js/chat/chat.js"></script>
-    <script src="${pageContext.request.contextPath}/js/chat/message.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/chat.css">
+    <script src="./js/chat/chat.js"></script>
+    <script src="./js/chat/message.js"></script>
     <title>채팅 : 번지</title>
 </head>
 <body>
-<jsp:include page="${pageContext.request.contextPath}/layout/header.jsp"/>
+<jsp:include page="../layout/header.jsp"/>
 
 <input type="hidden" id="loginId" value="${m_id}">
 <input type="hidden" id="sessionChatId" value="${chatId}">
