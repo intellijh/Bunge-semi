@@ -109,10 +109,10 @@ body {
 }
 
 #image-wrap image {
-	left: 0;
+	left: 20px;
 	top: 0;
 	height: 100%;
-	width: 100%;
+	width: 300px;
 	position: absolute;
 }
 
@@ -311,3 +311,4 @@ index_desc {
 .category-search input[type="submit"] {
 	margin: 5px;
 }
+
