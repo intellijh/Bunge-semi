@@ -295,8 +295,8 @@ $(function(){
         });
     }
 
-    $inputMessage.keydown(function(event){
-        if (event.key === "Enter") {
+    $inputMessage.keypress(function(event){
+        if (event.keyCode === 13) {
             $('.type_msg').focus();
             $('.send_btn').click();
             event.preventDefault();
