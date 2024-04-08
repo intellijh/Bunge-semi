@@ -61,7 +61,6 @@
     max-width: 80%;
     margin: 0 auto;
     border-bottom: 1px solid #BCE55C;
-    height: 90px;
 }
 
 .postsubject {
@@ -101,26 +100,14 @@ pre {
     overflow: auto;
     white-space: break-spaces;
     font-family: 나눔고딕;
-    position: relative;
-    top: 20px;
     word-wrap: break-word;
 }
 
-
-.postcontentarea {
-    position: relative;
-    top: 50px;
-}
-
 .postloc {
-  position : relative;
-  top : 40px;
   font-weight : bolder;
 }
 
 .postbookinfoarea {
-  position:relative;
-  top:142px;
   font-size:10px;
   display : inline-block;
 }
@@ -129,9 +116,7 @@ pre {
 
 <%-- 댓글 부분 시작 --%>
 .comment-area {
-    position: relative;
     border-top: 1px solid #BCE55C;
-    top: 1000px;
     width : 858px;
     margin : 0 auto;
 }
@@ -194,37 +179,14 @@ pre {
 		      <span class="badge badge-success">책제목</span><span class="postbooktitle">${boarddata.inf_book}</span><br>
 		      <span class="badge badge-success">지은이</span><span>${boarddata.inf_author}</span><br>
 		      <span class="badge badge-success">카테고리</span><span>${boarddata.inf_category}</span><br>
-		      <span class="badge badge-success">출간일</span><span class="postbookpubdate">${boarddata.inf_pubdate}</span><br>
+		      <span class="badge badge-success">출간일</span><span class="postbookpubdate">${boarddata.inf_pubdate}</span>
 	      </div>
 	    <pre class="postcontent">${boarddata.inf_content}</pre>
 	    <div class="postloc">From ... ${boarddata.inf_loc}</div>
 	    
 	  </div>
-	</div>
+	</div> <%-- col-xl end --%>
 
-
-
-    <%-- modal 시작 --%>
-    <div class="modal" id="mymodal">
-    	<div class="modal-dialog">
-    		<div class="modal-content">
-    		<%-- Modal body --%>
-    		<div class="modal-body">
-    			<form name="deleteForm" action="InfoDelete.com" method="post">
-    				<%-- http://localhost:8088/Board/BoardDetail.bo?num=22 
-    					주소를 보묜 num을 파라미터로 넘기고 있습니다. 
-    					이 값을 가져와서 ${param.num}를 사용
-    					또는 ${boarddata.board_num}--%>
-    			<input type="hidden" name="inf_num" value="${boarddata.inf_num}"
-    					id="inf_num">
-				<button type="submit" class="btn btn-primary">전송</button>   				
-				<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>   				
-    			</form>
-    		</div>
-    		</div>
-    	</div>
-    </div> 
-    
    <%-- 댓글 시작 부분 --%>
    <div class="comment-area">
 			<div class="comment-head">
@@ -253,6 +215,32 @@ pre {
 				</div>
 			</div><%--comment-write end--%>
 		</div><%-- comment-area end--%>
+		
+		
+<%-- modal 시작 --%>
+    <div class="modal" id="mymodal">
+    	<div class="modal-dialog">
+    		<div class="modal-content">
+    		<%-- Modal body --%>
+    		<div class="modal-body">
+    			<form name="deleteForm" action="InfoDelete.com" method="post">
+    				<%-- http://localhost:8088/Board/BoardDetail.bo?num=22 
+    					주소를 보묜 num을 파라미터로 넘기고 있습니다. 
+    					이 값을 가져와서 ${param.num}를 사용
+    					또는 ${boarddata.board_num}--%>
+    			<input type="hidden" name="inf_num" value="${boarddata.inf_num}"
+    					id="inf_num">
+				<button type="submit" class="btn btn-primary">전송</button>   				
+				<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>   				
+    			</form>
+    		</div>
+    		</div>
+    	</div>
+    </div>
+
+
+    
+ 
 </div><%-- container end --%>
 
 
