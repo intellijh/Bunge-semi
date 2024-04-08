@@ -6,6 +6,7 @@
 <jsp:include page="/layout/header.jsp" />
 <link href="${pageContext.request.contextPath}/css/Common.css" type="text/css" rel="stylesheet" >
 <style>
+
 .login{
     position:relative;
     top: 150px;
