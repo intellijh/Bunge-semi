@@ -15,12 +15,13 @@
     		position: sticky;
     		top: 0;
     		width: 100%; /* 헤더의 전체 너비를 채우도록 설정 */
-    		z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */\
-    		
+    		z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
+		}
+		nav {
 		}
     	
 		.navbar {
-			padding : 0 2rem
+			padding : 0 
 		}	
 		
         .navbar.navbar-expand-lg {
@@ -30,7 +31,7 @@
 
         .inner {
         	line-height: 28px;
-        	margin : 0 auto;
+        	margin : 0 175px 0 205px ;
             width: 1140px;
             display: flex; /* Changed to flex to align items horizontally */
             justify-content: space-between; /* Added to evenly distribute items horizontally */
@@ -53,29 +54,35 @@
             color: rgba(0, 0, 0, 1);
         }
         
-        .nav-item:nth-child(1),.nav-item:nth-child(2) {
-        	padding-left : 3rem; padding-right : 2rem
+        ul+ul .nav-item:nth-child(1){
+        	padding-right : 10px;
+        }
+        
+        .nav-item:nth-child(2){
+        	padding-right : 0px;
         }
         
         .nav-item:nth-child(3) {
-        padding-left : 3rem; padding-right : 8rem
+       		padding-left : 0; padding-right : 0
         }
          
         .nav-item:nth-child(4) {
-        padding : 0px 10px 5px 0px
+        	padding-right :10px 
         }
         
         .nav-item:nth-child(5){
-        padding-right : 10px
+        	padding-right : 0
         }
         
-        .nav-item:nth-child(7),.nav-item:nth-child(8) {
-        	font-size : 13px
+        ul+ul .nav-item:nth-child(3),.nav-item:nth-child(4) {
+        	font-size : 13px;
         }
         
         .headerpf {
         	border-radius : 50px
         }
+        
+     
         
     </style>
 </head>
@@ -90,7 +97,7 @@
                                                        width="140" height="30" class="d-inline-block align-text-top"></a>
         <ul class="navbar-nav ml-auto"> <!-- Add ml-auto class to move items to the right -->
          <li class="nav-item">
-               <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+               <a class="nav-link" aria-current="page" href="index.jsp">Home</a>
            </li>  
            <li class="nav-item">
                 <a class="nav-link" href="InfoList.com">정보공유게시판</a>
@@ -98,16 +105,17 @@
            <li class="nav-item">
                 <a class="nav-link" href="trade.net">거래게시판</a>
             </li>
-             
-            <li class="nav-item">
-                <a href="chat.com">
-                    <img src="${pageContext.request.contextPath}/image/chat.png" alt="chat" width="22" height="22">
-                </a>
-            </li>
+           </ul>
+            <ul class="navbar-nav ml-auto">
             <c:choose>
                 <c:when test="${m_id ==null }">
+					<li class="nav-item">
+              		  <a href="login.com">
+                  		  <img src="${pageContext.request.contextPath}/image/chat.png" alt="chat" width="22" height="22">
+               		 </a>
+           			 </li>                
                     <li class="nav-item">
-                        <a href="mypage.com">
+                        <a href="login.com">
                             <img src="${pageContext.request.contextPath}/image/profile.png" class="headerpf" alt="profile" width="22"
                                  height="22">
                         </a>
@@ -120,6 +128,11 @@
                     </li>
                 </c:when>
                 <c:when test="${m_id != null}">
+                <li class="nav-item">
+              		  <a href="chat.com">
+                  		  <img src="${pageContext.request.contextPath}/image/chat.png" alt="chat" width="22" height="22">
+               		 </a>
+           			 </li> 
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" id="navbardrop" data-toggle="dropdown">
                             <img id="headerprofile" class="headerpf" src="${pageContext.request.contextPath}/image/profile.png" alt="profile" width="25"

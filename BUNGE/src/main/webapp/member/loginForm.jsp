@@ -7,13 +7,10 @@
 <jsp:include page="/layout/header.jsp" />
 <style>
 body {
-    width: 1140px;
-    margin: 0 auto;
-    line-height: 28px;
 }  
 .login{
     position:relative;
-    top: 150px;;
+    top: 150px;
     width: 450px;
     height: 400px;
     margin: 0 auto;

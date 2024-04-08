@@ -8,14 +8,19 @@
 <script src="js/infolist.js"></script>
 <%@ include file="/layout/header.jsp" %>
 <style>
+	body {
+  		font-family : "나눔고딕";
+  		margin : 0 auto;
+	}	
+	
+	.table {
+		border : 1px soild #BCE55C;
+	}
+	
  	.container {
  		max-width : 1140px;
  		margin : 0 auto;
  		padding : 0;
-  	}
-  
-  	h1{
-  		font-size:1.5em; text-align:center; color:#1a92b9
   	}
   
   	label{
@@ -52,18 +57,28 @@
  		text-align : center;
  	}
  	
- 	#head th {
+ 	.table thead th {
+ 	    vertical-align: bottom;
+    	border-bottom: 2px solid #BCE55C;
+ 	}
+ 	
+ 	.table td {
+ 		font-size : 15px;
+ 		border-top: 1px solid #BCE55C;
  	}
  	
  	b { 
  		line-height: 70px
  	}
   
-   body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:8%}
-   body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:50%}
-   body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:14%}
-   body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:17%}
-   body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:11%}
+   body > div > table > thead > tr:nth-child(1) > th:nth-child(1){width:5%; } 
+   body > div > table > thead > tr:nth-child(2) > th:nth-child(2){width:30%}
+   body > div > table > thead > tr:nth-child(3) > th:nth-child(3){width:14%}
+   body > div > table > thead > tr:nth-child(4) > th:nth-child(4){width:4%}
+   body > div > table > thead > tr:nth-child(5) > th:nth-child(5){width:10%}
+   body > div > table > thead > tr:nth-child(6) > th:nth-child(6){width:9%}
+   body > div > table > thead > tr:nth-child(7) > th:nth-child(7){width:10%}
+   body > div > table > thead > tr:nth-child(8) > th:nth-child(8){width:9%}
 </style>
 </head>
 <body>
@@ -94,7 +109,6 @@
   	    <c:forEach var="b" items="${boardlist}">
   	    <tr>
   	      <td><%-- 번호 --%>
-  	      <c:out value="${num}"/><%-- num 출력 --%>
   	      <c:set var="num" value="${num-1}" />  <%-- num=num-1; 의미 --%>
   	      </td>
   	      <td><%-- 제목 --%>

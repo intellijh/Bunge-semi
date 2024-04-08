@@ -12,7 +12,6 @@
 <script src="${pageContext.request.contextPath}/js/mypage.js"></script>
 <style>
  body {
-    width: 1140px;
     margin: 0 auto;
     line-height: 28px;
 }

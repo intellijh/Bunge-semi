@@ -12,7 +12,6 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 <style>
  body {
-    width: 1140px;
     margin: 0 auto;
     line-height: 28px;
 }
