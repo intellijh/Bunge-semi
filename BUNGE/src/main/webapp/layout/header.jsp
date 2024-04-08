@@ -17,9 +17,6 @@
     		width: 100%; /* 헤더의 전체 너비를 채우도록 설정 */
     		z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
 		}
-		nav {
-    		
-		}
     	
 		.navbar {
 			padding : 0 
@@ -32,7 +29,7 @@
 
         .inner {
         	line-height: 28px;
-        	margin : 0 175px 0 205px ;
+        	margin : 0 auto ;
             width: 1140px;
             display: flex; /* Changed to flex to align items horizontally */
             justify-content: space-between; /* Added to evenly distribute items horizontally */
@@ -58,14 +55,6 @@
         ul+ul .nav-item:nth-child(1){
         	padding-right : 10px;
         }
-        
-        .nav-item:nth-child(2){
-        	padding-right : 0px;
-        }
-        
-        .nav-item:nth-child(3) {
-       		padding-left : 0; padding-right : 0
-        }
          
         .nav-item:nth-child(4) {
         	padding-right :10px 
@@ -83,6 +72,9 @@
         	border-radius : 50px
         }
         
+        #menu {
+        column-gap : 100px
+        } 
      
         
     </style>
@@ -96,7 +88,7 @@
         <a class="navbar-brand" href="index.jsp"><img src="${pageContext.request.contextPath}/image/logo.png"
                                                        alt="logo"
                                                        width="140" height="30" class="d-inline-block align-text-top"></a>
-        <ul class="navbar-nav ml-auto"> <!-- Add ml-auto class to move items to the right -->
+        <ul class="navbar-nav ml-auto" id="menu"> <!-- Add ml-auto class to move items to the right -->
          <li class="nav-item">
                <a class="nav-link" aria-current="page" href="index.jsp">Home</a>
            </li>  

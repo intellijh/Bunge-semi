@@ -58,6 +58,7 @@
  	}
  	
  	.table thead th {
+ 		padding : .75rem;
  	    vertical-align: bottom;
     	border-bottom: 2px solid #BCE55C;
  	}
@@ -70,15 +71,17 @@
  	b { 
  		line-height: 70px
  	}
+ 	
+ 	.table thead th {
+    	white-space: nowrap; /* 텍스트를 한 줄로 강제로 표시하도록 설정 */
+    	padding : 15px 12px 15px 12px 
+	}
+	
+	
+ 	.table thead th:nth-child(7), body > div.container > table > tbody > tr:nth-child(1) > td:nth-child(6) > div:nth-child(1),body > div.container > table > tbody > tr:nth-child(1) > td:nth-child(8) > div{
+ 	text-align : center
+}
   
-   body > div > table > thead > tr:nth-child(1) > th:nth-child(1){width:5%; } 
-   body > div > table > thead > tr:nth-child(2) > th:nth-child(2){width:30%}
-   body > div > table > thead > tr:nth-child(3) > th:nth-child(3){width:14%}
-   body > div > table > thead > tr:nth-child(4) > th:nth-child(4){width:4%}
-   body > div > table > thead > tr:nth-child(5) > th:nth-child(5){width:10%}
-   body > div > table > thead > tr:nth-child(6) > th:nth-child(6){width:9%}
-   body > div > table > thead > tr:nth-child(7) > th:nth-child(7){width:10%}
-   body > div > table > thead > tr:nth-child(8) > th:nth-child(8){width:9%}
 </style>
 </head>
 <body>
@@ -128,6 +131,7 @@
   	   			<c:out value="${b.inf_subject}" />
   	   		</c:if>
   	   	      </a>[${b.cnt}]	 <%--총 댓글 수 --%>
+  	   	      <span id="postbook0" class="booksubject">inf_book</span>
   	   	    </div>
   	   	  </td>
   	   	  <td><div>${b.inf_content}</div></td>
