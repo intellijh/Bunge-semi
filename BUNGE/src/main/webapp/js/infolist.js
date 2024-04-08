@@ -58,11 +58,11 @@ function ajax(sdata) {
 						if(subject.length >= 20) {
 							subject=subject.substr(0,20) + "..."
 						}
-						
-						let book=item.inf_book
-						if(book.length >= 20) {
-							book=book.substr(0,20) + "..."
-						}
+
+						// let book=item.inf_book
+						// if(book.length >= 20) {
+						// 	book=book.substr(0,20) + "..."
+						// }
 						
 						let content=item.inf_content
 						if(content.length >= 20) {

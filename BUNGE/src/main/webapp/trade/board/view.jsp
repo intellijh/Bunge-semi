@@ -36,7 +36,7 @@
 			<span id="image-tradeMethod"><c:out value="선호 거래 방법 : ${trade.tradeMethod}" /></span><br>
 			<span id="image-price"><c:out value="${trade.price}원" /></span><br>
 			<span id="image-author"><c:out value="${trade.sellerID}" /></span><br>
-			<span id="image-readCount"><c:out value="조회수 : ${trade.readCount}" /></span>
+			<span id="image-readCount"><c:out value="조회수 : ${trade.readCount + 1}" /></span>
 
 			<!-- 수정, 삭제 폼 -->
 			<form method="POST" id="delete-or-update-form">
