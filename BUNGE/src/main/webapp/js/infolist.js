@@ -59,10 +59,10 @@ function ajax(sdata) {
 							subject=subject.substr(0,20) + "..."
 						}
 						
-				//		let book=item.inf_book
-				//		if(book.length >= 20) {
-				//			book=book.substr(0,20) + "..."
-				//		}
+						let book=item.inf_book
+						if(book.length >= 20) {
+							book=book.substr(0,20) + "..."
+						}
 						
 						let content=item.inf_content
 						if(content.length >= 20) {
@@ -71,7 +71,9 @@ function ajax(sdata) {
 						output += "<td><div>" + blank + img
 						output += "  <a href='InfoDetail.com?inf_num=" + item.inf_num + "'>"
 						output += subject.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-						       +    '</a>[' + item.cnt + ']</div></td>'
+						       +    '</a>[' + item.cnt + ']'
+						       +'<span id="postbook0" class="booksubject">' + book + '</span></div></td>'
+						output += 
 				//	    output += "<td><div>" + book.replace(/</g, '&lt;').replace(/>/g, '&gt;') + "</div></td>"
 						output += '<td><div>' + content.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div></td>'
 						output += '<td><div>' + item.m_id + '</div></td>'
