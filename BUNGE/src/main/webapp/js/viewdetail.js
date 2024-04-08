@@ -320,13 +320,15 @@ $(function() {
 	$('.comment-area').on('click','.btn-cancel',function(){
 		//댓글 번호를 구합니다
 		const comm_num = $(this).next().attr('data-id');
+		console.log(comm_num)
 		const selector = '#' + comm_num;
+		console.log(selector)
 		
 		//.comment-write 영역 삭제합니다.
-		$(selector + '.comment-write').remove();
+		$(selector + ' .comment-write').remove();
 		
 		//숨겨두었던  .comment-nick-area 영역 보여줍니다.
-		$(selector + '>.comment-nick-area').css('display','block');
+		$(selector + ' .comment-nick-area').css('display','block');
 		
 		//수정 폼이 있는 상태에서 더보기를 클릭할 수 없도록 더보기 영역을 숨겼는데 취소를 선택하면 보여주도록 합니다.
 		$(".comment-tool").show();

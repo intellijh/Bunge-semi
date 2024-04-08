@@ -45,9 +45,6 @@
  		display : inline-block
  	}
  
- 	.rows {
- 		text-align : right;
- 	}
  	
  	#yeoback { 
  		width : 100%; 
@@ -78,10 +75,30 @@
 	}
 	
 	
- 	.table thead th:nth-child(7), body > div.container > table > tbody > tr:nth-child(1) > td:nth-child(6) > div:nth-child(1),body > div.container > table > tbody > tr:nth-child(1) > td:nth-child(8) > div{
- 	text-align : center
-}
+ 	.table thead th:nth-child(7), body > div.container > table > tbody > tr:nth-child(1) > td:nth-child(6), body > div.container > table > tbody > tr:nth-child(1) > td:nth-child(8) {
+ 		text-align : center
+	}
+	
+	body > div.container > table > tbody > tr:nth-child(1) > td:nth-child(8) {}
+	
+	.booksubject {
+		font-size : 10px
+	}
   
+  	.btn-success {
+  		background-color : #BCE55C;
+  		border : #BCE55C;
+  	}
+    
+    .page-link, .pagination {
+    	color: #000;
+    }
+    
+    .page-item.active .page-link {
+    	background-color: #BCE55C; /* 활성화된 페이지 버튼의 배경색을 파란색으로 설정 */
+    	color: #000; /* 텍스트 색상을 흰색으로 설정 */
+    	border-color: #BCE55C; /* 테두리 색상을 파란색으로 설정 */
+	}
 </style>
 </head>
 <body>
@@ -119,7 +136,6 @@
   	   	    <div>
   	   	    <c:if test="${b.inf_lev != 0}"> <%-- 답글인 경우 --%>
   	   		  <c:forEach var="a" begin="0" end="${b.inf_lev*2}" step="1">
-  	   		  &nbsp;
   	   		  </c:forEach>
   	   		  <img src="image/line.gif" style="width:20px">
   	   	    </c:if>
@@ -130,8 +146,8 @@
   	   		<c:if test="${b.inf_subject.length()<20}">
   	   			<c:out value="${b.inf_subject}" />
   	   		</c:if>
-  	   	      </a>[${b.cnt}]	 <%--총 댓글 수 --%>
-  	   	      <span id="postbook0" class="booksubject">inf_book</span>
+  	   	      </a>[${b.cnt}]<br>
+  	   	      <span id="postbook0" class="booksubject">book</span>	 <%--총 댓글 수 --%>
   	   	    </div>
   	   	  </td>
   	   	  <td><div>${b.inf_content}</div></td>
@@ -195,7 +211,7 @@
  </c:if>
  
  
- <button id="newwritebutton" type="button" style="position:relative;" class="btn btn-primary float-right">+글쓰기</button>
+ <button id="newwritebutton" type="button" style="position:relative;" class="btn btn-success float-right">+글쓰기</button>
 </div>
 </body>
 </head>

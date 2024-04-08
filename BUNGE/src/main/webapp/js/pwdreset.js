@@ -1,10 +1,10 @@
 $(function(){
-	
+	$("form[name=pwdreset").on('submit' ,
+	function(){
 	$("input[name=m_pwd").on('keyup',
 	function(){
 		const patternpwd =/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 		const pwd = $(this).val().trim();
-		
 		if(pwd == "") {
 			$("#pwd_message").css('color' , ' red').text("비밀번호: 비밀번호는 필수입니다.");
 			($("input[name=m_pwd]")).focus();
@@ -23,11 +23,13 @@ $(function(){
 		function(){
 				const pwd = $("input[name=m_pwd]").val().trim();
 				const pwd_check = $(this).val().trim();
-				if(pwd != pwd_check) {
-						$("#pwd_check_message").css('color', 'red').test("비밀번호가 일치하지 않습니다.");
+				 if(pwd != pwd_check) {
+						$("#pwd_check_message").css('color', 'red').text("비밀번호가 일치하지 않습니다.");
 						return	false;
 				}else {
-					$("#pwd_check_message").css('color', 'green').text("비밀번호가 일치합니다.");
+						$("#pwd_check_message").css('color', 'green').text("비밀번호가 일치합니다.");
+						return true;
 				}
 		})
+		});
 });

@@ -58,23 +58,23 @@ function ajax(sdata) {
 						if(subject.length >= 20) {
 							subject=subject.substr(0,20) + "..."
 						}
-
-						// let book=item.inf_book
-						// if(book.length >= 20) {
-						// 	book=book.substr(0,20) + "..."
-						// }
+						
+						let book = item.inf_book;
+           				let bookLength = book ? book.length : 0; // book 변수가 정의되어 있지 않을 수 있으므로, book의 길이를 확인합니다.
+            			if (bookLength >= 20) {
+                		book = book.substr(0, 20) + "...";
+            			}else if (book == null) {
+							book = '';
+						}
 						
 						let content=item.inf_content
 						if(content.length >= 20) {
 							content=content.substr(0,20) + "..."
 						}
-						output += "<td><div>" + blank + img
+						output += "<td><div>" + img
 						output += "  <a href='InfoDetail.com?inf_num=" + item.inf_num + "'>"
 						output += subject.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-						       +    '</a>[' + item.cnt + ']'
-						       +'<span id="postbook0" class="booksubject">' + book + '</span></div></td>'
-						output += 
-				//	    output += "<td><div>" + book.replace(/</g, '&lt;').replace(/>/g, '&gt;') + "</div></td>"
+						output +=    '</a>[' + item.cnt + ']<br><span id="postbook0" class="booksubject">' + book + '</span></div></td></div></td>'
 						output += '<td><div>' + content.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div></td>'
 						output += '<td><div>' + item.m_id + '</div></td>'
 						output += '<td><div>' + item.inf_reg + '</div></td>'
