@@ -9,7 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <%@ include file="/layout/header.jsp" %>
+<%@ include file="/layout/header.jsp" %>
 <script src="js/viewdetail.js"></script>
 <style>
   body {
@@ -103,6 +103,7 @@ pre {
     font-family: 나눔고딕;
     position: relative;
     top: 20px;
+    word-wrap: break-word;
 }
 
 
@@ -118,7 +119,9 @@ pre {
 }
 
 .postbookinfoarea {
-  font-size:8px;
+  position:relative;
+  top:142px;
+  font-size:10px;
   display : inline-block;
 }
 
@@ -188,10 +191,10 @@ pre {
 	  <div class="postcontentarea">
 	      <img src="${boarddata.inf_cover}" width="200px" height="300px">
 	      <div class="postbookinfoarea">
-		      <div class="postbooktitle">${boarddata.inf_book}</div>
-		      <div class="postbookauthor">${boarddata.inf_author}</div>
-		      <div class="postbookcategory">${boarddata.inf_category}</div>
-		      <div class="postbookpubdate">${boarddata.inf_pubdate}</div>
+		      <span class="badge badge-success">책제목</span><span class="postbooktitle">${boarddata.inf_book}</span><br>
+		      <span class="badge badge-success">지은이</span><span>${boarddata.inf_author}</span><br>
+		      <span class="badge badge-success">카테고리</span><span>${boarddata.inf_category}</span><br>
+		      <span class="badge badge-success">출간일</span><span class="postbookpubdate">${boarddata.inf_pubdate}</span><br>
 	      </div>
 	    <pre class="postcontent">${boarddata.inf_content}</pre>
 	    <div class="postloc">From ... ${boarddata.inf_loc}</div>

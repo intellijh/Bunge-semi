@@ -82,6 +82,7 @@
 </style>
 </head>
 <body>
+<input type="hidden" name="loginid" value="${m_id}" id="loginid">
 <div id="yeoback">
  <b>Sharing</b><br><br><br>
  독후감과 나의 일상을 공유해봐요.<br><br><br>
@@ -190,7 +191,7 @@
  </c:if>
  
  
- <button type="button" style="position:relative;" class="btn btn-primary float-right">+글쓰기</button>
+ <button id="newwritebutton" type="button" style="position:relative;" class="btn btn-primary float-right">+글쓰기</button>
 </div>
 </body>
 </head>
