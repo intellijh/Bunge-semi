@@ -8,6 +8,8 @@
 <script src="js/infolist.js"></script>
 <%@ include file="/layout/header.jsp" %>
 <style>
+
+
 	body {
   		font-family : "나눔고딕";
   		margin : 0 auto;
@@ -15,6 +17,7 @@
 	
 	.table {
 		border : 1px soild #BCE55C;
+		
 	}
 	
  	.container {
@@ -58,47 +61,43 @@
  		padding : .75rem;
  	    vertical-align: bottom;
     	border-bottom: 2px solid #BCE55C;
+    	white-space: nowrap; /* 텍스트를 한 줄로 강제로 표시하도록 설정 */
+    	padding : 15px 12px 15px 12px; 
+    	text-align : center
  	}
  	
- 	.table td {
+ 	.table td,th {
  		font-size : 15px;
  		border-top: 1px solid #BCE55C;
+ 		vertical-align: middle; /* 텍스트 수직 가운데 정렬 */
+ 		text-align : center
  	}
  	
  	b { 
  		line-height: 70px
  	}
- 	
- 	.table thead th {
-    	white-space: nowrap; /* 텍스트를 한 줄로 강제로 표시하도록 설정 */
-    	padding : 15px 12px 15px 12px 
-	}
-	
-	
- 	.table thead th:nth-child(7), body > div.container > table > tbody > tr:nth-child(1) > td:nth-child(6), body > div.container > table > tbody > tr:nth-child(1) > td:nth-child(8) {
- 		text-align : center
-	}
-	
-	body > div.container > table > tbody > tr:nth-child(1) > td:nth-child(8) {}
 	
 	.booksubject {
 		font-size : 10px
 	}
   
-  	.btn-success {
+  	#newwritebutton {
   		background-color : #BCE55C;
   		border : #BCE55C;
+  		display : inline-block;
+  		
   	}
     
-    .page-link, .pagination {
+    .page-link, .pagination, .page-link:hover {
     	color: #000;
     }
     
-    .page-item.active .page-link {
+    .page-item.active .page-link  {
     	background-color: #BCE55C; /* 활성화된 페이지 버튼의 배경색을 파란색으로 설정 */
     	color: #000; /* 텍스트 색상을 흰색으로 설정 */
     	border-color: #BCE55C; /* 테두리 색상을 파란색으로 설정 */
 	}
+	
 </style>
 </head>
 <body>
@@ -111,7 +110,6 @@
 <div class="container">
  <%-- 게시글이 있는 경우 --%>
  <c:if test="${listcount > 0}">
- 
     <table class="table">
       <thead>
   	    <tr>
@@ -158,8 +156,10 @@
   	   	</tr>
   	    </c:forEach>
       </tbody>
-    </table>
-    
+    </table><br>
+  	
+  	 <button id="newwritebutton" type="button" style="position:relative;" class="btn btn-success float-right">+글쓰기</button><br><br>
+  	
   	<div class="center-block">
 	  <ul class="pagination justify-content-center">
 	    <c:if test="${page <= 1}">
@@ -200,18 +200,13 @@
 	      </li>
 	    </c:if>
 	  </ul>
-	</div>
-    
-    
+	</div><br>
  </c:if> <%-- <c:if test="${listcount > 0}"> end --%>
  
  <%-- 게시글이 없는 경우 --%>
  <c:if test="${listcount == 0}">
    <h3 style="text-align:center">등록된 글이 없습니다.</h3>
  </c:if>
- 
- 
- <button id="newwritebutton" type="button" style="position:relative;" class="btn btn-success float-right">+글쓰기</button>
 </div>
 </body>
 </head>
