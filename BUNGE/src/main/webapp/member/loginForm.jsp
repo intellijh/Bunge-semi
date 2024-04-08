@@ -8,7 +8,7 @@
 <style>
 .login{
     position:relative;
-    top: 150px;;
+    top: 150px;
     width: 450px;
     height: 400px;
     margin: 0 auto;

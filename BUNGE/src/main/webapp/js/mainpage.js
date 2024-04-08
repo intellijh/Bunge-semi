@@ -53,7 +53,6 @@ $(document).ready(function(){
 			  $('#commreg' + index).text(this.reg)
 		  })
 	  }
-	  
   })
   
   //인기 게시글

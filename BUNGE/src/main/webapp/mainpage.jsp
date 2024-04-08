@@ -10,6 +10,7 @@
 <style>
   body {
     font-family : 나눔고딕;
+    margin : 0 auto;
   }
   
   .mt-3 {
@@ -28,7 +29,7 @@
 
 <%-- 슬라이드 영역 시작 --%>  
   .slide {
-    width : 1110px;
+    width : 1140px;
   }
   
   .carousel-inner img {

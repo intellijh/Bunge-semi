@@ -2,6 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+<style>
+	body {width : 1140px}
+
+</style>
 <head>
 	<jsp:include page="../../layout/header.jsp" />
 	<meta charset="UTF-8">
