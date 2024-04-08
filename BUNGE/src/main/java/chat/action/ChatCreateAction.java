@@ -63,7 +63,7 @@ public class ChatCreateAction implements Action {
 
         ActionForward forward = new ActionForward();
         forward.setRedirect(true);
-        forward.setPath("/chat.com");
+        forward.setPath("chat.com");
         return forward;
     }
 }
