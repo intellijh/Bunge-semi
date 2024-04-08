@@ -14,7 +14,7 @@ body, html {
 .card {
     height: 700px !important;
     border-radius: 15px !important;
-    background-color: rgba(0, 0, 0, 0.4) !important;
+    background-color: #46a7289c !important;
 }
 
 .contacts_body {
@@ -64,6 +64,10 @@ body, html {
 .type_msg:focus {
     box-shadow: none !important;
     outline: 0px !important;
+}
+
+.type_msg::placeholder {
+    color: yellowgreen !important;
 }
 
 .attach_btn {
@@ -158,7 +162,7 @@ body, html {
 
 .user_info p {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.6);
+    color: whitesmoke;
 }
 
 .info_msg {

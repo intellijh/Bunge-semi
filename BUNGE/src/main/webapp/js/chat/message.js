@@ -296,14 +296,11 @@ $(function(){
     }
 
     $inputMessage.keydown(function (e) {
-        console.log(e.key);
+        console.log(e);
         if (e.key === "Enter") {
-            if (e.key !== "Process") {
-
-                $('.type_msg').focus();
-                $('.send_btn').click();
-                e.preventDefault();
-            }
+            $('.type_msg').focus();
+            $('.send_btn').click();
+            e.preventDefault();
         }
     });
 
