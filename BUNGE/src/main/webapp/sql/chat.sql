@@ -102,4 +102,5 @@ FROM a
 WHERE (send_date, chat_id) IN (SELECT MAX(a.send_date), chat_id
                                FROM a
                                GROUP BY chat_id)
-   or content IS NULL;
+   or content IS NULL
+ORDER BY update_date DESC;

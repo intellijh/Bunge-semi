@@ -26,6 +26,14 @@ function getChatList() {
             if (rdata.length <= 0) {
                 console.log("getList length 안");
                 $(".contacts").empty();
+                $(".card").hide();
+                let output = "";
+                output +=
+                    "<div class='no-chat'>" +
+                    "   아직 채팅이 없습니다.<br>" +
+                    "   <a href='trade.net'>대화하러 가기</a>" +
+                    "</div>";
+                $("body").append(output);
                 return;
             }
 
