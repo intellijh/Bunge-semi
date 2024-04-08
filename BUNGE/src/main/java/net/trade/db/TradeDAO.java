@@ -176,7 +176,8 @@ public class TradeDAO {
     }
 
 
-    public ArrayList<Trade> searchTradeByCategory(String category) throws SQLException {
+
+    public ArrayList<Trade> searchTradeByCategory(String category) throws SQLException, NamingException {
         String sql = "SELECT imageID, title, sellerID, createDate, tradeID, price, category, quality, condition FROM trade WHERE category = ?";
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, category);
@@ -323,6 +324,46 @@ public class TradeDAO {
 
     }
 
+    public ArrayList<Trade> searchTradeByReadCount(String category) throws SQLException, NamingException {
+        String sql = "SELECT imageID, title, sellerID, createDate, tradeID, price, category, quality, condition FROM trade WHERE category = ?";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, category);
+        rs = pstmt.executeQuery();
+
+        ArrayList<Trade> list = new ArrayList<>();
+
+        while (rs.next()) {
+            Trade trade = new Trade();
+            trade.setTradeID(rs.getInt("tradeID"));
+            trade.setSellerID(rs.getString("sellerID"));
+            trade.setCreateDate(rs.getTimestamp("createDate"));
+            trade.setImageID(rs.getString("imageID"));
+            trade.setTitle(rs.getString("title"));
+            trade.setPrice(rs.getInt("price"));
+            trade.setCategory(rs.getString("category"));
+            trade.setQuality(rs.getString("quality"));
+            trade.setCondition(rs.getString("condition"));
+
+            list.add(trade);
+        }
+
+        return list;
+    }
+
+
+
+//    public ArrayList<Trade> getList(String )
+//        String sql = "SELECT * FROM TRADE WHERE TRADEID IN (SELECT TRADEID FROM TRADE WHERE = ?) ORDER BY TRADEID DESC"
+//        ArrayList<Trade> list = new ArrayList<Trade>();
+//        try {
+//            pstmt = conn.prepareStatement(sql);
+//            pstmt.setString(1, userID);
+//            rs = pstmt.executeQuery();
+//            while (rs.next()) {
+//                Trade trade = new Trade();
+//
+//            }
+//    }
 
 //    public void insertImagePath(String imagePath) {
 //        String sql = "INSERT INTO trade (imageID) VALUES (?)";
