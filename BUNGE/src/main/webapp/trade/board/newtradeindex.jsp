@@ -12,30 +12,36 @@
         response.sendRedirect("login.com");
     }
 
-    TradeDAO tradeDAO = new TradeDAO();
-    ArrayList<Trade> tradeList = null;
+//    TradeDAO tradeDAO = new TradeDAO();
+//    ArrayList<Trade> tradeList = null;
 
-    String keyword = request.getParameter("keyword");
-    if (keyword == null){	// 키워드가 없을 경우 전체 동영상 조회
-        tradeList = tradeDAO.getTradeList();
-    } else {	// 키워드 존재 시 검색결과 조회
-        String mode = request.getParameter("mode");
-        if (mode.equals("제목")){
-            tradeList = tradeDAO.searchTradeByTitle(keyword);
-        } else if (mode.equals("내용")){
-            tradeList = tradeDAO.searchTradeByDesc(keyword);
-        }
-    }
-
-
+//    String keyword = request.getParameter("keyword");
+//    if (keyword == null){	// 키워드가 없을 경우 전체 동영상 조회
+//        tradeList = tradeDAO.getTradeList();
+//    } else {	// 키워드 존재 시 검색결과 조회
+//        String mode = request.getParameter("mode");
+//        if (mode.equals("제목")){
+//            tradeList = tradeDAO.searchTradeByTitle(keyword);
+//        } else if (mode.equals("내용")){
+//            tradeList = tradeDAO.searchTradeByDesc(keyword);
+//        }
+//    }
+//
+//
+//    String category = request.getParameter("category");
+//    if(category != null) {
+//        tradeList = tradeDAO.searchTradeByCategory(category);
+//    }
 
 %>
+
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 </style>
 
 <!DOCTYPE html>
+
 <html>
 <head>
     <jsp:include page="../../layout/header.jsp" />
@@ -43,8 +49,32 @@
     <title>Trade Board</title>
     <link rel="stylesheet" href="../../static/bootstrap.min.css">
     <link rel="stylesheet" href="../../static/style.css">
+    <script>
+        $(document).ready(function() {
+            $(".category").click(function() {
+                var category = $(this).data("category");
+
+                // AJAX 요청 보내기
+                $.ajax({
+                    url: "tradeCategory.net",
+                    type: "GET",
+                    data: { category: category }, // 카테고리, 검색 모드, 검색어 함께 보내기
+                    success: function(response) {
+
+
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error:", error);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
+
+
+
 <div id="upper-bar">
     <a href="tradeWrite.net"><img src="../../static/upload_icon.png" id="button-write" height="43px"/></a>
 </div>
@@ -61,39 +91,25 @@
     </div>
 </div>
 
+
 <div id="categoryandcolor">
-    Trade<br>
-    당신의 이웃들과 책을 거래해보아요!
+    <br><index_title>Trade</index_title><br><br>
+    <index_desc>마음의 양식을 나누어 보아요!</index_desc><br><br><br><br>
 
-
+    <div id="category">
+    <button class="category button" data-category="철학">철학</button>
+    <button class="category button" data-category="종교">종교</button>
+    <button class="category button" data-category="사회과학">사회과학</button>
+    <button class="category button" data-category="자연과학">자연과학</button>
+    <button class="category button" data-category="기술과학">기술과학</button>
+    <button class="category button" data-category="예술">예술</button>
+    <button class="category button" data-category="언어">언어</button>
+    <button class="category button" data-category="문학">문학</button>
+    <button class="category button" data-category="역사">역사</button>
+    <button class="category button" data-category="IT">IT</button>
+    </div>
 </div>
 
-<script>
-    $(function() {
-        $("button").on('click',function() {
-            // 버튼 클릭 시 그 버튼의 value를 var kind로 가져오기
-            var kind = (this).val();
-
-            $.ajax({
-                url : './tradeCategory.net', // 상기 주소로
-                type : "post", // 포스트 방식으로 전송함
-                cache : false,
-                headers: {"cache-control": "no-cache", "pragma": "no-cache"},
-                data : {"kind" : kind}, // kind를 kind로 명명해서 보냄
-                success : function(data) {
-                    console.log(data);
-
-                    $('body').html(data); // 성공 시 body 부분에 data라는 html 문장 다 적용
-
-                },
-                error : function(data) {
-                    alert('error');
-                }
-            })
-        })
-    })
-
-</script>
 
 <hr>
 
@@ -119,6 +135,7 @@
 
 
 <div id="under-bar">중고 거래 게시판</div>
+
 </body>
 <script type="text/javascript" src="../../static/jquery.js"></script>
 <script type="text/javascript" src="../../static/bootstrap.min.js"></script>

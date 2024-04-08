@@ -27,7 +27,7 @@
             <div class="card mb-sm-3 mb-md-0 contacts_card">
                 <div class="card-header">
                     <div class="input-group">
-                        <input type="text" placeholder="Search..." name="" class="form-control search">
+                        <input type="search" placeholder="Search..." name="" class="form-control search">
                         <div class="input-group-prepend">
                             <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
                         </div>
@@ -51,16 +51,12 @@
                             <span class="online_icon"></span>
                         </div>
                         <div class="user_info chat_top">
-                            <%--                            <span>Chat with Khalid</span>--%>
-                            <%--                            <p>1767 Messages</p>--%>
+                            <%-- 채팅방 상대 이름 --%>
                         </div>
                     </div>
                     <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
                     <div class="action_menu">
                         <ul>
-                            <li class="profile"><i class="fas fa-user-circle"></i> 프로필 보기</li>
-                            <%--                            <li><i class="fas fa-users"></i> Add to close friends</li>--%>
-                            <%--                            <li><i class="fas fa-plus"></i> Add to group</li>--%>
                             <li class="delete-chat-btn"><i class="fas fa-ban"></i> 채팅방 삭제</li>
                         </ul>
                     </div>

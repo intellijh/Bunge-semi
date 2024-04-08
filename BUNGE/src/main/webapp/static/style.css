@@ -57,7 +57,7 @@ body {
 }
 #navi-bar {
 	min-height: 30px;
-	background: whitesmoke;
+	background: #E4F7BA;
 }
 
 #content {
@@ -161,6 +161,25 @@ body {
 	width: 100%;
 	height: 500px;
 	background-color: #bce55c;
+	text-align: center;
+}
+
+#category {
+	text-align: center;
+	margin: 0 auto;
+	background-color: #E4F7BA;
+}
+
+.category.button {
+	margin : 10px;
+}
+
+index_title {
+	font-size: 20px;
+}
+
+index_desc {
+	font-size: 15px;
 }
 
 .thumbnail {

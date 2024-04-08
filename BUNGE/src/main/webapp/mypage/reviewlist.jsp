@@ -8,17 +8,17 @@
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
-body {
-    width: 1140px;
+.myreveiw {
+    position: relative;
+    width: 1200px;
     margin: 0 auto;
-    line-height: 28px;
-}  
+}
 .tab_container{
     position: relative;
     display: flex;
     margin: 0 auto;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     padding-top: 40px;
 }
 .left_bar {
@@ -39,6 +39,9 @@ body {
 .tab-slider--container {
     position: relative;
     left: 20px;
+}
+.tab_box {
+width: 850px;
 }
 .reveiwtitle {
  	border-bottom: 1px solid rgba(212, 216, 229, .5);
@@ -92,6 +95,7 @@ body {
 </head>
 <body>
 <div id="warp">
+<div class="myreveiw">
 <!-- tab menu 시작 -->
 	<div class="reveiwtitle">
 	<h3>작성글 조회</h3>
@@ -160,6 +164,7 @@ body {
 		</div>
 	  </div>
 	<!-- 내가 쓴 글/댓글 영역 끝 -->
+	</div>
 	</div>
 </body>
 </html>
