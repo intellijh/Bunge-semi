@@ -170,4 +170,12 @@ $(function () {
     console.log("load");
 
     getChatList();
+
+    // 채팅 검색 기능
+    $(".search").on("keyup", function () {
+        const value = $(this).val().toLowerCase();
+        $(".contacts li .user_info").filter(function () {
+            $(this).closest("li").toggle($(this).children().text().toLowerCase().indexOf(value) > -1)
+        });
+    });
 });

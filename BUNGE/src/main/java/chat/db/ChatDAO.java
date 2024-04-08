@@ -1,8 +1,5 @@
 package chat.db;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -29,19 +26,8 @@ public class ChatDAO {
     public List<Chat> getChatList(String id) {
 
         List<Chat> list = new ArrayList<>();
-/*
         String sql =
-                "SELECT c.chat_id, c.seller_id, c.buyer_id, c.update_date, m.content\n" +
-                "FROM chat c\n" +
-                "         JOIN chat_message m ON c.chat_id = m.chat_id\n" +
-                "WHERE (c.seller_id = ? OR c.buyer_id = ?)\n" +
-                "  AND m.send_date = (SELECT MAX(send_date)\n" +
-                "                     FROM chat_message\n" +
-                "                     WHERE chat_id = c.chat_id)\n" +
-                "ORDER BY c.update_date DESC";
-*/
-        String sql =
-                "WITH b AS (SELECT c.chat_id,\n" +
+                "WITH a AS (SELECT c.chat_id,\n" +
                 "                  c.seller_id,\n" +
                 "                  c.buyer_id,\n" +
                 "                  c.update_date,\n" +
@@ -49,13 +35,13 @@ public class ChatDAO {
                 "                  CASE WHEN m.chat_id IS NULL THEN NULL ELSE m.content END AS content\n" +
                 "           FROM chat c\n" +
                 "                    LEFT JOIN chat_message m ON c.chat_id = m.chat_id\n" +
-                "           WHERE ? IN (c.seller_id, c.BUYER_ID))\n" +
+                "           WHERE ? IN (c.seller_id, c.buyer_id))\n" +
                 "SELECT *\n" +
-                "FROM b\n" +
-                "WHERE (send_date, chat_id) IN (SELECT MAX(b.send_date), chat_id\n" +
-                "                               FROM b\n" +
+                "FROM a\n" +
+                "WHERE (send_date, chat_id) IN (SELECT MAX(a.send_date), chat_id\n" +
+                "                               FROM a\n" +
                 "                               GROUP BY chat_id)\n" +
-                "   or content is null\n" +
+                "   or content IS NULL\n" +
                 "ORDER BY update_date DESC";
 
         try (Connection conn = ds.getConnection();
@@ -117,16 +103,16 @@ public class ChatDAO {
         long chatId = 0;
         String sql =
                 "INSERT INTO chat\n" +
-                "VALUES (?, ?, ?, ?, SYSTIMESTAMP, SYSTIMESTAMP)";
+                "VALUES (chat_seq.nextval, ?, ?, ?, SYSTIMESTAMP, SYSTIMESTAMP)";
 
         try (Connection conn = ds.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            chatId = incrementChatId(conn);
-            pstmt.setLong(1, chatId); //서비스 전에 chat_seq.nextval 로 변경
-            pstmt.setString(2, chat.getSellerId());
-            pstmt.setString(3, chat.getBuyerId());
-            pstmt.setLong(4, chat.getTrade_id());
+//            chatId = incrementChatId(conn);
+//            pstmt.setLong(1, chatId); //서비스 전에 chat_seq.nextval 로 변경
+            pstmt.setString(1, chat.getSellerId());
+            pstmt.setString(2, chat.getBuyerId());
+            pstmt.setLong(3, chat.getTrade_id());
             pstmt.executeUpdate();
         } catch (Exception e) {
 //            System.out.println("createChat() 에러 : " + e.getStackTrace()[0]);
@@ -135,6 +121,7 @@ public class ChatDAO {
         return chatId;
     }
 
+/*
     private long incrementChatId(Connection conn) throws SQLException {
         long result = 0L;
         String sql =
@@ -150,6 +137,7 @@ public class ChatDAO {
         }
         return result;
     }
+*/
 
     public int delete(Long chatId, String loginId, String sellerId) {
 
@@ -174,7 +162,7 @@ public class ChatDAO {
             pstmt.setLong(1, chatId);
             result = pstmt.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("delete() 에러 : " + e.getStackTrace()[0]);
         }
 
         return result;
