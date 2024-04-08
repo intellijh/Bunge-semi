@@ -442,7 +442,7 @@ public class BoardDAO {
 
 	public boolean boardModify(Board board) {
 		String sql = "update infoboard "
-				   + "set inf_subject=?, inf_content=?, inf_open=?, inf_loc=?, inf_book=?, inf_cover=? "
+				   + "set inf_subject=?, inf_content=?, inf_open=?, inf_loc=?, inf_book=?, inf_cover=?, inf_author=?, inf_category=?, inf_pubdate=?"
 				   + "where inf_num=?";
 		try (Connection con = ds.getConnection();
 		     PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -452,7 +452,10 @@ public class BoardDAO {
 				pstmt.setString(4, board.getInf_loc());
 				pstmt.setString(5, board.getInf_book());
 				pstmt.setString(6, board.getInf_cover());
-				pstmt.setInt(7, board.getInf_num());
+				pstmt.setString(7, board.getInf_author());
+				pstmt.setString(8, board.getInf_category());
+				pstmt.setString(9, board.getInf_pubdate());
+				pstmt.setInt(10, board.getInf_num());
 				
 				int result = pstmt.executeUpdate();
 				if (result == 1) {

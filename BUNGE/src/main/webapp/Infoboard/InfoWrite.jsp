@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <title>글쓰기</title>
 <head>
-<%@ include file="/layout/header.jsp" %>
+<jsp:include page="/layout/header.jsp" />
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 <script src="${pageContext.request.contextPath}/js/writeform.js"></script>
  <style>
@@ -17,8 +19,8 @@ h1 {
 }
 	
 .container {
-  width: 80%;
-  margin: 0 auto;
+    width: 1140px;
+    margin: 40px auto;
 }
 	
 label {
@@ -47,12 +49,14 @@ input[type=file]{
 }
 
 .bookinfo {
-  font-size : 10px;
+  font-size : 13px;
 }
 
 .bookinfoarea {
-  position : relative;
-  top : 10px;
+    position: absolute;
+    width: auto;
+    left: 410px;
+    font-size: 15px;
 }
 
 .badge-success {
@@ -79,14 +83,6 @@ input[type=file]{
   border-bottom-width:6px;
 }
 
-a {
-  color:white;
-}
-
-a:visited {
-  color: white;
-}
-
 textarea {
   resize:vertical;
   width:800px;
@@ -100,15 +96,25 @@ textarea {
     display: inline-block;
 }
 
-h2 {
-  display:inline-block;
-  position:relative;
-  top:20px;
-}
-
 #inf_cover {
   margin-right:15px;
   margin-bottom:15px;
+}
+
+#searchbtn {
+  color:white;
+}
+
+#searchbtn:visited {
+  color:white;
+}
+
+.lastbtn {
+  font-size:25px;
+}
+
+.infloc {
+  margin-bottom:50px;
 }
  </style>
  </head>
@@ -130,7 +136,7 @@ h2 {
 		<div class="form-group">
 	  		<label for="inf_book">책
 		 		<input name="inf_book" id="inf_book" type="text" placeholder="'검색' 버튼을 눌러주세요" readOnly value="${booktitle}" size="90px">
-	          	  <button type="button" class="badge badge-success"><a href="Infobooksearch.com?state=write">검색</a></button>
+	          	  <button type="button" class="badge badge-success"><a id="searchbtn" href="Infobooksearch.com?state=write">검색</a></button>
 	        </label>
 	      <c:if test="${booktitle != null}">
 	        <div>
@@ -221,15 +227,15 @@ h2 {
   		</div>
   		
  		
- 		<div class="form-group">
+ 		<div class="form-group infloc">
   		 <label for="address">위치</label>
   		    <input type="text" size="50" name="inf_loc" id="inf_loc">
   		    <input type="button" class="badge badge-success" value="위치찾기" id="postcode">
  		</div>
   		
    		 <div class="form-group">
-				<h2><button type="submit" class="badge badge-info">등록</button></h2>
-				<h2><button id="cancelbtn" type="reset" class="badge badge-danger">취소</button></h2>
+				<button type="submit" class="badge badge-info lastbtn">등록</button>
+				<button id="cancelbtn" type="reset" class="badge badge-danger lastbtn">취소</button>
 		</div>
 	</form>
   </div>

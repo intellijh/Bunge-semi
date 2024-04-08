@@ -8,6 +8,6 @@
 </head>
 <body>
 <input type="hidden" name="state" value="${param.state}" id="state">
-<input type="hidden" name="inf_num" value="${param.num}" id="inf_num">
+<input type="hidden" name="inf_num" value="${param.inf_num}" id="inf_num">
 </body>
 </html>

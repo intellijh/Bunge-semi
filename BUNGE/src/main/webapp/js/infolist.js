@@ -71,21 +71,21 @@ function ajax(sdata) {
 						if(content.length >= 20) {
 							content=content.substr(0,20) + "..."
 						}
-						output += "<td><div>" + img
+						output += "<td class='title'><div>" + img
 						output += "  <a href='InfoDetail.com?inf_num=" + item.inf_num + "'>"
 						output += subject.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 						output +=    '</a>[' + item.cnt + ']<br><span id="postbook0" class="booksubject">' + book + '</span></div></td></div></td>'
-						output += '<td><div>' + content.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div></td>'
+						output += '<td class="content"><div>' + content.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div></td>'
 						output += '<td><div>' + item.m_id + '</div></td>'
 						output += '<td><div>' + item.inf_reg + '</div></td>'
-						output += '<td><div>' + item.inf_readcount + '</div></td>'
+						output += "<td><div><img src='./image/book.png' width='15px' height='15px'>" + item.inf_readcount + '</div></td>'
 						if (item.inf_cover != undefined) {
 							//console.log('item.inf_cover :'+ index + " : " + item.inf_cover)
 						output += "<td><div><img class='cover' src='" + item.inf_cover + "'></div></td>'"
 						} else {
-						output += "<td><div></div></td>"
+						output += "<td><div><img src='./image/noimage.jpg' width='100px' height='130px'></div></td>"
 						}
-						output += '<td><div>' + item.infolikecnt + '</div></td>'
+						output += "<td><div><img src='./image/like_on.png' width='15px' height='15px'>" + item.infolikecnt + '</div></td>'
 					}) //function(index, item)
 				output += "</tbody>"
 				$('table').append(output)

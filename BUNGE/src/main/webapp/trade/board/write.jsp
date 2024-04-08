@@ -8,6 +8,11 @@
 	<title>거래글 업로드</title>
 	<link rel="stylesheet" href="./static/bootstrap.min.css">
 	<link rel="stylesheet" href="./static/style.css">
+<style>
+#price {
+  margin-bottom:30px;
+}
+</style>
 </head>
 <body>
 <div id="upper-bar">

@@ -47,6 +47,9 @@ public class InfoModifyProcessAction implements Action {
 			board.setInf_loc(multi.getParameter("inf_loc"));
 			board.setInf_book(multi.getParameter("inf_book"));
 			board.setInf_cover(multi.getParameter("inf_cover"));
+			board.setInf_author(multi.getParameter("inf_author"));
+			board.setInf_category(multi.getParameter("inf_category"));
+			board.setInf_pubdate(multi.getParameter("inf_pubdate"));
 			
 			board_result = boarddao.boardModify(board);
 			
