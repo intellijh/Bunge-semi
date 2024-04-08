@@ -8,7 +8,11 @@
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
-
+.mylike {
+	position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
 .tab_container{
      position: relative;
     display: flex;
@@ -37,7 +41,7 @@
     left: 20px;
  }
  .tab_box {
-width: 300px;
+width: 850px;
 }
  .myliketitle {
  	border-bottom: 1px solid rgba(212, 216, 229, .5);
@@ -92,6 +96,7 @@ width: 300px;
 </head>
 <body>
 <div id="warp">
+	<div class="mylike">
 	<!-- tab menu 시작 -->
 	<div class="myliketitle">
 		<h3>내가 좋아요한 리뷰 조회</h3>
@@ -165,6 +170,7 @@ width: 300px;
 		</div>
 	  </div>
 	<!-- 내가 쓴 글/댓글 영역 끝 -->
+	</div>
 	</div>
 </body>
 </html>

@@ -52,7 +52,7 @@ width: 850px;
 }
 .reveiwtitle h3 {
 	position: relative;
-    left: 90px;
+    left: 155px;
 }
 .user_board {
 	width: 850px;
@@ -128,7 +128,7 @@ width: 850px;
 					<div class="board">                                     
 					  <div class="board_box">
 						<div class="board_subject">
-							<h3 class="board_inf_subject_title">제목 : ${b.board.inf_subject}</h3>
+							<a href="InfoDetail.com?inf_num=${b.board.inf_num}"><h3 class="board_inf_subject_title">제목 : ${b.board.inf_subject}</h3></a>
 						</div>
 						  <div class="board_content">
 							<p class="board_inf_contet_text">내용 : ${b.board.inf_content}</p>

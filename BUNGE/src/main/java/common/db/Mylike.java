@@ -9,7 +9,6 @@ public class Mylike {
 	private Comment comment = new Comment();
 	private InfoLike infoLike = new InfoLike();
 	
-
 	public Mylike() {
 		
 	}

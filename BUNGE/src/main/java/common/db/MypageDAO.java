@@ -161,6 +161,7 @@ private DataSource ds;
 		String like_sql= "select b.inf_num , b.inf_subject, b.inf_content , b.inf_reg, b.inf_book, b.inf_cover, "
 				+ "    COUNT(DISTINCT c.inf_num) AS comment_count, "
 				+ "    COUNT(DISTINCT k.inf_num) AS like_count "
+				+ "	k.inf_num "
 				+ "from "
 				+ "    infoboard b "
 				+ "LEFT JOIN "
@@ -168,7 +169,7 @@ private DataSource ds;
 				+ "LEFT JOIN "
 				+ "    infolike k ON b.inf_num = k.inf_num "
 				+ "where b.m_id=? and b.inf_lev=0 "
-				+ "group by b.inf_num, b.inf_subject, b.inf_content, b.inf_reg, b.inf_book, b.inf_cover ";
+				+ "group by b.inf_num, b.inf_subject, b.inf_content, b.inf_reg, b.inf_book, b.inf_cover , k.inf_num ";
 			
 		try(Connection con =ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(like_sql);) {
@@ -186,6 +187,7 @@ private DataSource ds;
 					like.getInfoLike().setInf_num(rs.getInt("like_count"));
 					like.getBoard().setInf_book(rs.getString("inf_book"));
 					like.getBoard().setInf_cover(rs.getString("inf_cover"));
+					like.getInfoLike().setInf_num(rs.getInt("inf_num"));
 					
 					likelist.add(like);
 				}
