@@ -60,12 +60,33 @@
     flex-grow: 1;
     max-width: 80%;
     margin: 0 auto;
+    border-bottom: 1px solid #BCE55C;
+    height: 90px;
 }
 
 .postsubject {
   font-weight : bolder;
   font-size : 25px;
+  display : inline-block;
 }
+
+.posttool {
+  text-align : center;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #BCE55C;
+    border-color: #BCE55C;
+}
+
+.dropdowntool {
+    position: absolute;
+    display: inline-block;
+    left: 800px;
+    top: 30px;
+}
+
 <%-- 제목 부분 끝 --%>
  
 <%-- "내용" 부분 시작 --%>
@@ -75,6 +96,15 @@
 }
 <%-- "내용" 부분 끝 --%>
 
+<%-- 댓글 부분 시작 --%>
+.comment-area {
+    position: relative;
+    border-top: 1px solid #BCE55C;
+    top: 900px;
+}
+<%-- 댓글 부분 끝 --%>
+
+
 </style>
 </head>
 <body>
@@ -82,12 +112,37 @@
 <div class="container">
 	<div class="col-xl">
 	  <div class="postsubject">${boarddata.inf_subject}</div>
-	  <div class="posttool">&#46;&#46;&#46;</div>
-	 
+	  <c:if test="${boarddata.inf_open == 0}">
+	    <span class="badge badge-success">공개</span>
+	  </c:if>
+	  <c:if test="${boarddata.inf_open == 1}">
+	    <span class="badge badge-warning">비공개</span>
+	  </c:if>
+		<div class="dropdowntool">
+		  <button type="button" class="btn btn-success dropdown-toggle droptool" data-toggle="dropdown">
+		    더보기
+		  </button>
+		  <div class="dropdown-menu">
+		    <a class="dropdown-item" href="#">목록</a>
+		    <a class="dropdown-item" href="#">답변</a>
+		  <c:if test="${m_id == boarddata.m_id}">
+		    <a class="dropdown-item" href="InfoModify.com?inf_num=${boarddata.inf_num}">수정</a>
+		    <a class="dropdown-item" href="#">삭제</a>
+		  </c:if>
+		  </div>
+		</div>
 	  <div class="postprofilearea">
 	    <img src="memberupload/${boarddata.m_profile}" width="30px" height="30px" class="postprofile">
 	    <span class="postuserid">${boarddata.m_id}</span>
 	    <span class="postreg">${boarddata.inf_reg}</span>
+	  </div>
+	  <div class="postcontentarea">
+	    <img src="${boarddata.inf_cover}" width="150px" height="200px">
+	    <div class="postbooktitle">${boarddata.inf_book}</div>
+	    <div class="postopen">${boarddata.inf_open}</div>
+	    <div class="postcontent">${boarddata.inf_content}</div>
+	    <div class="postloc">${boarddata.inf_loc}</div>
+	    
 	  </div>
 	</div>
 
@@ -142,8 +197,7 @@
 				</div>
 			</div><%--comment-write end--%>
 		</div><%-- comment-area end--%>
-
-</div>
+</div><%-- container end --%>
 
 
 <%-- 테이블로 표시했던 부분 주석
@@ -231,6 +285,6 @@
 <%-- 게시판 view end --%>
     
 
-<%-- ></div> <%-- class="container" end --%> --%
+<%-- ></div> <%-- class="container" end --%>
 </body>
 			
