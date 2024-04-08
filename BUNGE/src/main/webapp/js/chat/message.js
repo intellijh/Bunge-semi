@@ -298,7 +298,6 @@ $(function(){
     $inputMessage.keydown(function (e) {
         console.log(e);
         if (e.key === "Enter") {
-            $('.type_msg').focus();
             $('.send_btn').click();
             e.preventDefault();
         }
