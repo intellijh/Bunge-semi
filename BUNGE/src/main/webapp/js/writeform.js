@@ -1,5 +1,27 @@
 $(function() {
 	
+	//글자수 카운트
+	$("#writecount").text($("#inf_content").val().length + '/1000')
+		console.log($("#inf_content").val())
+	
+	$("#inf_content").on('keyup', function() {
+		const length = $(this).val().length;
+		$("#writecount").text(length + '/1000');
+		console.log($("#inf_content").val())
+		
+		if (length > 1000) {
+			alert('1000자까지만 입력할 수 있습니다...')
+			$(this).val($(this).val().substr(0,999))
+			$("#writecount").text(length + '/1000');
+		}
+	})		
+	
+	//파일첨부 파일추가 버튼 툴팁
+	$(document).ready(function(){
+	  $('[data-toggle="tooltip"]').tooltip();
+	});
+		
+	//
 	if ($('.inf_cover').attr('src') != "") {
 		$('.inf_cover').css('display', 'block')
 	}
@@ -40,36 +62,42 @@ $(function() {
 		if ($('.filename').text() != "") {
 			$(".remove"+$(this).attr('name').substr(8,1)).css('display', 'inline-block')
 		}
+		$('#preview' + $(this).attr('name').substr(8,1)).css('display', 'inline-block')
 	})
 	
 	
 	$(".remove1").click(function() {
 		$("#filevalue1").text('');
 		$("#preview1").attr('src','')
+		$("#preview1").css('display','none')
 		$(".input-group1").css('display', 'none')
 		$(this).css('display', 'none')
 	})
 	$(".remove2").click(function() {
 		$("#filevalue2").text('');
 		$("#preview2").attr('src','')
+		$("#preview2").css('display','none')
 		$(".input-group2").css('display','none')
 		$(this).css('display', 'none')
 	})
 	$(".remove3").click(function() {
 		$("#filevalue3").text('');
 		$("#preview3").attr('src','')
+		$("#preview3").css('display','none')
 		$(".input-group3").css('display','none')
 		$(this).css('display', 'none')
 	})
 	$(".remove4").click(function() {
 		$("#filevalue4").text('');
 		$("#preview4").attr('src','')
+		$("#preview4").css('display','none')
 		$(".input-group4").css('display','none')
 		$(this).css('display', 'none')
 	})
 	$(".remove5").click(function() {
 		$("#filevalue5").text('');
 		$("#preview5").attr('src','')
+		$("#preview5").css('display','none')
 		$(".input-group5").css('display','none')
 		$(this).css('display', 'none')
 	})
@@ -91,7 +119,7 @@ $("form[name=boardform]").submit(function(e){
 	
  });
   
-$(".cancel-btn").click(function(){
+$("#cancelbtn").click(function(){
 	location.href = "InfoList.com"
 })
 	

@@ -16,11 +16,17 @@ public class InfoWriteAction implements Action {
 		
 		String bookcover = request.getParameter("bookcover");
 		String booktitle = request.getParameter("booktitle");
+		String bookauthor = request.getParameter("bookauthor");
+		String bookcategoryname = request.getParameter("bookcategoryname");
+		String bookpubdate = request.getParameter("bookpubdate");
 		System.out.println("bookcover : " + bookcover);
 		System.out.println("booktitle : " + booktitle);
 		
 		request.setAttribute("bookcover", bookcover);
 		request.setAttribute("booktitle", booktitle);
+		request.setAttribute("bookauthor", bookauthor);
+		request.setAttribute("bookcategoryname", bookcategoryname);
+		request.setAttribute("bookpubdate", bookpubdate);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

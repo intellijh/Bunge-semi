@@ -10,11 +10,21 @@
 <html>
 <head>
     <style>
+    	
+    	header {
+    		position: sticky;
+    		top: 0;
+    		width: 100%; /* 헤더의 전체 너비를 채우도록 설정 */
+    		z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
+    		
+		}
+    	
 		.navbar {
 			padding : 0 2rem
 		}	
 		
         .navbar.navbar-expand-lg {
+       		background-color : #ffffff;
         	justify-content: space-between;
         }
 
@@ -37,10 +47,6 @@
         .nav-link {
             /* Added padding to nav links to create space between them */
             padding: 0;
-        }
-
-        .bg-light {
-            background-color: #ffffff !important;
         }
 
         .navbar-light .navbar-nav .nav-link {
@@ -75,6 +81,7 @@
 </head>
 <body>
 <input type="hidden" id="loginid" value="${m_id}" name="loginid">
+<header>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="inner">
         <!-- Brand -->
@@ -95,11 +102,6 @@
             <li class="nav-item">
                 <a href="chat.com">
                     <img src="${pageContext.request.contextPath}/image/chat.png" alt="chat" width="22" height="22">
-                </a>
-            </li>
-             <li class="nav-item">
-                <a  href="#">
-                    <img src="${pageContext.request.contextPath}/image/bell.png" alt="bell" width="22" height="22">
                 </a>
             </li>
             <c:choose>
@@ -146,4 +148,5 @@
         </ul>
     </div>
 </nav>
+</header>
 </body>

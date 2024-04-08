@@ -2,15 +2,10 @@
 <html>
 <head>
 <title>로그인 페이지</title>
-<link href="${pageContext.request.contextPath}/css/Common.css" type="text/css" rel="stylesheet" >
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
 <jsp:include page="/layout/header.jsp" />
+<link href="${pageContext.request.contextPath}/css/Common.css" type="text/css" rel="stylesheet" >
 <style>
-body {
-    width: 1140px;
-    margin: 0 auto;
-    line-height: 28px;
-}  
 .login{
     position:relative;
     top: 150px;;
@@ -84,7 +79,7 @@ padding-bottom: 20px;
 <script>
 $(function() {
 	$(".join").click(function () {
-		location.href = "index.jsp";
+		location.href = "join.com";
 	});
 //아이디 저장
 	const m_id = '${cookie_id}';

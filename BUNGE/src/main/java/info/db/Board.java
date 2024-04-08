@@ -17,7 +17,11 @@ public class Board {
 	private int cnt;
 	private String inf_book;
 	private String inf_cover;
+	private String inf_author;
+	private String inf_category;
+	private String inf_pubdate;
 	private int infolikecnt;
+	private String m_profile;
 	
 	public int getInf_num() {
 		return inf_num;
@@ -108,6 +112,30 @@ public class Board {
 	}
 	public void setInf_cover(String inf_cover) {
 		this.inf_cover = inf_cover;
+	}
+	public String getM_profile() {
+		return m_profile;
+	}
+	public void setM_profile(String m_profile) {
+		this.m_profile = m_profile;
+	}
+	public String getInf_category() {
+		return inf_category;
+	}
+	public void setInf_category(String inf_category) {
+		this.inf_category = inf_category;
+	}
+	public String getInf_author() {
+		return inf_author;
+	}
+	public void setInf_author(String inf_author) {
+		this.inf_author = inf_author;
+	}
+	public String getInf_pubdate() {
+		return inf_pubdate;
+	}
+	public void setInf_pubdate(String inf_pubdate) {
+		this.inf_pubdate = inf_pubdate;
 	}
 	
 }

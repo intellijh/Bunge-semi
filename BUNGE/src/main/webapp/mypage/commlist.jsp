@@ -8,11 +8,7 @@
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
-body {
-     width: 1140px;
-     margin: 0 auto;
-     line-height: 28px;
-}
+
 .tab_container{
     position: relative;
     display: flex;
@@ -39,6 +35,9 @@ body {
 .tab-slider--container {
     position: relative;
     left: 90px;
+}
+.tab_box {
+width: 300px;
 }
 .commtitle {
 	border-bottom: 1px solid rgba(212, 216, 229, .5);

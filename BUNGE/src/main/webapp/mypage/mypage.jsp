@@ -11,12 +11,6 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath}/js/mypage.js"></script>
 <style>
- body {
-    width: 1140px;
-    margin: 0 auto;
-    line-height: 28px;
-}
-
 .tab_container{
     position: relative;
     display: flex;
@@ -252,6 +246,7 @@ width: 250px;
 </head>
 <body>
 <div id="warp">
+<div class="mypage">
 <div class="membertitle">
       <h3>회원 정보 수정</h3>
     </div>	
@@ -541,6 +536,7 @@ width: 250px;
     </div>
     <%-- 핸드폰 변경 modal 끝 --%>
 		</div>
+</div>
 </div>
 </div>
 </body>
