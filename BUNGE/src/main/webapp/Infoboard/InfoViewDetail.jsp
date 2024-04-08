@@ -4,12 +4,12 @@
 <html>
 <head>
 <title>상세페이지</title>
+<jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" href="css/view.css" type="text/css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<%@ include file="/layout/header.jsp" %>
 <script src="js/viewdetail.js"></script>
 <style>
   body {
@@ -60,7 +60,7 @@
     flex-grow: 1;
     max-width: 80%;
     margin: 0 auto;
-    border-bottom: 1px solid #BCE55C;
+    /* border-bottom: 1px solid #BCE55C; */
 }
 
 .postsubject {
@@ -82,8 +82,8 @@
 .dropdowntool {
     position: absolute;
     display: inline-block;
-    left: 800px;
-    top: 30px;
+    left: 787px;
+    top: 25px;
 }
 
 <%-- 제목 부분 끝 --%>
@@ -108,17 +108,29 @@ pre {
 }
 
 .postbookinfoarea {
-  font-size:10px;
-  display : inline-block;
+    font-size: 13px;
+    display: inline-block;
+    position: absolute;
+    left:200px;
+}
+
+.postprofilearea {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #BCE55C;
+}
+
+.infoitem {
+  margin-bottom:5px;
+  margin-right:5px;
 }
 
 <%-- "내용" 부분 끝 --%>
 
 <%-- 댓글 부분 시작 --%>
 .comment-area {
-    border-top: 1px solid #BCE55C;
     width : 858px;
-    margin : 0 auto;
+    margin : 15px auto;
 }
 
 .comment-write .comment-write-area-text {
@@ -137,6 +149,7 @@ pre {
     color: #000000;
     outline: 0;
 }
+
 <%-- 댓글 부분 끝 --%>
 
 
@@ -158,11 +171,13 @@ pre {
 		    더보기
 		  </button>
 		  <div class="dropdown-menu">
-		    <a class="dropdown-item" href="#">목록</a>
-		    <a class="dropdown-item" href="#">답변</a>
+		    <a class="dropdown-item" href="InfoList.com">목록</a>
+		  <c:if test="${m_id != null}">
+		    <a class="dropdown-item" href="InfoReply.com?inf_num=${boarddata.inf_num}">답변</a>
+		  </c:if>
 		  <c:if test="${m_id == boarddata.m_id}">
 		    <a class="dropdown-item" href="InfoModify.com?inf_num=${boarddata.inf_num}">수정</a>
-		    <a class="dropdown-item" href="#">삭제</a>
+		    <a class="dropdown-item" href="InfoDelete.com">삭제</a>
 		  </c:if>
 		  </div>
 		</div>
@@ -176,13 +191,32 @@ pre {
 	  <div class="postcontentarea">
 	      <img src="${boarddata.inf_cover}" width="200px" height="300px">
 	      <div class="postbookinfoarea">
-		      <span class="badge badge-success">책제목</span><span class="postbooktitle">${boarddata.inf_book}</span><br>
-		      <span class="badge badge-success">지은이</span><span>${boarddata.inf_author}</span><br>
-		      <span class="badge badge-success">카테고리</span><span>${boarddata.inf_category}</span><br>
-		      <span class="badge badge-success">출간일</span><span class="postbookpubdate">${boarddata.inf_pubdate}</span>
+		      <span class="badge badge-success infoitem">책제목</span><span class="postbooktitle">${boarddata.inf_book}</span><br>
+		      <span class="badge badge-success infoitem">지은이</span><span>${boarddata.inf_author}</span><br>
+		      <span class="badge badge-success infoitem">카테고리</span><span>${boarddata.inf_category}</span><br>
+		      <span class="badge badge-success infoitem">출간일</span><span class="postbookpubdate">${boarddata.inf_pubdate}</span>
 	      </div>
 	    <pre class="postcontent">${boarddata.inf_content}</pre>
 	    <div class="postloc">From ... ${boarddata.inf_loc}</div>
+	    
+	    <c:if test="${boarddata.inf_lev==0}">
+          <tr>
+            <td><div>첨부파일</div></td>
+              <c:forEach var="a" items="${boardfile}" varStatus="status">
+                <c:if test="${a.infa_filename != null}">
+		          <td><img src="image/down.png" width="10px">
+		            <a href="InfoBoardFileDown.com?filename=${a.infa_filename}">${a.infa_filename}</a>
+		            <img src="boardupload/${a.infa_servername}" class="inf_file" id="inf_file${status.count}">
+		          </td>
+		        </c:if>
+		        <c:if test="${a.infa_filename == null}">
+		        </c:if>
+              </c:forEach>
+          </tr>
+        </c:if>	
+	    
+	    <div class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button></div>
+        <span id="likecnt"></span>
 	    
 	  </div>
 	</div> <%-- col-xl end --%>
