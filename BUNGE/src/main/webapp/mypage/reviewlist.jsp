@@ -7,6 +7,8 @@
 <title>내 리뷰 활동 페이지</title>
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
+<script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/count.js"></script>
 <style>
 .myreveiw {
     position: relative;
@@ -75,6 +77,15 @@ width: 850px;
 	width: 200px;
 	height: 250px;
 }
+.like_comm_box {
+	width: 300px;
+}
+.inf_like_num {
+	width: 70px;
+}
+.inf_comm_num {
+	width: 70px;
+}
 .board_inf_subject_title {
 	padding-bottom:10px;
 }
@@ -91,6 +102,7 @@ width: 850px;
 	display: flex;
     flex-direction: row;
 }
+
 </style>
 </head>
 <body>
@@ -108,7 +120,9 @@ width: 850px;
 			<a href="reviewlist.com"><li class="tab-slider--trigger active" rel="tab2"><span>작성글</span></li></a>
 			<a href="mycommlist.com"><li class="tab-slider--trigger"  rel="tab3"><span>작성댓글</span></li></a>
 			<a href="mylikelist.com"><li class="tab-slider--trigger"  rel="tab4"><span>좋아요한 리뷰</span></li></a>
-			<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>좋아요한 거래상품</span></li></a>
+			<%-- 
+				<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>좋아요한 거래상품</span></li></a>
+				--%>
 		  </ul>
 		</div>
 		</div>
@@ -133,7 +147,7 @@ width: 850px;
 						  <div class="board_content">
 							<p class="board_inf_contet_text">내용 : ${b.board.inf_content}</p>
 						  </div>
-					</div>   
+					</div>
 						  <div class="board_img">
 						  		<div class="img">
 						  		<img  src="${b.board.inf_cover}">
@@ -142,14 +156,10 @@ width: 850px;
 					   </div>
 					   <div class="like_comm_box">
 							<div class="inf_like_num">
-								<div>
-									<img src="${pageContext.request.contextPath}/image/like_on.png" alt="Like Icon">${b.infoLike.inf_num}
-								</div>
+									<img src="${pageContext.request.contextPath}/image/like_on.png" alt="Like Icon"><span id="likecnt" class="likecnt"></span>
 							</div>
 							<div class="inf_comm_num">
-								<div>
-									<img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg">${b.comment.inf_num}
-								</div>
+									<img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg"><span id="commcnt" class="commcnt"></span>
 							</div>
 						  </div>
 					</div>
