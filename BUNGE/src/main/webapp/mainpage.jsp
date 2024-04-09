@@ -36,7 +36,7 @@
     width: 19.5%;
     height: 300px;
   }
-  
+
   #myCarousel {
   	height : 370px;
   }
@@ -117,7 +117,7 @@
 }
 
   .popularpost1 {
-  	margin-bottom : 20px
+  	margin-bottom : 25px;
   }
   
   h4 {
@@ -255,6 +255,9 @@
   padding-right : 5px;
 }
 
+.bg-light {
+    background-color: #ffffff !important;
+}
 <%-- 인기 댓글 영역 끝 --%>
 
 <%-- 더보기 시작 --%>
@@ -352,7 +355,7 @@
     
 <%--인기 게시글1(이미지 오른쪽) 시작 --%>
 	<div class="container mt-3 popularpost1">
-	  <h4 class="font-italic">인기 게시글</h4>
+	  <h3><span class="badge badge-pill badge-success">정보공유 인기 게시글</span></h3>
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
 	      <div class="profilearea">
@@ -461,8 +464,11 @@
 	    <img id="postimg3" src="" style="width:80px;">
 	  </div>
 	</div>
-<%-- 인기 게시글3(이미지 오른쪽) 끝 --%>
+<%--인기 게시글4(이미지 오른쪽) 끝 --%>
+	
+<%-- 거래게시판 게시글1(이미지 오른쪽) 시작--%>
 	<div class="container mt-3 popularpost1">
+	  <h3><span class="badge badge-pill badge-success">진행 중인 거래</span></h3>
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
 	      <div class="profilearea">
@@ -571,7 +577,7 @@
     </div><!-- /.blog-main -->
 <%-- 인기 있는 책 영역 시작 --%>
     <aside class="col-md-4 blog-sidebar">
-      <h4 class="font-italic">인기 책</h4>
+      <h3><span class="badge badge-pill badge-success">책마니 인기 책</span></h3>
       <div class="p-4 mb-3 bg-light rounded popularbookarea">
         <div class="mb-0"><img class="popularcover" id="popularbookcover0" src="">
           <div id="popularcount0" class="tagcount"></div>
@@ -586,7 +592,7 @@
 <%-- 인기 있는 책 영역 끝 --%>
  
 <%-- 인기 댓글 시작 --%>      
-      <h4 class="font-italic">인기 댓글</h4>
+      <h3><span class="badge badge-pill badge-success">인기 댓글</span></h3>
       <div class="p-4 mb-3 bg-light rounded">
         <div class="popularcommarea">
           <div class="popularcommcount">
