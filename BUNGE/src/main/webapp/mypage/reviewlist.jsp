@@ -80,7 +80,7 @@ width: 850px;
 }
 .board_inf_contet_text {
     width: 600px;
-    height: 110px;
+    height: 100px;
     text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;

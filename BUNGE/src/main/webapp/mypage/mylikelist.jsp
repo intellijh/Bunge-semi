@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>즐겨찾기 페이지</title>
+<title>내가 좋아요한 리뷰 페이지</title>
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
@@ -158,8 +158,6 @@ width: 850px;
 						  </div>
 					   </div>
 					</div>
-				 
-				  
 				  </c:forEach>
 				</c:when>
 			  </c:choose>

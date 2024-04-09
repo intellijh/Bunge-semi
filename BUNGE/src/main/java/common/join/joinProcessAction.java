@@ -8,7 +8,6 @@ import common.action.Action;
 import common.action.ActionForward;
 import common.db.Member;
 import common.db.MemberDAO;
-import common.db.Memberimg;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +17,8 @@ public class joinProcessAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		
 		String m_id = request.getParameter("m_id");
 		String m_pwd = request.getParameter("m_pwd");
 		String m_name= request.getParameter("m_name");
@@ -46,12 +47,14 @@ public class joinProcessAction implements Action {
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
 			request.setAttribute("mesage","회원가입 실패입니다.");
+			out.print("<script>");
+			out.print("alert('회원 가입 실패입니다.');");
+			out.print("</script>");
 			forward.setPath("member/joinForm.jsp");
 			return forward;
 		}
 		
 		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
 		out.print("<script>");
 		out.print("alert('회원 가입을 축하합니다.');");
 		out.print("location.href='login.com';");
