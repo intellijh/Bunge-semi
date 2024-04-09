@@ -5,10 +5,10 @@
 <title>상세페이지</title>
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" href="css/view.css" type="text/css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="js/viewdetail.js"></script>
 <style>
   body {
@@ -16,8 +16,8 @@
   }
   
  .inf_file {
- 	width:20px;
- 	height:30px;
+ 	width:100px;
+ 	height:150px;
  }
  
  .commlike {
@@ -112,9 +112,10 @@ pre {
     font-size: 13px;
     display: inline-block;
     position: absolute;
-    top: 120px;
+    top: 82px;
     width: 75%;
     margin-left: 10px;
+    font-weight:600;
 }
 
 .postprofilearea {
@@ -142,11 +143,27 @@ pre {
 }
 
 .uploadfilearea {
+  display:inline-block;
   margin-bottom:10px;
 }
 
 .cntarea {
   margin-top:50px;
+}
+
+.postcontent {
+  opacity:0.6;
+}
+
+.uploadfile {
+    width: 7%;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.btnloc {
+  margin-right:5px;
+  margin-bottom:7px;
 }
 <%-- "내용" 부분 끝 --%>
 
@@ -174,7 +191,15 @@ pre {
 }
 
 .comment-write {
-  margin-top:10px;
+  margin-top:0px !important;
+}
+
+.comment-head {
+  margin-bottom:0px !important;
+}
+
+.readcountimg {
+  margin-right:5px;
 }
 <%-- 댓글 부분 끝 --%>
 
@@ -214,7 +239,20 @@ pre {
 	    <span class="postreg">${boarddata.inf_reg}</span>
 	  </div>
 	  
-	  <div class="postcontentarea">
+    <c:if test="${boarddata.inf_lev>0}">
+      <div class="postcontentarea">
+	    <pre class="postcontent">${boarddata.inf_content}</pre>
+	    <span class="badge badge-success btnloc">위치</span><span class="postloc">${boarddata.inf_loc}</span>
+	    
+	    <div class="cntarea" data-toggle="tooltip" data-placement="top" title="하트를 눌러보세요!">
+		  <span class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button></span>
+	      <span id="likecnt"></span>
+	      <img src="./image/openbook.png" width="25px" height="25px" class="readcountimg"><span>${boarddata.inf_readcount}</span>
+	    </div>
+	  </div>
+	</c:if>
+	  
+	<c:if test="${boarddata.inf_lev==0}">
 	      <img src="${boarddata.inf_cover}" width="200px" height="300px" class="postbookcover">
 	      <div class="postbookinfoarea">
 		      <span class="badge badge-success infoitem">책제목</span><span class="postbooktitle">${boarddata.inf_book}</span><br>
@@ -223,30 +261,27 @@ pre {
 		      <span class="badge badge-success infoitem">출간일</span><span class="postbookpubdate">${boarddata.inf_pubdate}</span>
 	      </div>
 	    <pre class="postcontent">${boarddata.inf_content}</pre>
-	    <div class="postloc">From ... ${boarddata.inf_loc}</div>
-	    
-	    <c:if test="${boarddata.inf_lev==0}">
+	    <span class="badge badge-success btnloc">위치</span><span class="postloc">${boarddata.inf_loc}</span>
+	    <div class="badge badge-success uploadfile">첨부파일</div>
               <c:forEach var="a" items="${boardfile}" varStatus="status">
                 <c:if test="${a.infa_filename != null}">
 	            <div class="uploadfilearea">
-		          <img src="image/down.png" width="10px">
-		          <a href="InfoBoardFileDown.com?filename=${a.infa_filename}">${a.infa_filename}</a>
-		          <img src="boardupload/${a.infa_servername}" class="inf_file" id="inf_file${status.count}">
+		          <a href="InfoBoardFileDown.com?filename=${a.infa_filename}">
+		            <img src="boardupload/${a.infa_servername}" class="inf_file" id="inf_file${status.count}">
+		          </a>
+		        </div>
 		        </c:if>
   		          <c:if test="${a.infa_filename == null}">
 		          </c:if>
-			    </div>
               </c:forEach>
-        </c:if>	
-	    
-	    <div class="cntarea">
-		  <span data-toggle="tooltip" title="하트를 채우거나 비울 수 있어요!" class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button></span>
+	</c:if>
+	
+	    <div class="cntarea" data-toggle="tooltip" data-placement="top" title="하트를 눌러보세요!">
+		  <span class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button></span>
 	      <span id="likecnt"></span>
-	      <img src="./image/book.png" width="25px" height="25px"><span>${boarddata.inf_readcount}</span>
+	      <img src="./image/openbook.png" width="25px" height="25px" class="readcountimg"><span>${boarddata.inf_readcount}</span>
 	    </div>
-	  </div>
 	</div> <%-- col-xl end --%>
-
    <%-- 댓글 시작 부분 --%>
    <div class="comment-area">
 			<div class="comment-head">

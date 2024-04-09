@@ -55,14 +55,14 @@ function ajax(sdata) {
 						}
 						
 						let subject=item.inf_subject
-						if(subject.length >= 20) {
-							subject=subject.substr(0,20) + "..."
+						if(subject.length >= 9) {
+							subject=subject.substr(0,8) + "..."
 						}
 						
 						let book = item.inf_book;
            				let bookLength = book ? book.length : 0; // book 변수가 정의되어 있지 않을 수 있으므로, book의 길이를 확인합니다.
-            			if (bookLength >= 20) {
-                		book = book.substr(0, 20) + "...";
+            			if (bookLength >= 15) {
+                		book = book.substr(0,14) + "...";
             			}else if (book == null) {
 							book = '';
 						}
@@ -71,21 +71,22 @@ function ajax(sdata) {
 						if(content.length >= 20) {
 							content=content.substr(0,20) + "..."
 						}
+						
 						output += "<td class='title'><div>" + img
 						output += "  <a href='InfoDetail.com?inf_num=" + item.inf_num + "'>"
-						output += subject.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-						output +=    '</a>[' + item.cnt + ']<br><span id="postbook0" class="booksubject">' + book + '</span></div></td></div></td>'
+						output += "<div class='subjectcomm'>" + subject.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+						output +=    '</a>[' + item.cnt + ']</div><div id="postbook0" class="booksubject">' + book + '</div></div></td></div></td>'
 						output += '<td class="content"><div>' + content.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div></td>'
 						output += '<td><div>' + item.m_id + '</div></td>'
-						output += '<td><div>' + item.inf_reg + '</div></td>'
-						output += "<td><div><img src='./image/book.png' width='15px' height='15px'>" + item.inf_readcount + '</div></td>'
+						output += '<td><div>' + item.inf_reg.substr(0,10) + '</div></td>'
+						output += "<td><div><img src='./image/openbook.png' width='15px' height='15px' class='readcntimg'>" + item.inf_readcount + '</div></td>'
+						output += "<td><div><img src='./image/like_on.png' width='15px' height='15px'>" + item.infolikecnt + '</div></td>'
 						if (item.inf_cover != undefined) {
 							//console.log('item.inf_cover :'+ index + " : " + item.inf_cover)
 						output += "<td><div><img class='cover' src='" + item.inf_cover + "'></div></td>'"
 						} else {
 						output += "<td><div><img src='./image/noimage.jpg' width='100px' height='130px'></div></td>"
 						}
-						output += "<td><div><img src='./image/like_on.png' width='15px' height='15px'>" + item.infolikecnt + '</div></td>'
 					}) //function(index, item)
 				output += "</tbody>"
 				$('table').append(output)
