@@ -44,7 +44,7 @@
                         $.each(response.tradeList, function(index, trade) {
                             var postDiv = '<div class="post" onclick="location.href=\'view.net?tradeID=' + trade.tradeID + '\'">' +
                                 '<div class="post-thumbnail" style="text-align: center;">' +
-                                '<img src="/image/' + trade.imageID + '" width="140" height="200">' +
+                                '<img src="./image/' + trade.imageID + '" width="140" height="200">' +
                                 '</div>' +
                                 '<div class="post-info">' +
                                 '<span id="post-info-title">' + trade.title + '</span><br>' +
@@ -71,7 +71,6 @@
 </head>
 <body>
 
-
 <div id="categoryandcolor">
     <br><index_title>Trade</index_title><br><br>
     <index_desc>마음의 양식을 나누어 보아요!</index_desc><br><br><br><br>
@@ -89,8 +88,9 @@
     </div>
 </div>
     
-<div class="container">
+
    
+<div class="container">
     <div id="category"><br><br><br>
     <button class="category button" data-category="철학">철학</button>
     <button class="category button" data-category="종교">종교</button>
@@ -122,9 +122,9 @@
         </div>
     </c:forEach>
 </div>
+</div>
 
-<br><button id="newwritebutton" type="button" class="btn btn-success float-right">+글쓰기</button><br><br>
-</div>
-</div>
+<br><button id="newwritebutton" type="button" class="btn btn-success">+글쓰기</button><br><br>
+
 </body>
 </html>
