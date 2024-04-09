@@ -8,7 +8,7 @@
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/count.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/reviewcount.js"></script>
 <style>
 .myreveiw {
     position: relative;
@@ -139,7 +139,7 @@ width: 850px;
 				<c:when test="${!empty boardlist}">
 				  <c:forEach var="b" items="${boardlist}" >		
 				  <input type="hidden"  id="inf_num" value="${b.board.inf_num}" name="inf_num"><%--view.js에서 사용하기 위해 추가합니다. --%>
-				  <div class="user_board">
+				 <div class="user_board">
 					<div class="board-section">	  
 					<div class="board">                                     
 					  <div class="board_box">
@@ -158,10 +158,10 @@ width: 850px;
 					   </div>
 					   <div class="like_comm_box">
 							<div class="inf_like_num">
-									<img src="${pageContext.request.contextPath}/image/like_on.png" alt="Like Icon"><span id="likecnt" class="likecnt"></span>
+									<img src="${pageContext.request.contextPath}/image/like_on.png" alt="Like Icon"><span id="likecnt"></span>
 							</div>
 							<div class="inf_comm_num">
-									<img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg"><span id="commcnt" class="commcnt"></span>
+									<img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg"><span id="commcnt"></span>
 							</div>
 						  </div>
 					</div>
