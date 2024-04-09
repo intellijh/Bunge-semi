@@ -242,9 +242,9 @@ public class BoardDAO {
 					board.setInf_subject(rs.getString("INF_SUBJECT"));
 					board.setInf_content(rs.getString("INF_CONTENT"));
 					board.setInf_open(rs.getInt("INF_OPEN"));
-				//	board.setInf_ref(rs.getInt("INF_REF"));
-				//	board.setInf_lev(rs.getInt("INF_LEV"));
-				//	board.setInf_seq(rs.getInt("INF_SEQ"));
+					board.setInf_ref(rs.getInt("INF_REF"));
+					board.setInf_lev(rs.getInt("INF_LEV"));
+					board.setInf_seq(rs.getInt("INF_SEQ"));
 					board.setInf_readcount(rs.getInt("INF_READCOUNT"));
 					board.setInf_loc(rs.getString("INF_LOC"));
 					board.setInf_reg(rs.getString("INF_REG"));
@@ -675,6 +675,73 @@ public class BoardDAO {
 			System.out.println("getpopularPost() 에러 : " + ex);
 		}
 
+		return list;
+	}
+	
+	public ArrayList<Board> getmyPost(String m_id) {
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "SELECT C.*, COUNT(infolike.inf_num) AS total_likes "
+			       + "FROM ( "
+			       + "       SELECT a.inf_num, "
+				   + "              a.m_id, "
+				   + "	            a.inf_subject, "
+				   + "              a.inf_content, "
+				   + "              a.inf_readcount, "
+				   + "	            a.inf_reg, "
+				   + "              a.inf_book, "
+				   + "	            a.inf_cover, "
+				   + "	            COUNT(b.inf_num) as commcnt "
+				   + "	     FROM infoboard a "
+		           + "       JOIN infocomm b ON a.inf_num = b.inf_num "
+		           + "       WHERE a.m_id = ? "
+				   + "	     GROUP BY a.inf_num, "
+				   + "                a.m_id, "
+				   + "                a.inf_subject, "
+				   + "	              a.inf_content, "
+				   + "	              a.inf_readcount, " 
+				   + "                a.inf_reg, "  
+				   + "                a.inf_book, " 
+				   + "	              a.inf_cover "
+				   + "	     ) C "
+				   + "LEFT JOIN infolike ON C.inf_num = infolike.inf_num " 
+				   + "GROUP BY C.inf_num, "
+				   + "         C.m_id, "
+				   + "         C.inf_subject, " 
+				   + "         C.inf_content, " 
+				   + "         C.inf_readcount, " 
+				   + "         C.inf_reg, " 
+				   + "         C.inf_book, " 
+				   + "         C.inf_cover, " 
+				   + "         C.commcnt ";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			 pstmt.setString(1, m_id);
+			 
+			 try (ResultSet rs = pstmt.executeQuery();) {
+				 while(rs.next()) {
+					 Board board = new Board();
+					 board.setInf_num(rs.getInt("inf_num"));
+					 board.setInf_subject(rs.getString("inf_subject"));
+					 board.setInf_content(rs.getString("inf_content"));
+					 board.setInf_readcount(rs.getInt("inf_readcount"));
+					 board.setInf_reg(rs.getString("inf_reg"));
+					 board.setInf_book(rs.getString("inf_book"));
+					 board.setInf_cover(rs.getString("inf_cover"));
+					 board.setCnt(rs.getInt("commcnt"));
+					 board.setInfolikecnt(rs.getInt("total_likes"));
+					 
+					 list.add(board);
+				 }
+			 } catch (SQLException ex) {
+				 ex.printStackTrace();
+				 System.out.println("getmyPost() 에러 : " + ex);
+			 }
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("getmyPost() 에러 : " + e);
+		}
+		
 		return list;
 	}
 	

@@ -44,11 +44,12 @@
 width: 850px;
 }
  .myliketitle {
- 	border-bottom: 1px solid rgba(212, 216, 229, .5);
-    width: 1140px;
+    border-bottom: 1px solid #BCE55C;
+    width: auto;
     position: relative;
-    top : 20px;
-    padding-bottom: 30px;
+    top: 20px;
+    padding-bottom: 15px;
+    text-align: center;
  }
   .myliketitle h3 {
   	position: relative;

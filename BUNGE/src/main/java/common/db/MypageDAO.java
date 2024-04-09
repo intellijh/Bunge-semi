@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.google.gson.JsonObject;
+
 public class MypageDAO {
 private DataSource ds;
 	
@@ -124,28 +126,34 @@ private DataSource ds;
 	    return boardlist;
 	}
 	//내가 쓴 댓글 조회
-	public List<Mycomm> getCommList(String m_id) {
-		List<Mycomm> commlist = new ArrayList<>();
+	public ArrayList<JsonObject> getCommList(String m_id) {
+		String comm_sql = "select b.inf_num, b.m_id, b.inf_subject, c.comm_content, c.comm_reg, b.inf_content "
+				        + "from infoboard b "
+				        + "join infocomm c "
+				        + "on b.inf_num = c.inf_num " 
+				        + "where b.m_id = ? "
+				        + "group by b.inf_num, b.m_id, b.inf_subject, c.comm_content, c.comm_reg, b.inf_content "
+				        + "order by c.comm_reg desc";
 		
-		String comm_sql = "select b.m_id,c.m_id, b.inf_subject, b.inf_content, c.comm_content "
-				+ " from infoboard b "
-				+ " join infocomm c on b.inf_num = c.inf_num "
-				+ " where b.m_id = ? ";
+		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
+		
 		try(Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(comm_sql);) {
 			
 			pstmt.setString(1, m_id);
 			
-			try(ResultSet rs=pstmt.executeQuery()){
+			try(ResultSet rs = pstmt.executeQuery()){
 				 while (rs.next()) {
-					Mycomm comm = new Mycomm();
-					comm.getBoard().setM_id(rs.getString("m_id"));
-					comm.getComment().setM_id(rs.getString("m_id"));
-					 comm.getBoard().setInf_subject(rs.getString("inf_subject"));
-					 comm.getBoard().setInf_content(rs.getString("inf_content"));
-					 comm.getComment().setComm_content(rs.getString("comm_content"));
 					 
-					 commlist.add(comm);
+					JsonObject object = new JsonObject();
+
+					object.addProperty("inf_num", rs.getString("inf_num"));
+					object.addProperty("inf_subject", rs.getString("inf_subject"));
+					object.addProperty("comm_content", rs.getString("comm_content"));
+					object.addProperty("comm_reg", rs.getString("comm_reg"));
+					object.addProperty("inf_content", rs.getString("inf_content"));
+					
+					list.add(object);
 				 }
 			}catch (SQLException e) {
 			e.printStackTrace();
@@ -153,7 +161,8 @@ private DataSource ds;
 		}catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return commlist;
+		
+		return list;
 	}
 	//내가 좋아요한 게시글 조회
 	public List<Mylike> getlikeList(String m_id) {

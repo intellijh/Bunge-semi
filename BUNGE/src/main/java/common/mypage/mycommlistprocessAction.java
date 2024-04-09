@@ -1,45 +1,46 @@
 package common.mypage;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.naming.NamingException;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import common.action.Action;
 import common.action.ActionForward;
+import common.db.MypageDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class mycommlistAction implements Action {
+public class mycommlistprocessAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException, NamingException {
-
+		
+		MypageDAO mypagedao = new MypageDAO();
+		JsonObject object = new JsonObject();
+		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
 		HttpSession session = request.getSession();
-		PrintWriter out = response.getWriter();
 
+		
 		String m_id= (String)session.getAttribute("m_id");
 		
-		if(m_id != null) {
+		list = mypagedao.getCommList(m_id);
+		
+		JsonElement js = new Gson().toJsonTree(list);
+		object.add("commlist", js);
 
-			ActionForward forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("mypage/commlist.jsp");
-			
-			return forward;
-
-		} else {
-			response.setContentType("text/html; charset=utf-8");
-			String message = "로그인 후 이용 가능합니다.";
-			out.print("<script>");
-			out.print("alert('" + message + "');");
-			out.print("location.href='login.com';");
-			out.print("</script>");
-			out.close();
-			
-		}
+		response.setContentType("application/json;charset=utf-8");
+		response.getWriter().print(object);
+		
 		return null;
 	}
+
 }

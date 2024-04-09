@@ -13,7 +13,7 @@
 .myreveiw {
     position: relative;
     width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 .tab_container{
     position: relative;
@@ -27,11 +27,7 @@
 	width: 180px;
     height: 600px;
 } 
-.tab-slider--tabs{
-	position: relative;
-    left: 50px;
-    padding-bottom: 20px;
-}
+
 .tab-slider--tabs li {
     text-align: center;
     width: 140px;
@@ -46,15 +42,15 @@
 width: 850px;
 }
 .reveiwtitle {
- 	border-bottom: 1px solid rgba(212, 216, 229, .5);
-    width: 1140px;
-    position: relative;
-    top : 20px;
-    padding-bottom: 30px;
+    border-bottom: 1px solid #BCE55C;
+    width: auto;
+    padding-bottom: 15px;
 }
 .reveiwtitle h3 {
-	position: relative;
-    left: 155px;
+    width: auto;
+    text-align: center;
+    /* position: relative; */
+    /* left: 155px; */
 }
 .user_board {
 	width: 850px;
@@ -132,38 +128,51 @@ width: 850px;
 		  <div id="tab1" class="tab-slider--body">
 			<div class="tab_box">
 			  <!-- 글 시작 -->
+ 
 			  <c:choose>
 				<c:when test="${empty boardlist}">
 				  <p>작성된 글이 없습니다.</p>
 				</c:when>
 				<c:when test="${!empty boardlist}">
 				  <c:forEach var="b" items="${boardlist}" >		
-				  <input type="hidden"  id="inf_num" value="${b.board.inf_num}" name="inf_num"><%--view.js에서 사용하기 위해 추가합니다. --%>
+				  <input type="hidden"  id="inf_num" value="${b.inf_num}" name="inf_num"><%--view.js에서 사용하기 위해 추가합니다. --%>
 				 <div class="user_board">
 					<div class="board-section">	  
 					<div class="board">                                     
 					  <div class="board_box">
 						<div class="board_subject">
-							<a href="InfoDetail.com?inf_num=${b.board.inf_num}"><h3 class="board_inf_subject_title">제목 : ${b.board.inf_subject}</h3></a>
+							<a href="InfoDetail.com?inf_num=${b.inf_num}"><h3 class="board_inf_subject_title">${b.inf_subject}</h3></a>
 						</div>
 						  <div class="board_content">
-							<p class="board_inf_contet_text">내용 : ${b.board.inf_content}</p>
+							<p class="board_inf_contet_text">${b.inf_content}</p>
 						  </div>
-					</div>
+					  </div>
+					    <c:if test="${b.inf_cover != null}">
 						  <div class="board_img">
 						  		<div class="img">
-						  		<img  src="${b.board.inf_cover}">
+						  		<img  src="${b.inf_cover}">
 						  		</div>
 						  </div>
+						</c:if>
+						<c:if test="${b.inf_cover == null}">
+						  <div class="board_img">
+						    <div class="img">
+						      <img src="./image/noimage.jpg">
+						    </div>
+						  </div>
+						</c:if>
 					   </div>
 					   <div class="like_comm_box">
 							<div class="inf_like_num">
-									<img src="${pageContext.request.contextPath}/image/like_on.png" alt="Like Icon"><span id="likecnt"></span>
+									<img src="${pageContext.request.contextPath}/image/like_on.png" alt="Like Icon"><span id="likecnt">${b.infolikecnt}</span>
 							</div>
 							<div class="inf_comm_num">
-									<img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg"><span id="commcnt"></span>
+									<img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg"><span id="commcnt">${b.cnt}</span>
 							</div>
-						  </div>
+					   </div>
+					   <div class="postdate">
+					     <div>${b.inf_reg}</div>
+					   </div>
 					</div>
 				  </div>
 				  </c:forEach>

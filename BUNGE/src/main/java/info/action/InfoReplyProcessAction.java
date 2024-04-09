@@ -36,7 +36,7 @@ public class InfoReplyProcessAction implements Action {
 		 if (result == 0) {
 			 System.out.println("답장 저장 실패");
 			 forward.setRedirect(false);
-			 request.setAttribute("message", "답장 저장 실패입니다.");
+			 request.setAttribute("message", "답글 저장 실패입니다(답글 제한)");
 			 forward.setPath("error/error.jsp");
 		 } else {
 			 //답변 저장이 제대로 된 경우
