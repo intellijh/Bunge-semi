@@ -104,6 +104,7 @@
                 <a class="nav-link" href="trade.net">거래게시판</a>
             </li>
            </ul>
+           
             <ul class="navbar-nav ml-auto">
             <c:choose>
                 <c:when test="${m_id ==null }">
