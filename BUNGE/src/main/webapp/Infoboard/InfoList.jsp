@@ -8,11 +8,10 @@
 <script src="js/infolist.js"></script>
 <%@ include file="/layout/header.jsp" %>
 <style>
-
-
 	body {
   		font-family : "나눔고딕";
   		margin : 0 auto;
+  		letter-spacing : 0.3px;
 	}	
 	
 	.table {
@@ -78,7 +77,9 @@
  	}
 	
 	.booksubject {
-		font-size : 10px
+		font-size : 10px;
+		opacity:0.6;
+		padding-left:6px;
 	}
   
   	#newwritebutton {
@@ -102,6 +103,13 @@
 	  text-align:justify!important;
 	}
 	
+	.subjectcomm {
+	  margin-bottom:5px;
+	}
+	
+	.readcntimg {
+	  margin-right:3px;
+	}
 </style>
 </head>
 <body>
@@ -123,8 +131,8 @@
   		  <th><div>작성자</div></th>
   		  <th><div>날짜</div></th>
   		  <th><div>조회수</div></th>
-  		  <th><div>책 표지</div></th>
   		  <th><div>좋아요</div></th>
+  		  <th><div>책표지</div></th>
   	    </tr>
       </thead>
       <tbody>

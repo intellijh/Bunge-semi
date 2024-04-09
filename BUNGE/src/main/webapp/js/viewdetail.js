@@ -242,7 +242,10 @@ $(function() {
 		$(this).prev().text(length+'/200');
 	});// keyup','.comment-write-area-text', function() {
 	
-
+	//툴팁
+	$(document).ready(function(){
+  		$('[data-toggle="tooltip"]').tooltip();   
+	});
 	
 	//댓글 등록을 클릭하면 데이터베이스에 저장 -> 저장 성공 후에 리스트 불러옵니다.
 	$('ul+.comment-write .btn-register').click(function() {
@@ -526,8 +529,4 @@ $(function() {
 			}		
 		}); //ajax end
     } //infolikecnt() end
-   
-  //툴팁 관련 부분 
-  $('[data-toggle="tooltip"]').tooltip();
-  
 })//ready
