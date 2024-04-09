@@ -53,9 +53,7 @@ input[type=file]{
 }
 
 .bookinfoarea {
-    position: absolute;
     width: auto;
-    left: 410px;
     font-size: 15px;
 }
 

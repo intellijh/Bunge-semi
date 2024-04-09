@@ -240,7 +240,7 @@ pre {
         </c:if>	
 	    
 	    <div class="cntarea">
-		  <span class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button></span>
+		  <span data-toggle="tooltip" title="하트를 채우거나 비울 수 있어요!" class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button></span>
 	      <span id="likecnt"></span>
 	      <img src="./image/book.png" width="25px" height="25px"><span>${boarddata.inf_readcount}</span>
 	    </div>
