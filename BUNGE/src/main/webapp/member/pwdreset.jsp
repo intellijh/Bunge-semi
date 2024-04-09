@@ -17,8 +17,17 @@
     height: 400px;
     margin: 0 auto;
 }
-.pwdreset h2 {
-	padding-bottom: 20px;
+.pwdresettitle {
+   border-bottom: 1px solid rgba(212, 216, 229, .5);
+    width: 1140px;
+    position: relative;
+    top : 20px;
+    padding-bottom: 30px;
+}
+.pwdresettitle h2 {
+	position: relative;
+    width: 1040px;
+    left: 182px;
 }
 .pwd {
 	position: relative;
@@ -56,8 +65,10 @@
 </head>
 <body>
 <div id="warp">
-	<h2>비밀번호 재설정</h2>
 	<form name="pwdreset" action="pwdreset.com" method="post">
+	<div class="pwdresettitle">
+		<h2>비밀번호 재설정</h2>
+	</div>
 	<div class="pwdreset">
 	<div class="pwd">
 	<b>비밀번호</b>

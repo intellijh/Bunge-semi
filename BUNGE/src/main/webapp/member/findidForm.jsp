@@ -9,7 +9,6 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
-
 .findid {
     position: relative;
     top: 150px;
@@ -79,7 +78,7 @@ $(function(){
 				<button type="submit" class="submitbtn">아이디 찾기</button>
 			</div>
 			<div class="reset btn">
-				<button type="reset" class="cancelbtn">돌아가기</button> <%--메인화면으로 --%>
+				<button type="reset" class="cancelbtn">로그인 돌아가기</button> <%--메인화면으로 --%>
 			</div>
 			</div>
 	</div>

@@ -160,7 +160,7 @@ private DataSource ds;
 		List<Mylike> likelist = new ArrayList<>();
 		String like_sql= "select b.inf_num , b.inf_subject, b.inf_content , b.inf_reg, b.inf_book, b.inf_cover, "
 				+ "    COUNT(DISTINCT c.inf_num) AS comment_count, "
-				+ "    COUNT(DISTINCT k.inf_num) AS like_count "
+				+ "    COUNT(DISTINCT k.inf_num) AS like_count, "
 				+ "	k.inf_num "
 				+ "from "
 				+ "    infoboard b "

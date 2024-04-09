@@ -55,9 +55,19 @@ width: 850px;
     left: 90px;
 }
 .user_comm {
-	width: 850px;
+	width: 750px;
     height: 200px;
 }
+.board_inf_content_text  {
+    width: 600px;
+    height: 100px;
+    text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
 </style>
 </head>
 <body>
@@ -95,7 +105,8 @@ width: 850px;
 					  <div class="comm">
 						<div class="comm_box">                     
 							<div class="my_comm_subject">
-								<h3 class="my_comm_subject_title">아이디 : ${c.board.m_id}=> 제목 : ${c.board.inf_subject}</h3>
+								<h3 class="my_comm_subject_title">아이디 : ${c.board.m_id}=><br>
+								 제목 : ${c.board.inf_subject}</h3>
 							</div>
 							<div class="my_comm_content">
 								<p class="board_inf_content_text">내용 : ${c.board.inf_content}</p>

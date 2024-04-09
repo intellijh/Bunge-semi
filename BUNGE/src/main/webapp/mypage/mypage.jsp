@@ -11,6 +11,11 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath}/js/mypage.js"></script>
 <style>
+.mypage {
+	position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
 .tab_container{
     position: relative;
     display: flex;

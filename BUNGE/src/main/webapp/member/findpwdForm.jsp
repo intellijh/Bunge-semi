@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>비밀번호 찾기 페이지</title>
+<jsp:include page="/layout/header.jsp" />
+<script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
 .findpwd {
     position: relative;
@@ -59,16 +64,14 @@ $(function(){
 	});
 });
 </script>
-<meta charset="UTF-8">
-<title>비밀번호 찾기 페이지</title>
-<jsp:include page="/layout/header.jsp" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 </head>
 <body>
 <div id="warp">
 	<form name="findpwd" action="findpwdProcess.com" method="post">
+		<div class="findpwdtitle">
+			<h2>비밀번호 찾기</h2>
+		</div>
 		<div class="findpwd">
-		<h2>비밀번호 찾기</h2>
 		<div class="find_id">
 			<b>아이디</b>
 			<input type="text" name="m_id"  placeholder="아이디 입력 (5~15자)"  min="5" maxlength="15" required>
@@ -86,7 +89,7 @@ $(function(){
 			<button type="submit" class="submitbtn">비밀번호 찾기</button>
 			</div>
 			<div class="reset btn">
-			<button type="reset" class="cancelbtn">메인으로 돌아가기</button> <%--메인화면으로 --%>
+			<button type="reset" class="cancelbtn">로그인 돌아가기</button> <%--메인화면으로 --%>
 			</div>
 		</div>
 		</div>
