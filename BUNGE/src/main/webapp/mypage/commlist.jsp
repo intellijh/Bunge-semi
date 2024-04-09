@@ -7,6 +7,7 @@
 <title>게시글에 단 댓글 페이지</title>
 <jsp:include page="/layout/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/commlist.js"></script>
 <style>
 .mycomm {
     position: relative;
@@ -44,15 +45,17 @@
 width: 850px;
 }
 .commtitle {
-	border-bottom: 1px solid rgba(212, 216, 229, .5);
-    width: 1140px;
+    border-bottom: 1px solid #BCE55C;
+    width: auto;
     position: relative;
-    top : 20px;
-    padding-bottom: 30px;
+    top: 20px;
+    padding-bottom: 15px;
+    text-align: center;
 }
 .commtitle h3 {
-	position: relative;
-    left: 90px;
+    position: relative;
+    width: auto;
+    left: 0;
 }
 .user_comm {
 	width: 750px;
@@ -68,7 +71,17 @@ width: 850px;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
 }
-
+.commcount {
+  opacity:0.6;
+  margin-right:10px;
+}
+.commreg {
+  float:right;
+  font-size:9px;
+}
+.contentbox {
+  width:740px;
+}
 </style>
 </head>
 <body>
@@ -96,37 +109,9 @@ width: 850px;
 		  <!-- tab2 시작 -->
 		  <div id="tab2" class="tab-slider--body">
 			<div class="tab_box">
-			  <!-- 글 시작 -->
-			  <c:choose>
-				<c:when test="${empty commlist}">
-				  <p>작성된 댓글이 없습니다.</p>
-				</c:when>
-				<c:when test="${!empty commlist}">
-				  <c:forEach var="c"  items="${commlist}" >	
-				  <div class="user_comm">
-					<div class="comm-section">	                                          
-					  <div class="comm">
-						<div class="comm_box">                     
-							<div class="my_comm_subject">
-								<h3 class="my_comm_subject_title">아이디 : ${c.board.m_id}=><br>
-								 제목 : ${c.board.inf_subject}</h3>
-							</div>
-							<div class="my_comm_content">
-								<p class="board_inf_content_text">내용 : ${c.board.inf_content}</p>
-							</div>
-							<div class="my_comm_content_text">
-								${c.comment.m_id} => ${c.comment.comm_content}
-							</div>	
-						</div>		
-					   </div>
-					</div>
-				  </div>
-				  </c:forEach>
-				</c:when>
-			  </c:choose>
-			  <!-- 글 종료 -->
-			</div>	                  
-		  </div>
+			  <div class="contentbox">
+			  </div>
+		    </div>
 		  <!-- tab2 종료 -->
 		</div>
 	  </div>

@@ -211,25 +211,31 @@ pre {
 <div class="container">
 	<div class="col-xl">
 	  <div class="postsubject">${boarddata.inf_subject}</div>
+	  
 	  <c:if test="${boarddata.inf_open == 0}">
 	    <span class="badge badge-success">공개</span>
 	  </c:if>
+	  
 	  <c:if test="${boarddata.inf_open == 1}">
 	    <span class="badge badge-warning">비공개</span>
 	  </c:if>
+	  
 		<div class="dropdowntool">
 		  <button type="button" class="btn btn-success dropdown-toggle droptool" data-toggle="dropdown">
 		    더보기
 		  </button>
 		  <div class="dropdown-menu">
 		    <a class="dropdown-item" href="InfoList.com">목록</a>
+		    
 		  <c:if test="${m_id != null}">
 		    <a class="dropdown-item" href="InfoReply.com?inf_num=${boarddata.inf_num}">답변</a>
 		  </c:if>
+		  
 		  <c:if test="${m_id == boarddata.m_id}">
 		    <a class="dropdown-item" href="InfoModify.com?inf_num=${boarddata.inf_num}">수정</a>
 		    <a class="dropdown-item" href="InfoDelete.com">삭제</a>
 		  </c:if>
+		  
 		  </div>
 		</div>
 		
@@ -242,7 +248,6 @@ pre {
     <c:if test="${boarddata.inf_lev>0}">
       <div class="postcontentarea">
 	    <pre class="postcontent">${boarddata.inf_content}</pre>
-	    <span class="badge badge-success btnloc">위치</span><span class="postloc">${boarddata.inf_loc}</span>
 	    
 	    <div class="cntarea" data-toggle="tooltip" data-placement="top" title="하트를 눌러보세요!">
 		  <span class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button></span>
@@ -253,6 +258,10 @@ pre {
 	</c:if>
 	  
 	<c:if test="${boarddata.inf_lev==0}">
+	    <c:if test="${boarddata.inf_book == null}">
+	      <img src="./image/noimage.jpg" width="200px" height="300px" class="postbookcover">
+	    </c:if>
+	    <c:if test="${boarddata.inf_book != null}">
 	      <img src="${boarddata.inf_cover}" width="200px" height="300px" class="postbookcover">
 	      <div class="postbookinfoarea">
 		      <span class="badge badge-success infoitem">책제목</span><span class="postbooktitle">${boarddata.inf_book}</span><br>
@@ -260,8 +269,11 @@ pre {
 		      <span class="badge badge-success infoitem">카테고리</span><span>${boarddata.inf_category}</span><br>
 		      <span class="badge badge-success infoitem">출간일</span><span class="postbookpubdate">${boarddata.inf_pubdate}</span>
 	      </div>
+	    </c:if>
+	    
 	    <pre class="postcontent">${boarddata.inf_content}</pre>
 	    <span class="badge badge-success btnloc">위치</span><span class="postloc">${boarddata.inf_loc}</span>
+	    
 	    <div class="badge badge-success uploadfile">첨부파일</div>
               <c:forEach var="a" items="${boardfile}" varStatus="status">
                 <c:if test="${a.infa_filename != null}">
@@ -274,13 +286,14 @@ pre {
   		          <c:if test="${a.infa_filename == null}">
 		          </c:if>
               </c:forEach>
-	</c:if>
-	
+              
 	    <div class="cntarea" data-toggle="tooltip" data-placement="top" title="하트를 눌러보세요!">
 		  <span class="imglike"><button><img src="./image/like_off.png" id="likeclick"></button></span>
 	      <span id="likecnt"></span>
 	      <img src="./image/openbook.png" width="25px" height="25px" class="readcountimg"><span>${boarddata.inf_readcount}</span>
 	    </div>
+	</c:if>
+	
 	</div> <%-- col-xl end --%>
    <%-- 댓글 시작 부분 --%>
    <div class="comment-area">

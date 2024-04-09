@@ -9,9 +9,12 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Common.css">
 <style>
 .mytrade {
+    border-bottom: 1px solid #BCE55C;
+    width: auto;
     position: relative;
-    width: 1200px;
-    margin: 0 auto;
+    top: 20px;
+    padding-bottom: 15px;
+    text-align: center;
 }
 .tab_container{
     position: relative;

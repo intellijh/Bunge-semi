@@ -24,15 +24,20 @@
     justify-content: space-evenly;
     padding-top: 60px;
 }
+
 .left_bar {
 	width: 180px;
     height: 600px;
-} 
-.tab-slider--tabs{
-    position: relative;
-    left: 50px;
-    padding-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
+ 
+.tab-slider--tabs {
+    position: absolute;
+    padding-bottom: 20px;
+    bottom: 250px;
+}
+
 .tab-slider--tabs li {
     text-align: center;
     width: 140px;
@@ -41,20 +46,20 @@
 
 }
 .membertitle {
-   border-bottom: 1px solid rgba(212, 216, 229, .5);
-    width: 1140px;
+    border-bottom: 1px solid #BCE55C;
+    width: auto;
     position: relative;
-    top : 20px;
-    padding-bottom: 30px;
+    top: 20px;
+    padding-bottom: 15px;
+    text-align: center;
 }
 .membertitle h3 {
     position: relative;
-    width: 1040px;
-    left: 182px;
+    width: auto;
+    left: 0;
 }
 .m_profile {
-    position: relative;
-    left: 60px;
+    position: absolute;
 }
 label{
 	margin: 0;
@@ -75,6 +80,7 @@ label{
 .profilech {
     width: 140px;
     height: 140px;
+    padding-left:10px;
 }
 .profilech img {
     width: 130px;
@@ -101,15 +107,16 @@ label{
     width: 80px;
     height: 40px;
 }
+
 .m_pwd_btn button {
     width: 100px;
     height: 40px;
     position: absolute;
     left: 355px;
-    background-color: rgba(212,216,229,.25);
+    background-color: #BCE55C;
     border: solid 1px rgba(212,216,229,.5);
     border-radius: 4px;
-    color: #7b8994;
+    color: white;
 }
 
 .m_name b {
@@ -130,10 +137,10 @@ label{
     height: 40px;
     position: absolute;
     left: 355px;
-    background-color: rgba(212,216,229,.25);
+    background-color: #BCE55C;
     border: solid 1px rgba(212,216,229,.5);
     border-radius: 4px;
-    color: #7b8994;
+    color: white;
 }
 .m_gender {
     height: 40px;
@@ -159,10 +166,10 @@ label{
 .m_zipcode_btn input {
     width: 160px;
     height: 40px;
-    background-color: rgba(212,216,229,.25);
+    background-color: #BCE55C;
     border: solid 1px rgba(212,216,229,.5);
     border-radius: 4px;
-    color: #7b8994;
+    color: white;
 }
 .m_addr1 {
     width: 500px;
@@ -187,10 +194,10 @@ label{
     height: 40px;
     position: absolute;
     left: 355px;
-    background-color: rgba(212,216,229,.25);
+    background-color: #BCE55C;
     border: solid 1px rgba(212,216,229,.5);
     border-radius: 4px;
-    color: #7b8994;
+    color: white;
 }
 .m_phone b{
     padding-right: 16px;
@@ -201,15 +208,16 @@ label{
     width: 80px;
     height: 40px;
 }
+
 .m_phone_btn button {
     width: 100px;
     height: 40px;
     position: absolute;
     left: 355px;
-    background-color: rgba(212,216,229,.25);
+    background-color: #BCE55C;
     border: solid 1px rgba(212,216,229,.5);
     border-radius: 4px;
-    color: #7b8994;
+    color: white;
 }
 
 .m_email input {
@@ -226,10 +234,10 @@ label{
     height: 40px;
     position: absolute;
     left: 355px;
-    background-color: rgba(212,216,229,.25);
+    background-color: #BCE55C;
     border: solid 1px rgba(212,216,229,.5);
     border-radius: 4px;
-    color: #7b8994;
+    color: white;
 }
 .modal-content{
 	top:300px;

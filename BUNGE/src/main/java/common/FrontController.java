@@ -25,12 +25,12 @@ import common.login.loginProcessAction;
 import common.login.logoutAction;
 import common.login.pwdresetAction;
 import common.mypage.mycommlistAction;
+import common.mypage.mycommlistprocessAction;
 import common.mypage.mylikelistAction;
 import common.mypage.mypageAction;
-import common.mypage.mypageLikecntAction;
+import common.mypage.mypageReviewAction;
 import common.mypage.mypagechangeAction;
 import common.mypage.mytradelistAction;
-import common.mypage.reviewlistAction;
 import header.action.HeaderProfileAciton;
 import info.action.InfoDetailAction;
 import info.action.InfoListAction;
@@ -139,16 +139,16 @@ public class FrontController extends HttpServlet {
             case "/mypagechange.com" :
             	action = new mypagechangeAction();
             	break;
-                //리뷰 활동 페이지
             case "/reviewlist.com" :
-            	action = new reviewlistAction();
-            	break;
-            case "/mypageLikecnt.com" :
-            	action = new mypageLikecntAction();
+            	action = new mypageReviewAction();
             	break;
             	//내가 쓴 댓글 페이지
-            case"/mycommlist.com" :
+            case "/mycommlist.com" :
             	action = new mycommlistAction();
+            	break;
+            //마이페이지 댓글 리스트 처리
+            case "/mycommlistprocess.com" :
+            	action = new mycommlistprocessAction();
             	break;
             	//즐겨찾기 페이지
             case "/mylikelist.com" :

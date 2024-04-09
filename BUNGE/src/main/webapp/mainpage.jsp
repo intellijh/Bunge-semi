@@ -49,6 +49,16 @@
     background: #BCE55C;
 }
 
+.slidebackground::before {
+    position: absolute;
+    content: "";
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 480px;
+    background-color: rgba(0,0,0,0.4);
+}
+
 .slidearea {
   padding-top:5px;
   padding-bottom:40px;
