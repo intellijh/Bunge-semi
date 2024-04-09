@@ -5,10 +5,12 @@
 html, body {
 	margin: 0;
 	padding: 0;
-	min-width: 400px;
-	width: 100%;
-	height: 100%;
 	font-family:나눔고딕;
+}
+
+
+#newwritebutton {
+	display : inline-block;
 }
 
 body {
@@ -57,18 +59,14 @@ body {
 }
 #navi-bar {
 	min-height: 30px;
-	background: #E4F7BA;
+	background: #bce55c;
 }
 
 #content {
+	width : 1140px;
 	display: flex;
-	width: 100%;
-	height: 100%;
 	flex-wrap: wrap;
 	justify-content: center;
-	padding-bottom: 30px;
-	overflow-y: auto;
-	-ms-overflow-style: none;
 }
 
 #content::-webkit-scrollbar {
@@ -89,7 +87,6 @@ body {
 	min-width: 400px;
 	padding-top: 50px;
 	padding-bottom: 30px;
-	overflow-y: auto;
 	-ms-overflow-style: none;
 }
 #content-view-inner hr{
@@ -121,13 +118,7 @@ body {
 	font-weight: bold;
 }
 
-#under-bar {
-	background-color: whitesmoke;
-	text-align: center;
-	height: 30px;
-	width: 100%;
-	display: fixed;
-}
+
 
 #title {
 	font-size: 25px;
@@ -159,15 +150,17 @@ body {
 
 #categoryandcolor{
 	width: 100%;
-	height: 500px;
+	height: 300px;
 	background-color: #bce55c;
 	text-align: center;
 }
 
 #category {
+	max-width : 1140px;
 	text-align: center;
 	margin: 0 auto;
-	background-color: #E4F7BA;
+	background-color: #bce55c;
+	display : inline-block;
 }
 
 .category.button {
