@@ -69,8 +69,8 @@ $(document).ready(function(){
 			  $('#postbook'+index).text(item.inf_book)
 			  
 			  //console.log(item.inf_content.length)
-			  if (item.inf_content.length > 60) {
-				  $('#postcontent'+index).text(item.inf_content.substr(0,59) + '...')
+			  if (item.inf_content.length > 57) {
+				  $('#postcontent'+index).text(item.inf_content.substr(0,56) + '...')
 			  } else {
 				  $('#postcontent'+index).text(item.inf_content)
 			  }
@@ -108,6 +108,30 @@ $(document).ready(function(){
 	  }
   })
   
+  //신간도서
+  $.ajax ({
+	  url : "http://www.aladin.co.kr/ttb/api/ItemList.aspx",
+	  data : {"ttbkey" : "ttbyyy24941308001",
+	  		  "QueryType" : "ItemNewSpecial",
+	  		  "SearchTarget" : "Book",
+	  		  "MaxResults" : "5",
+	  		  "Cover" : "Big",
+	  		  "Output" : "JS",
+	  		  "Version" : "20131101"},
+	  dataType : "json",
+	  cache : false,
+	  success : function(rdata) {
+		  
+		  let i=0;
+		  $(rdata.item).each(function() {
+			  let subject=rdata.item.at(i)
+			  console.log(subject)
+			  $('#newbestimg' + i).attr("src", subject.cover)
+			  $('#newbest' + i).attr("href", subject.link)
+			  i++
+		  })
+	  }
+  })  
   
   //더보기 버튼 클릭 시
   $('#morelist').click(function() {

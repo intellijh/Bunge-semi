@@ -54,13 +54,6 @@
   padding-bottom:40px;
 }
 
-.nextbtn {
-  left : 1120px;
-}
-
-.prevbtn {
-  left : -165px;
-}
 
 .indicatorbtn {
   top:375px;
@@ -74,10 +67,36 @@
 }
 
 #bestsellercomm {
- font-size:20px;
- margin-left:20px;
+  color:white;
+  font-weight:bold;
+  font-size:20px;
+  margin-left:20px;
 }
 
+.welcomement {
+  padding-top:30px;
+  padding-bottom:30px;
+}
+
+.welcomecommarea {
+  padding-bottom:9px;
+}
+
+#poster {
+    position: absolute;
+    width: 240px;
+    height: 321px;
+    top: 30px;
+    left: 886px;
+}
+
+.prevbtn {
+  left:-176px;
+}
+
+.nextbtn {
+  left:1130px;
+}
 <%-- 슬라이드 영역 끝--%>  
 
 <%-- 인기 게시글 영역 시작 --%>
@@ -270,7 +289,27 @@
 	  
 	  <!-- The slideshow -->
 	  <div class="carousel-inner">
-	    <div class="carousel-item active">
+	  
+	    <div class="carousel-item active welcomement">
+	      <div class="welcomecommarea">
+	        <div id="bestseller" class="badge badge-success">🤗환영해요!</div><span id="bestsellercomm">BUNGE에서 책의 바다에 풍덩 빠져보아요</span>
+	      </div>
+	      <div class="welcomecommarea">
+	        <div id="bestseller" class="badge badge-success">🙏함께해요!</div><span id="bestsellercomm">같이 읽으면 쉽게 갈 수 있어요</span>
+	      </div>
+	      <div class="welcomecommarea">
+	        <div id="bestseller" class="badge badge-success">🤔고민해요!</div><span id="bestsellercomm">책을 읽고 기록하면서 생각이 깊어져요</span>
+	      </div>
+	      <div class="welcomecommarea">
+	        <div id="bestseller" class="badge badge-success">🎉즐거워요!</div><span id="bestsellercomm">책마니들과 소통하면서 즐거움이 생겨요</span>
+	      </div>
+	      <div class="welcomecommarea">
+	        <div id="bestseller" class="badge badge-success">🚀성장해요!</div><span id="bestsellercomm">BUNGE를 이용할수록 달라지는 스스로를 볼 수 있어요</span>
+	      </div>
+	      <img id="poster" src="${pageContext.request.contextPath}/image/bungeposter.png">
+	    </div>
+	    
+	    <div class="carousel-item">
 	      <div id="bestseller">🏆베스트셀러<span id="bestsellercomm">실시간으로 인기있는 책을 알려드려요</span></div>
 	      <a id="slidelink0"><img id="slideimg0" src="${pageContext.request.contextPath}/image/sample4.jpg" alt="Los Angeles"></a>
 	      <a id="slidelink1"><img id="slideimg1" src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago"></a>
@@ -278,30 +317,27 @@
 	      <a id="slidelink3"><img id="slideimg3" src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago"></a>
 	      <a id="slidelink4"><img id="slideimg4" src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago"></a>
 	    </div>
+	    
+	    
 	    <div class="carousel-item">
-	      <div id="bestseller">🤗환영해요!<span id="bestsellercomm">BUNGE에 오신 여러분 환영합니다</span></div>
-	      <img src="${pageContext.request.contextPath}/image/sample6.png" alt="Los Angeles">
-	      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
-	      <img src="${pageContext.request.contextPath}/image/sample8.png" alt="Los Angeles">
-	      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
-	      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
+	      <div id="bestseller">👏신간도서<span id="bestsellercomm">주목받는 신간을 알려드려요</span></div>
+	      <a id="newbest0"><img id="newbestimg0" src="${pageContext.request.contextPath}/image/sample4.jpg" alt="Los Angeles"></a>
+	      <a id="newbest1"><img id="newbestimg1" src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago"></a>
+	      <a id="newbest2"><img id="newbestimg2" src="${pageContext.request.contextPath}/image/sample8.png" alt="Los Angeles"></a>
+	      <a id="newbest3"><img id="newbestimg3" src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago"></a>
+	      <a id="newbest4"><img id="newbestimg4" src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago"></a>
 	    </div>
-	    <div class="carousel-item">
-	      <img src="${pageContext.request.contextPath}/image/sample9.png" alt="Los Angeles">
-	      <img src="${pageContext.request.contextPath}/image/sample5.png" alt="Los Angeles">
-	      <img src="${pageContext.request.contextPath}/image/sample6.png" alt="Chicago">
-	      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
-	      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
-	    </div>
+	    
 	  </div>
-	  
-	  <!-- Left and right controls -->
 	  <a class="carousel-control-prev prevbtn" href="#myCarousel" data-slide="prev">
 	    <span class="carousel-control-prev-icon"></span>
 	  </a>
 	  <a class="carousel-control-next nextbtn" href="#myCarousel" data-slide="next">
 	    <span class="carousel-control-next-icon"></span>
 	  </a>
+	  </div>
+	  
+	  <!-- Left and right controls -->
 	</div>
 	</div>
 </div>
