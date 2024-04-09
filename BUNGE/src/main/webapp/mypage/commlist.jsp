@@ -57,6 +57,7 @@ width: 850px;
 .user_comm {
 	width: 750px;
     height: 200px;
+    border-bottom: 1px solid rgba(220, 227, 233, .8);
 }
 .board_inf_content_text  {
     width: 600px;
@@ -85,7 +86,9 @@ width: 850px;
 			<a href="reviewlist.com"><li class="tab-slider--trigger active" rel="tab2"><span>작성글</span></li></a>
 			<a href="mycommlist.com"><li class="tab-slider--trigger"  rel="tab3"><span>작성댓글</span></li></a>
 			<a href="mylikelist.com"><li class="tab-slider--trigger"  rel="tab4"><span>좋아요한 리뷰</span></li></a>
-			<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>좋아요한 거래상품</span></li></a>
+			<%-- 
+				<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>좋아요한 거래상품</span></li></a>
+				--%>
 		  </ul>
 		  </div>
 		</div>

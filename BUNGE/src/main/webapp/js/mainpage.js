@@ -20,7 +20,6 @@ $(document).ready(function(){
     $("#myCarousel").carousel("next");
   });
   
-  
   //인기 있는 책
   $.ajax ({
 	  url : "MainPopularBook.com",

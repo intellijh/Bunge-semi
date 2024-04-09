@@ -109,7 +109,9 @@ width: 850px;
 				<a href="reviewlist.com"><li class="tab-slider--trigger active" rel="tab2"><span>작성글</span></li></a>
 				<a href="mycommlist.com"><li class="tab-slider--trigger"  rel="tab3"><span>작성댓글</span></li></a>
 				<a href="mylikelist.com"><li class="tab-slider--trigger"  rel="tab4"><span>좋아요한 리뷰</span></li></a>
+				<%-- 
 				<a href="mytradelist.com"><li class="tab-slider--trigger"  rel="tab5"><span>좋아요한 거래상품</span></li></a>
+				--%>
 		  </ul>
 		</div>
 		</div>
@@ -132,7 +134,7 @@ width: 850px;
 							<p>작성일 : ${k.board.inf_reg}</p>
 						</div>
 						<div class="like_subject">
-							<h3 class="like_inf_subject_title">제목 :${k.board.inf_subject}</h3>
+						 <a href="InfoDetail.com?inf_num=${k.board.inf_num}"><h3 class="like_inf_subject_title">제목 :${k.board.inf_subject}</h3></a>
 						</div>
 						  <div class="like_content">
 							<p class="like_inf_contet_text">내용 : ${k.board.inf_content}</p>	
@@ -147,12 +149,12 @@ width: 850px;
 						  <div class="like_comm_box">
 							<div class="inf_like_num">
 								<div>
-									<img src="${pageContext.request.contextPath}/image/like_on.png" alt="Like Icon">${k.infoLike.inf_num}
+									<img src="${pageContext.request.contextPath}/image/like_on.png" alt="Like Icon">${k.board.infolikecnt}
 								</div>
 							</div>
 							<div class="inf_comm_num">
 								<div>
-									<img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg">${k.comment.inf_num}
+									<img width="50px" height="50px" alt="talk" src="${pageContext.request.contextPath}/image/talk.jpg">${k.board.cnt}
 								</div>
 							</div>
 						  </div>

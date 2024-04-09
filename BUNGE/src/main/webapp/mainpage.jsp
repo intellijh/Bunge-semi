@@ -498,8 +498,6 @@
 	  </div>
 	</div>
 
-      
-
     </div><!-- /.blog-main -->
 <%-- 인기 있는 책 영역 시작 --%>
     <aside class="col-md-4 blog-sidebar">
