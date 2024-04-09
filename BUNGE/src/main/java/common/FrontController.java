@@ -27,6 +27,7 @@ import common.login.pwdresetAction;
 import common.mypage.mycommlistAction;
 import common.mypage.mylikelistAction;
 import common.mypage.mypageAction;
+import common.mypage.mypageLikecntAction;
 import common.mypage.mypagechangeAction;
 import common.mypage.mytradelistAction;
 import common.mypage.reviewlistAction;
@@ -142,6 +143,9 @@ public class FrontController extends HttpServlet {
             case "/reviewlist.com" :
             	action = new reviewlistAction();
             	break;
+            case "/mypageLikecnt.com" :
+            	action = new mypageLikecntAction();
+            	break;
             	//내가 쓴 댓글 페이지
             case"/mycommlist.com" :
             	action = new mycommlistAction();
@@ -214,13 +218,13 @@ public class FrontController extends HttpServlet {
             case "/InfoLikeCnt.com":
                 action = new InfoLikeCntAction();
                 break;
-            // 좋아요 추기
+            // 좋아요 추가
             case "/InfoLikeAdd.com":
                 action = new InfoLikeAddAction();
                 break;
              // 좋아요 삭제
             case "/InfoLikeDelete.com":
-                action = new InfoLikeDeleteAction();		
+                action = new InfoLikeDeleteAction();
                 break;												
             //채팅 페이지 이동
             case "/chat.com":

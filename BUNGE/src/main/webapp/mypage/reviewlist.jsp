@@ -106,6 +106,7 @@ width: 850px;
 </style>
 </head>
 <body>
+<input type="hidden" id="loginid" value="${m_id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
 <div id="warp">
 <div class="myreveiw">
 <!-- tab menu 시작 -->
@@ -136,7 +137,8 @@ width: 850px;
 				  <p>작성된 글이 없습니다.</p>
 				</c:when>
 				<c:when test="${!empty boardlist}">
-				  <c:forEach var="b" items="${boardlist}" >		  	
+				  <c:forEach var="b" items="${boardlist}" >		
+				  <input type="hidden"  id="inf_num" value="${b.board.inf_num}" name="inf_num"><%--view.js에서 사용하기 위해 추가합니다. --%>
 				  <div class="user_board">
 					<div class="board-section">	  
 					<div class="board">                                     
