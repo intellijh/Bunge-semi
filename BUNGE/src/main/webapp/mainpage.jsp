@@ -38,7 +38,7 @@
   }
   
   #myCarousel {
-  	height : 300px;
+  	height : 370px;
   }
   
   #myCarousel > div {
@@ -48,6 +48,36 @@
 .slidebackground {
     background: #BCE55C;
 }
+
+.slidearea {
+  padding-top:5px;
+  padding-bottom:40px;
+}
+
+.nextbtn {
+  left : 1120px;
+}
+
+.prevbtn {
+  left : -165px;
+}
+
+.indicatorbtn {
+  top:375px;
+}
+
+#bestseller {
+  color:white;
+  font-weight:bold;
+  padding-bottom:5px;
+  font-size:40px;
+}
+
+#bestsellercomm {
+ font-size:20px;
+ margin-left:20px;
+}
+
 <%-- 슬라이드 영역 끝--%>  
 
 <%-- 인기 게시글 영역 시작 --%>
@@ -202,7 +232,7 @@
 }
 
 .commcontent {
-  font-size : 10px;
+  font-size : 12px;
   padding-right : 5px;
 }
 
@@ -228,11 +258,11 @@
 <body>
 <%-- 슬라이드 이미지 --%>
 <div class="slidebackground">
-	<div class="container mt-3 slide">
+	<div class="container mt-3 slide slidearea">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 	
 	  <!-- Indicators -->
-	  <ul class="carousel-indicators">
+	  <ul class="carousel-indicators indicatorbtn">
 	    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 	    <li data-target="#myCarousel" data-slide-to="1"></li>
 	    <li data-target="#myCarousel" data-slide-to="2"></li>
@@ -241,13 +271,15 @@
 	  <!-- The slideshow -->
 	  <div class="carousel-inner">
 	    <div class="carousel-item active">
-	      <img src="${pageContext.request.contextPath}/image/sample4.jpg" alt="Los Angeles">
-	      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
-	      <img src="${pageContext.request.contextPath}/image/sample8.png" alt="Los Angeles">
-	      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
-	      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
+	      <div id="bestseller">🏆베스트셀러<span id="bestsellercomm">실시간으로 인기있는 책을 알려드려요</span></div>
+	      <a id="slidelink0"><img id="slideimg0" src="${pageContext.request.contextPath}/image/sample4.jpg" alt="Los Angeles"></a>
+	      <a id="slidelink1"><img id="slideimg1" src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago"></a>
+	      <a id="slidelink2"><img id="slideimg2" src="${pageContext.request.contextPath}/image/sample8.png" alt="Los Angeles"></a>
+	      <a id="slidelink3"><img id="slideimg3" src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago"></a>
+	      <a id="slidelink4"><img id="slideimg4" src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago"></a>
 	    </div>
 	    <div class="carousel-item">
+	      <div id="bestseller">🤗환영해요!<span id="bestsellercomm">BUNGE에 오신 여러분 환영합니다</span></div>
 	      <img src="${pageContext.request.contextPath}/image/sample6.png" alt="Los Angeles">
 	      <img src="${pageContext.request.contextPath}/image/sample7.png" alt="Chicago">
 	      <img src="${pageContext.request.contextPath}/image/sample8.png" alt="Los Angeles">
@@ -264,10 +296,10 @@
 	  </div>
 	  
 	  <!-- Left and right controls -->
-	  <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+	  <a class="carousel-control-prev prevbtn" href="#myCarousel" data-slide="prev">
 	    <span class="carousel-control-prev-icon"></span>
 	  </a>
-	  <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+	  <a class="carousel-control-next nextbtn" href="#myCarousel" data-slide="next">
 	    <span class="carousel-control-next-icon"></span>
 	  </a>
 	</div>
