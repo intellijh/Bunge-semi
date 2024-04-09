@@ -7,8 +7,17 @@
 <%@ include file="/layout/header.jsp" %>
  <script src="js/reply.js"></script>
  <style>
-	h1{font-size:1.5em; text-align:center; color:#1a92b9}
-	.container{width:60%}
+	h1 {
+		font-size:1.5em; text-align:center; color:#1a92b9
+	}
+	.container {
+		width:60%;
+		padding-top : 60px;
+	}
+	
+	body > div > form > div:nth-child(7) {
+		text-align : center
+	}
 	
 	label{font-weight:bold}
 	#upfile{display:none}
@@ -20,16 +29,15 @@
   		<input name="inf_ref" value="${boarddata.inf_ref}" type="hidden">
   		<input name="inf_lev" value="${boarddata.inf_lev}" type="hidden">
   		<input name="inf_seq" value="${boarddata.inf_seq}" type="hidden">
-		<h1>MVC 게시판 - Reply</h1>
 		<div class="form-group">
 			<label for="m_id">글쓴이</label>
 			<input name="m_id" id="m_id" type="text" value="${m_id}"		 
-  			   class="form-control">
+  			   class="form-control" readonly>
 		</div>
 		<div class="form-group">		
 		   <label for="inf_subject">제목</label>
 		   <textarea name="inf_subject" id="inf_subject" rows="1" maxlength="100"		 
-  			   class="form-control">Re:${boarddata.inf_subject}</textarea>
+  			   class="form-control" readonly>Re:${boarddata.inf_subject}</textarea>
   		</div>	
   		<div class="form-group">
   			<label for="inf_content">내용</label>
