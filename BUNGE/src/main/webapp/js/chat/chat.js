@@ -30,12 +30,16 @@ function getChatList() {
                 let output = "";
                 output +=
                     "<div class='no-chat'>" +
-                    "   아직 채팅이 없습니다.<br>" +
-                    "   <a href='trade.net'>대화하러 가기</a>" +
+                    "   아직 채팅이 없습니다.<br><br>" +
+                    "   <button style='border: none; padding: 10px 15px; background: #BCE55C'>" +
+                    "       <a href='trade.net' style='text-decoration-line: none'>대화하러 가기</a>" +
+                    "   </button>" +
                     "</div>";
-                $("body").append(output);
+                $(".container-fluid").prepend(output);
                 return;
             }
+
+            $(".no-chat").remove();
 
             let output = ``;
             $(rdata).each(function () {
