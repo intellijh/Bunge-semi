@@ -8,9 +8,19 @@ html, body {
 	font-family:나눔고딕;
 }
 
+.contrainer {
+	width:1140px;
+	margin : 0 auto;
+}
 
 #newwritebutton {
+	background: #bce55c;
+	border : #BCE55C;
 	display : inline-block;
+	position: fixed;
+    bottom: 20px; /* 화면 하단으로부터의 거리 조정 */
+    right: 195px; /* 화면 오른쪽으로부터의 거리 조정 */
+    z-index: 999; /* 다른 요소 위에 표시되도록 설정 */
 }
 
 body {
@@ -23,12 +33,6 @@ body {
 	color: #000000;
 }
 
-#upper-bar {
-	min-height: 52px;
-	background: #bce55c;
-	padding: 7px 15px;
-	display: fixed;
-}
 #button-write {
 	font-size: 25px;
 	float:right;
