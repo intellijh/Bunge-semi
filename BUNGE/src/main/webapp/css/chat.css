@@ -272,3 +272,8 @@ body, html {
     background: white;
     line-height: 2.5;
 }
+
+.no-chat {
+    text-align: center;
+    margin-top: 300px
+}

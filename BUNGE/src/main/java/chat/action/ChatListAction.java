@@ -23,7 +23,7 @@ public class ChatListAction implements Action {
         ActionForward forward = new ActionForward();
         if (session.getAttribute("m_id") == null) {
             forward.setRedirect(true);
-            forward.setPath("/login.com");
+            forward.setPath("login.com");
         } else {
             forward.setRedirect(false);
             forward.setPath("/chat/chat.jsp");
