@@ -295,11 +295,25 @@ $(function(){
         });
     }
 
-    $inputMessage.keypress(function (e) {
+/*
+    $inputMessage.keydown(function (e) {
         console.log(e);
+        console.log(e.isComposing);
         if (e.key === "Enter") {
             $('.send_btn').click();
             e.preventDefault();
+        }
+    });
+*/
+
+    document.getElementsByClassName("type_msg")[0].addEventListener("keydown", (e) => {
+        console.log(e);
+        console.log(e.isComposing);
+        if (e.key === "Enter") {
+            if (e.isComposing == false) {
+                $('.send_btn').click();
+                e.preventDefault();
+            }
         }
     });
 
