@@ -37,7 +37,7 @@
 		<div class="form-group">		
 		   <label for="inf_subject">제목</label>
 		   <textarea name="inf_subject" id="inf_subject" rows="1" maxlength="100"		 
-  			   class="form-control">Re:${boarddata.inf_subject}</textarea>
+  			   class="form-control" readonly>Re:${boarddata.inf_subject}</textarea>
   		</div>	
   		<div class="form-group">
   			<label for="inf_content">내용</label>
