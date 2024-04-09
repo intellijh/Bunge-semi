@@ -176,10 +176,18 @@ $(function () {
     loginId = $("#loginId").val();
     console.log("myId = " + loginId);
 
+    // 토글 메뉴 클릭 이벤트
     $('#action_menu_btn').click(function () {
         $(".action_menu").toggle();
     });
-    console.log("load");
+
+    // 메뉴 외 클릭 시 닫기
+    $("body").click(function (e) {
+        if ($(e.target).parent("#action_menu_btn").length >= 1) {
+            return;
+        }
+        $(".action_menu").hide();
+    });
 
     getChatList();
 

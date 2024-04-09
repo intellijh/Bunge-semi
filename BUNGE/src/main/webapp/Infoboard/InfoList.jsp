@@ -162,7 +162,7 @@
       </tbody>
     </table><br>
   	
-  	 <button id="newwritebutton" type="button" style="position:relative;" class="btn btn-success float-right">+글쓰기</button><br><br>
+ <button id="newwritebutton" type="button" style="position:relative;" class="btn btn-success float-right">+글쓰기</button><br><br>
   	
   	<div class="center-block">
 	  <ul class="pagination justify-content-center">
