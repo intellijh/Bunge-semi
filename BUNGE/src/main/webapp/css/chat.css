@@ -277,3 +277,11 @@ body, html {
     text-align: center;
     margin-top: 300px
 }
+
+.col-xl-3 {
+    line-height: 2;
+}
+
+.col-xl-6 {
+    line-height: 1;
+}
