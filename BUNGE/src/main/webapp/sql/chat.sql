@@ -10,8 +10,7 @@ CREATE TABLE chat
     open_date   TIMESTAMP NOT NULL,
     update_date TIMESTAMP,
     CONSTRAINT fk_seller_id FOREIGN KEY (seller_id) REFERENCES member (m_id),
-    CONSTRAINT fk_buyer_id FOREIGN KEY (buyer_id) REFERENCES member (m_id),
-    CONSTRAINT fk_trade_id FOREIGN KEY (trade_id) REFERENCES trade (tradeid)
+    CONSTRAINT fk_buyer_id FOREIGN KEY (buyer_id) REFERENCES member (m_id)
 );
 
 CREATE TABLE chat_message
@@ -22,7 +21,7 @@ CREATE TABLE chat_message
     content      VARCHAR2(200) NOT NULL,
     send_date    TIMESTAMP     NOT NULL,
     content_type CHAR(1)       NOT NULL,
-    CONSTRAINT fk_chat_id FOREIGN KEY (chat_id) REFERENCES chat (chat_id),
+    CONSTRAINT fk_chat_id FOREIGN KEY (chat_id) REFERENCES chat (chat_id) ON DELETE CASCADE,
     CONSTRAINT fk_member_id FOREIGN KEY (member_id) REFERENCES member (m_id)
 );
 
