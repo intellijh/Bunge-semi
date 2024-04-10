@@ -141,11 +141,20 @@ width: 850px;
 							<p class="like_inf_contet_text">내용 : ${k.board.inf_content}</p>	
 						</div>
 					</div>   
+						<c:if test="${k.board.inf_cover != null}">
 						  <div class="board_img">
-							<div class="img">
-						  		<img  src="${k.board.inf_cover}">
-						  		</div>
+					        <div class="img">
+						  	  <img  src="${k.board.inf_cover}">
+						  	</div>
 						  </div>
+						</c:if>
+						<c:if test="${k.board.inf_cover == null}">
+						  <div class="board_img">
+						    <div class="img">
+						      <img src="./image/noimage.jpg">
+						    </div>
+						  </div>
+						</c:if>
 						 </div>
 						  <div class="like_comm_box">
 							<div class="inf_like_num">
