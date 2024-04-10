@@ -24,7 +24,6 @@
   
   .attachname {display:none}
   
-  .input-group1, .input-group2, .input-group3, .input-group4, .input-group5 {display:none}
   
 .badge-success {
   color:white;
@@ -150,7 +149,6 @@ label {
     <%-- 원문글인 경우에만 파일 첨부 수정 가능하다 --%>
     
 
-    
 <c:if test="${board.inf_lev==0}">
       <button type="button" id="inputfile-btn" class="badge badge-success" data-toggle="tooltip" title="5개까지 첨부할 수 있어요">파일추가</button>
  	<c:if test="${boardfile[0] == null}">
@@ -275,10 +273,10 @@ label {
     </c:if>
     
 </c:if>
-    
-    
-<%--    
-    <c:if test="${boardfile[0] == null}">
+
+<!--    
+   <button type="button" id="inputfile-btn" class="badge badge-success" data-toggle="tooltip" title="5개까지 첨부할 수 있어요">파일추가</button>
+     <c:if test="${boardfile[0] == null}">
  	  <div class="input-group1">
 	 	  <label>
 	 	    첨부파일
@@ -291,7 +289,6 @@ label {
   		</div>
   	</c:if>
     <c:if test="${boardfile[0] != null}">
-      <div>첨부한 파일목록 (클릭하면 첨부파일을 수정할 수 있습니다)</div>
           <label>
             <input type="file" id="uploadedfile1" class="uploadedfile1" name="uploadedfile1" onchange="readURL(this)">
             <img src="boardupload/${boardfile[0].infa_filename}" width="50px" class="uploadedfile${status.count}">
@@ -343,8 +340,7 @@ label {
 	 	    <span class="filename" id="filevalue5"></span>
 	 	    <img src="image/remove.png" alt="파일삭제" width="10px" class="remove5">
   		</div>
-    </c:if>
---%>
+ -->   
     
       <div class="form-group">
         <label for="inf_loc">위치</label>

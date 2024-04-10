@@ -759,6 +759,7 @@ public class BoardDAO {
 				while (rs.next()) {
 					JsonObject object = new JsonObject();
 					
+					object.addProperty("tradeid", rs.getInt("tradeid"));
 					object.addProperty("sellerid", rs.getString("sellerid"));
 					object.addProperty("title", rs.getString("title"));
 					object.addProperty("description", rs.getString("description"));
