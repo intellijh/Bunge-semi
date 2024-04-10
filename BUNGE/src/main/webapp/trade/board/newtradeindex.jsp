@@ -44,7 +44,7 @@
                         $.each(response.tradeList, function(index, trade) {
                             var postDiv = '<div class="post" onclick="location.href=\'view.net?tradeID=' + trade.tradeID + '\'">' +
                                 '<div class="post-thumbnail" style="text-align: center;">' +
-                                '<img src="./image/' + trade.imageID + '" width="140" height="200">' +
+                                '<img src="./image/' + trade.imageID + '" width="140" height="202">' +
                                 '</div>' +
                                 '<div class="post-info">' +
                                 '<span id="post-info-title">' + trade.title + '</span><br>' +
@@ -73,8 +73,8 @@
 
 
 <div id="categoryandcolor">
-    <br><index_title>Trade</index_title><br><br>
-    <index_desc>마음의 양식을 나누어 보아요!</index_desc><br><br><br><br>
+    <br><index_title>🤝Trade</index_title><br><br>
+    <index_desc>마음의 양식을 나누어 보아요!</index_desc><br><br><br>
 
     <div id="navi-bar">
         <div id="search">
@@ -109,7 +109,7 @@
                 <div class="post" onclick="location.href='view.net?tradeID=${trade.tradeID}'">
                     <div class="post-thumbnail" style="text-align: center;">
                         <!-- 이미지 경로 출력 -->
-                        <img src="./image/<c:out value="${trade.imageID}" />" width="140" height="200">
+                        <img src="./image/<c:out value="${trade.imageID}" />" width="140" height="202">
                     </div>
                     <div class="post-info">
                         <span id="post-info-title"><c:out value="${trade.title}" /></span>

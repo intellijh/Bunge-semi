@@ -25,21 +25,29 @@
 		<div id="image-wrap">
 			<img src="./image/<c:out value="${trade.imageID}" />" style = "float:left" width="280" height="400">
 			<section>
-				<div id="image-title"><c:out value="${trade.title}" /></div>
-				<span id="image-category"><c:out value="카테고리 : ${trade.category}" /></span><br>
-				<span id="image-quality"><c:out value="책 상태 : ${trade.quality}" /></span><br>
-				<span id="image-condition"><c:out value="거래 상태 : ${trade.condition}" /></span><br>
-				<span id="image-tradeMethod"><c:out value="선호 거래 방법 : ${trade.tradeMethod}" /></span><br>
-				<span id="image-price"><c:out value="${trade.price}원" /></span><br>
-				<span id="image-author"><c:out value="${trade.sellerID}" /></span><br>
-				<span id="image-readCount"><c:out value="조회수 : ${trade.readCount + 1}" /></span>
+				<div id="image-title"><c:out value="${trade.title}" />
+				<button id="goBackButton" class="btn back-btn" style = "float:right">목록으로</button>
+				</div>
+				<script>
+					document.getElementById("goBackButton").addEventListener("click", function() {
+						history.back(); // 브라우저의 이전 페이지로 이동
+					});
+				</script>
+				<br>
+				<span id="image-category"><imgbox>카테고리</imgbox><c:out value="${trade.category}" /></span><br><br>
+				<span id="image-quality"><imgbox>책 상태</imgbox><c:out value="${trade.quality}" /></span><br><br>
+				<span id="image-condition"><imgbox>거래 상태</imgbox><c:out value="${trade.condition}" /></span><br><br>
+				<span id="image-tradeMethod"><imgbox>선호 거래 방법</imgbox><c:out value="${trade.tradeMethod}" /></span><br><br>
+				<span id="image-price"><imgbox>가격</imgbox><c:out value="${trade.price}원" /></span><br><br>
+				<span id="image-author"><imgbox>판매자</imgbox><c:out value="${trade.sellerID}" /></span><br><br>
+				<span id="image-readCount"><imgbox>조회수</imgbox><c:out value="${trade.readCount + 1}" /></span><br><br>
+				<form method="post" action="chatCreate.com">
+					<input type="hidden" name="tradeId" value="<c:out value="${trade.tradeID}" />">
+					<input type="hidden" name="sellerId" value="<c:out value="${trade.sellerID}" />">
+					<button class="w-btn w-btn-gra1 w-btn-gra-anim" type="submit" >채팅하기</button>
+				</form>
 			</section>
-			<%--		<div id="image-info">--%>
-			<form method="post" action="chatCreate.com">
-				<input type="hidden" name="tradeId" value="<c:out value="${trade.tradeID}" />">
-				<input type="hidden" name="sellerId" value="<c:out value="${trade.sellerID}" />">
-				<button type="submit" style="float:right">채팅하기</button>
-			</form>
+		<%--		<div id="image-info">--%>
 			<%--			<input type="button" value="좋아요" id="like-button" class="btn btn-light" onclick="">--%>
 			<%--		</div>--%>
 
