@@ -127,7 +127,7 @@ public class TradeDAO {
 //
 //    // 제목으로 책 검색
     public ArrayList<Trade> searchTradeByTitle(String keyword) throws SQLException{
-        String sql = "SELECT imageID,title,sellerID,createdate,tradeID from trade where title like ? order by tradeID desc";
+        String sql = "SELECT imageID,title,sellerID,createdate,tradeID,price,readCount from trade where title like ? order by tradeID desc";
 
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, "%"+keyword+"%");
@@ -141,6 +141,8 @@ public class TradeDAO {
             trade.setCreateDate(rs.getTimestamp("createDate"));
             trade.setImageID(rs.getString("imageID"));
             trade.setTitle(rs.getString("title"));
+            trade.setPrice(rs.getInt("price"));
+            trade.setReadCount(rs.getInt("readCount"));
 
             list.add(trade);
         }
@@ -205,7 +207,7 @@ public class TradeDAO {
 
     // 내용으로 책 검색
     public ArrayList<Trade> searchTradeByDesc(String keyword) throws SQLException{
-        String sql = "SELECT imageID,title,sellerID,createdate,tradeID from trade where description like ? order by tradeID desc";
+        String sql = "SELECT imageID,title,sellerID,createdate,tradeID,price,readCount from trade where description like ? order by tradeID desc";
 
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, "%"+keyword+"%");
@@ -220,6 +222,8 @@ public class TradeDAO {
             trade.setCreateDate(rs.getTimestamp("createDate"));
             trade.setImageID(rs.getString("imageID"));
             trade.setTitle(rs.getString("title"));
+            trade.setPrice(rs.getInt("price"));
+            trade.setReadCount(rs.getInt("readCount"));
 
             list.add(trade);
         }
