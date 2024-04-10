@@ -15,6 +15,11 @@
     margin: 0 auto;
     line-height: 28px;
 }
+.joinform {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
 .member {
  position:relative;
     width: 800px;
@@ -24,9 +29,13 @@
 .join {
     position: relative;
     left: 200px;
-    width: 400px;
+    width: 750px;
     height: 60px;
     margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }
 .join input {
     width: 250px;
@@ -36,29 +45,28 @@
 }
 
 .jointitle {
-   border-bottom: 1px solid rgba(212, 216, 229, .5);
-    width: 1140px;
+   border-bottom: 1px solid #BCE55C;
+    width: auto;
     position: relative;
     top : 20px;
     padding-bottom: 30px;
+    text-align: center;
 }
 
-.jointitle h2{
-	position: relative;
-    width: 1040px;
-    left: 182px;
-}
 .member {
 padding-top : 38px
 }
 .m_id b {
-	padding-right: 16px;
+	padding-right: 21px;
+}
+.m_pwd  b {
+	padding-right: 5px;
 }
 .m_name b {
-    padding-right: 30px;
+    padding-right: 35px;
 }
 .m_nick b {
-    padding-right: 16px;
+    padding-right: 21px;
 }
 .m_gender {
     height: 50px;
@@ -70,25 +78,40 @@ padding-top : 38px
     padding: 5px;
 }
 .m_gender b {
-    padding-right: 30px;
+    padding-right: 35px;
 }
 .m_zipcode input {
     width: 80px;
 }
-.m_addr1, .m_addr2 , .m_phone , .m_email{
-    width: 500px;
-}
 .m_addr1 input, .m_addr2 input, .m_phone input  {
     width: 380px;
 }
+.m_zipcode b {
+	padding-right: 5px;
+}
 .m_addr1 b {
-    padding-right: 30px;
+    padding-right: 35px;
+}
+.m_addr2 b {
+	padding-right: 5px;
 }
 .m_phone b{
-    padding-right: 16px;
+    padding-right: 21px;
+}
+.m_email { 
+	width: 820px;
 }
 .m_email input {
     width: 358px;
+}
+.m_email b {
+	padding-right: 5px;
+}
+.m_birthdate b {
+	padding-right: 5px;	
+}
+.message {
+	padding-left: 5px;
 }
 .clearfix {
  	position: relative;
@@ -114,6 +137,7 @@ padding-top : 38px
 <body>
 <div id="warp">
 	<form name="joinform" action="joinProcess.com" method="post">
+	<div class="joinform">
 	<div class="jointitle">
 	<h2>회원가입</h2>
 	</div>
@@ -157,7 +181,15 @@ padding-top : 38px
 			<span id="gender_message"></span>
 		</div>
 		</div>
-		
+
+		<div class="join m_birthdate">
+			<b>생년월일</b>
+			<input type="date" name="m_birthdate" min="1900-01-01" required>
+			<div class="message">
+				<span id="birth_message"></span>
+			</div>
+		</div>
+				
 		<div class="join m_zipcode">
 			<b>우편번호</b>
 			<input type="text" maxlength="5" name="m_zipcode"  required readonly>
@@ -191,20 +223,12 @@ padding-top : 38px
 				<span id="pho_message"></span>
 			</div>
 		</div>
-		
+
 		<div class="join m_email">
 			<b>이메일 주소</b>
 			<input type="text" name="m_email" placeholder="이메일을 입력" maxlength="30" required>
 			<div class="message">
 				<span id="email_message"></span>
-			</div>
-		</div>
-		
-		<div class="join m_birthdate">
-			<b>생년월일</b>
-			<input type="date" name="m_birthdate" min="1900-01-01" required>
-			<div class="message">
-				<span id="birth_message"></span>
 			</div>
 		</div>
 		
@@ -215,6 +239,7 @@ padding-top : 38px
 			<div class="reset btn">
 			<button type="reset" class="cancelbtn">돌아가기</button> <%--메인화면으로 --%>
 			</div>
+		</div>
 		</div>
 		</div>
 	</form>

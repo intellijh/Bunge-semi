@@ -13,7 +13,7 @@
 .myreveiw {
     position: relative;
     width: 1200px;
-    margin: 20px auto;
+    margin: 0 auto;
 }
 .tab_container{
     position: relative;
@@ -53,9 +53,7 @@ width: 850px;
     /* left: 155px; */
 }
 .user_board {
-	width: 850px;
-	height: 300px;
-	border-bottom: 1px solid rgba(220, 227, 233, .8);
+	width: 750px;
 }
 .tab_box :last-child {
 	border-bottom: none;
