@@ -28,7 +28,7 @@ $(document).ready(function(){
 	  success : function(rdata) {
 		  $(rdata.popularbooklist).each(function (index, item) {
 			  $('#popularbookcover' + index).attr('src', item.inf_cover)
-			  $('#popularcount' + index).text('#책마니관심도' + item.count)
+			  $('#popularcount' + index).html("<span class='badge badge-warning'>#책마니관심도" + item.count + "</span>")
 		  })
 	  }
   })
@@ -81,6 +81,25 @@ $(document).ready(function(){
 	  },
   })
   
+  //진행 중인 거래 영역
+  $.ajax ({
+	  url : "MainTrade.com",
+	  type : "post",
+	  dataType : "json",
+	  success : function(rdata) {
+		  $(rdata.tradelist).each(function(index, item) {
+			  $('#tradeprofile' + index).attr('src', './memberupload/' + item.m_profile)
+			  $('#sellerid' + index).text(this.sellerid)
+			  $('#createdate' + index).text(item.createdate)
+			  $('#title' + index).text(item.title)
+			  $('#description' + index).text(item.description.substr(0,100))
+			  $('#price'+index).html("<span class='badge badge-pill badge-warning'>"+item.price+"원</span>")
+			  $('#category'+index).html("<span class='badge badge-pill badge-warning'>"+item.category+"</span>")
+			  $('#quality'+index).html("<span class='badge badge-pill badge-warning'>"+item.quality+"급</span>")
+			  $('#imageid' + index).attr('src','./image/' + item.imageid)
+		  })
+	  }
+  })
   
   //베스트셀러
   $.ajax ({

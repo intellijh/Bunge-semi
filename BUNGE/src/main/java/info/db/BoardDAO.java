@@ -744,5 +744,46 @@ public class BoardDAO {
 		
 		return list;
 	}
+
+
+	public ArrayList<JsonObject> getTrade() {
+		ArrayList<JsonObject> list = new ArrayList<JsonObject>();
+		String sql = "select a.*, b.m_profile "
+				   + "from trade a "
+				   + "INNER JOIN member b on a.sellerid = b.m_id "
+				   + "order by createdate desc ";
+		
+		try (Connection con = ds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql);) {
+			try (ResultSet rs = pstmt.executeQuery();) {
+				while (rs.next()) {
+					JsonObject object = new JsonObject();
+					
+					object.addProperty("sellerid", rs.getString("sellerid"));
+					object.addProperty("title", rs.getString("title"));
+					object.addProperty("description", rs.getString("description"));
+					object.addProperty("price", rs.getString("price"));
+					object.addProperty("category", rs.getString("category"));
+					object.addProperty("quality", rs.getString("quality"));
+					object.addProperty("condition", rs.getString("condition"));
+					object.addProperty("trademethod", rs.getString("trademethod"));
+					object.addProperty("imageid", rs.getString("imageid"));
+					object.addProperty("readcount", rs.getInt("readcount"));
+					object.addProperty("createdate", rs.getString("createdate"));
+					object.addProperty("m_profile", rs.getString("m_profile"));
+					
+					list.add(object);
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+				System.out.println("getTrade() 에러 : " + ex);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("getTrade() 에러 : " + e);
+		}
+		
+		return list;
+	}
 	
 }//class end
