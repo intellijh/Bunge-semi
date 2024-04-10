@@ -24,6 +24,7 @@ body {
 }
 
 #upper-bar {
+	width:100%;
 	min-height: 52px;
 	background-color: #6a922c;
 	padding: 7px 15px;
@@ -88,8 +89,9 @@ body {
 	min-width: 400px;
 	padding-top: 50px;
 	padding-bottom: 30px;
-	overflow-y: auto;
+	overflow: auto;
 	-ms-overflow-style: none;
+	justify-content: center;
 }
 
 
@@ -103,10 +105,11 @@ body {
 }
 
 #image-wrap {
-	overflow: hidden;
+	overflow: visible;
 	padding-bottom: 90%;
 	position: relative;
 	height: 0;
+	justify-content: center;
 }
 
 #image-wrap image {
