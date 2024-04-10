@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "나눔고딕";
-    src: url("font.otf") format('opentype');
+	font-family: "나눔고딕";
+	src: url("font.otf") format('opentype');
 }
 html, body {
 	margin: 0;
@@ -8,19 +8,9 @@ html, body {
 	font-family:나눔고딕;
 }
 
-.contrainer {
-	width:1140px;
-	margin : 0 auto;
-}
 
 #newwritebutton {
-	background: #bce55c;
-	border : #BCE55C;
 	display : inline-block;
-	position: fixed;
-    bottom: 20px; /* 화면 하단으로부터의 거리 조정 */
-    right: 195px; /* 화면 오른쪽으로부터의 거리 조정 */
-    z-index: 999; /* 다른 요소 위에 표시되도록 설정 */
 }
 
 body {
@@ -33,6 +23,12 @@ body {
 	color: #000000;
 }
 
+#upper-bar {
+	min-height: 52px;
+	background: #bce55c;
+	padding: 7px 15px;
+	display: fixed;
+}
 #button-write {
 	font-size: 25px;
 	float:right;
@@ -71,6 +67,8 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+
+
 }
 
 #content::-webkit-scrollbar {
@@ -78,7 +76,6 @@ body {
 }
 
 #content-view {
-	min-height: calc(100% - 76px);
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -86,25 +83,27 @@ body {
 
 #content-view-inner {
 	width: 70%;
-	min-height: calc(100% - 80px);
 	max-width: 1280px;
 	min-width: 400px;
 	padding-top: 50px;
 	padding-bottom: 30px;
+	overflow-y: auto;
 	-ms-overflow-style: none;
 }
+
+
 #content-view-inner hr{
 	margin: 0;
 	border:1px solid gray;
 }
 
 #content-view-inner::-webkit-scrollbar {
-	display: none;
+	display: auto;
 }
 
 #image-wrap {
 	overflow: hidden;
-	padding-bottom: 50%;
+	padding-bottom: 90%;
 	position: relative;
 	height: 0;
 }
@@ -146,11 +145,40 @@ body {
 	height: 50px;
 }
 #post-info-title{
+	display: inline-block;
+	width: 300px;
+	font-family: "Black Han Sans", sans-serif;
+	font-weight: 400;
+	font-size: 25px;
+	font-style: normal;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	word-break: break-all;
+}
+
+#post-info-price{
+	float:left;
+}
+
+#post-info-readcount{
+	float:left;
+}
+
+
+#image-wrap section {
+	height: 400px;
+	margin-left: 300px;
+}
+
+#image-title{
 	font-family: "Black Han Sans", sans-serif;
 	font-weight: 400;
 	font-size: 25px;
 	font-style: normal;
 }
+
+
 
 #categoryandcolor{
 	width: 100%;
@@ -308,4 +336,5 @@ index_desc {
 .category-search input[type="submit"] {
 	margin: 5px;
 }
+
 

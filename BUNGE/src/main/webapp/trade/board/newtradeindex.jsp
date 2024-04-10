@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="./static/bootstrap.min.css">
     <link rel="stylesheet" href="./static/style.css">
     <script type="text/javascript" src="./static/jquery.js"></script>
-	<script type="text/javascript" src="./static/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
             $(".category").click(function() {
@@ -62,69 +62,74 @@
                     }
                 });
             });
-            
+
             $("#newwritebutton").click(function(){
-            	  location.href="tradeWrite.net";
-              })
+                location.href="tradeWrite.net";
+            })
         });
     </script>
 </head>
 <body>
 
+
 <div id="categoryandcolor">
     <br><index_title>Trade</index_title><br><br>
     <index_desc>마음의 양식을 나누어 보아요!</index_desc><br><br><br><br>
-    
+
     <div id="navi-bar">
-    <div id="search">
-        <form action="trade.net" method="GET">
-            <select class="form-control" id="search-mode" name="mode">
-                <option>제목</option>
-                <option>내용</option>
-            </select>
-            <input id="search-input" type="text" name="keyword" placeholder="검색어">
-            <input id="search-button" class="btn btn-info" type="submit" value="검색"><br>
-        </form>
-    </div>
-</div>
-    
-
-   
-<div class="container">
-    <div id="category"><br><br><br>
-    <button class="category button" data-category="철학">철학</button>
-    <button class="category button" data-category="종교">종교</button>
-    <button class="category button" data-category="사회과학">사회과학</button>
-    <button class="category button" data-category="자연과학">자연과학</button>
-    <button class="category button" data-category="기술과학">기술과학</button>
-    <button class="category button" data-category="예술">예술</button>
-    <button class="category button" data-category="언어">언어</button>
-    <button class="category button" data-category="문학">문학</button>
-    <button class="category button" data-category="역사">역사</button>
-    <button class="category button" data-category="IT">IT</button>
-    </div>
-
-<div id="content">
-    <c:forEach var="trade" items="${tradeList}">
-        <div class="post" onclick="location.href='view.net?tradeID=${trade.tradeID}'">
-            <div class="post-thumbnail" style="text-align: center;">
-                <!-- 이미지 경로 출력 -->
-                <img src="./image/<c:out value="${trade.imageID}" />" width="140" height="200">
-            </div>
-            <div class="post-info">
-                <span id="post-info-title"><c:out value="${trade.title}" /></span>
-                <br>
-                <span id="post-info-price"><c:out value="${trade.price}원" /></span>
-                <span id="post-info-author" style="float:right"><c:out value="${trade.sellerID}" /></span><br>
-                <span id="post-info-readcount"><c:out value="조회수 : ${trade.readCount}" /></span>
-                <span id="post-info-date" style="float:right"><c:out value="${trade.createDate}" /></span>
-            </div>
+        <div id="search">
+            <form action="trade.net" method="GET">
+                <select class="form-control" id="search-mode" name="mode">
+                    <option>제목</option>
+                    <option>내용</option>
+                </select>
+                <input id="search-input" type="text" name="keyword" placeholder="검색어">
+                <input id="search-button" class="btn btn-info" type="submit" value="검색"><br>
+            </form>
         </div>
-    </c:forEach>
-</div>
-</div>
+    </div>
 
-<br><button id="newwritebutton" type="button" class="btn btn-success">+글쓰기</button><br><br>
+    <div class="container">
 
+        <div id="category"><br><br><br>
+            <button class="category button" data-category="철학">철학</button>
+            <button class="category button" data-category="종교">종교</button>
+            <button class="category button" data-category="사회과학">사회과학</button>
+            <button class="category button" data-category="자연과학">자연과학</button>
+            <button class="category button" data-category="기술과학">기술과학</button>
+            <button class="category button" data-category="예술">예술</button>
+            <button class="category button" data-category="언어">언어</button>
+            <button class="category button" data-category="문학">문학</button>
+            <button class="category button" data-category="역사">역사</button>
+            <button class="category button" data-category="IT">IT</button>
+        </div>
+
+        <div id="content">
+            <c:forEach var="trade" items="${tradeList}">
+                <div class="post" onclick="location.href='view.net?tradeID=${trade.tradeID}'">
+                    <div class="post-thumbnail" style="text-align: center;">
+                        <!-- 이미지 경로 출력 -->
+                        <img src="./image/<c:out value="${trade.imageID}" />" width="140" height="200">
+                    </div>
+                    <div class="post-info">
+                        <span id="post-info-title"><c:out value="${trade.title}" /></span>
+                        <br>
+                        <span id="post-info-price" style="float:left"><c:out value="${trade.price}원" /></span>
+                        <span id="post-info-author" style="float:right"><c:out value="${trade.sellerID}" /></span><br>
+                        <span id="post-info-readcount"style="float:left"><c:out value="조회수 : ${trade.readCount}" /></span>
+                        <span id="post-info-date" style="float:right">
+					<script>
+						var createDate = new Date("<c:out value='${trade.createDate}' />");
+                        document.write(createDate.toLocaleString('en-US', {hour12: false}));
+    				</script>
+				</span>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+
+        <br><button id="newwritebutton" type="button" class="btn btn-success float-right">+글쓰기</button><br><br>
+    </div>
+</div>
 </body>
 </html>
