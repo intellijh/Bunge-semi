@@ -28,7 +28,11 @@
         height : 65px;
         vertical-align: middle;    
         }
-	
+
+	.navbar {
+		background: white;
+	}
+
 	.navbar-nav>li>a {
 		padding : 0
 	}

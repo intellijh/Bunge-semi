@@ -25,7 +25,7 @@ body {
 
 #upper-bar {
 	min-height: 52px;
-	background: #bce55c;
+	background-color: #6a922c;
 	padding: 7px 15px;
 	display: fixed;
 }
@@ -33,33 +33,36 @@ body {
 	font-size: 25px;
 	float:right;
 }
-#search {
-	display: table;
-	margin: 0 auto;
+
+#search-input, #search-mode, #search-button {
+	display: inline-block; /* 요소들을 인라인 블록으로 표시하여 한 줄에 나타나도록 설정 */
+	vertical-align: middle; /* 수직 정렬을 중앙에 맞추기 */
+	margin-right: 10px; /* 요소들 사이의 간격 설정 */
 }
-#search-input{
+
+#search-input {
+	width: 300px;
+	background: whitesmoke;
 	font-size: 15px;
 	border: none;
-	border-bottom: 1px solid gray;
-	background: whitesmoke;
 }
-#search-mode{
+
+#search-mode {
 	width: 80px;
-	margin:0;
+	height: 31.42px;
 	padding: 0px 12px;
-	height: 25px;
-	margin-top: 3px;
+
 }
-#search-button, #search-input, #search-mode{
-	display: inline;
-}
-#search-button, #update-button, #delete-button{
-	height: 25px;
+
+#search-button, #update-button, #delete-button {
+	height: 31.42px;
 	padding: 1px 4px;
 }
+
 #navi-bar {
-	min-height: 30px;
-	background: #bce55c;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #content {
@@ -67,8 +70,6 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-
-
 }
 
 #content::-webkit-scrollbar {
@@ -139,6 +140,7 @@ body {
 .post-thumbnail {
 	width: 360px;
 	height: 202px;
+	background-color: lightslategray;
 }
 .post-info {
 	width: 360px;
@@ -174,16 +176,70 @@ body {
 #image-title{
 	font-family: "Black Han Sans", sans-serif;
 	font-weight: 400;
-	font-size: 25px;
+	font-size: 30px;
 	font-style: normal;
 }
 
+.w-btn-gra1{
+	background: linear-gradient(-45deg, #33ccff 0%, #ff99cc 100%);
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+	padding: 10px 20px;
+}
 
+.w-btn-gra-anim {
+	background-size: 400% 400%;
+	animation: gradient1 5s ease infinite;
+}
+
+@keyframes gradient1 {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/* 마우스 호버시 색상 변경 */
+.w-btn:hover {
+	background-color: #45a049; /* 더 짙은 초록색 배경색 */
+}
+
+.back-btn {
+	/* 원하는 스타일을 여기에 추가하세요 */
+	background-color: #28A745; /* 배경색 */
+	color: white; /* 글자색 */
+	border: none; /* 테두리 없음 */
+	padding: 10px 20px; /* 내부 여백 */
+	border-radius: 5px; /* 테두리 둥글기 */
+	cursor: pointer; /* 마우스 커서를 포인터로 변경하여 버튼임을 표시 */
+}
+
+.back-btn:hover {
+	background-color: #bce55c; /* 마우스 오버시 배경색 변경 */
+}
+
+
+imgbox{
+	font-weight: bold; /* 텍스트를 굵게 표시합니다 */
+	color: white; /* 텍스트 색상을 지정합니다 */
+	background-color: #28A745;
+	border-radius: 5px;
+	margin-bottom:5px;
+	margin-right:5px;
+	padding: 5px 5px;
+}
 
 #categoryandcolor{
 	width: 100%;
 	height: 300px;
-	background-color: #bce55c;
+	background-color: #6a922c;
 	text-align: center;
 }
 
@@ -191,8 +247,9 @@ body {
 	max-width : 1140px;
 	text-align: center;
 	margin: 0 auto;
-	background-color: #bce55c;
+	background-color: #6a922c;
 	display : inline-block;
+	color: white;
 }
 
 .category.button {
@@ -200,11 +257,14 @@ body {
 }
 
 index_title {
-	font-size: 20px;
+	font-size: 30px;
+	color:white;
 }
 
 index_desc {
-	font-size: 15px;
+	font-size: 20px;
+	color:white;
+	font-weight: bold;
 }
 
 .thumbnail {
