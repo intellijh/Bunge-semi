@@ -43,7 +43,7 @@
     left: 67px;
 }
 .submitbtn {
-	background-color: D0ED8D;
+	background-color: #D0ED8D;
     width: 140px;
     height: 40px;
     border: solid 1px rgba(212, 216, 229, .5);
@@ -68,10 +68,10 @@ $(function(){
 <body>
 <div id="warp">
 	<form name="findpwd" action="findpwdProcess.com" method="post">
+		<div class="findpwd">
 		<div class="findpwdtitle">
 			<h2>비밀번호 찾기</h2>
 		</div>
-		<div class="findpwd">
 		<div class="find_id">
 			<b>아이디</b>
 			<input type="text" name="m_id"  placeholder="아이디 입력 (5~15자)"  min="5" maxlength="15" required>
