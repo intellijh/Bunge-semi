@@ -19,7 +19,9 @@
 		}
     	
 		.navbar {
-			padding : 0 
+	 	    border-radius: 4px;
+   			background: white;
+			padding : 0; 
 		}	
 		
         .navbar.navbar-expand-lg {
@@ -37,11 +39,12 @@
             height : 65px;
         }
 
-        .nav-item {
-            /* Removed padding for nav items to prevent spacing between items */
-            padding: 0;
-            margin: 0;
-        }
+		.nav-item {
+		    padding: 0;
+		    margin: 0;
+		    display: block;
+		    margin: auto;
+		}
         
         .navimg {
           padding-top:20px;
