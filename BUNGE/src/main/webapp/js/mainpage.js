@@ -91,8 +91,12 @@ $(document).ready(function(){
 			  $('#tradeprofile' + index).attr('src', './memberupload/' + item.m_profile)
 			  $('#sellerid' + index).text(this.sellerid)
 			  $('#createdate' + index).text(item.createdate)
-			  $('#title' + index).text(item.title)
-			  $('#description' + index).text(item.description.substr(0,100))
+			  $('#title' + index).html("<a href='view.net?tradeID="+item.tradeid+"'>" + item.title + "</a>")
+			  if (item.description.length > 128) {
+				  $('#description' + index).text(item.description.substr(0,126) + '...')
+			  } else {
+				  $('#description' + index).text(item.description)
+			  }
 			  $('#price'+index).html("<span class='badge badge-pill badge-warning'>"+item.price+"원</span>")
 			  $('#category'+index).html("<span class='badge badge-pill badge-warning'>"+item.category+"</span>")
 			  $('#quality'+index).html("<span class='badge badge-pill badge-warning'>"+item.quality+"급</span>")

@@ -14,8 +14,7 @@ html, body {
 }
 
 body {
-	display: flex;
-	flex-direction: column;
+    display: contents;
 }
 
 #title {
