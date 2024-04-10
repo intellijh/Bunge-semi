@@ -8,9 +8,9 @@ public class Mytrade {
 	private Trade trade = new Trade();
 	private Likey likey =new Likey();
 	public Mytrade() {
-		
+
 	}
-	
+
 	public Mytrade(Trade trade, Likey likey) {
 		super();
 		this.setTrade(trade);
