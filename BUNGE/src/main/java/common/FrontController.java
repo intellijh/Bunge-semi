@@ -59,6 +59,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import mainpage.action.MainPopularBookAciton;
 import mainpage.action.MainPopularCommAction;
 import mainpage.action.MainPopularPostAction;
+import mainpage.action.MainTradeAction;
 
 import javax.naming.NamingException;
 
@@ -289,6 +290,10 @@ public class FrontController extends HttpServlet {
             //헤더 프로필
             case "/HeaderProfile.com":
             	action = new HeaderProfileAciton();
+            	break;
+            //거래 게시판 진행중인 거래
+            case "/MainTrade.com" :
+            	action = new MainTradeAction();
             	break;
 
         } //switch (command)

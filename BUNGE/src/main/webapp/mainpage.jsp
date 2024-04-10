@@ -479,28 +479,28 @@
 	<div class="container mt-3 popularpost1">
 	  <h3><span class="badge badge-pill badge-success">진행 중인 거래</span></h3>
 	  <button type="button" class="btn btn-success" id="moretradelist">더보기</button>
+	  
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
 	      <div class="profilearea">
-	        <img class="profile" id="m_profile4" width="32px" height="32px" >
+	        <img class="profile" id="tradeprofile0" width="32px" height="32px" >
 	      </div>
 	      <div class="m_idarea">
-	      	<span id="m_id4">m_id</span>
-		    <span class="inf_reg" id="postreg4">inf_reg</span>
+	      	<span id="sellerid0">m_id</span>
+		    <span class="inf_reg" id="createdate0">inf_reg</span>
 	      </div>
-	      <h4 class="postsubject" id="postsubject4">inf_subject</h4>
-	      <div id="postbook4" class="booksubject"></div>       
-	      <div id="postcontent4" class="postcontent">inf_content</div>
+	      <h4 class="postsubject" id="title0">inf_subject</h4>
+	      <div id="description0" class="postcontent">inf_content</div>
 	      <div class="popularpost4">
 	        <div class="popularpost5">
-	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt4" class="postlikecnt"></span>
-	        </div>
-	        <div class="popularpost6">
-	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt4" class="postcommcnt"></span>
+	          <span id="price0"></span>
+	          <span id="category0"></span>
+	          <span id="quality0"></span>
+	          <span id="readcount"></span>
 	        </div>
 	      </div>
 	    </div>
-	    <img id="postimg4" src="" style="width:80px;">
+	    <img id="imageid1" src="" style="width:80px;">
 	  </div>
 	</div>
 	
@@ -508,25 +508,24 @@
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
 	      <div class="profilearea">
-	        <img class="profile" id="m_profile5" width="32px" height="32px" >
+	        <img class="profile" id="tradeprofile1" width="32px" height="32px" >
 	      </div>
 	      <div class="m_idarea">
-	      	<span id="m_id5">m_id</span>
-		    <span class="inf_reg" id="postreg5">inf_reg</span>
+	      	<span id="sellerid1">m_id</span>
+		    <span class="inf_reg" id="createdate1">inf_reg</span>
 	      </div>
-	      <h4 class="postsubject" id="postsubject5">inf_subject</h4>
-	      <div id="postbook5" class="booksubject"></div>       
-	      <div id="postcontent5" class="postcontent">inf_content</div>
+	      <h4 class="postsubject" id="title1">inf_subject</h4>
+	      <div id="description1" class="postcontent">inf_content</div>
 	      <div class="popularpost4">
 	        <div class="popularpost5">
-	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt5" class="postlikecnt"></span>
-	        </div>
-	        <div class="popularpost6">
-	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt5" class="postcommcnt"></span>
+	          <span id="price1"></span>
+	          <span id="category1"></span>
+	          <span id="quality1"></span>
+	          <span id="readcount"></span>
 	        </div>
 	      </div>
 	    </div>
-	    <img id="postimg5" src="" style="width:80px;">
+	    <img id="imageid1" src="" style="width:80px;">
 	  </div>
 	</div>
 
@@ -534,53 +533,53 @@
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
 	      <div class="profilearea">
-	        <img class="profile" id="m_profile6" width="32px" height="32px" >
+	        <img class="profile" id="tradeprofile2" width="32px" height="32px" >
 	      </div>
 	      <div class="m_idarea">
-	      	<span id="m_id6">m_id</span>
-		    <span class="inf_reg" id="postreg6">inf_reg</span>
+	      	<span id="sellerid2">m_id</span>
+		    <span class="inf_reg" id="createdate2">inf_reg</span>
 	      </div>
-	      <h4 class="postsubject" id="postsubject6">inf_subject</h4>
-	      <div id="postbook6" class="booksubject"></div>       
-	      <div id="postcontent6" class="postcontent">inf_content</div>
+	      <h4 class="postsubject" id="title2">inf_subject</h4>
+	      <div id="description2" class="postcontent">inf_content</div>
 	      <div class="popularpost4">
 	        <div class="popularpost5">
-	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt6" class="postlikecnt"></span>
-	        </div>
-	        <div class="popularpost6">
-	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt6" class="postcommcnt"></span>
+	          <span id="price2"></span>
+	          <span id="category2"></span>
+	          <span id="quality2"></span>
+	          <span id="readcount"></span>
 	        </div>
 	      </div>
 	    </div>
-	    <img id="postimg6" src="" style="width:80px;">
+	    <img id="imageid2" src="" style="width:80px;">
 	  </div>
 	</div>
-
+	
+	
 	<div class="container mt-3 popularpost1">
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
 	      <div class="profilearea">
-	        <img class="profile" id="m_profile7" width="32px" height="32px" >
+	        <img class="profile" id="tradeprofile3" width="32px" height="32px" >
 	      </div>
 	      <div class="m_idarea">
-	      	<span id="m_id7">m_id</span>
-		    <span class="inf_reg" id="postreg7">inf_reg</span>
+	      	<span id="sellerid3">m_id</span>
+		    <span class="inf_reg" id="createdate3">inf_reg</span>
 	      </div>
-	      <h4 class="postsubject" id="postsubject7">inf_subject</h4>
-	      <div id="postbook7" class="booksubject"></div>       
-	      <div id="postcontent7" class="postcontent">inf_content</div>
+	      <h4 class="postsubject" id="title3">inf_subject</h4>
+	      <div id="description3" class="postcontent">inf_content</div>
 	      <div class="popularpost4">
 	        <div class="popularpost5">
-	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/like_on.png"><span id="postlikecnt7" class="postlikecnt"></span>
-	        </div>
-	        <div class="popularpost6">
-	          <img style="width:10px;height:10px" src="${pageContext.request.contextPath}/image/chat.png"><span id="postcommcnt7" class="postcommcnt"></span>
+	          <span id="price3"></span>
+	          <span id="category3"></span>
+	          <span id="quality3"></span>
+	          <span id="readcount"></span>
 	        </div>
 	      </div>
 	    </div>
-	    <img id="postimg7" src="" style="width:80px;">
+	    <img id="imageid3" src="" style="width:80px;">
 	  </div>
-	</div>
+	</div>	
+
 
     </div><!-- /.blog-main -->
 <%-- 인기 있는 책 영역 시작 --%>
