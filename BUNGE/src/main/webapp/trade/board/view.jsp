@@ -2,14 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<style>
-	body {width : 1140px}
-
-</style>
-<style>
-	@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
-</style>
-
 <head>
 	<jsp:include page="../../layout/header.jsp" />
 	<meta charset="UTF-8">
@@ -17,6 +9,13 @@
 	<link rel="stylesheet" href="./static/bootstrap.min.css">
 	<link rel="stylesheet" href="./static/style.css">
 </head>
+<style>
+body {width : 1140px}
+
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+
+
+</style>
 <body>
 <div id="upper-bar">
 </div>
