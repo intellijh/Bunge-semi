@@ -132,8 +132,13 @@ $(document).ready(function(){
 	  }
   })  
   
-  //더보기 버튼 클릭 시
+  //더보기 버튼 클릭
   $('#morelist').click(function() {
 	  location.href = "InfoList.com"
+  })
+  
+    //'진행 중인 거래' 더보기 버튼 클릭
+  $('#moretradelist').click(function() {
+	  location.href = "trade.net"
   })
 }); //ready end

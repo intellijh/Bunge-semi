@@ -56,6 +56,16 @@
  		text-align : center;
  	}
  	
+#yeoback::before {
+    position: absolute;
+    content: "";
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 365px;
+    background-color: rgba(0,0,0,0.4);
+}
+ 	
  	.table thead th {
  		padding : .75rem;
  	    vertical-align: bottom;
@@ -73,7 +83,7 @@
  	}
  	
  	b { 
- 		line-height: 70px
+ 		line-height: 70px;
  	}
 	
 	.booksubject {
@@ -110,14 +120,33 @@
 	.readcntimg {
 	  margin-right:3px;
 	}
+	
+.bannercomm {
+    position: relative;
+    z-index: 100;
+    color: white;
+    font-weight: 600;
+    font-size: x-large;
+    margin-bottom:10px;
+}
+
+.bannercommarea {
+    width: 1144px;
+    margin: auto;
+    text-align: left;
+    position: relative;
+    top: 74px;
+}
 </style>
 </head>
 <body>
 <input type="hidden" name="loginid" value="${m_id}" id="loginid">
 <div id="yeoback">
- <b>Sharing</b><br><br><br>
- 독후감과 나의 일상을 공유해봐요.<br><br><br>
- 책의 내용이 좋았다면, 책을 읽은 장소가 좋았다면 우리 함께 공유해요!
+ <div class="bannercommarea">
+   <div class="bannercomm">✍Sharing</div>
+   <div class="bannercomm">독후감과 나의 일상을 공유해봐요.</div>
+   <div class="bannercomm">책의 내용이 좋았다면, 책을 읽은 장소가 좋았다면 우리 함께 공유해요!</div>
+ </div>
  </div>
 <div class="container">
  <%-- 게시글이 있는 경우 --%>

@@ -55,8 +55,8 @@ function ajax(sdata) {
 						}
 						
 						let subject=item.inf_subject
-						if(subject.length >= 9) {
-							subject=subject.substr(0,8) + "..."
+						if(subject.length >= 13) {
+							subject=subject.substr(0,12) + "..."
 						}
 						
 						let book = item.inf_book;
