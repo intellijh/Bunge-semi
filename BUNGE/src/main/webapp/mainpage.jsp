@@ -184,6 +184,10 @@
   	top : 10px;
   	font-weight : bolder;
   }
+  
+  h3 {
+    display:inline-block;
+  }
 <%-- 인기 게시글 영역 끝 --%>
 
 
@@ -271,19 +275,13 @@
 <%-- 인기 댓글 영역 끝 --%>
 
 <%-- 더보기 시작 --%>
-.btn-block {
-    display: block;
-    width: 63.5%;
-    margin: 0 auto;
-    position: relative;
-    top: 10px;
-    right: 189px;
-}
 
 .btn-success {
     color: #fff;
     background-color: #BCE55C;
     border-color: #BCE55C;
+    font-weight: bold;
+    border-radius: 50px;
 }
 <%-- 더보기 끝 --%>
 </style>
@@ -366,6 +364,7 @@
 <%--인기 게시글1(이미지 오른쪽) 시작 --%>
 	<div class="container mt-3 popularpost1">
 	  <h3><span class="badge badge-pill badge-success">정보공유 인기 게시글</span></h3>
+	  <button type="button" class="btn btn-success" id="morelist">더보기</button>
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
 	      <div class="profilearea">
@@ -479,6 +478,7 @@
 <%-- 거래게시판 게시글1(이미지 오른쪽) 시작--%>
 	<div class="container mt-3 popularpost1">
 	  <h3><span class="badge badge-pill badge-success">진행 중인 거래</span></h3>
+	  <button type="button" class="btn btn-success" id="moretradelist">더보기</button>
 	  <div class="media border p-3 popularpost2">
 	    <div class="media-body popularpost3">
 	      <div class="profilearea">
@@ -671,7 +671,6 @@
 
     </aside><!-- /.blog-sidebar -->
   </div><!-- /.row -->
-<button type="button" class="btn btn-success btn-block" id="morelist">더보기</button>
 </main><!-- /.container -->
 
 
