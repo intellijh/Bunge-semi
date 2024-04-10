@@ -131,7 +131,7 @@ private DataSource ds;
 				        + "from infoboard b "
 				        + "join infocomm c "
 				        + "on b.inf_num = c.inf_num " 
-				        + "where b.m_id = ? "
+				        + "where c.m_id = ? "
 				        + "group by b.inf_num, b.m_id, b.inf_subject, c.comm_content, c.comm_reg, b.inf_content "
 				        + "order by c.comm_reg desc";
 		
