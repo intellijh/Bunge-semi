@@ -2,7 +2,6 @@ let webSocket = "";
 
 function loadMessage() {
 
-    console.log("loadMessage() Start");
     $(".msg_card_body").empty();
     $.ajax({
         type: "post",
@@ -10,7 +9,6 @@ function loadMessage() {
         data: {"chatId": selectedChatId},
         dataType: "json",
         success: function (rdata) {
-            console.log(rdata);
 
             let chat = "";
             $(rdata).each(function () {
@@ -42,8 +40,6 @@ function loadMessage() {
             $(".msg_card_body").scrollTop($(".msg_card_body")[0].scrollHeight);
         },
     })
-
-    console.log("loadMessage() End");
 }
 
 $(function(){
@@ -61,9 +57,6 @@ $(function(){
 
     webSocket.onmessage = function(e){
 
-        console.log("메세지 왔다");
-        console.log(e.data);
-
         // 채팅 데이터
         const chatData = JSON.parse(e.data);
         const chatId = chatData[0].chatId;
@@ -71,11 +64,6 @@ $(function(){
         const buyerId = chatData[0].buyerId;
         const msg = chatData[0].msg;
         let time = chatData[0].time
-
-        console.log("onMessage chatId: " + chatId);
-        console.log("onMessage sellerId: " + sellerId);
-        console.log("onMessage buyerId: " + buyerId);
-        console.log("onMessage msg: " + msg);
 
         // 자기한테 온 메세지인지 확인
         if (sellerId != loginId && buyerId != loginId) {
@@ -109,9 +97,7 @@ $(function(){
                             </div>
                         </li>`;
             $(".contacts").append(output);
-            console.log("chatId length");
         }
-        console.log("chatId length end");
 
         // 채팅 목록 메세지 날짜 업데이트
         if (msg == " ") {
@@ -121,7 +107,6 @@ $(function(){
         $("#" + chatId).find("p:eq(1)").text(time.substring(0, 16));
 
         // 리스트 최상단으로 채팅 이동
-        console.log(document.getElementById(chatId).outerHTML);
         const updateChatHtml = document.getElementById(chatId).outerHTML;
         $("#" + chatId).remove();
         $(".contacts").prepend(updateChatHtml);
@@ -240,7 +225,6 @@ $(function(){
 */
 
     function onOpen(e){
-        console.log("오픈 확인용: ");
     }
 
     function onError(e){
@@ -250,7 +234,6 @@ $(function(){
     function send(){
 
         const chatMsg = $inputMessage.val();
-        console.log(chatMsg);
         if(chatMsg == ""){
             return;
         }
@@ -262,7 +245,6 @@ $(function(){
         const minutes = `00${date.getMinutes()}`.slice(-2);
         const dateInfo = `${year}-${month}-${todayDate} ${hours}:${minutes}`;
 
-        console.log("send dateInfo" + dateInfo);
         const $chat = $(`
                     <div class="d-flex justify-content-end mb-4">
                         <div class="msg_cotainer_send">
@@ -286,29 +268,14 @@ $(function(){
             dataType: "json",
             success: function (rdata) {
                 if (rdata == 1) {
-                    console.log("메세지 저장 성공");
                     $("#" + selectedChatId).find("p:eq(0)").text(chatMsg);
                     $("#" + selectedChatId).find("p:eq(1)").text(dateInfo);
-                    // getChatList();
                 }
             },
         });
     }
 
-/*
-    $inputMessage.keydown(function (e) {
-        console.log(e);
-        console.log(e.isComposing);
-        if (e.key === "Enter") {
-            $('.send_btn').click();
-            e.preventDefault();
-        }
-    });
-*/
-
     document.getElementsByClassName("type_msg")[0].addEventListener("keydown", (e) => {
-        console.log(e);
-        console.log(e.isComposing);
         if (e.key === "Enter") {
             if (e.isComposing == false) {
                 $('.send_btn').click();
@@ -323,6 +290,5 @@ $(function(){
         }
         send();
         $inputMessage.val("");
-        console.log("send_btn click");
     });
 })
